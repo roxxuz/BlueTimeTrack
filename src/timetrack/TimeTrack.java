@@ -1,8 +1,7 @@
 /*
 MAINKLASSEN!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!
-same row (made in revision)
-Inlagd in 
+something else made in master
  */
 package timetrack;
 
