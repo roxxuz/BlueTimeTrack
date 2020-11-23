@@ -13,12 +13,12 @@ import javax.swing.JPanel;
  * @author roxxu
  */
 public class TimeTrackGUI extends javax.swing.JFrame {
-
+         
     /**
      * Creates new form TimeTrackGUI_test
      */
     public TimeTrackGUI() {
-        initComponents();
+        initComponents();    
     }
     JPanel panel12 = new MotionPanel(this);
     /**
@@ -179,7 +179,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
-        this.dispose();
+        this.dispose();      
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
@@ -197,7 +197,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         jPanel5.setVisible(false);
-        jPanel6.setVisible(true);
+        jPanel6.setVisible(true);     
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
