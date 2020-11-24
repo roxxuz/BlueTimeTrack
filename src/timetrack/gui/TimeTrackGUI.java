@@ -1,6 +1,8 @@
 
 package timetrack.gui;
-
+//tre
+//stycken
+//rader
 import timetrack.*;
 import javax.swing.JPanel;
 
