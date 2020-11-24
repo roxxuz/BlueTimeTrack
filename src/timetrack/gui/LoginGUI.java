@@ -248,7 +248,7 @@ public class LoginGUI extends javax.swing.JFrame {
         //Skapar objekt av Properties för att läsa från filen db.properties
         Properties prop = new Properties();
         try {
-            FileReader reader = new FileReader("src\\timetrack\\gui\\db.properties");
+            FileReader reader = new FileReader("src/timetrack/gui/db.properties");
             prop.load(reader);
             //Tilldelar värdena från filen db.properties till klassvariablerna
             //som sedan ska användas för att logga in på databasen
@@ -257,10 +257,10 @@ public class LoginGUI extends javax.swing.JFrame {
             DBPass = prop.getProperty("pass");
         } catch (FileNotFoundException ex) {
             Logger.getLogger(LoginGUI.class.getName()).log(Level.SEVERE, null, ex);
-            System.err.println("Kanske saknas filen db.properties i src\\timetrack\\gui?");
+            System.err.println("Kanske saknas filen db.properties i src/timetrack/gui?");
         } catch (IOException ex) {
             Logger.getLogger(LoginGUI.class.getName()).log(Level.SEVERE, null, ex);
-            System.err.println("Kanske saknas filen db.properties i src\\timetrack\\gui?");
+            System.err.println("Kanske saknas filen db.properties i src/timetrack/gui?");
         }
         
     }
