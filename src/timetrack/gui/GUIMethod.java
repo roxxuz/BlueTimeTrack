@@ -14,11 +14,11 @@ import javax.swing.JOptionPane;
  */
 public class GUIMethod {
     
-    public void showDialog() {
-        ImageIcon icon = new ImageIcon("TimeTrack\\src\\timetrack\\gui\\ic_logo.png");
-        int input = JOptionPane.showConfirmDialog(null,"title", "message", JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE, icon);
-        System.out.println(input);
-            //return input;
+    public int showDialog(String title, String message) {
+        ImageIcon icon = new ImageIcon("C:\\Users\\Akram\\OneDrive\\Skrivbord\\TimeTrack\\src\\timetrack\\gui\\ic_logo2.png");
+        int input = JOptionPane.showConfirmDialog(null,message,title, JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE, icon);
+        
+            return input;
            
     }
 }

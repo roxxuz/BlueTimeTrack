@@ -204,8 +204,8 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         jPanel5.setVisible(false);
         jPanel6.setVisible(true);
-        sd.showDialog();
-   
+        //sd.showDialog("Title","Message","TimeTrack\\src\\timetrack\\gui\\ic_logo.png");
+   sd.showDialog("Hello Title?", "HY Message!");
         
         
     }//GEN-LAST:event_jButton2ActionPerformed
