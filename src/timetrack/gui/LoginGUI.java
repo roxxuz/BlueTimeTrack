@@ -241,6 +241,7 @@ public class LoginGUI extends javax.swing.JFrame {
         //Placerar objeketet i mitten på användarens skärm
         tGUI.setLocationRelativeTo(null);
         tGUI.setVisible(true);
+        this.dispose();
         
     }
     
