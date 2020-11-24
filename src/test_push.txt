@@ -1,2 +1,0 @@
-testar push och conflicts
-Ny rad från 1 (ändras nu)
