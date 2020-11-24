@@ -5,9 +5,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.sql.Statement;
 import javax.swing.JOptionPane;
 
 /**
@@ -66,7 +64,7 @@ public class LoginGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        loginPanel = new javax.swing.JPanel();
+        loginPanel = new MotionPanel(this);
         emailLabel = new javax.swing.JLabel();
         passLabel = new javax.swing.JLabel();
         titleLable = new javax.swing.JLabel();
@@ -85,17 +83,19 @@ public class LoginGUI extends javax.swing.JFrame {
         loginPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         loginPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        emailLabel.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         emailLabel.setForeground(new java.awt.Color(204, 204, 204));
         emailLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         emailLabel.setText("Användarnamn:");
         loginPanel.add(emailLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 66, 100, 20));
 
+        passLabel.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         passLabel.setForeground(new java.awt.Color(204, 204, 204));
         passLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         passLabel.setText("Lösenord:");
         loginPanel.add(passLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 96, 100, 20));
 
-        titleLable.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        titleLable.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         titleLable.setForeground(new java.awt.Color(255, 255, 255));
         titleLable.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         titleLable.setText("- Time Track -");
@@ -103,12 +103,13 @@ public class LoginGUI extends javax.swing.JFrame {
         loginPanel.add(emailInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 60, 120, 30));
         loginPanel.add(passInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 120, 30));
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("SansSerif", 1, 10)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(204, 204, 204));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Logga in med användarnamn och lösenord");
         loginPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 240, -1));
 
+        exitButton.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         exitButton.setText("Avsluta");
         exitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -117,6 +118,7 @@ public class LoginGUI extends javax.swing.JFrame {
         });
         loginPanel.add(exitButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 140, 80, -1));
 
+        loginButton.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         loginButton.setText("Logga in");
         loginButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -186,15 +188,15 @@ public class LoginGUI extends javax.swing.JFrame {
         });
         
     }
-    private int loginUser(String email, String pass){
+    private int loginUser(String email, String pass1){
         String qEmail = email;
-        String qPass = pass;
+        String qPass = pass1;
         //returnUserID som kommer att returnera UserID från databasen om användarnamn + lösenord matchar
         //Annars är den default 0 och returnerar då 0.
         int returnUserID = 0;
         try {
             //Skapar en koppling till DB med dess adress, user och pass
-            cn = DriverManager.getConnection(DBAddress, user, this.pass);
+            cn = DriverManager.getConnection(DBAddress, user, pass);
             //Skapar ett SELECT statement till PreparedStatement objekt
             pstat = cn.prepareStatement("select * from users where email=? and user_password=?");
             //Ändrar value-parametrar till texten i text-fälten.
