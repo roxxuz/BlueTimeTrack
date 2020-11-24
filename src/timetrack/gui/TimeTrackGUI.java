@@ -1,4 +1,4 @@
-/* SADAKSFHJAKSJKAJSKJASF ladsjfhdsjksdkf
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -8,19 +8,17 @@ package timetrack.gui;
 import timetrack.*;
 import javax.swing.JPanel;
 
-/**
- *
- * @author roxxu
- */
 public class TimeTrackGUI extends javax.swing.JFrame {
-         
-    /**
-     * Creates new form TimeTrackGUI_test
-     */
+
+    //Inloggad användare (ID från databasen)
+    //Tilldelas värde med set-metoden setUserID.
+    //default = 0 (ingen användare är inloggad).
+    private int userID = 0;
+    
+
     public TimeTrackGUI() {
         initComponents();    
     }
-    JPanel panel12 = new MotionPanel(this);
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -58,17 +56,17 @@ public class TimeTrackGUI extends javax.swing.JFrame {
 
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(116, 151, 187));
+        jPanel1.setBackground(new java.awt.Color(77, 111, 146));
         jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.setBackground(new java.awt.Color(46, 65, 103));
+        jButton1.setBackground(new java.awt.Color(44, 56, 80));
         jButton1.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jButton1.setForeground(new java.awt.Color(204, 204, 204));
         jButton1.setText("Logga ut");
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 460, 200, -1));
 
-        jButton2.setBackground(new java.awt.Color(46, 65, 103));
+        jButton2.setBackground(new java.awt.Color(44, 56, 80));
         jButton2.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jButton2.setForeground(new java.awt.Color(204, 204, 204));
         jButton2.setText("Tidrapportering");
@@ -79,7 +77,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         });
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 200, -1));
 
-        jButton3.setBackground(new java.awt.Color(46, 65, 103));
+        jButton3.setBackground(new java.awt.Color(44, 56, 80));
         jButton3.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jButton3.setForeground(new java.awt.Color(204, 204, 204));
         jButton3.setText("Projekt");
@@ -142,7 +140,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
 
         jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 70, 730, 510));
 
-        jPanel4.setBackground(new java.awt.Color(54, 54, 105));
+        jPanel4.setBackground(new java.awt.Color(54, 69, 100));
         jPanel4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -260,5 +258,14 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables
+    
+    public void setUserID(int userID) {
+        this.userID = userID;
+      
+    }
+    
+    public int getUserID() {
+        return userID;
+    }
     
 }
