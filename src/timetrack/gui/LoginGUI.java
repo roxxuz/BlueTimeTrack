@@ -255,6 +255,7 @@ public class LoginGUI extends javax.swing.JFrame {
             DBAddress = prop.getProperty("db");
             DBUser = prop.getProperty("user");
             DBPass = prop.getProperty("pass");
+            reader.close();
         } catch (FileNotFoundException ex) {
             Logger.getLogger(LoginGUI.class.getName()).log(Level.SEVERE, null, ex);
             System.err.println("Kanske saknas filen db.properties i src/timetrack/gui?");
