@@ -1,11 +1,18 @@
 
 package timetrack.gui;
 
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -18,9 +25,9 @@ public class LoginGUI extends javax.swing.JFrame {
     PreparedStatement pstat = null;
     ResultSet rs = null;
 
-    final String DBAddress = "";
-    final String user = "";
-    final String pass = "";
+    String DBAddress = "";
+    String DBUser = "";
+    String DBPass = "";
     
     public LoginGUI() {
         //Tagen från main till konstruktorn för att koden ska köras när objektet skapas
@@ -50,6 +57,9 @@ public class LoginGUI extends javax.swing.JFrame {
         this.setTitle("LOGIN");
         //Placerar fönstret i mitten av skärmen (ska göra innan setvisible)
         this.setLocationRelativeTo(null);
+        //Kallar på metoden som läser in värden från filen db.properties
+        //och sparar i strängarna DBAddress, DBUser och DBPass
+        readProperties();
     }
     
     //Loginmetod som kallas på från main direkt när programmet startar
@@ -196,7 +206,7 @@ public class LoginGUI extends javax.swing.JFrame {
         int returnUserID = 0;
         try {
             //Skapar en koppling till DB med dess adress, user och pass
-            cn = DriverManager.getConnection(DBAddress, user, pass);
+            cn = DriverManager.getConnection(DBAddress, DBUser, DBPass);
             //Skapar ett SELECT statement till PreparedStatement objekt
             pstat = cn.prepareStatement("select * from users where email=? and user_password=?");
             //Ändrar value-parametrar till texten i text-fälten.
@@ -229,6 +239,27 @@ public class LoginGUI extends javax.swing.JFrame {
         //Sätter inloggad användare till userID (från databasen)
         tGUI.setUserID(userID);
         tGUI.setVisible(true);
+        
+    }
+    
+    private void readProperties(){
+        //Skapar objekt av Properties för att läsa från filen db.properties
+        Properties prop = new Properties();
+        try {
+            FileReader reader = new FileReader("src\\timetrack\\gui\\db.properties");
+            prop.load(reader);
+            //Tilldelar värdena från filen db.properties till klassvariablerna
+            //som sedan ska användas för att logga in på databasen
+            DBAddress = prop.getProperty("db");
+            DBUser = prop.getProperty("user");
+            DBPass = prop.getProperty("pass");
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(LoginGUI.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println("Kanske saknas filen db.properties i src\\timetrack\\gui?");
+        } catch (IOException ex) {
+            Logger.getLogger(LoginGUI.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println("Kanske saknas filen db.properties i src\\timetrack\\gui?");
+        }
         
     }
 
