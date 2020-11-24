@@ -24,9 +24,9 @@ public class LoginGUI extends javax.swing.JFrame {
     PreparedStatement pstat = null;
     ResultSet rs = null;
 
-    final String DBAddress = "jdbc:mysql://team-blue.se:3306/Ei2leVXyES";
-    final String user = "Ei2leVXyES";
-    final String pass = "xbRPJkbCmi";
+    final String DBAddress = "";
+    final String user = "";
+    final String pass = "";
     
     public LoginGUI() {
         //Tagen från main till konstruktorn för att koden ska köras när objektet skapas
