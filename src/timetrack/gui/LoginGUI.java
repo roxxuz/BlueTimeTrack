@@ -238,6 +238,8 @@ public class LoginGUI extends javax.swing.JFrame {
         TimeTrackGUI tGUI = new TimeTrackGUI();
         //Sätter inloggad användare till userID (från databasen)
         tGUI.setUserID(userID);
+        //Placerar objeketet i mitten på användarens skärm
+        tGUI.setLocationRelativeTo(null);
         tGUI.setVisible(true);
         
     }
