@@ -79,10 +79,10 @@ public class LoginGUI extends javax.swing.JFrame {
         passLabel = new javax.swing.JLabel();
         titleLable = new javax.swing.JLabel();
         emailInput = new javax.swing.JTextField();
-        passInput = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         exitButton = new javax.swing.JButton();
         loginButton = new javax.swing.JButton();
+        passField = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -110,8 +110,13 @@ public class LoginGUI extends javax.swing.JFrame {
         titleLable.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         titleLable.setText("- Time Track -");
         loginPanel.add(titleLable, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 10, 260, 30));
+
+        emailInput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                emailInputActionPerformed(evt);
+            }
+        });
         loginPanel.add(emailInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 60, 120, 30));
-        loginPanel.add(passInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 120, 30));
 
         jLabel1.setFont(new java.awt.Font("SansSerif", 1, 10)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(204, 204, 204));
@@ -137,6 +142,13 @@ public class LoginGUI extends javax.swing.JFrame {
         });
         loginPanel.add(loginButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, -1, -1));
 
+        passField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                passFieldActionPerformed(evt);
+            }
+        });
+        loginPanel.add(passField, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 92, 120, 30));
+
         getContentPane().add(loginPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 260, 190));
 
         pack();
@@ -149,7 +161,7 @@ public class LoginGUI extends javax.swing.JFrame {
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         //Hämtar inmatningarna i textfälten
         String email = emailInput.getText();
-        String pass = passInput.getText();
+        String pass = passField.getText();
         
         //If-satsen anropar metoden loginUser och skickar med email och pass från textfälten
         //Metoden kommer returnera en int med användarens ID, som lagras i userID.
@@ -162,6 +174,24 @@ public class LoginGUI extends javax.swing.JFrame {
             startTimeTrack(userID);
         }
     }//GEN-LAST:event_loginButtonActionPerformed
+    
+    //Kommer hit om användaren trycker "ENTER" i textrutan.
+    //Tangenten "enter" räknas som en action och det räcker därför med att bara
+    //ha en actionListener.
+    private void passFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passFieldActionPerformed
+        //Kallar på metoden loginButtonActionPerformed() som är samma
+        //som när användaren trycker på OK vid inloggning.
+        loginButtonActionPerformed(evt);
+    }//GEN-LAST:event_passFieldActionPerformed
+    
+    //Kommer hit om användaren trycker "ENTER" i textrutan.
+    //Tangenten "enter" räknas som en action och det räcker därför med att bara
+    //ha en actionListener.
+    private void emailInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailInputActionPerformed
+        //Kallar på metoden loginButtonActionPerformed() som är samma
+        //som när användaren trycker på OK vid inloggning.
+        loginButtonActionPerformed(evt);
+    }//GEN-LAST:event_emailInputActionPerformed
 
     /**
      * @param args the command line arguments
@@ -205,10 +235,12 @@ public class LoginGUI extends javax.swing.JFrame {
         //Annars är den default 0 och returnerar då 0.
         int returnUserID = 0;
         try {
+            //Ökar timeout till 5 sekunder
+            DriverManager.setLoginTimeout(5);
             //Skapar en koppling till DB med dess adress, user och pass
             cn = DriverManager.getConnection(DBAddress, DBUser, DBPass);
             //Skapar ett SELECT statement till PreparedStatement objekt
-            pstat = cn.prepareStatement("select * from users where email=? and user_password=?");
+            pstat = cn.prepareStatement("SELECT * FROM users WHERE email=? AND BINARY user_password=?");
             //Ändrar value-parametrar till texten i text-fälten.
             pstat.setString(1, qEmail);
             pstat.setString(2, qPass);
@@ -224,9 +256,13 @@ public class LoginGUI extends javax.swing.JFrame {
             else{
                 JOptionPane.showMessageDialog(null, "Felaktigt användarnamn/lösenord", "Ej behörig!", 0);
             }
+            //Stänger kopplingen till databasen så att inte
+            //max antal användare för databasen ska överskridas.
+            cn.close();
         //Om något går fel med kopplingen till databasen... (kommer även hit om felaktigt select statement används osv.
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Kunde inte ansluta till databasen.\nKontrollera att du är ansluten till internet.", "Är du online?", 0);
+            System.out.println(ex);
         }
         //Returnerar userID (från databasen)
         //Om login misslyckades så returneras 0.
@@ -266,6 +302,7 @@ public class LoginGUI extends javax.swing.JFrame {
         }
         
     }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField emailInput;
@@ -274,7 +311,7 @@ public class LoginGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JButton loginButton;
     private javax.swing.JPanel loginPanel;
-    private javax.swing.JTextField passInput;
+    private javax.swing.JPasswordField passField;
     private javax.swing.JLabel passLabel;
     private javax.swing.JLabel titleLable;
     // End of variables declaration//GEN-END:variables
