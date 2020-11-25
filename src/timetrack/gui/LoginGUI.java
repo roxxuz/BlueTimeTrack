@@ -83,6 +83,8 @@ public class LoginGUI extends javax.swing.JFrame {
         exitButton = new javax.swing.JButton();
         loginButton = new javax.swing.JButton();
         passField = new javax.swing.JPasswordField();
+        loginLabel = new javax.swing.JLabel();
+        userLogin = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -149,6 +151,20 @@ public class LoginGUI extends javax.swing.JFrame {
         });
         loginPanel.add(passField, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 92, 120, 30));
 
+        loginLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                loginLabelMouseClicked(evt);
+            }
+        });
+        loginPanel.add(loginLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 170, 20, 20));
+
+        userLogin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                userLoginMouseClicked(evt);
+            }
+        });
+        loginPanel.add(userLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 20, 20));
+
         getContentPane().add(loginPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 260, 190));
 
         pack();
@@ -192,6 +208,14 @@ public class LoginGUI extends javax.swing.JFrame {
         //som när användaren trycker på OK vid inloggning.
         loginButtonActionPerformed(evt);
     }//GEN-LAST:event_emailInputActionPerformed
+
+    private void loginLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginLabelMouseClicked
+        startTimeTrack(6);
+    }//GEN-LAST:event_loginLabelMouseClicked
+
+    private void userLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userLoginMouseClicked
+        startTimeTrack(2);
+    }//GEN-LAST:event_userLoginMouseClicked
 
     /**
      * @param args the command line arguments
@@ -310,9 +334,11 @@ public class LoginGUI extends javax.swing.JFrame {
     private javax.swing.JButton exitButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JButton loginButton;
+    private javax.swing.JLabel loginLabel;
     private javax.swing.JPanel loginPanel;
     private javax.swing.JPasswordField passField;
     private javax.swing.JLabel passLabel;
     private javax.swing.JLabel titleLable;
+    private javax.swing.JLabel userLogin;
     // End of variables declaration//GEN-END:variables
 }
