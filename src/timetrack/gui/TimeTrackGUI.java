@@ -62,6 +62,11 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         jButton1.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jButton1.setForeground(new java.awt.Color(204, 204, 204));
         jButton1.setText("Logga ut");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 460, 200, -1));
 
         jButton2.setBackground(new java.awt.Color(44, 56, 80));
@@ -198,6 +203,10 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         jPanel6.setVisible(true);     
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        signOut();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -266,6 +275,15 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     
     public int getUserID() {
         return userID;
+    }
+    
+    private void signOut(){
+        //skapar objekt av LoginGUI innan programmet avslutas (användaren loggas ut)
+        LoginGUI loginGUI = new LoginGUI();
+        //avslutar huvudprogrammet
+        this.dispose();
+        //visar login-ruta igen
+        loginGUI.setVisible(true);
     }
     
 }
