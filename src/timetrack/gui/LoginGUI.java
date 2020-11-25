@@ -240,7 +240,7 @@ public class LoginGUI extends javax.swing.JFrame {
             //Skapar en koppling till DB med dess adress, user och pass
             cn = DriverManager.getConnection(DBAddress, DBUser, DBPass);
             //Skapar ett SELECT statement till PreparedStatement objekt
-            pstat = cn.prepareStatement("select * from users where email=? and user_password=?");
+            pstat = cn.prepareStatement("SELECT * FROM users WHERE email=? AND BINARY user_password=?");
             //Ändrar value-parametrar till texten i text-fälten.
             pstat.setString(1, qEmail);
             pstat.setString(2, qPass);
