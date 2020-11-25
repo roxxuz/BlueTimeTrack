@@ -205,6 +205,8 @@ public class LoginGUI extends javax.swing.JFrame {
         //Annars är den default 0 och returnerar då 0.
         int returnUserID = 0;
         try {
+            //Ökar timeout till 5 sekunder
+            DriverManager.setLoginTimeout(5);
             //Skapar en koppling till DB med dess adress, user och pass
             cn = DriverManager.getConnection(DBAddress, DBUser, DBPass);
             //Skapar ett SELECT statement till PreparedStatement objekt
@@ -224,9 +226,13 @@ public class LoginGUI extends javax.swing.JFrame {
             else{
                 JOptionPane.showMessageDialog(null, "Felaktigt användarnamn/lösenord", "Ej behörig!", 0);
             }
+            //Stänger kopplingen till databasen så att inte
+            //max antal användare för databasen ska överskridas.
+            cn.close();
         //Om något går fel med kopplingen till databasen... (kommer även hit om felaktigt select statement används osv.
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Kunde inte ansluta till databasen.\nKontrollera att du är ansluten till internet.", "Är du online?", 0);
+            System.out.println(ex);
         }
         //Returnerar userID (från databasen)
         //Om login misslyckades så returneras 0.
