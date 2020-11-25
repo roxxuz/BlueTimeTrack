@@ -1,26 +1,23 @@
-/* SADAKSFHJAKSJKAJSKJASF ladsjfhdsjksdkf
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package timetrack.gui;
 
 import timetrack.*;
 import javax.swing.JPanel;
 
-/**
- *
- * @author roxxu
- */
 public class TimeTrackGUI extends javax.swing.JFrame {
 
-    /**
-     * Creates new form TimeTrackGUI_test
-     */
+    //Inloggad användare (ID från databasen)
+    //Tilldelas värde med set-metoden setUserID.
+    //default = 0 (ingen användare är inloggad).
+    private int userID = 0;
+    GUIMethod sd = new GUIMethod();
+
     public TimeTrackGUI() {
-        initComponents();
+        initComponents();  
+      
+        
+        
     }
-    JPanel panel12 = new MotionPanel(this);
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -58,17 +55,22 @@ public class TimeTrackGUI extends javax.swing.JFrame {
 
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(116, 151, 187));
+        jPanel1.setBackground(new java.awt.Color(77, 111, 146));
         jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.setBackground(new java.awt.Color(46, 65, 103));
+        jButton1.setBackground(new java.awt.Color(44, 56, 80));
         jButton1.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jButton1.setForeground(new java.awt.Color(204, 204, 204));
         jButton1.setText("Logga ut");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 460, 200, -1));
 
-        jButton2.setBackground(new java.awt.Color(46, 65, 103));
+        jButton2.setBackground(new java.awt.Color(44, 56, 80));
         jButton2.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jButton2.setForeground(new java.awt.Color(204, 204, 204));
         jButton2.setText("Tidrapportering");
@@ -79,7 +81,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         });
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 200, -1));
 
-        jButton3.setBackground(new java.awt.Color(46, 65, 103));
+        jButton3.setBackground(new java.awt.Color(44, 56, 80));
         jButton3.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jButton3.setForeground(new java.awt.Color(204, 204, 204));
         jButton3.setText("Projekt");
@@ -142,7 +144,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
 
         jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 70, 730, 510));
 
-        jPanel4.setBackground(new java.awt.Color(54, 54, 105));
+        jPanel4.setBackground(new java.awt.Color(54, 69, 100));
         jPanel4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -179,7 +181,9 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
-        this.dispose();
+        this.dispose();     
+        
+        
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
@@ -189,6 +193,11 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         jPanel6.setVisible(false);
         jPanel5.setVisible(true);
+        String test = Integer.toString(userID);
+        jButton4.setText(test);
+        
+        
+        
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -198,14 +207,22 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         jPanel5.setVisible(false);
         jPanel6.setVisible(true);
+        //sd.showDialog("Title","Message","TimeTrack\\src\\timetrack\\gui\\ic_logo.png");
+   sd.showDialog("Hello Title?", "HY Message!");
+        
+        
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        signOut();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
@@ -260,5 +277,23 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables
+    
+    public void setUserID(int userID) {
+        this.userID = userID;
+      
+    }
+    
+    public int getUserID() {
+        return userID;
+    }
+    
+    private void signOut(){
+        //skapar objekt av LoginGUI innan programmet avslutas (användaren loggas ut)
+        LoginGUI loginGUI = new LoginGUI();
+        //avslutar huvudprogrammet
+        this.dispose();
+        //visar login-ruta igen
+        loginGUI.setVisible(true);
+    }
     
 }
