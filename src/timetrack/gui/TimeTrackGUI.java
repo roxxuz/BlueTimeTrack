@@ -1,8 +1,6 @@
-//ändrat på rad 1 av daniel
-package timetrack.gui; //ändrad rad av daniel
-//tre
-//stycken
-//rader
+
+package timetrack.gui;
+
 import timetrack.*;
 import javax.swing.JPanel;
 
@@ -12,10 +10,13 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     //Tilldelas värde med set-metoden setUserID.
     //default = 0 (ingen användare är inloggad).
     private int userID = 0;
-    
+    GUIMethod sd = new GUIMethod();
 
     public TimeTrackGUI() {
-        initComponents();    
+        initComponents();  
+      
+        
+        
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -180,7 +181,9 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
-        this.dispose();      
+        this.dispose();     
+        
+        
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
@@ -192,6 +195,9 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         jPanel5.setVisible(true);
         String test = Integer.toString(userID);
         jButton4.setText(test);
+        
+        
+        
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -200,7 +206,11 @@ public class TimeTrackGUI extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         jPanel5.setVisible(false);
-        jPanel6.setVisible(true);     
+        jPanel6.setVisible(true);
+        //sd.showDialog("Title","Message","TimeTrack\\src\\timetrack\\gui\\ic_logo.png");
+   sd.showDialog("Hello Title?", "HY Message!");
+        
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
