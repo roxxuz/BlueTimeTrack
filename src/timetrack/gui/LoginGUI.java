@@ -91,7 +91,7 @@ public class LoginGUI extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        loginPanel.setBackground(new java.awt.Color(54, 69, 100));
+        loginPanel.setBackground(new java.awt.Color(74, 88, 117));
         loginPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         loginPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -151,19 +151,25 @@ public class LoginGUI extends javax.swing.JFrame {
         });
         loginPanel.add(passField, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 92, 120, 30));
 
+        loginLabel.setFont(new java.awt.Font("SansSerif", 1, 8)); // NOI18N
+        loginLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        loginLabel.setText("Admin login  ");
         loginLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 loginLabelMouseClicked(evt);
             }
         });
-        loginPanel.add(loginLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 170, 20, 20));
+        loginPanel.add(loginLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 170, 80, 20));
 
+        userLogin.setFont(new java.awt.Font("SansSerif", 1, 8)); // NOI18N
+        userLogin.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        userLogin.setText("  User login");
         userLogin.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 userLoginMouseClicked(evt);
             }
         });
-        loginPanel.add(userLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 20, 20));
+        loginPanel.add(userLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 60, 20));
 
         getContentPane().add(loginPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 260, 190));
 
