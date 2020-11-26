@@ -10,7 +10,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     //Tilldelas värde med set-metoden setUserID.
     //default = 0 (ingen användare är inloggad).
     private int userID = 0;
-    GUIMethod sd = new GUIMethod();
+    GUIMethods guiMethods = new GUIMethods();
 
     public TimeTrackGUI() {
         initComponents();

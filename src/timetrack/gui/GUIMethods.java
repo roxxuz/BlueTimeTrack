@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
  *
  * @author Akram
  */
-public class GUIMethod {
+public class GUIMethods {
     
     public int showDialog(String title, String message) {
         //ImageIcon icon = new ImageIcon("C:\\Users\\Akram\\OneDrive\\Skrivbord\\TimeTrack\\src\\timetrack\\gui\\ic_logo2.png");
