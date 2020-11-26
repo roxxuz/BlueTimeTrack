@@ -161,7 +161,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
 
         minimiseBtn.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         minimiseBtn.setForeground(new java.awt.Color(204, 204, 204));
-        minimiseBtn.setText("--");
+        minimiseBtn.setText("━");
         minimiseBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         minimiseBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
