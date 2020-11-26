@@ -1,8 +1,10 @@
 
 package timetrack.gui;
 
+import java.awt.Color;
 import java.util.HashSet;
 import java.util.Set;
+import javax.swing.UIManager;
 
 public class TimeTrackGUI extends javax.swing.JFrame {
 
@@ -39,6 +41,9 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         jPanel7 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        ResetPW = new javax.swing.JButton();
+        tf1 = new javax.swing.JTextField();
+        tf2 = new javax.swing.JTextField();
         mainPanel = new javax.swing.JPanel();
         timePanel = new javax.swing.JPanel();
         timePanelTitle = new javax.swing.JLabel();
@@ -111,6 +116,16 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         jPanel7.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 10, 140, -1));
 
         jPanel1.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 140, 60));
+
+        ResetPW.setText("Reset PW");
+        ResetPW.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ResetPWActionPerformed(evt);
+            }
+        });
+        jPanel1.add(ResetPW, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, -1, -1));
+        jPanel1.add(tf1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 280, 90, -1));
+        jPanel1.add(tf2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 320, 30, -1));
 
         jPanel2.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 220, 510));
 
@@ -205,6 +220,15 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         signOut();
     }//GEN-LAST:event_loggaUtActionPerformed
 
+    private void ResetPWActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResetPWActionPerformed
+       String pw = tf1.getText();
+       String id = tf2.getText();
+       int idu = Integer.parseInt(id);
+       boolean haj = guiM.resetpw(pw, idu);
+           
+       
+    }//GEN-LAST:event_ResetPWActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -215,6 +239,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
         try {
+                
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
@@ -244,6 +269,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ResetPW;
     private javax.swing.JLabel closeBtn;
     private static javax.swing.JLabel dateTimeLabel;
     private javax.swing.JLabel jLabel1;
@@ -259,6 +285,8 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     private javax.swing.JPanel projectPanel;
     private javax.swing.JLabel projectPanelTitle;
     private javax.swing.JButton projekt;
+    private javax.swing.JTextField tf1;
+    private javax.swing.JTextField tf2;
     private javax.swing.JButton tidRapport;
     private javax.swing.JPanel timePanel;
     private javax.swing.JLabel timePanelTitle;
