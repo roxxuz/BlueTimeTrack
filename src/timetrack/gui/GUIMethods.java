@@ -161,4 +161,20 @@ public class GUIMethods {
             return this.isRunning;
         }
     }
+        public boolean resetpw(String password, int userid){
+            boolean success = false;
+            try {
+            pstat = cn.prepareStatement("update users set user_password = ? where user_id = ?");
+            pstat.setString(1, password);
+            pstat.setInt(2, userid);
+            pstat.executeUpdate();
+    /*        if(rs.next()){
+                System.out.println(result);
+            }*/
+                success = true;
+        } catch (SQLException ex) {
+                System.out.println(ex);
+        }
+            return success;
+        }
 }
