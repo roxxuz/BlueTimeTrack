@@ -30,9 +30,9 @@ public class GUIMethods {
     
     
     public class TimerThread extends Thread{
-        
+        //Så länge som isRunning=true så uppdateras tiden
         boolean isRunning;
-
+        //Här anges i vilket format som datum och tid ska visas
         SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, d MMM yyyy");
         SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
 
@@ -46,6 +46,8 @@ public class GUIMethods {
         //Gör Override på metoden run() (kolla i klassen Thread för att se hur run() fungerar)
         @Override
         public void run() {
+            //While-loop som kör så länge som isRunning=true
+            //Vi stänger av den med metoden setRunning(false) som då ger boolean isRunning värdet false
             while (isRunning) {
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override
@@ -53,9 +55,14 @@ public class GUIMethods {
                         //Hämtar tid och datum med dom statiska metoderna getInstance() och getTime()
                         Calendar currentCalendar = Calendar.getInstance();
                         Date currentTime = currentCalendar.getTime();
-                        //Här uppdateras dateTimeLabel i TimeTrackGUI med aktuellt datum och tid.
-                        //Den är ändrad till static i TimeTrackGUI och kan därför uppdateras direkt såhär
-                        TimeTrackGUI.dateTimeLabel.setText(dateFormat.format(currentTime) + "  |  " + timeFormat.format(currentTime));
+                        //Skapar en string där aktuellt datum och tid först in
+                        String dateTime = (dateFormat.format(currentTime) + "  |  " + timeFormat.format(currentTime));
+                        //Strängen skickas med till metoden updateDateTime() som ligger i TImeTrackGUI
+                        //Denna metod är static och kan därför användas direkt såhär
+                        //Eftersom tiden inte ska behandlas på olika sätt för
+                        //olika objekt så valde jag att göra den static
+                        TimeTrackGUI.updateDateTime(dateTime);
+                        
                     }
                 });
                 try {
