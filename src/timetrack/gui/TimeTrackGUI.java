@@ -242,10 +242,10 @@ public class TimeTrackGUI extends javax.swing.JFrame {
             
         });
     }
-/*
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel closeBtn;
-    private javax.swing.JLabel dateTimeLabel;
+    private static javax.swing.JLabel dateTimeLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
@@ -263,34 +263,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     private javax.swing.JPanel timePanel;
     private javax.swing.JLabel timePanelTitle;
     // End of variables declaration//GEN-END:variables
-*/
-    //Kommenterat bort alla deklarationer och skrivit in dom själv
-    //Endast för att kunna göra dateTimeLabel till static,
-    //då den inte är beroende av vem som är inloggad.
-    //Och vi kan skriva direkt till den från GUIMethods
-    //OBS! Måste uppdateras om nya saker läggs in i designläget
-    //För att uppdatera så ta bort allt som är deklarerat här under och
-    //klistra in nytt från de utkommenterade deklarationerna (som då kommer att ha nya rader)
-    //Ändra sedan dateTimeLabel till -  static javax.swing.JLabel dateTimeLabel; 
-    static javax.swing.JLabel dateTimeLabel;
-    private javax.swing.JLabel closeBtn;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JButton loggaUt;
-    private javax.swing.JLabel logo;
-    private javax.swing.JPanel mainPanel;
-    private javax.swing.JLabel minimiseBtn;
-    private javax.swing.JPanel projectPanel;
-    private javax.swing.JLabel projectPanelTitle;
-    private javax.swing.JButton projekt;
-    private javax.swing.JButton tidRapport;
-    private javax.swing.JPanel timePanel;
-    private javax.swing.JLabel timePanelTitle;
-    
+
     
     private void signOut(){
         //skapar objekt av LoginGUI innan programmet avslutas (användaren loggas ut)
@@ -302,6 +275,13 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         timerThread.setRunning(false);
         //visar login-ruta igen
         loginGUI.setVisible(true);
+    }
+    
+    //Metod som används för att uppdatera datum och tid i programmet
+    public static void updateDateTime(String updatedDateTime) {
+        //Eftersom deklarationen av jLabel dateTimeLabel är ändrad till static
+        //så kan vi skriva direkt till den från en statisk metod
+        dateTimeLabel.setText(updatedDateTime);
     }
     
     ////////
