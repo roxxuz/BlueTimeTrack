@@ -11,9 +11,9 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     //default = 0 (ingen användare är inloggad).
     private int userID = 0;
     //Skapar objekt av guiMethods
-    GUIMethods guiMethods = new GUIMethods();
+    GUIMethods guiM = new GUIMethods();
     //Skapar objekt av TimerThread som är en "inner class" i GUIMethods
-    GUIMethods.TimerThread timerThread = guiMethods.new TimerThread();
+    GUIMethods.TimerThread timerThread = guiM.new TimerThread();
 
     public TimeTrackGUI() {
         initComponents();

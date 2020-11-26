@@ -21,13 +21,15 @@ import javax.swing.JOptionPane;
  */
 public class LoginGUI extends javax.swing.JFrame {
     
-    Connection cn = null;
-    PreparedStatement pstat = null;
-    ResultSet rs = null;
-
-    String DBAddress = "";
-    String DBUser = "";
-    String DBPass = "";
+    PreparedStatement pstat;
+    ResultSet rs;
+    String DBAddress;
+    String DBUser;
+    String DBPass;
+    
+    GUIMethods guiM = new GUIMethods();
+    //Kallar på metoden som förbereder uppkopplingen till MySQL servern
+    Connection cn = guiM.prepareDBConnection(this);
     
     public LoginGUI() {
         //Tagen från main till konstruktorn för att koden ska köras när objektet skapas
@@ -57,9 +59,6 @@ public class LoginGUI extends javax.swing.JFrame {
         this.setTitle("LOGIN");
         //Placerar fönstret i mitten av skärmen (ska göra innan setvisible)
         this.setLocationRelativeTo(null);
-        //Kallar på metoden som läser in värden från filen db.properties
-        //och sparar i strängarna DBAddress, DBUser och DBPass
-        readProperties();
     }
     
     //Loginmetod som kallas på från main direkt när programmet startar
@@ -267,8 +266,6 @@ public class LoginGUI extends javax.swing.JFrame {
         try {
             //Ökar timeout till 5 sekunder
             DriverManager.setLoginTimeout(5);
-            //Skapar en koppling till DB med dess adress, user och pass
-            cn = DriverManager.getConnection(DBAddress, DBUser, DBPass);
             //Skapar ett SELECT statement till PreparedStatement objekt
             pstat = cn.prepareStatement("SELECT * FROM users WHERE email=? AND BINARY user_password=?");
             //Ändrar value-parametrar till texten i text-fälten.
@@ -310,30 +307,6 @@ public class LoginGUI extends javax.swing.JFrame {
         this.dispose();
         
     }
-    
-    private void readProperties(){
-        //Skapar objekt av Properties för att läsa från filen db.properties
-        Properties prop = new Properties();
-        try {
-            FileReader reader = new FileReader("src/timetrack/gui/db.properties");
-            prop.load(reader);
-            //Tilldelar värdena från filen db.properties till klassvariablerna
-            //som sedan ska användas för att logga in på databasen
-            DBAddress = prop.getProperty("db");
-            DBUser = prop.getProperty("user");
-            DBPass = prop.getProperty("pass");
-            reader.close();
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(LoginGUI.class.getName()).log(Level.SEVERE, null, ex);
-            System.err.println("Kanske saknas filen db.properties i src/timetrack/gui?");
-        } catch (IOException ex) {
-            Logger.getLogger(LoginGUI.class.getName()).log(Level.SEVERE, null, ex);
-            System.err.println("Kanske saknas filen db.properties i src/timetrack/gui?");
-        }
-        
-    }
-    
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField emailInput;
     private javax.swing.JLabel emailLabel;
