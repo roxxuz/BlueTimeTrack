@@ -13,7 +13,11 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     GUIMethod sd = new GUIMethod();
 
     public TimeTrackGUI() {
-        initComponents();  
+        initComponents();
+        //Sätter alla paneler (knappar/menyval) till false vid start,
+        //förutom Tidrapportering som ska vara default när programmet startar
+        projectPanel.setVisible(false);
+        timePanel.setVisible(true);
       
         
         
@@ -34,17 +38,12 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         projekt = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tabel = new javax.swing.JTable();
-        jSeparator1 = new javax.swing.JSeparator();
-        jPanel5 = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jButton4 = new javax.swing.JButton();
-        jPanel6 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        jButton5 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        mainPanel = new javax.swing.JPanel();
+        timePanel = new javax.swing.JPanel();
+        timePanelTitle = new javax.swing.JLabel();
+        projectPanel = new javax.swing.JPanel();
+        projectPanelTitle = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         closeBtn = new javax.swing.JLabel();
         minimiseBtn = new javax.swing.JLabel();
@@ -61,7 +60,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        loggaUt.setBackground(new java.awt.Color(44, 56, 80));
+        loggaUt.setBackground(new java.awt.Color(34, 43, 61));
         loggaUt.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         loggaUt.setForeground(new java.awt.Color(204, 204, 204));
         loggaUt.setText("Logga ut");
@@ -72,7 +71,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         });
         jPanel1.add(loggaUt, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 460, 200, -1));
 
-        tidRapport.setBackground(new java.awt.Color(44, 56, 80));
+        tidRapport.setBackground(new java.awt.Color(34, 43, 61));
         tidRapport.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         tidRapport.setForeground(new java.awt.Color(204, 204, 204));
         tidRapport.setText("Tidrapportering");
@@ -81,9 +80,9 @@ public class TimeTrackGUI extends javax.swing.JFrame {
                 tidRapportActionPerformed(evt);
             }
         });
-        jPanel1.add(tidRapport, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 200, -1));
+        jPanel1.add(tidRapport, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 200, -1));
 
-        projekt.setBackground(new java.awt.Color(44, 56, 80));
+        projekt.setBackground(new java.awt.Color(34, 43, 61));
         projekt.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         projekt.setForeground(new java.awt.Color(204, 204, 204));
         projekt.setText("Projekt");
@@ -92,75 +91,54 @@ public class TimeTrackGUI extends javax.swing.JFrame {
                 projektActionPerformed(evt);
             }
         });
-        jPanel1.add(projekt, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 200, -1));
+        jPanel1.add(projekt, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 200, -1));
 
-        jPanel7.setBackground(new java.awt.Color(54, 69, 100));
+        jPanel7.setBackground(new java.awt.Color(79, 100, 144));
         jPanel7.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Ola Svärdh");
-        jPanel7.add(jLabel1);
+        jPanel7.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 30, 140, -1));
 
-        jPanel1.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 140, 60));
+        jLabel2.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Inloggad som:");
+        jPanel7.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 10, 140, -1));
+
+        jPanel1.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 140, 60));
 
         jPanel2.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 220, 510));
 
-        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        mainPanel.setBackground(new java.awt.Color(255, 255, 255));
+        mainPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        tabel.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
-        tabel.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(tabel);
+        timePanel.setBackground(new java.awt.Color(255, 255, 255));
+        timePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, 630, 270));
-        jPanel3.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 340, 730, 20));
+        timePanelTitle.setFont(new java.awt.Font("SansSerif", 1, 48)); // NOI18N
+        timePanelTitle.setForeground(new java.awt.Color(242, 242, 242));
+        timePanelTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        timePanelTitle.setText("Tidrapportering");
+        timePanel.add(timePanelTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 2, 730, -1));
 
-        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        mainPanel.add(timePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 730, 510));
 
-        jLabel6.setText("jLabel6");
-        jPanel5.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, -1, -1));
+        projectPanel.setBackground(new java.awt.Color(255, 255, 255));
+        projectPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTextField3.setText("jTextField3");
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
-            }
-        });
-        jPanel5.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, -1, -1));
+        projectPanelTitle.setFont(new java.awt.Font("SansSerif", 1, 48)); // NOI18N
+        projectPanelTitle.setForeground(new java.awt.Color(242, 242, 242));
+        projectPanelTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        projectPanelTitle.setText("Projekt");
+        projectPanel.add(projectPanelTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 2, 730, -1));
 
-        jButton4.setText("jButton4");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-        jPanel5.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 310, -1));
+        mainPanel.add(projectPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 730, 510));
 
-        jPanel3.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 340, 360, 170));
-
-        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel4.setText("jLabel4");
-        jPanel6.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, 50));
-
-        jButton5.setText("jButton5");
-        jPanel6.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 80, -1, -1));
-
-        jPanel3.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 340, 370, 170));
-
-        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 70, 730, 510));
+        jPanel2.add(mainPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 70, 730, 510));
 
         jPanel4.setBackground(new java.awt.Color(54, 69, 100));
         jPanel4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -209,35 +187,18 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_minimiseBtnMouseClicked
 
     private void projektActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_projektActionPerformed
-        jPanel6.setVisible(false);
-        jPanel5.setVisible(true);
-        String test = Integer.toString(userID);
-        jButton4.setText(test);
-        
-        
-        
+        timePanel.setVisible(false);
+        projectPanel.setVisible(true);
     }//GEN-LAST:event_projektActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_jButton4ActionPerformed
-
     private void tidRapportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tidRapportActionPerformed
-        jPanel5.setVisible(false);
-        jPanel6.setVisible(true);
-        //sd.showDialog("Title","Message","TimeTrack\\src\\timetrack\\gui\\ic_logo.png");
-   sd.showDialog("Hello Title?", "HY Message!");
-        
-        
+        projectPanel.setVisible(false);
+        timePanel.setVisible(true);
     }//GEN-LAST:event_tidRapportActionPerformed
 
     private void loggaUtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loggaUtActionPerformed
         signOut();
     }//GEN-LAST:event_loggaUtActionPerformed
-
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -279,27 +240,22 @@ public class TimeTrackGUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel closeBtn;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JButton loggaUt;
     private javax.swing.JLabel logo;
+    private javax.swing.JPanel mainPanel;
     private javax.swing.JLabel minimiseBtn;
+    private javax.swing.JPanel projectPanel;
+    private javax.swing.JLabel projectPanelTitle;
     private javax.swing.JButton projekt;
-    private javax.swing.JTable tabel;
     private javax.swing.JButton tidRapport;
+    private javax.swing.JPanel timePanel;
+    private javax.swing.JLabel timePanelTitle;
     // End of variables declaration//GEN-END:variables
     
     public void setUserID(int userID) {
