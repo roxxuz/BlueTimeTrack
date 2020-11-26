@@ -29,7 +29,7 @@ public class LoginGUI extends javax.swing.JFrame {
     
     GUIMethods guiM = new GUIMethods();
     //Kallar på metoden som förbereder uppkopplingen till MySQL servern
-    Connection cn = guiM.prepareDBConnection(this);
+    Connection cn = guiM.prepareDBConnection();
     
     public LoginGUI() {
         //Tagen från main till konstruktorn för att koden ska köras när objektet skapas

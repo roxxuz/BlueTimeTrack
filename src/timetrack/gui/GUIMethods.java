@@ -40,7 +40,7 @@ public class GUIMethods {
         readProperties();
         //Lägger in allt som behövs för uppkopplingen till databasen
         //efter att readProperties har läst in värdena i programmet
-        prepareDBConnection();
+        cn = prepareDBConnection();
     }
     
     
@@ -84,14 +84,7 @@ public class GUIMethods {
     * T.ex. via metoden readProperties()
     * @param text test
     */
-    public void prepareDBConnection() {
-        try {
-            cn = DriverManager.getConnection(DBAddress, DBUser, DBPass);
-        } catch (SQLException ex) {
-            Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    public Connection prepareDBConnection(JFrame jFrame) {
+    public Connection prepareDBConnection() {
         //Skapar Connection variabel för att kunna skicka tillbaka till anropet
         Connection con = null;
         try {
