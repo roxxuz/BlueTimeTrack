@@ -1,14 +1,22 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package timetrack.gui;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
@@ -19,6 +27,22 @@ import javax.swing.SwingUtilities;
  */
 public class GUIMethods {
     
+    Connection cn;
+    PreparedStatement pstat;
+    ResultSet rs;
+    String DBAddress;
+    String DBUser;
+    String DBPass;
+    
+    //Konstruktor
+    public GUIMethods() {
+        //Värden från filen db.properties läses in
+        readProperties();
+        //Lägger in allt som behövs för uppkopplingen till databasen
+        //efter att readProperties har läst in värdena i programmet
+        prepareDBConnection();
+    }
+    
     
     public int showDialog(String title, String message) {
         //ImageIcon icon = new ImageIcon("C:\\Users\\Akram\\OneDrive\\Skrivbord\\TimeTrack\\src\\timetrack\\gui\\ic_logo2.png");
@@ -26,6 +50,56 @@ public class GUIMethods {
         
             return input;
            
+    }
+    
+    //Denna metod körs varje gång som en instans skapas av klassen (ligger i konstruktorn)
+    //Den läser då in de värden som finns i db.properties
+    private void readProperties(){
+        //Skapar objekt av Properties för att läsa från filen db.properties
+        Properties prop = new Properties();
+        try {
+            FileReader reader = new FileReader("src/timetrack/gui/db.properties");
+            prop.load(reader);
+            //Tilldelar värdena från filen db.properties till klassvariablerna
+            //som sedan ska användas för att logga in på databasen
+            DBAddress = prop.getProperty("db");
+            DBUser = prop.getProperty("user");
+            DBPass = prop.getProperty("pass");
+            reader.close();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(LoginGUI.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println("Kanske saknas filen db.properties i src/timetrack/gui?");
+        } catch (IOException ex) {
+            Logger.getLogger(LoginGUI.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println("Kanske saknas filen db.properties i src/timetrack/gui?");
+        }
+        
+    }
+    
+    /**
+    * Använd endast denna metod från den klass där metoden finns
+    * I annat fall så ska jFrame skickas med
+    * Den här metoden måste anropas efter att
+    * DBAddress, DBUser och DBPass har fått värden
+    * T.ex. via metoden readProperties()
+    * @param text test
+    */
+    public void prepareDBConnection() {
+        try {
+            cn = DriverManager.getConnection(DBAddress, DBUser, DBPass);
+        } catch (SQLException ex) {
+            Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public Connection prepareDBConnection(JFrame jFrame) {
+        //Skapar Connection variabel för att kunna skicka tillbaka till anropet
+        Connection con = null;
+        try {
+            con = DriverManager.getConnection(DBAddress, DBUser, DBPass);
+        } catch (SQLException ex) {
+            Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return con;
     }
     
     
