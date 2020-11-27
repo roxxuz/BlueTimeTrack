@@ -64,7 +64,6 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         mainPanel = new javax.swing.JPanel();
         timePanel = new javax.swing.JPanel();
         timePanelTitle = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         projectPanel = new javax.swing.JPanel();
         jXGraph2 = new org.jdesktop.swingx.JXGraph();
         projectPanelTitle = new javax.swing.JLabel();
@@ -72,7 +71,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         closeBtn = new javax.swing.JLabel();
         minimiseBtn = new javax.swing.JLabel();
-        logo = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -224,9 +223,6 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         timePanelTitle.setText("Tidrapportering");
         timePanel.add(timePanelTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 2, 730, -1));
 
-        jButton1.setText("jButton1");
-        timePanel.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 390, -1, -1));
-
         mainPanel.add(timePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 760, 470));
 
         projectPanel.setBackground(new java.awt.Color(255, 255, 255));
@@ -272,8 +268,11 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         });
         jPanel4.add(minimiseBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 10, 10, -1));
 
-        logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/timetrack/gui/ic_logo2.jpg"))); // NOI18N
-        jPanel4.add(logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 280, 70));
+        jLabel11.setFont(new java.awt.Font("Dialog", 1, 70)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel11.setText("TT");
+        jPanel4.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 100, 90));
 
         jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 950, 90));
 
@@ -438,8 +437,8 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel closeBtn;
     private static javax.swing.JLabel dateTimeLabel;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -459,7 +458,6 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private org.jdesktop.swingx.JXGraph jXGraph2;
-    private javax.swing.JLabel logo;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JLabel minimiseBtn;
     private javax.swing.JPanel projectPanel;
