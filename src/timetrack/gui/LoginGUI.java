@@ -48,16 +48,18 @@ public class LoginGUI extends javax.swing.JFrame {
     private void initComponents() {
 
         loginPanel = new MotionPanel(this);
+        jPanel1 = new javax.swing.JPanel();
+        titleLable = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
         emailLabel = new javax.swing.JLabel();
         passLabel = new javax.swing.JLabel();
-        titleLable = new javax.swing.JLabel();
         emailInput = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        exitButton = new javax.swing.JButton();
-        loginButton = new javax.swing.JButton();
         passField = new javax.swing.JPasswordField();
-        loginLabel = new javax.swing.JLabel();
+        loginButton = new javax.swing.JButton();
+        exitButton = new javax.swing.JButton();
         userLogin = new javax.swing.JLabel();
+        loginLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -65,86 +67,99 @@ public class LoginGUI extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         loginPanel.setBackground(new java.awt.Color(74, 88, 117));
-        loginPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         loginPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        emailLabel.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        emailLabel.setForeground(new java.awt.Color(204, 204, 204));
-        emailLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        emailLabel.setText("Användarnamn:");
-        loginPanel.add(emailLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 66, 100, 20));
+        jPanel1.setBackground(new java.awt.Color(47, 66, 84));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        passLabel.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        passLabel.setForeground(new java.awt.Color(204, 204, 204));
-        passLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        passLabel.setText("Lösenord:");
-        loginPanel.add(passLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 96, 100, 20));
-
-        titleLable.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        titleLable.setFont(new java.awt.Font("SansSerif", 1, 36)); // NOI18N
         titleLable.setForeground(new java.awt.Color(255, 255, 255));
         titleLable.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        titleLable.setText("- Time Track -");
-        loginPanel.add(titleLable, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 10, 260, 30));
+        titleLable.setText("TT");
+        jPanel1.add(titleLable, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 330, 30));
+
+        jLabel1.setFont(new java.awt.Font("SansSerif", 1, 10)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Logga in med användarnamn och lösenord");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 320, -1));
+
+        loginPanel.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 330, 70));
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        emailLabel.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        emailLabel.setForeground(new java.awt.Color(47, 66, 84));
+        emailLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        emailLabel.setText("Användarnamn:");
+        jPanel2.add(emailLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 100, 30));
+
+        passLabel.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        passLabel.setForeground(new java.awt.Color(47, 66, 84));
+        passLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        passLabel.setText("Lösenord:");
+        jPanel2.add(passLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 100, 30));
 
         emailInput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 emailInputActionPerformed(evt);
             }
         });
-        loginPanel.add(emailInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 60, 120, 30));
-
-        jLabel1.setFont(new java.awt.Font("SansSerif", 1, 10)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Logga in med användarnamn och lösenord");
-        loginPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 240, -1));
-
-        exitButton.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        exitButton.setText("Avsluta");
-        exitButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                exitButtonActionPerformed(evt);
-            }
-        });
-        loginPanel.add(exitButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 140, 80, -1));
-
-        loginButton.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        loginButton.setText("Logga in");
-        loginButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                loginButtonActionPerformed(evt);
-            }
-        });
-        loginPanel.add(loginButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, -1, -1));
+        jPanel2.add(emailInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, 210, 30));
 
         passField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 passFieldActionPerformed(evt);
             }
         });
-        loginPanel.add(passField, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 92, 120, 30));
+        jPanel2.add(passField, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 50, 210, 30));
 
-        loginLabel.setFont(new java.awt.Font("SansSerif", 1, 8)); // NOI18N
-        loginLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        loginLabel.setText("Admin login  ");
-        loginLabel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                loginLabelMouseClicked(evt);
+        loginButton.setBackground(new java.awt.Color(47, 66, 84));
+        loginButton.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        loginButton.setForeground(new java.awt.Color(255, 255, 255));
+        loginButton.setText("Logga in");
+        loginButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loginButtonActionPerformed(evt);
             }
         });
-        loginPanel.add(loginLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 170, 80, 20));
+        jPanel2.add(loginButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 330, -1));
+
+        exitButton.setBackground(new java.awt.Color(47, 66, 84));
+        exitButton.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        exitButton.setForeground(new java.awt.Color(255, 255, 255));
+        exitButton.setText("Avsluta");
+        exitButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exitButtonActionPerformed(evt);
+            }
+        });
+        jPanel2.add(exitButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 330, -1));
 
         userLogin.setFont(new java.awt.Font("SansSerif", 1, 8)); // NOI18N
+        userLogin.setForeground(new java.awt.Color(47, 66, 84));
         userLogin.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        userLogin.setText("  User login");
         userLogin.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 userLoginMouseClicked(evt);
             }
         });
-        loginPanel.add(userLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 60, 20));
+        jPanel2.add(userLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 20, 20));
 
-        getContentPane().add(loginPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 260, 190));
+        loginLabel.setFont(new java.awt.Font("SansSerif", 1, 8)); // NOI18N
+        loginLabel.setForeground(new java.awt.Color(47, 66, 84));
+        loginLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        loginLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                loginLabelMouseClicked(evt);
+            }
+        });
+        jPanel2.add(loginLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 110, 20, 20));
+
+        loginPanel.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 330, 170));
+
+        getContentPane().add(loginPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 330, 240));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -286,6 +301,8 @@ public class LoginGUI extends javax.swing.JFrame {
     private javax.swing.JLabel emailLabel;
     private javax.swing.JButton exitButton;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JButton loginButton;
     private javax.swing.JLabel loginLabel;
     private javax.swing.JPanel loginPanel;
