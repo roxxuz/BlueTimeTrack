@@ -23,6 +23,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     GUIMethods guiM = new GUIMethods();
     //Skapar objekt av TimerThread som är en "inner class" i GUIMethods
     GUIMethods.TimerThread timerThread = guiM.new TimerThread();
+    //Boolean array som håller reda på vilket menyval som är aktivt
     Boolean[] menuArray = new Boolean[5];
 
     public TimeTrackGUI() {
@@ -35,7 +36,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         //förutom Tidrapportering som ska vara default när programmet startar
         projectPanel.setVisible(false);
         timePanel.setVisible(true);
-        
+        //Sätter alla booleans i arrayen till false
         Arrays.fill(menuArray, Boolean.FALSE);
     }
     
@@ -63,10 +64,10 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         mainPanel = new javax.swing.JPanel();
         timePanel = new javax.swing.JPanel();
-        timePanelTitle = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
         projectPanel = new javax.swing.JPanel();
         jXGraph2 = new org.jdesktop.swingx.JXGraph();
-        projectPanelTitle = new javax.swing.JLabel();
         dateTimeLabel = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         closeBtn = new javax.swing.JLabel();
@@ -80,10 +81,10 @@ public class TimeTrackGUI extends javax.swing.JFrame {
 
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(70, 101, 133));
+        jPanel1.setBackground(new java.awt.Color(210, 219, 228));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel3.setBackground(new java.awt.Color(66, 91, 117));
+        jPanel3.setBackground(new java.awt.Color(92, 126, 162));
         jPanel3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jPanel3MouseClicked(evt);
@@ -97,17 +98,18 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         });
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel3.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel3.setText("Inställningar");
-        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 190, -1));
+        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 160, 30));
 
         jPanel12.setBackground(new java.awt.Color(47, 66, 84));
-        jPanel3.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 40));
+        jPanel3.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 30));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 380, 190, 40));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 390, 190, 30));
 
-        jPanel5.setBackground(new java.awt.Color(66, 91, 117));
+        jPanel5.setBackground(new java.awt.Color(92, 126, 162));
         jPanel5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jPanel5MouseClicked(evt);
@@ -121,17 +123,18 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         });
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel4.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Rapporter");
-        jPanel5.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 10, 190, -1));
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel4.setText("Info");
+        jPanel5.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 160, 30));
 
         jPanel11.setBackground(new java.awt.Color(47, 66, 84));
-        jPanel5.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 40));
+        jPanel5.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 30));
 
-        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 190, 40));
+        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 190, -1));
 
-        jPanel6.setBackground(new java.awt.Color(66, 91, 117));
+        jPanel6.setBackground(new java.awt.Color(92, 126, 162));
         jPanel6.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jPanel6MouseClicked(evt);
@@ -145,17 +148,18 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         });
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel5.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel5.setText("Tidrapportering");
-        jPanel6.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 10, 190, -1));
+        jPanel6.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 0, 160, 30));
 
         jPanel9.setBackground(new java.awt.Color(47, 66, 84));
-        jPanel6.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 10, 40));
+        jPanel6.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 10, 30));
 
-        jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 190, 40));
+        jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 190, 30));
 
-        jPanel7.setBackground(new java.awt.Color(66, 91, 117));
+        jPanel7.setBackground(new java.awt.Color(92, 126, 162));
         jPanel7.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jPanel7MouseClicked(evt);
@@ -169,17 +173,18 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         });
         jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel6.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel6.setText("Projekt");
-        jPanel7.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 10, 190, -1));
+        jPanel7.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 160, 30));
 
         jPanel10.setBackground(new java.awt.Color(47, 66, 84));
-        jPanel7.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 40));
+        jPanel7.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 30));
 
-        jPanel1.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 190, 40));
+        jPanel1.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 190, 30));
 
-        jPanel8.setBackground(new java.awt.Color(66, 91, 117));
+        jPanel8.setBackground(new java.awt.Color(92, 126, 162));
         jPanel8.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jPanel8MouseClicked(evt);
@@ -193,17 +198,18 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         });
         jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel7.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel7.setText("Logga ut");
-        jPanel8.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 190, -1));
+        jPanel8.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 160, 30));
 
         jPanel13.setBackground(new java.awt.Color(47, 66, 84));
-        jPanel8.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 10, 40));
+        jPanel8.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 10, 30));
 
-        jPanel1.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 430, 190, 40));
+        jPanel1.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 430, 190, 30));
 
-        jLabel1.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(47, 66, 84));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Ola Svärdh");
@@ -217,23 +223,20 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         timePanel.setBackground(new java.awt.Color(255, 255, 255));
         timePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        timePanelTitle.setFont(new java.awt.Font("SansSerif", 1, 48)); // NOI18N
-        timePanelTitle.setForeground(new java.awt.Color(255, 255, 255));
-        timePanelTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        timePanelTitle.setText("Tidrapportering");
-        timePanel.add(timePanelTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 2, 730, -1));
+        jTextArea1.setColumns(20);
+        jTextArea1.setLineWrap(true);
+        jTextArea1.setRows(5);
+        jTextArea1.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam nec metus id elit suscipit accumsan eget et lacus. Aliquam a tempus purus, at dapibus elit. Donec sem mi, semper eu enim rhoncus, pretium placerat justo. Proin egestas dictum sagittis. Nam nec consectetur metus, viverra convallis justo. Etiam ut sem sem. Sed mattis purus at placerat placerat.  Nullam molestie nibh leo, id mattis leo porta sit amet. Pellentesque pharetra dui nec aliquet mpus eros. Nunc non metus viverra, eleifend lectus non, cursus orci. Praesent pellentesque sit amet diam non pulvinar. tie, risus urna viverra est, malesuada semper ");
+        jTextArea1.setWrapStyleWord(true);
+        jScrollPane1.setViewportView(jTextArea1);
+
+        timePanel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 190, 640, 100));
 
         mainPanel.add(timePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 760, 470));
 
         projectPanel.setBackground(new java.awt.Color(255, 255, 255));
         projectPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         projectPanel.add(jXGraph2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 540, 280));
-
-        projectPanelTitle.setFont(new java.awt.Font("SansSerif", 1, 48)); // NOI18N
-        projectPanelTitle.setForeground(new java.awt.Color(255, 255, 255));
-        projectPanelTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        projectPanelTitle.setText("Projekt");
-        projectPanel.add(projectPanelTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 2, 730, -1));
 
         mainPanel.add(projectPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 760, 470));
 
@@ -268,11 +271,11 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         });
         jPanel4.add(minimiseBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 10, 10, -1));
 
-        jLabel11.setFont(new java.awt.Font("Dialog", 1, 70)); // NOI18N
+        jLabel11.setFont(new java.awt.Font("SansSerif", 1, 36)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel11.setText("TT");
-        jPanel4.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 110, 90));
+        jLabel11.setText("》TT");
+        jPanel4.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 100, 90));
 
         jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 950, 90));
 
@@ -298,26 +301,26 @@ public class TimeTrackGUI extends javax.swing.JFrame {
 
     private void jPanel3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseExited
         if(!menuArray[3]) {
-        jPanel3.setBackground(new java.awt.Color(66,91,117));
+        jPanel3.setBackground(new java.awt.Color(92,126,162));
         }
     }//GEN-LAST:event_jPanel3MouseExited
 
     private void jPanel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseClicked
         timePanel.setVisible(false);
         projectPanel.setVisible(true);
-        jPanel6.setBackground(new java.awt.Color(66,91,117));
-        jPanel7.setBackground(new java.awt.Color(66,91,117));
-        jPanel5.setBackground(new java.awt.Color(66,91,117));
-        jPanel8.setBackground(new java.awt.Color(66,91,117));
+        jPanel6.setBackground(new java.awt.Color(92,126,162));
+        jPanel7.setBackground(new java.awt.Color(92,126,162));
+        jPanel5.setBackground(new java.awt.Color(92,126,162));
+        jPanel8.setBackground(new java.awt.Color(92,126,162));
         Arrays.fill(menuArray, Boolean.FALSE);
         menuArray[3] = true;
     }//GEN-LAST:event_jPanel3MouseClicked
 
     private void jPanel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseClicked
-        jPanel6.setBackground(new java.awt.Color(66,91,117));
-        jPanel7.setBackground(new java.awt.Color(66,91,117));
-        jPanel3.setBackground(new java.awt.Color(66,91,117));
-        jPanel8.setBackground(new java.awt.Color(66,91,117));
+        jPanel6.setBackground(new java.awt.Color(92,126,162));
+        jPanel7.setBackground(new java.awt.Color(92,126,162));
+        jPanel3.setBackground(new java.awt.Color(92,126,162));
+        jPanel8.setBackground(new java.awt.Color(92,126,162));
         Arrays.fill(menuArray, Boolean.FALSE);
         menuArray[2] = true;
     }//GEN-LAST:event_jPanel5MouseClicked
@@ -328,17 +331,17 @@ public class TimeTrackGUI extends javax.swing.JFrame {
 
     private void jPanel5MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseExited
         if(!menuArray[2]) {
-        jPanel5.setBackground(new java.awt.Color(66,91,117));
+        jPanel5.setBackground(new java.awt.Color(92,126,162));
         }
     }//GEN-LAST:event_jPanel5MouseExited
 
     private void jPanel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MouseClicked
         projectPanel.setVisible(false);
         timePanel.setVisible(true);
-        jPanel7.setBackground(new java.awt.Color(66,91,117));
-        jPanel5.setBackground(new java.awt.Color(66,91,117));
-        jPanel3.setBackground(new java.awt.Color(66,91,117));
-        jPanel8.setBackground(new java.awt.Color(66,91,117));
+        jPanel7.setBackground(new java.awt.Color(92,126,162));
+        jPanel5.setBackground(new java.awt.Color(92,126,162));
+        jPanel3.setBackground(new java.awt.Color(92,126,162));
+        jPanel8.setBackground(new java.awt.Color(92,126,162));
         Arrays.fill(menuArray, Boolean.FALSE);
         menuArray[0] = true;
         
@@ -350,17 +353,17 @@ public class TimeTrackGUI extends javax.swing.JFrame {
 
     private void jPanel6MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MouseExited
         if(!menuArray[0]) {
-        jPanel6.setBackground(new java.awt.Color(66,91,117));
+        jPanel6.setBackground(new java.awt.Color(92,126,162));
         }
     }//GEN-LAST:event_jPanel6MouseExited
 
     private void jPanel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseClicked
         timePanel.setVisible(false);
         projectPanel.setVisible(true);
-        jPanel6.setBackground(new java.awt.Color(66,91,117));
-        jPanel5.setBackground(new java.awt.Color(66,91,117));
-        jPanel3.setBackground(new java.awt.Color(66,91,117));
-        jPanel8.setBackground(new java.awt.Color(66,91,117));
+        jPanel6.setBackground(new java.awt.Color(92,126,162));
+        jPanel5.setBackground(new java.awt.Color(92,126,162));
+        jPanel3.setBackground(new java.awt.Color(92,126,162));
+        jPanel8.setBackground(new java.awt.Color(92,126,162));
         Arrays.fill(menuArray, Boolean.FALSE);
         menuArray[1] = true;
     }//GEN-LAST:event_jPanel7MouseClicked
@@ -371,15 +374,15 @@ public class TimeTrackGUI extends javax.swing.JFrame {
 
     private void jPanel7MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseExited
         if(!menuArray[1]) {
-        jPanel7.setBackground(new java.awt.Color(66,91,117));
+        jPanel7.setBackground(new java.awt.Color(92,126,162));
         }
     }//GEN-LAST:event_jPanel7MouseExited
 
     private void jPanel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel8MouseClicked
-        jPanel6.setBackground(new java.awt.Color(66,91,117));
-        jPanel7.setBackground(new java.awt.Color(66,91,117));
-        jPanel5.setBackground(new java.awt.Color(66,91,117));
-        jPanel3.setBackground(new java.awt.Color(66,91,117));
+        jPanel6.setBackground(new java.awt.Color(92,126,162));
+        jPanel7.setBackground(new java.awt.Color(92,126,162));
+        jPanel5.setBackground(new java.awt.Color(92,126,162));
+        jPanel3.setBackground(new java.awt.Color(92,126,162));
         Arrays.fill(menuArray, Boolean.FALSE);
         menuArray[4] = true;
         signOut();
@@ -391,7 +394,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
 
     private void jPanel8MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel8MouseExited
         if(!menuArray[4]) {
-        jPanel8.setBackground(new java.awt.Color(66,91,117));
+        jPanel8.setBackground(new java.awt.Color(92,126,162));
         }
     }//GEN-LAST:event_jPanel8MouseExited
 
@@ -457,13 +460,13 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea1;
     private org.jdesktop.swingx.JXGraph jXGraph2;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JLabel minimiseBtn;
     private javax.swing.JPanel projectPanel;
-    private javax.swing.JLabel projectPanelTitle;
     private javax.swing.JPanel timePanel;
-    private javax.swing.JLabel timePanelTitle;
     // End of variables declaration//GEN-END:variables
 
     
