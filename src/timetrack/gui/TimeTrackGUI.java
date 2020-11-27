@@ -64,6 +64,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         mainPanel = new javax.swing.JPanel();
         timePanel = new javax.swing.JPanel();
         timePanelTitle = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         projectPanel = new javax.swing.JPanel();
         jXGraph2 = new org.jdesktop.swingx.JXGraph();
         projectPanelTitle = new javax.swing.JLabel();
@@ -80,7 +81,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
 
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(77, 111, 146));
+        jPanel1.setBackground(new java.awt.Color(70, 101, 133));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel3.setBackground(new java.awt.Color(66, 91, 117));
@@ -204,7 +205,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         jPanel1.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 430, 190, 40));
 
         jLabel1.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(81, 116, 153));
+        jLabel1.setForeground(new java.awt.Color(47, 66, 84));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Ola Svärdh");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 190, 60));
@@ -223,6 +224,9 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         timePanelTitle.setText("Tidrapportering");
         timePanel.add(timePanelTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 2, 730, -1));
 
+        jButton1.setText("jButton1");
+        timePanel.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 390, -1, -1));
+
         mainPanel.add(timePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 760, 470));
 
         projectPanel.setBackground(new java.awt.Color(255, 255, 255));
@@ -237,17 +241,17 @@ public class TimeTrackGUI extends javax.swing.JFrame {
 
         mainPanel.add(projectPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 760, 470));
 
-        dateTimeLabel.setForeground(new java.awt.Color(153, 153, 153));
+        dateTimeLabel.setForeground(new java.awt.Color(47, 66, 84));
         dateTimeLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        mainPanel.add(dateTimeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 470, 330, 20));
+        mainPanel.add(dateTimeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 470, 360, 20));
 
         jPanel2.add(mainPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 90, 760, 490));
 
-        jPanel4.setBackground(new java.awt.Color(54, 69, 100));
+        jPanel4.setBackground(new java.awt.Color(47, 66, 84));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         closeBtn.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        closeBtn.setForeground(new java.awt.Color(204, 204, 204));
+        closeBtn.setForeground(new java.awt.Color(255, 255, 255));
         closeBtn.setText("X");
         closeBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         closeBtn.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -258,7 +262,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         jPanel4.add(closeBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 10, 10, -1));
 
         minimiseBtn.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        minimiseBtn.setForeground(new java.awt.Color(204, 204, 204));
+        minimiseBtn.setForeground(new java.awt.Color(255, 255, 255));
         minimiseBtn.setText("━");
         minimiseBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         minimiseBtn.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -434,6 +438,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel closeBtn;
     private static javax.swing.JLabel dateTimeLabel;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
