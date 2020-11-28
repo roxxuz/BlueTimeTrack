@@ -98,7 +98,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         });
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel3.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel3.setText("Inställningar");
@@ -123,10 +123,10 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         });
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel4.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel4.setText("Info");
+        jLabel4.setText("Anteckningar");
         jPanel5.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 160, 30));
 
         jPanel11.setBackground(new java.awt.Color(47, 66, 84));
@@ -148,7 +148,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         });
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel5.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel5.setText("Tidrapportering");
@@ -173,7 +173,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         });
         jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel6.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel6.setText("Projekt");
@@ -198,7 +198,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         });
         jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel7.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel7.setText("Logga ut");
@@ -209,7 +209,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
 
         jPanel1.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 430, 190, 30));
 
-        jLabel1.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(47, 66, 84));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Ola Svärdh");
@@ -240,6 +240,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
 
         mainPanel.add(projectPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 760, 470));
 
+        dateTimeLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         dateTimeLabel.setForeground(new java.awt.Color(47, 66, 84));
         dateTimeLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         mainPanel.add(dateTimeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 470, 360, 20));
@@ -249,7 +250,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         jPanel4.setBackground(new java.awt.Color(47, 66, 84));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        closeBtn.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        closeBtn.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         closeBtn.setForeground(new java.awt.Color(255, 255, 255));
         closeBtn.setText("X");
         closeBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -260,7 +261,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         });
         jPanel4.add(closeBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 10, 10, -1));
 
-        minimiseBtn.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        minimiseBtn.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         minimiseBtn.setForeground(new java.awt.Color(255, 255, 255));
         minimiseBtn.setText("━");
         minimiseBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -271,7 +272,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         });
         jPanel4.add(minimiseBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 10, 10, -1));
 
-        jLabel11.setFont(new java.awt.Font("SansSerif", 1, 36)); // NOI18N
+        jLabel11.setFont(new java.awt.Font("SansSerif", 0, 36)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel11.setText("》TT");
