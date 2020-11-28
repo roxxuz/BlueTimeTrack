@@ -267,7 +267,7 @@ public class LoginGUI extends javax.swing.JFrame {
 
     
     private void startTimeTrack(int userID){
-        
+        guiM.closeDBConnection();
         TimeTrackGUI tGUI = new TimeTrackGUI();
         //Sätter inloggad användare till userID (från databasen)
         tGUI.setUserID(userID);
