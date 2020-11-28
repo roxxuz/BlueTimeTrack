@@ -464,6 +464,8 @@ public class TimeTrackGUI extends javax.swing.JFrame {
 
     
     private void signOut(){
+        //Stänger uppkopplingen till databasen
+        guiM.closeDBConnection();
         //skapar objekt av LoginGUI innan programmet avslutas (användaren loggas ut)
         LoginGUI loginGUI = new LoginGUI();
         //avslutar huvudprogrammet
@@ -493,6 +495,10 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     
     public int getUserID() {
         return userID;
+    }
+    
+    public void setCurrentUserLabel(String userLabel) {
+        currentUserLabel.setText(userLabel);
     }
     
 }
