@@ -219,7 +219,7 @@ public class LoginGUI extends javax.swing.JFrame {
         //If-satsen anropar metoden loginUser och skickar med email och pass från textfälten
         //Metoden kommer returnera en int med användarens ID, som lagras i userID.
         //Om användare + lösenord är fel eller inte finns så returneras 0.
-        int userID = loginUser(email,pass);
+        int userID = guiM.loginUser(email,pass);
 
         if(userID > 0){
             //Kallar på metoden som ska starta huvudprogrammet och skickar med
@@ -252,7 +252,7 @@ public class LoginGUI extends javax.swing.JFrame {
         //If-satsen anropar metoden loginUser och skickar med email och pass från textfälten
         //Metoden kommer returnera en int med användarens ID, som lagras i userID.
         //Om användare + lösenord är fel eller inte finns så returneras 0.
-        int userID = loginUser(email,pass);
+        int userID = guiM.loginUser(email,pass);
 
         if(userID > 0){
             //Kallar på metoden som ska starta huvudprogrammet och skickar med
@@ -265,45 +265,6 @@ public class LoginGUI extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_menuExitPanelMouseClicked
 
-    
-    private int loginUser(String email, String pass1){
-        String qEmail = email;
-        String qPass = pass1;
-        //returnUserID som kommer att returnera UserID från databasen om användarnamn + lösenord matchar
-        //Annars är den default 0 och returnerar då 0.
-        int returnUserID = 0;
-        try {
-            //Ökar timeout till 5 sekunder
-            DriverManager.setLoginTimeout(5);
-            //Skapar ett SELECT statement till PreparedStatement objekt
-            pstat = cn.prepareStatement("SELECT * FROM users WHERE email=? AND BINARY user_password=?");
-            //Ändrar value-parametrar till texten i text-fälten.
-            pstat.setString(1, qEmail);
-            pstat.setString(2, qPass);
-            //Utför SQL kommand
-            rs = pstat.executeQuery();
-            //Kollar om det finns MINST en rad från select statement (while hade kollat alla)
-            if(rs.next()){
-                //sparar värdet från första kolumnen (userID) från Select statemant.
-                returnUserID = rs.getInt(1);
-            }
-            //Om ingen rad returneras från select statemant så betyder det att kombinationen
-            //av användarnamn och lösenord ej hittades i databasen och då körs istället else.
-            else{
-                JOptionPane.showMessageDialog(null, "Felaktigt användarnamn/lösenord", "Ej behörig!", 0);
-            }
-            //Stänger kopplingen till databasen så att inte
-            //max antal användare för databasen ska överskridas.
-            cn.close();
-        //Om något går fel med kopplingen till databasen... (kommer även hit om felaktigt select statement används osv.
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Kunde inte ansluta till databasen.\nKontrollera att du är ansluten till internet.", "Är du online?", 0);
-            System.out.println(ex);
-        }
-        //Returnerar userID (från databasen)
-        //Om login misslyckades så returneras 0.
-        return returnUserID;
-    }
     
     private void startTimeTrack(int userID){
         

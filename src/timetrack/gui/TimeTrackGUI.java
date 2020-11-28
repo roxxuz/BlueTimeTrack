@@ -495,4 +495,8 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         return userID;
     }
     
+    public void setCurrentUserLabel(String userLabel) {
+        currentUserLabel.setText(userLabel);
+    }
+    
 }
