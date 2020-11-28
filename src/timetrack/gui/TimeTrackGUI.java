@@ -1,17 +1,9 @@
 
 package timetrack.gui;
 
-import java.awt.Color;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.ArrayList;
+
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.UIManager;
+
 
 public class TimeTrackGUI extends javax.swing.JFrame {
 
@@ -44,24 +36,24 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel2 = new MotionPanel(this);
-        jPanel1 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jPanel12 = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        jPanel11 = new javax.swing.JPanel();
-        jPanel6 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        jPanel9 = new javax.swing.JPanel();
-        jPanel7 = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
-        jPanel10 = new javax.swing.JPanel();
-        jPanel8 = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
-        jPanel13 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        motionPanel = new MotionPanel(this);
+        mainLeftPanel = new javax.swing.JPanel();
+        menuPanel1 = new javax.swing.JPanel();
+        menuLabel1 = new javax.swing.JLabel();
+        menuLeftPanel1 = new javax.swing.JPanel();
+        menuPanel2 = new javax.swing.JPanel();
+        menuLabel2 = new javax.swing.JLabel();
+        menuLeftPanel2 = new javax.swing.JPanel();
+        menuPanel3 = new javax.swing.JPanel();
+        menuLabel3 = new javax.swing.JLabel();
+        menuLeftPanel3 = new javax.swing.JPanel();
+        menuPanel7 = new javax.swing.JPanel();
+        menuLabel7 = new javax.swing.JLabel();
+        menuLeftPanel7 = new javax.swing.JPanel();
+        menuPanel8 = new javax.swing.JPanel();
+        menuLabel8 = new javax.swing.JLabel();
+        menuLeftPanel8 = new javax.swing.JPanel();
+        currentUserLabel = new javax.swing.JLabel();
         mainPanel = new javax.swing.JPanel();
         timePanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -69,153 +61,153 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         projectPanel = new javax.swing.JPanel();
         jXGraph2 = new org.jdesktop.swingx.JXGraph();
         dateTimeLabel = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
-        closeBtn = new javax.swing.JLabel();
-        minimiseBtn = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
+        mainTopPanel = new javax.swing.JPanel();
+        closeLabel = new javax.swing.JLabel();
+        minimizeLabel = new javax.swing.JLabel();
+        logoLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        motionPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(210, 219, 228));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        mainLeftPanel.setBackground(new java.awt.Color(210, 219, 228));
+        mainLeftPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel3.setBackground(new java.awt.Color(92, 126, 162));
-        jPanel3.addMouseListener(new java.awt.event.MouseAdapter() {
+        menuPanel1.setBackground(new java.awt.Color(92, 126, 162));
+        menuPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanel3MouseClicked(evt);
+                menuPanel1MouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jPanel3MouseEntered(evt);
+                menuPanel1MouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jPanel3MouseExited(evt);
+                menuPanel1MouseExited(evt);
             }
         });
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        menuPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel3.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel3.setText("Inställningar");
-        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 160, 30));
+        menuLabel1.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        menuLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        menuLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        menuLabel1.setText("Tidrapportering");
+        menuPanel1.add(menuLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 0, 160, 30));
 
-        jPanel12.setBackground(new java.awt.Color(47, 66, 84));
-        jPanel3.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 30));
+        menuLeftPanel1.setBackground(new java.awt.Color(47, 66, 84));
+        menuPanel1.add(menuLeftPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 10, 30));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 390, 190, 30));
+        mainLeftPanel.add(menuPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 190, 30));
 
-        jPanel5.setBackground(new java.awt.Color(92, 126, 162));
-        jPanel5.addMouseListener(new java.awt.event.MouseAdapter() {
+        menuPanel2.setBackground(new java.awt.Color(92, 126, 162));
+        menuPanel2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanel5MouseClicked(evt);
+                menuPanel2MouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jPanel5MouseEntered(evt);
+                menuPanel2MouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jPanel5MouseExited(evt);
+                menuPanel2MouseExited(evt);
             }
         });
-        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        menuPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel4.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel4.setText("Anteckningar");
-        jPanel5.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 160, 30));
+        menuLabel2.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        menuLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        menuLabel2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        menuLabel2.setText("Projekt");
+        menuPanel2.add(menuLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 160, 30));
 
-        jPanel11.setBackground(new java.awt.Color(47, 66, 84));
-        jPanel5.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 30));
+        menuLeftPanel2.setBackground(new java.awt.Color(47, 66, 84));
+        menuPanel2.add(menuLeftPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 30));
 
-        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 190, -1));
+        mainLeftPanel.add(menuPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 190, 30));
 
-        jPanel6.setBackground(new java.awt.Color(92, 126, 162));
-        jPanel6.addMouseListener(new java.awt.event.MouseAdapter() {
+        menuPanel3.setBackground(new java.awt.Color(92, 126, 162));
+        menuPanel3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanel6MouseClicked(evt);
+                menuPanel3MouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jPanel6MouseEntered(evt);
+                menuPanel3MouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jPanel6MouseExited(evt);
+                menuPanel3MouseExited(evt);
             }
         });
-        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        menuPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel5.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel5.setText("Tidrapportering");
-        jPanel6.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 0, 160, 30));
+        menuLabel3.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        menuLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        menuLabel3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        menuLabel3.setText("Anteckningar");
+        menuPanel3.add(menuLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 160, 30));
 
-        jPanel9.setBackground(new java.awt.Color(47, 66, 84));
-        jPanel6.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 10, 30));
+        menuLeftPanel3.setBackground(new java.awt.Color(47, 66, 84));
+        menuPanel3.add(menuLeftPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 30));
 
-        jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 190, 30));
+        mainLeftPanel.add(menuPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 190, -1));
 
-        jPanel7.setBackground(new java.awt.Color(92, 126, 162));
-        jPanel7.addMouseListener(new java.awt.event.MouseAdapter() {
+        menuPanel7.setBackground(new java.awt.Color(92, 126, 162));
+        menuPanel7.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanel7MouseClicked(evt);
+                menuPanel7MouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jPanel7MouseEntered(evt);
+                menuPanel7MouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jPanel7MouseExited(evt);
+                menuPanel7MouseExited(evt);
             }
         });
-        jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        menuPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel6.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel6.setText("Projekt");
-        jPanel7.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 160, 30));
+        menuLabel7.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        menuLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        menuLabel7.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        menuLabel7.setText("Inställningar");
+        menuPanel7.add(menuLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 160, 30));
 
-        jPanel10.setBackground(new java.awt.Color(47, 66, 84));
-        jPanel7.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 30));
+        menuLeftPanel7.setBackground(new java.awt.Color(47, 66, 84));
+        menuPanel7.add(menuLeftPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 30));
 
-        jPanel1.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 190, 30));
+        mainLeftPanel.add(menuPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 390, 190, 30));
 
-        jPanel8.setBackground(new java.awt.Color(92, 126, 162));
-        jPanel8.addMouseListener(new java.awt.event.MouseAdapter() {
+        menuPanel8.setBackground(new java.awt.Color(92, 126, 162));
+        menuPanel8.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanel8MouseClicked(evt);
+                menuPanel8MouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jPanel8MouseEntered(evt);
+                menuPanel8MouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jPanel8MouseExited(evt);
+                menuPanel8MouseExited(evt);
             }
         });
-        jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        menuPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel7.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel7.setText("Logga ut");
-        jPanel8.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 160, 30));
+        menuLabel8.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        menuLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        menuLabel8.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        menuLabel8.setText("Logga ut");
+        menuPanel8.add(menuLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 160, 30));
 
-        jPanel13.setBackground(new java.awt.Color(47, 66, 84));
-        jPanel8.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 10, 30));
+        menuLeftPanel8.setBackground(new java.awt.Color(47, 66, 84));
+        menuPanel8.add(menuLeftPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 10, 30));
 
-        jPanel1.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 430, 190, 30));
+        mainLeftPanel.add(menuPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 430, 190, 30));
 
-        jLabel1.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(47, 66, 84));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Ola Svärdh");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 190, 60));
+        currentUserLabel.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
+        currentUserLabel.setForeground(new java.awt.Color(47, 66, 84));
+        currentUserLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        currentUserLabel.setText("Ola Svärdh");
+        mainLeftPanel.add(currentUserLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 190, 60));
 
-        jPanel2.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 190, 490));
+        motionPanel.add(mainLeftPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 190, 490));
 
         mainPanel.setBackground(new java.awt.Color(255, 255, 255));
         mainPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -245,159 +237,159 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         dateTimeLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         mainPanel.add(dateTimeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 470, 360, 20));
 
-        jPanel2.add(mainPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 90, 760, 490));
+        motionPanel.add(mainPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 90, 760, 490));
 
-        jPanel4.setBackground(new java.awt.Color(47, 66, 84));
-        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        mainTopPanel.setBackground(new java.awt.Color(47, 66, 84));
+        mainTopPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        closeBtn.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        closeBtn.setForeground(new java.awt.Color(255, 255, 255));
-        closeBtn.setText("X");
-        closeBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        closeBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+        closeLabel.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        closeLabel.setForeground(new java.awt.Color(255, 255, 255));
+        closeLabel.setText("X");
+        closeLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        closeLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                closeBtnMouseClicked(evt);
+                closeLabelMouseClicked(evt);
             }
         });
-        jPanel4.add(closeBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 10, 10, -1));
+        mainTopPanel.add(closeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 10, 10, -1));
 
-        minimiseBtn.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        minimiseBtn.setForeground(new java.awt.Color(255, 255, 255));
-        minimiseBtn.setText("━");
-        minimiseBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        minimiseBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+        minimizeLabel.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        minimizeLabel.setForeground(new java.awt.Color(255, 255, 255));
+        minimizeLabel.setText("━");
+        minimizeLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        minimizeLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                minimiseBtnMouseClicked(evt);
+                minimizeLabelMouseClicked(evt);
             }
         });
-        jPanel4.add(minimiseBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 10, 10, -1));
+        mainTopPanel.add(minimizeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 10, 10, -1));
 
-        jLabel11.setFont(new java.awt.Font("SansSerif", 0, 36)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel11.setText("》TT");
-        jPanel4.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 100, 90));
+        logoLabel.setFont(new java.awt.Font("SansSerif", 0, 36)); // NOI18N
+        logoLabel.setForeground(new java.awt.Color(255, 255, 255));
+        logoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        logoLabel.setText("》TT");
+        mainTopPanel.add(logoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 100, 90));
 
-        jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 950, 90));
+        motionPanel.add(mainTopPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 950, 90));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 950, 580));
+        getContentPane().add(motionPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 950, 580));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void closeBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeBtnMouseClicked
+    private void closeLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeLabelMouseClicked
         this.dispose();
         //Stänger av visningen av datum och tid via metoden setRunnig()
         //Detta är för att den Thread som körs parallellt ska avslutas
         timerThread.setRunning(false);
-    }//GEN-LAST:event_closeBtnMouseClicked
+    }//GEN-LAST:event_closeLabelMouseClicked
 
-    private void minimiseBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimiseBtnMouseClicked
+    private void minimizeLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizeLabelMouseClicked
         this.setState(ICONIFIED);
-    }//GEN-LAST:event_minimiseBtnMouseClicked
+    }//GEN-LAST:event_minimizeLabelMouseClicked
 
-    private void jPanel3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseEntered
-        jPanel3.setBackground(new java.awt.Color(47,66,84));
-    }//GEN-LAST:event_jPanel3MouseEntered
+    private void menuPanel7MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuPanel7MouseEntered
+        menuPanel7.setBackground(new java.awt.Color(47,66,84));
+    }//GEN-LAST:event_menuPanel7MouseEntered
 
-    private void jPanel3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseExited
+    private void menuPanel7MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuPanel7MouseExited
         if(!menuArray[3]) {
-        jPanel3.setBackground(new java.awt.Color(92,126,162));
+        menuPanel7.setBackground(new java.awt.Color(92,126,162));
         }
-    }//GEN-LAST:event_jPanel3MouseExited
+    }//GEN-LAST:event_menuPanel7MouseExited
 
-    private void jPanel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseClicked
+    private void menuPanel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuPanel7MouseClicked
         timePanel.setVisible(false);
         projectPanel.setVisible(true);
-        jPanel6.setBackground(new java.awt.Color(92,126,162));
-        jPanel7.setBackground(new java.awt.Color(92,126,162));
-        jPanel5.setBackground(new java.awt.Color(92,126,162));
-        jPanel8.setBackground(new java.awt.Color(92,126,162));
+        menuPanel1.setBackground(new java.awt.Color(92,126,162));
+        menuPanel2.setBackground(new java.awt.Color(92,126,162));
+        menuPanel3.setBackground(new java.awt.Color(92,126,162));
+        menuPanel8.setBackground(new java.awt.Color(92,126,162));
         Arrays.fill(menuArray, Boolean.FALSE);
         menuArray[3] = true;
-    }//GEN-LAST:event_jPanel3MouseClicked
+    }//GEN-LAST:event_menuPanel7MouseClicked
 
-    private void jPanel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseClicked
-        jPanel6.setBackground(new java.awt.Color(92,126,162));
-        jPanel7.setBackground(new java.awt.Color(92,126,162));
-        jPanel3.setBackground(new java.awt.Color(92,126,162));
-        jPanel8.setBackground(new java.awt.Color(92,126,162));
+    private void menuPanel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuPanel3MouseClicked
+        menuPanel1.setBackground(new java.awt.Color(92,126,162));
+        menuPanel2.setBackground(new java.awt.Color(92,126,162));
+        menuPanel7.setBackground(new java.awt.Color(92,126,162));
+        menuPanel8.setBackground(new java.awt.Color(92,126,162));
         Arrays.fill(menuArray, Boolean.FALSE);
         menuArray[2] = true;
-    }//GEN-LAST:event_jPanel5MouseClicked
+    }//GEN-LAST:event_menuPanel3MouseClicked
 
-    private void jPanel5MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseEntered
-        jPanel5.setBackground(new java.awt.Color(47,66,84));
-    }//GEN-LAST:event_jPanel5MouseEntered
+    private void menuPanel3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuPanel3MouseEntered
+        menuPanel3.setBackground(new java.awt.Color(47,66,84));
+    }//GEN-LAST:event_menuPanel3MouseEntered
 
-    private void jPanel5MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseExited
+    private void menuPanel3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuPanel3MouseExited
         if(!menuArray[2]) {
-        jPanel5.setBackground(new java.awt.Color(92,126,162));
+        menuPanel3.setBackground(new java.awt.Color(92,126,162));
         }
-    }//GEN-LAST:event_jPanel5MouseExited
+    }//GEN-LAST:event_menuPanel3MouseExited
 
-    private void jPanel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MouseClicked
+    private void menuPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuPanel1MouseClicked
         projectPanel.setVisible(false);
         timePanel.setVisible(true);
-        jPanel7.setBackground(new java.awt.Color(92,126,162));
-        jPanel5.setBackground(new java.awt.Color(92,126,162));
-        jPanel3.setBackground(new java.awt.Color(92,126,162));
-        jPanel8.setBackground(new java.awt.Color(92,126,162));
+        menuPanel2.setBackground(new java.awt.Color(92,126,162));
+        menuPanel3.setBackground(new java.awt.Color(92,126,162));
+        menuPanel7.setBackground(new java.awt.Color(92,126,162));
+        menuPanel8.setBackground(new java.awt.Color(92,126,162));
         Arrays.fill(menuArray, Boolean.FALSE);
         menuArray[0] = true;
         
-    }//GEN-LAST:event_jPanel6MouseClicked
+    }//GEN-LAST:event_menuPanel1MouseClicked
 
-    private void jPanel6MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MouseEntered
-        jPanel6.setBackground(new java.awt.Color(47,66,84));
-    }//GEN-LAST:event_jPanel6MouseEntered
+    private void menuPanel1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuPanel1MouseEntered
+        menuPanel1.setBackground(new java.awt.Color(47,66,84));
+    }//GEN-LAST:event_menuPanel1MouseEntered
 
-    private void jPanel6MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MouseExited
+    private void menuPanel1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuPanel1MouseExited
         if(!menuArray[0]) {
-        jPanel6.setBackground(new java.awt.Color(92,126,162));
+        menuPanel1.setBackground(new java.awt.Color(92,126,162));
         }
-    }//GEN-LAST:event_jPanel6MouseExited
+    }//GEN-LAST:event_menuPanel1MouseExited
 
-    private void jPanel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseClicked
+    private void menuPanel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuPanel2MouseClicked
         timePanel.setVisible(false);
         projectPanel.setVisible(true);
-        jPanel6.setBackground(new java.awt.Color(92,126,162));
-        jPanel5.setBackground(new java.awt.Color(92,126,162));
-        jPanel3.setBackground(new java.awt.Color(92,126,162));
-        jPanel8.setBackground(new java.awt.Color(92,126,162));
+        menuPanel1.setBackground(new java.awt.Color(92,126,162));
+        menuPanel3.setBackground(new java.awt.Color(92,126,162));
+        menuPanel7.setBackground(new java.awt.Color(92,126,162));
+        menuPanel8.setBackground(new java.awt.Color(92,126,162));
         Arrays.fill(menuArray, Boolean.FALSE);
         menuArray[1] = true;
-    }//GEN-LAST:event_jPanel7MouseClicked
+    }//GEN-LAST:event_menuPanel2MouseClicked
 
-    private void jPanel7MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseEntered
-        jPanel7.setBackground(new java.awt.Color(47,66,84));
-    }//GEN-LAST:event_jPanel7MouseEntered
+    private void menuPanel2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuPanel2MouseEntered
+        menuPanel2.setBackground(new java.awt.Color(47,66,84));
+    }//GEN-LAST:event_menuPanel2MouseEntered
 
-    private void jPanel7MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseExited
+    private void menuPanel2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuPanel2MouseExited
         if(!menuArray[1]) {
-        jPanel7.setBackground(new java.awt.Color(92,126,162));
+        menuPanel2.setBackground(new java.awt.Color(92,126,162));
         }
-    }//GEN-LAST:event_jPanel7MouseExited
+    }//GEN-LAST:event_menuPanel2MouseExited
 
-    private void jPanel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel8MouseClicked
-        jPanel6.setBackground(new java.awt.Color(92,126,162));
-        jPanel7.setBackground(new java.awt.Color(92,126,162));
-        jPanel5.setBackground(new java.awt.Color(92,126,162));
-        jPanel3.setBackground(new java.awt.Color(92,126,162));
+    private void menuPanel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuPanel8MouseClicked
+        menuPanel1.setBackground(new java.awt.Color(92,126,162));
+        menuPanel2.setBackground(new java.awt.Color(92,126,162));
+        menuPanel3.setBackground(new java.awt.Color(92,126,162));
+        menuPanel7.setBackground(new java.awt.Color(92,126,162));
         Arrays.fill(menuArray, Boolean.FALSE);
         menuArray[4] = true;
         signOut();
-    }//GEN-LAST:event_jPanel8MouseClicked
+    }//GEN-LAST:event_menuPanel8MouseClicked
 
-    private void jPanel8MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel8MouseEntered
-        jPanel8.setBackground(new java.awt.Color(47,66,84));
-    }//GEN-LAST:event_jPanel8MouseEntered
+    private void menuPanel8MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuPanel8MouseEntered
+        menuPanel8.setBackground(new java.awt.Color(47,66,84));
+    }//GEN-LAST:event_menuPanel8MouseEntered
 
-    private void jPanel8MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel8MouseExited
+    private void menuPanel8MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuPanel8MouseExited
         if(!menuArray[4]) {
-        jPanel8.setBackground(new java.awt.Color(92,126,162));
+        menuPanel8.setBackground(new java.awt.Color(92,126,162));
         }
-    }//GEN-LAST:event_jPanel8MouseExited
+    }//GEN-LAST:event_menuPanel8MouseExited
 
     /**
      * @param args the command line arguments
@@ -439,33 +431,33 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel closeBtn;
+    private javax.swing.JLabel closeLabel;
+    private javax.swing.JLabel currentUserLabel;
     private static javax.swing.JLabel dateTimeLabel;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel12;
-    private javax.swing.JPanel jPanel13;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
     private org.jdesktop.swingx.JXGraph jXGraph2;
+    private javax.swing.JLabel logoLabel;
+    private javax.swing.JPanel mainLeftPanel;
     private javax.swing.JPanel mainPanel;
-    private javax.swing.JLabel minimiseBtn;
+    private javax.swing.JPanel mainTopPanel;
+    private javax.swing.JLabel menuLabel1;
+    private javax.swing.JLabel menuLabel2;
+    private javax.swing.JLabel menuLabel3;
+    private javax.swing.JLabel menuLabel7;
+    private javax.swing.JLabel menuLabel8;
+    private javax.swing.JPanel menuLeftPanel1;
+    private javax.swing.JPanel menuLeftPanel2;
+    private javax.swing.JPanel menuLeftPanel3;
+    private javax.swing.JPanel menuLeftPanel7;
+    private javax.swing.JPanel menuLeftPanel8;
+    private javax.swing.JPanel menuPanel1;
+    private javax.swing.JPanel menuPanel2;
+    private javax.swing.JPanel menuPanel3;
+    private javax.swing.JPanel menuPanel7;
+    private javax.swing.JPanel menuPanel8;
+    private javax.swing.JLabel minimizeLabel;
+    private javax.swing.JPanel motionPanel;
     private javax.swing.JPanel projectPanel;
     private javax.swing.JPanel timePanel;
     // End of variables declaration//GEN-END:variables
