@@ -15,9 +15,6 @@ import java.util.Date;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
@@ -36,10 +33,7 @@ public class GUIMethods {
     
     //Konstruktor
     public GUIMethods() {
-        //Värden från filen db.properties läses in
         readProperties();
-        //Lägger in allt som behövs för uppkopplingen till databasen
-        //efter att readProperties har läst in värdena i programmet
         cn = prepareDBConnection();
     }
     
@@ -80,7 +74,6 @@ public class GUIMethods {
         return returnUserID;
     }
     
-    
     public int showDialog(String title, String message) {
         //ImageIcon icon = new ImageIcon("C:\\Users\\Akram\\OneDrive\\Skrivbord\\TimeTrack\\src\\timetrack\\gui\\ic_logo2.png");
         int input = JOptionPane.showConfirmDialog(null,message,title, JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
@@ -89,9 +82,8 @@ public class GUIMethods {
            
     }
     
-    //Denna metod körs varje gång som en instans skapas av klassen (ligger i konstruktorn)
-    //Den läser då in de värden som finns i db.properties
     private void readProperties(){
+        //Metod som läser in värden från filen db.properties
         //Skapar objekt av Properties för att läsa från filen db.properties
         Properties prop = new Properties();
         try {
@@ -117,16 +109,9 @@ public class GUIMethods {
         
     }
     
-    /**
-    * Använd endast denna metod från den klass där metoden finns
-    * I annat fall så ska jFrame skickas med
-    * Den här metoden måste anropas efter att
-    * DBAddress, DBUser och DBPass har fått värden
-    * T.ex. via metoden readProperties()
-    * @param text test
-    */
     public Connection prepareDBConnection() {
-        //Skapar Connection variabel för att kunna skicka tillbaka till anropet
+        //Skapar Connection variabel med login info till DB
+        //och returnerar den
         Connection con = null;
         try {
             con = DriverManager.getConnection(DBAddress, DBUser, DBPass);
@@ -136,6 +121,30 @@ public class GUIMethods {
         return con;
     }
     
+    public boolean resetpw(String password, int userid){
+        boolean success = false;
+        try {
+        pstat = cn.prepareStatement("update users set user_password = ? where user_id = ?");
+        pstat.setString(1, password);
+        pstat.setInt(2, userid);
+        pstat.executeUpdate();
+/*        if(rs.next()){
+            System.out.println(result);
+        }*/
+            success = true;
+    } catch (SQLException ex) {
+            System.out.println(ex);
+    }
+        return success;
+    }
+    
+    public void closeDBConnection() {
+    try {
+        cn.close();
+    } catch (SQLException ex) {
+        Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    }
     
     public class TimerThread extends Thread{
         //Så länge som isRunning=true så uppdateras tiden
@@ -202,27 +211,4 @@ public class GUIMethods {
             return this.isRunning;
         }
     }
-        public boolean resetpw(String password, int userid){
-            boolean success = false;
-            try {
-            pstat = cn.prepareStatement("update users set user_password = ? where user_id = ?");
-            pstat.setString(1, password);
-            pstat.setInt(2, userid);
-            pstat.executeUpdate();
-    /*        if(rs.next()){
-                System.out.println(result);
-            }*/
-                success = true;
-        } catch (SQLException ex) {
-                System.out.println(ex);
-        }
-            return success;
-        }
-        public void closeDBConnection() {
-        try {
-            cn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        }
 }
