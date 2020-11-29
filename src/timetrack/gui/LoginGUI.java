@@ -54,7 +54,7 @@ public class LoginGUI extends javax.swing.JFrame {
         mainTopPanel.setBackground(new java.awt.Color(47, 66, 84));
         mainTopPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        logoLabel.setFont(new java.awt.Font("SansSerif", 1, 36)); // NOI18N
+        logoLabel.setFont(new java.awt.Font("SansSerif", 0, 36)); // NOI18N
         logoLabel.setForeground(new java.awt.Color(255, 255, 255));
         logoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         logoLabel.setText("TT");
@@ -77,6 +77,7 @@ public class LoginGUI extends javax.swing.JFrame {
         passLabel.setText("LÖSENORD");
         mainPanel.add(passLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 330, 30));
 
+        emailInput.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         emailInput.setForeground(new java.awt.Color(47, 66, 84));
         emailInput.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         emailInput.addActionListener(new java.awt.event.ActionListener() {
@@ -129,6 +130,7 @@ public class LoginGUI extends javax.swing.JFrame {
         });
         menuSignInPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        menuSignInLabel.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         menuSignInLabel.setForeground(new java.awt.Color(255, 255, 255));
         menuSignInLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         menuSignInLabel.setText("LOGGA IN");
@@ -150,6 +152,7 @@ public class LoginGUI extends javax.swing.JFrame {
         });
         menuExitPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        menuExitLabel.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         menuExitLabel.setForeground(new java.awt.Color(255, 255, 255));
         menuExitLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         menuExitLabel.setText("AVSLUTA");
