@@ -97,12 +97,12 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         menuLabel1.setForeground(new java.awt.Color(255, 255, 255));
         menuLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         menuLabel1.setText("Tidrapportering");
-        menuPanel1.add(menuLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 0, 160, 30));
+        menuPanel1.add(menuLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 0, 140, 30));
 
         menuLeftPanel1.setBackground(new java.awt.Color(47, 66, 84));
         menuPanel1.add(menuLeftPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 10, 30));
 
-        mainLeftPanel.add(menuPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 190, 30));
+        mainLeftPanel.add(menuPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 170, 30));
 
         menuPanel2.setBackground(new java.awt.Color(92, 126, 162));
         menuPanel2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -122,12 +122,12 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         menuLabel2.setForeground(new java.awt.Color(255, 255, 255));
         menuLabel2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         menuLabel2.setText("Projekt");
-        menuPanel2.add(menuLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 160, 30));
+        menuPanel2.add(menuLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 140, 30));
 
         menuLeftPanel2.setBackground(new java.awt.Color(47, 66, 84));
         menuPanel2.add(menuLeftPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 30));
 
-        mainLeftPanel.add(menuPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 190, 30));
+        mainLeftPanel.add(menuPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 170, 30));
 
         menuPanel3.setBackground(new java.awt.Color(92, 126, 162));
         menuPanel3.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -147,12 +147,12 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         menuLabel3.setForeground(new java.awt.Color(255, 255, 255));
         menuLabel3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         menuLabel3.setText("Anteckningar");
-        menuPanel3.add(menuLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 160, 30));
+        menuPanel3.add(menuLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 140, 30));
 
         menuLeftPanel3.setBackground(new java.awt.Color(47, 66, 84));
         menuPanel3.add(menuLeftPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 30));
 
-        mainLeftPanel.add(menuPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 190, -1));
+        mainLeftPanel.add(menuPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 170, -1));
 
         menuPanel7.setBackground(new java.awt.Color(92, 126, 162));
         menuPanel7.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -172,12 +172,12 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         menuLabel7.setForeground(new java.awt.Color(255, 255, 255));
         menuLabel7.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         menuLabel7.setText("Inställningar");
-        menuPanel7.add(menuLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 160, 30));
+        menuPanel7.add(menuLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 140, 30));
 
         menuLeftPanel7.setBackground(new java.awt.Color(47, 66, 84));
         menuPanel7.add(menuLeftPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 30));
 
-        mainLeftPanel.add(menuPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 390, 190, 30));
+        mainLeftPanel.add(menuPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 420, 170, 30));
 
         menuPanel8.setBackground(new java.awt.Color(92, 126, 162));
         menuPanel8.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -197,20 +197,20 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         menuLabel8.setForeground(new java.awt.Color(255, 255, 255));
         menuLabel8.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         menuLabel8.setText("Logga ut");
-        menuPanel8.add(menuLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 160, 30));
+        menuPanel8.add(menuLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 140, 30));
 
         menuLeftPanel8.setBackground(new java.awt.Color(47, 66, 84));
         menuPanel8.add(menuLeftPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 10, 30));
 
-        mainLeftPanel.add(menuPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 430, 190, 30));
+        mainLeftPanel.add(menuPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 460, 170, 30));
 
-        currentUserLabel.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
+        currentUserLabel.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         currentUserLabel.setForeground(new java.awt.Color(47, 66, 84));
         currentUserLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         currentUserLabel.setText("Ola Svärdh");
-        mainLeftPanel.add(currentUserLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 190, 60));
+        mainLeftPanel.add(currentUserLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 170, 60));
 
-        motionPanel.add(mainLeftPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 190, 490));
+        motionPanel.add(mainLeftPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 170, 520));
 
         mainPanel.setBackground(new java.awt.Color(255, 255, 255));
         mainPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -227,20 +227,20 @@ public class TimeTrackGUI extends javax.swing.JFrame {
 
         timePanel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 190, 640, 100));
 
-        mainPanel.add(timePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 760, 470));
+        mainPanel.add(timePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 780, 500));
 
         projectPanel.setBackground(new java.awt.Color(255, 255, 255));
         projectPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         projectPanel.add(jXGraph2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 540, 280));
 
-        mainPanel.add(projectPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 760, 470));
+        mainPanel.add(projectPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 780, 500));
 
         dateTimeLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         dateTimeLabel.setForeground(new java.awt.Color(47, 66, 84));
         dateTimeLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        mainPanel.add(dateTimeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 470, 360, 20));
+        mainPanel.add(dateTimeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 500, 360, 20));
 
-        motionPanel.add(mainPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 90, 760, 490));
+        motionPanel.add(mainPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, 780, 520));
 
         mainTopPanel.setBackground(new java.awt.Color(47, 66, 84));
         mainTopPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -267,13 +267,13 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         });
         mainTopPanel.add(minimizeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 10, 10, -1));
 
-        logoLabel.setFont(new java.awt.Font("SansSerif", 0, 36)); // NOI18N
+        logoLabel.setFont(new java.awt.Font("SansSerif", 0, 24)); // NOI18N
         logoLabel.setForeground(new java.awt.Color(255, 255, 255));
         logoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         logoLabel.setText("》TT");
-        mainTopPanel.add(logoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 100, 90));
+        mainTopPanel.add(logoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 70, 60));
 
-        motionPanel.add(mainTopPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 950, 90));
+        motionPanel.add(mainTopPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 950, 60));
 
         getContentPane().add(motionPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 950, 580));
 
