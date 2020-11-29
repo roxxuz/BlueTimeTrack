@@ -29,6 +29,7 @@ public class LoginGUI extends javax.swing.JFrame {
         motionPanel = new MotionPanel(this);
         mainTopPanel = new javax.swing.JPanel();
         logoLabel = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         mainPanel = new javax.swing.JPanel();
         userLabel = new javax.swing.JLabel();
         passLabel = new javax.swing.JLabel();
@@ -54,11 +55,17 @@ public class LoginGUI extends javax.swing.JFrame {
         mainTopPanel.setBackground(new java.awt.Color(47, 66, 84));
         mainTopPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        logoLabel.setFont(new java.awt.Font("SansSerif", 0, 36)); // NOI18N
+        logoLabel.setFont(new java.awt.Font("SansSerif", 0, 24)); // NOI18N
         logoLabel.setForeground(new java.awt.Color(255, 255, 255));
         logoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        logoLabel.setText("TT");
-        mainTopPanel.add(logoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 330, 50));
+        logoLabel.setText("T⌚T");
+        mainTopPanel.add(logoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 330, 60));
+
+        jLabel2.setFont(new java.awt.Font("SansSerif", 0, 8)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Blue Time Track");
+        mainTopPanel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 330, 20));
 
         motionPanel.add(mainTopPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 330, 70));
 
@@ -267,6 +274,7 @@ public class LoginGUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel copyrightLabel;
     protected javax.swing.JTextField emailInput;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JButton loginButton;
     private javax.swing.JLabel loginLabel;
     private javax.swing.JLabel logoLabel;
