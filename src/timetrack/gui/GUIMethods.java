@@ -15,9 +15,7 @@ import java.util.Date;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
@@ -33,13 +31,12 @@ public class GUIMethods {
     String DBAddress;
     String DBUser;
     String DBPass;
+    JFrame loginJFrame;
+    String currentUser;
     
     //Konstruktor
     public GUIMethods() {
-        //Värden från filen db.properties läses in
         readProperties();
-        //Lägger in allt som behövs för uppkopplingen till databasen
-        //efter att readProperties har läst in värdena i programmet
         cn = prepareDBConnection();
     }
     
@@ -63,6 +60,7 @@ public class GUIMethods {
             if(rs.next()){
                 //sparar värdet från första kolumnen (userID) från Select statemant.
                 returnUserID = rs.getInt(1);
+                currentUser = rs.getString(2) + " " + rs.getString(3);
             }
             //Om ingen rad returneras från select statemant så betyder det att kombinationen
             //av användarnamn och lösenord ej hittades i databasen och då körs istället else.
@@ -80,7 +78,6 @@ public class GUIMethods {
         return returnUserID;
     }
     
-    
     public int showDialog(String title, String message) {
         //ImageIcon icon = new ImageIcon("C:\\Users\\Akram\\OneDrive\\Skrivbord\\TimeTrack\\src\\timetrack\\gui\\ic_logo2.png");
         int input = JOptionPane.showConfirmDialog(null,message,title, JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
@@ -89,9 +86,8 @@ public class GUIMethods {
            
     }
     
-    //Denna metod körs varje gång som en instans skapas av klassen (ligger i konstruktorn)
-    //Den läser då in de värden som finns i db.properties
     private void readProperties(){
+        //Metod som läser in värden från filen db.properties
         //Skapar objekt av Properties för att läsa från filen db.properties
         Properties prop = new Properties();
         try {
@@ -113,20 +109,13 @@ public class GUIMethods {
         
     }
     
-    public void setCurrentUserLabel() {
-        
+    public void setCurrentUserLabel(TimeTrackGUI tGUI) {
+        tGUI.currentUserLabel.setText(currentUser);
     }
     
-    /**
-    * Använd endast denna metod från den klass där metoden finns
-    * I annat fall så ska jFrame skickas med
-    * Den här metoden måste anropas efter att
-    * DBAddress, DBUser och DBPass har fått värden
-    * T.ex. via metoden readProperties()
-    * @param text test
-    */
     public Connection prepareDBConnection() {
-        //Skapar Connection variabel för att kunna skicka tillbaka till anropet
+        //Skapar Connection variabel med login info till DB
+        //och returnerar den
         Connection con = null;
         try {
             con = DriverManager.getConnection(DBAddress, DBUser, DBPass);
@@ -135,6 +124,45 @@ public class GUIMethods {
         }
         return con;
     }
+    
+    public boolean resetpw(String password, int userid){
+        boolean success = false;
+        try {
+        pstat = cn.prepareStatement("update users set user_password = ? where user_id = ?");
+        pstat.setString(1, password);
+        pstat.setInt(2, userid);
+        pstat.executeUpdate();
+/*        if(rs.next()){
+            System.out.println(result);
+        }*/
+            success = true;
+    } catch (SQLException ex) {
+            System.out.println(ex);
+    }
+        return success;
+    }
+    
+    public void closeDBConnection() {
+    try {
+        cn.close();
+    } catch (SQLException ex) {
+        Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    }
+    
+    public void startTimeTrack(JFrame loginJFrame, GUIMethods loginGUI_guiM, int userID){
+        this.loginJFrame = loginJFrame;
+        loginJFrame.setVisible(false);
+        //Gör loginrutan osynlig när användaren har loggat in
+        TimeTrackGUI tGUI = new TimeTrackGUI(loginJFrame);
+        //Sätter inloggad användare till userID (från databasen)
+        tGUI.setUserID(userID);
+        setCurrentUserLabel(tGUI);
+        //Placerar objeketet i mitten på användarens skärm
+        tGUI.setLocationRelativeTo(null);
+        tGUI.setVisible(true);
+    }
+    
     
     
     public class TimerThread extends Thread{
@@ -202,27 +230,7 @@ public class GUIMethods {
             return this.isRunning;
         }
     }
-        public boolean resetpw(String password, int userid){
-            boolean success = false;
-            try {
-            pstat = cn.prepareStatement("update users set user_password = ? where user_id = ?");
-            pstat.setString(1, password);
-            pstat.setInt(2, userid);
-            pstat.executeUpdate();
-    /*        if(rs.next()){
-                System.out.println(result);
-            }*/
-                success = true;
-        } catch (SQLException ex) {
-                System.out.println(ex);
-        }
-            return success;
-        }
-        public void closeDBConnection() {
-        try {
-            cn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        }
+    
+    
+    
 }

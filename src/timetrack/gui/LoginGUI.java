@@ -2,12 +2,8 @@
 package timetrack.gui;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import javax.swing.JOptionPane;
-
 
 public class LoginGUI extends javax.swing.JFrame {
     
@@ -204,11 +200,11 @@ public class LoginGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_emailInputActionPerformed
 
     private void loginLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginLabelMouseClicked
-        startTimeTrack(6);
+        guiM.startTimeTrack(this, guiM, 6);
     }//GEN-LAST:event_loginLabelMouseClicked
 
     private void userLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userLoginMouseClicked
-        startTimeTrack(2);
+        guiM.startTimeTrack(this, guiM, 2);
     }//GEN-LAST:event_userLoginMouseClicked
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
@@ -224,7 +220,7 @@ public class LoginGUI extends javax.swing.JFrame {
         if(userID > 0){
             //Kallar på metoden som ska starta huvudprogrammet och skickar med
             //inloogad användares userID (från databasen)
-            startTimeTrack(userID);
+            guiM.startTimeTrack(this, guiM, userID);
         }
     }//GEN-LAST:event_loginButtonActionPerformed
 
@@ -257,29 +253,17 @@ public class LoginGUI extends javax.swing.JFrame {
         if(userID > 0){
             //Kallar på metoden som ska starta huvudprogrammet och skickar med
             //inloogad användares userID (från databasen)
-            startTimeTrack(userID);
+            guiM.startTimeTrack(this, guiM, userID);
         }
     }//GEN-LAST:event_menuSignInPanelMouseClicked
 
     private void menuExitPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuExitPanelMouseClicked
-        this.dispose();
+        System.exit(0);
     }//GEN-LAST:event_menuExitPanelMouseClicked
 
-    
-    private void startTimeTrack(int userID){
-        guiM.closeDBConnection();
-        TimeTrackGUI tGUI = new TimeTrackGUI();
-        //Sätter inloggad användare till userID (från databasen)
-        tGUI.setUserID(userID);
-        //Placerar objeketet i mitten på användarens skärm
-        tGUI.setLocationRelativeTo(null);
-        tGUI.setVisible(true);
-        this.dispose();
-        
-    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel copyrightLabel;
-    private javax.swing.JTextField emailInput;
+    protected javax.swing.JTextField emailInput;
     private javax.swing.JButton loginButton;
     private javax.swing.JLabel loginLabel;
     private javax.swing.JLabel logoLabel;
@@ -295,4 +279,10 @@ public class LoginGUI extends javax.swing.JFrame {
     private javax.swing.JLabel userLabel;
     private javax.swing.JLabel userLogin;
     // End of variables declaration//GEN-END:variables
+
+    public void clearPasswordField() {
+        passField.setText("");
+        
+    }
+
 }
