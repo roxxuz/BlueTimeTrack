@@ -2,7 +2,14 @@
 package timetrack.gui;
 
 
+import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 
 
@@ -70,6 +77,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         minimizePanel = new javax.swing.JPanel();
         minimizeLabel = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -107,7 +115,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         mainLeftPanel.add(menuPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 170, 30));
 
         menuPanel2.setBackground(new java.awt.Color(92, 126, 162));
-        menuPanel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        menuPanel2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         menuPanel2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 menuPanel2MouseClicked(evt);
@@ -251,8 +259,8 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         logoLabel.setFont(new java.awt.Font("SansSerif", 0, 24)); // NOI18N
         logoLabel.setForeground(new java.awt.Color(255, 255, 255));
         logoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        logoLabel.setText("》TT");
-        mainTopPanel.add(logoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 70, 50));
+        logoLabel.setText("T⌚T");
+        mainTopPanel.add(logoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, -10, 70, 60));
 
         closePanel.setBackground(new java.awt.Color(47, 66, 84));
         closePanel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -297,6 +305,12 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         minimizePanel.add(minimizeLabel, new java.awt.GridBagConstraints());
 
         mainTopPanel.add(minimizePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 0, 50, 50));
+
+        jLabel2.setFont(new java.awt.Font("SansSerif", 0, 8)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Blue Time Track");
+        mainTopPanel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 90, 20));
 
         motionPanel.add(mainTopPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 950, 50));
 
@@ -440,6 +454,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     protected javax.swing.JLabel currentUserLabel;
     private static javax.swing.JLabel dateTimeLabel;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
     private org.jdesktop.swingx.JXGraph jXGraph2;
