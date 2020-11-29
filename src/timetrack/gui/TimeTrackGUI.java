@@ -3,6 +3,7 @@ package timetrack.gui;
 
 
 import java.util.Arrays;
+import javax.swing.JFrame;
 
 
 public class TimeTrackGUI extends javax.swing.JFrame {
@@ -17,8 +18,10 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     GUIMethods.TimerThread timerThread = guiM.new TimerThread();
     //Boolean array som håller reda på vilket menyval som är aktivt
     Boolean[] menuArray = new Boolean[5];
+    JFrame loginJFrame;
 
-    public TimeTrackGUI() {
+    public TimeTrackGUI(JFrame loginJFrame) {
+        this.loginJFrame = loginJFrame;
         initComponents();
         //Här körs metoden start() som finns i klassen TimerThread som i sin tur finns i klassen GUIMethods
         //Den kommer att starta en ny Thread som kan köras oberoende av det övriga programmet
@@ -278,10 +281,11 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void closeLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeLabelMouseClicked
-        this.dispose();
+        
         //Stänger av visningen av datum och tid via metoden setRunnig()
         //Detta är för att den Thread som körs parallellt ska avslutas
         timerThread.setRunning(false);
+        System.exit(0);
     }//GEN-LAST:event_closeLabelMouseClicked
 
     private void minimizeLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizeLabelMouseClicked
@@ -391,48 +395,9 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_menuPanel8MouseExited
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-                
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TimeTrackGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TimeTrackGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TimeTrackGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TimeTrackGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new TimeTrackGUI().setVisible(true);
-                
-            }
-            
-        });
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel closeLabel;
-    private javax.swing.JLabel currentUserLabel;
+    protected javax.swing.JLabel currentUserLabel;
     private static javax.swing.JLabel dateTimeLabel;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
@@ -466,15 +431,18 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     private void signOut(){
         //Stänger uppkopplingen till databasen
         guiM.closeDBConnection();
-        //skapar objekt av LoginGUI innan programmet avslutas (användaren loggas ut)
-        LoginGUI loginGUI = new LoginGUI();
         //avslutar huvudprogrammet
         this.dispose();
         //Stänger av visningen av datum och tid via metoden setRunnig()
         //Detta är för att den Thread som körs parallellt ska avslutas
         timerThread.setRunning(false);
-        //visar login-ruta igen
-        loginGUI.setVisible(true);
+        //loginJFrame är (this) från LoginGUI.
+        ((LoginGUI)loginJFrame).clearPasswordField();
+        //Sätter markören i textefältet emailInput (användarnamn)
+        ((LoginGUI)loginJFrame).emailInput.grabFocus();
+        //Markerar all text i textefältet emailInput (användarnamn)
+        ((LoginGUI)loginJFrame).emailInput.selectAll();
+        loginJFrame.setVisible(true);
     }
     
     //Metod som används för att uppdatera datum och tid i programmet
