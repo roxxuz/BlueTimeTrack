@@ -67,7 +67,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         mainTopPanel = new javax.swing.JPanel();
         logoLabel = new javax.swing.JLabel();
         closePanel = new javax.swing.JPanel();
-        closeLabel = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         minimizePanel = new javax.swing.JPanel();
         minimizeLabel = new javax.swing.JLabel();
 
@@ -107,6 +107,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         mainLeftPanel.add(menuPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 170, 30));
 
         menuPanel2.setBackground(new java.awt.Color(92, 126, 162));
+        menuPanel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         menuPanel2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 menuPanel2MouseClicked(evt);
@@ -267,19 +268,12 @@ public class TimeTrackGUI extends javax.swing.JFrame {
             }
         });
 
-        closeLabel.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        closeLabel.setForeground(new java.awt.Color(255, 255, 255));
-        closeLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        closeLabel.setText("✕");
-        closeLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        closeLabel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                closeLabelMouseClicked(evt);
-            }
-        });
-        closePanel.add(closeLabel);
+        jLabel1.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("✕");
+        closePanel.add(jLabel1);
 
-        mainTopPanel.add(closePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 10, 30, 30));
+        mainTopPanel.add(closePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 10, 30, 30));
 
         minimizePanel.setBackground(new java.awt.Color(47, 66, 84));
         minimizePanel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -297,12 +291,10 @@ public class TimeTrackGUI extends javax.swing.JFrame {
 
         minimizeLabel.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         minimizeLabel.setForeground(new java.awt.Color(255, 255, 255));
-        minimizeLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         minimizeLabel.setText("—");
-        minimizeLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         minimizePanel.add(minimizeLabel);
 
-        mainTopPanel.add(minimizePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 10, 30, 30));
+        mainTopPanel.add(minimizePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 10, 30, 30));
 
         motionPanel.add(mainTopPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 950, 50));
 
@@ -310,11 +302,6 @@ public class TimeTrackGUI extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void closeLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeLabelMouseClicked
-        
-        
-    }//GEN-LAST:event_closeLabelMouseClicked
 
     private void menuPanel7MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuPanel7MouseEntered
         menuPanel7.setBackground(new java.awt.Color(47,66,84));
@@ -447,10 +434,10 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_closePanelMouseExited
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel closeLabel;
     private javax.swing.JPanel closePanel;
     protected javax.swing.JLabel currentUserLabel;
     private static javax.swing.JLabel dateTimeLabel;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
     private org.jdesktop.swingx.JXGraph jXGraph2;
