@@ -15,6 +15,7 @@ import java.util.Date;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
@@ -30,6 +31,8 @@ public class GUIMethods {
     String DBAddress;
     String DBUser;
     String DBPass;
+    JFrame loginJFrame;
+    String currentUser;
     
     //Konstruktor
     public GUIMethods() {
@@ -57,6 +60,7 @@ public class GUIMethods {
             if(rs.next()){
                 //sparar värdet från första kolumnen (userID) från Select statemant.
                 returnUserID = rs.getInt(1);
+                currentUser = rs.getString(2) + " " + rs.getString(3);
             }
             //Om ingen rad returneras från select statemant så betyder det att kombinationen
             //av användarnamn och lösenord ej hittades i databasen och då körs istället else.
@@ -105,8 +109,8 @@ public class GUIMethods {
         
     }
     
-    public void setCurrentUserLabel() {
-        
+    public void setCurrentUserLabel(TimeTrackGUI tGUI) {
+        tGUI.currentUserLabel.setText(currentUser);
     }
     
     public Connection prepareDBConnection() {
@@ -145,6 +149,21 @@ public class GUIMethods {
         Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
     }
     }
+    
+    public void startTimeTrack(JFrame loginJFrame, GUIMethods loginGUI_guiM, int userID){
+        this.loginJFrame = loginJFrame;
+        loginJFrame.setVisible(false);
+        //Gör loginrutan osynlig när användaren har loggat in
+        TimeTrackGUI tGUI = new TimeTrackGUI(loginJFrame);
+        //Sätter inloggad användare till userID (från databasen)
+        tGUI.setUserID(userID);
+        setCurrentUserLabel(tGUI);
+        //Placerar objeketet i mitten på användarens skärm
+        tGUI.setLocationRelativeTo(null);
+        tGUI.setVisible(true);
+    }
+    
+    
     
     public class TimerThread extends Thread{
         //Så länge som isRunning=true så uppdateras tiden
@@ -211,4 +230,7 @@ public class GUIMethods {
             return this.isRunning;
         }
     }
+    
+    
+    
 }
