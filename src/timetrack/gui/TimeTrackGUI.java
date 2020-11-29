@@ -267,13 +267,14 @@ public class TimeTrackGUI extends javax.swing.JFrame {
                 closePanelMouseExited(evt);
             }
         });
+        closePanel.setLayout(new java.awt.GridBagLayout());
 
         jLabel1.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("✕");
-        closePanel.add(jLabel1);
+        closePanel.add(jLabel1, new java.awt.GridBagConstraints());
 
-        mainTopPanel.add(closePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 10, 30, 30));
+        mainTopPanel.add(closePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 0, 50, 50));
 
         minimizePanel.setBackground(new java.awt.Color(47, 66, 84));
         minimizePanel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -288,13 +289,14 @@ public class TimeTrackGUI extends javax.swing.JFrame {
                 minimizePanelMouseExited(evt);
             }
         });
+        minimizePanel.setLayout(new java.awt.GridBagLayout());
 
         minimizeLabel.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         minimizeLabel.setForeground(new java.awt.Color(255, 255, 255));
         minimizeLabel.setText("—");
-        minimizePanel.add(minimizeLabel);
+        minimizePanel.add(minimizeLabel, new java.awt.GridBagConstraints());
 
-        mainTopPanel.add(minimizePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 10, 30, 30));
+        mainTopPanel.add(minimizePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 0, 50, 50));
 
         motionPanel.add(mainTopPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 950, 50));
 
