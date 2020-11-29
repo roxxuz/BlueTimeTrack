@@ -107,7 +107,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         mainLeftPanel.add(menuPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 170, 30));
 
         menuPanel2.setBackground(new java.awt.Color(92, 126, 162));
-        menuPanel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        menuPanel2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         menuPanel2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 menuPanel2MouseClicked(evt);
