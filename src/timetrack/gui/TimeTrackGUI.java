@@ -57,6 +57,8 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         menuPanel3 = new javax.swing.JPanel();
         menuLabel3 = new javax.swing.JLabel();
         menuLeftPanel3 = new javax.swing.JPanel();
+        menuPanel5 = new javax.swing.JPanel();
+        menuLeftPanel5 = new javax.swing.JPanel();
         menuPanel7 = new javax.swing.JPanel();
         menuLabel7 = new javax.swing.JLabel();
         menuLeftPanel7 = new javax.swing.JPanel();
@@ -66,10 +68,11 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         currentUserLabel = new javax.swing.JLabel();
         mainPanel = new javax.swing.JPanel();
         timePanel = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        jLabel3 = new javax.swing.JLabel();
         projectPanel = new javax.swing.JPanel();
-        jXGraph2 = new org.jdesktop.swingx.JXGraph();
+        jLabel4 = new javax.swing.JLabel();
+        adminProjectPanel = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
         dateTimeLabel = new javax.swing.JLabel();
         mainTopPanel = new javax.swing.JPanel();
         logoLabel = new javax.swing.JLabel();
@@ -165,6 +168,26 @@ public class TimeTrackGUI extends javax.swing.JFrame {
 
         mainLeftPanel.add(menuPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 170, -1));
 
+        menuPanel5.setBackground(new java.awt.Color(92, 126, 162));
+        menuPanel5.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        menuPanel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuPanel5MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                menuPanel5MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                menuPanel5MouseExited(evt);
+            }
+        });
+        menuPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        menuLeftPanel5.setBackground(new java.awt.Color(47, 66, 84));
+        menuPanel5.add(menuLeftPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 30));
+
+        mainLeftPanel.add(menuPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 170, 30));
+
         menuPanel7.setBackground(new java.awt.Color(92, 126, 162));
         menuPanel7.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -229,22 +252,26 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         timePanel.setBackground(new java.awt.Color(255, 255, 255));
         timePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setLineWrap(true);
-        jTextArea1.setRows(5);
-        jTextArea1.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam nec metus id elit suscipit accumsan eget et lacus. Aliquam a tempus purus, at dapibus elit. Donec sem mi, semper eu enim rhoncus, pretium placerat justo. Proin egestas dictum sagittis. Nam nec consectetur metus, viverra convallis justo. Etiam ut sem sem. Sed mattis purus at placerat placerat.  Nullam molestie nibh leo, id mattis leo porta sit amet. Pellentesque pharetra dui nec aliquet mpus eros. Nunc non metus viverra, eleifend lectus non, cursus orci. Praesent pellentesque sit amet diam non pulvinar. tie, risus urna viverra est, malesuada semper ");
-        jTextArea1.setWrapStyleWord(true);
-        jScrollPane1.setViewportView(jTextArea1);
-
-        timePanel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 190, 640, 100));
+        jLabel3.setText("Tidrapportering");
+        timePanel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 240, -1, -1));
 
         mainPanel.add(timePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 780, 510));
 
         projectPanel.setBackground(new java.awt.Color(255, 255, 255));
         projectPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        projectPanel.add(jXGraph2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 540, 280));
+
+        jLabel4.setText("Projekt");
+        projectPanel.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 210, -1, -1));
 
         mainPanel.add(projectPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 780, 510));
+
+        adminProjectPanel.setBackground(new java.awt.Color(255, 255, 255));
+        adminProjectPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel5.setText("Admin Projekt");
+        adminProjectPanel.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 240, -1, -1));
+
+        mainPanel.add(adminProjectPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 780, 510));
 
         dateTimeLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         dateTimeLabel.setForeground(new java.awt.Color(47, 66, 84));
@@ -330,8 +357,6 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_menuPanel7MouseExited
 
     private void menuPanel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuPanel7MouseClicked
-        timePanel.setVisible(false);
-        projectPanel.setVisible(true);
         menuPanel1.setBackground(new java.awt.Color(92,126,162));
         menuPanel2.setBackground(new java.awt.Color(92,126,162));
         menuPanel3.setBackground(new java.awt.Color(92,126,162));
@@ -360,8 +385,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_menuPanel3MouseExited
 
     private void menuPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuPanel1MouseClicked
-        projectPanel.setVisible(false);
-        timePanel.setVisible(true);
+        selectedPanel(1);
         menuPanel2.setBackground(new java.awt.Color(92,126,162));
         menuPanel3.setBackground(new java.awt.Color(92,126,162));
         menuPanel7.setBackground(new java.awt.Color(92,126,162));
@@ -382,8 +406,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_menuPanel1MouseExited
 
     private void menuPanel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuPanel2MouseClicked
-        timePanel.setVisible(false);
-        projectPanel.setVisible(true);
+        selectedPanel(2);
         menuPanel1.setBackground(new java.awt.Color(92,126,162));
         menuPanel3.setBackground(new java.awt.Color(92,126,162));
         menuPanel7.setBackground(new java.awt.Color(92,126,162));
@@ -449,15 +472,28 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         closePanel.setBackground(new java.awt.Color(47,66,84));
     }//GEN-LAST:event_closePanelMouseExited
 
+    private void menuPanel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuPanel5MouseClicked
+        selectedPanel(5);
+    }//GEN-LAST:event_menuPanel5MouseClicked
+
+    private void menuPanel5MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuPanel5MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menuPanel5MouseEntered
+
+    private void menuPanel5MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuPanel5MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menuPanel5MouseExited
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel adminProjectPanel;
     private javax.swing.JPanel closePanel;
     protected javax.swing.JLabel currentUserLabel;
     private static javax.swing.JLabel dateTimeLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
-    private org.jdesktop.swingx.JXGraph jXGraph2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel logoLabel;
     private javax.swing.JPanel mainLeftPanel;
     private javax.swing.JPanel mainPanel;
@@ -470,11 +506,13 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     private javax.swing.JPanel menuLeftPanel1;
     private javax.swing.JPanel menuLeftPanel2;
     private javax.swing.JPanel menuLeftPanel3;
+    private javax.swing.JPanel menuLeftPanel5;
     private javax.swing.JPanel menuLeftPanel7;
     private javax.swing.JPanel menuLeftPanel8;
     private javax.swing.JPanel menuPanel1;
     private javax.swing.JPanel menuPanel2;
     private javax.swing.JPanel menuPanel3;
+    private javax.swing.JPanel menuPanel5;
     private javax.swing.JPanel menuPanel7;
     private javax.swing.JPanel menuPanel8;
     private javax.swing.JLabel minimizeLabel;
@@ -524,6 +562,36 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     
     public void setCurrentUserLabel(String userLabel) {
         currentUserLabel.setText(userLabel);
+    }
+    
+    public void selectedPanel(int menuNr) {
+        timePanel.setVisible(false);
+        projectPanel.setVisible(false);
+        adminProjectPanel.setVisible(false);
+        
+        switch(menuNr) {
+            case 1:
+                timePanel.setVisible(true);
+                break;
+            case 2:
+                projectPanel.setVisible(true);
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                adminProjectPanel.setVisible(true);
+                break;
+            case 6:
+                break;
+            case 7:
+                break;
+            case 8:
+                break;
+            default:
+                
+        }
     }
     
 }
