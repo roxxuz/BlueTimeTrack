@@ -2,6 +2,7 @@
 package timetrack.gui;
 
 
+import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -35,6 +36,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         //Den kommer att starta en ny Thread som kan köras oberoende av det övriga programmet
         //och uppdatera tid och datum via en jLabel längst ner i högra hörnet.
         timerThread.start();
+        guiM.setTimeTrackGUI(this);
         //Sätter alla paneler (knappar/menyval) till false vid start,
         //förutom Tidrapportering som ska vara default när programmet startar
         projectPanel.setVisible(false);
@@ -90,6 +92,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         timeSendButtonPanel = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         menuLeftPanel4 = new javax.swing.JPanel();
+        timeSucceededLabel = new javax.swing.JLabel();
         projectPanel = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         overviewPanel = new javax.swing.JPanel();
@@ -351,25 +354,25 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         timePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         timeDateLabel.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
-        timeDateLabel.setForeground(new java.awt.Color(51, 51, 51));
+        timeDateLabel.setForeground(new java.awt.Color(47, 66, 84));
         timeDateLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         timeDateLabel.setText(" Datum");
         timePanel.add(timeDateLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 30, 130, 30));
 
         timeStartLabel.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
-        timeStartLabel.setForeground(new java.awt.Color(51, 51, 51));
+        timeStartLabel.setForeground(new java.awt.Color(47, 66, 84));
         timeStartLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         timeStartLabel.setText(" Starttid");
         timePanel.add(timeStartLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 30, 140, 30));
 
         timeEndLabel.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
-        timeEndLabel.setForeground(new java.awt.Color(51, 51, 51));
+        timeEndLabel.setForeground(new java.awt.Color(47, 66, 84));
         timeEndLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         timeEndLabel.setText(" Sluttid");
         timePanel.add(timeEndLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 30, 140, 30));
 
         timeProjectLabel.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
-        timeProjectLabel.setForeground(new java.awt.Color(51, 51, 51));
+        timeProjectLabel.setForeground(new java.awt.Color(47, 66, 84));
         timeProjectLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         timeProjectLabel.setText(" Projekt");
         timePanel.add(timeProjectLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, 150, 30));
@@ -419,6 +422,9 @@ public class TimeTrackGUI extends javax.swing.JFrame {
 
         timeSendButtonPanel.setBackground(new java.awt.Color(92, 126, 162));
         timeSendButtonPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                timeSendButtonPanelMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 timeSendButtonPanelMouseEntered(evt);
             }
@@ -444,6 +450,11 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         timeSendButtonPanel.add(menuLeftPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 30));
 
         timePanel.add(timeSendButtonPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 60, 90, 30));
+
+        timeSucceededLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        timeSucceededLabel.setForeground(new java.awt.Color(255, 255, 255));
+        timeSucceededLabel.setText("Din tidredovisning har registrerats");
+        timePanel.add(timeSucceededLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 100, -1, -1));
 
         mainPanel.add(timePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 780, 510));
 
@@ -816,6 +827,10 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         menuPanel8.setBackground(new java.awt.Color(47,66,84));
     }//GEN-LAST:event_menuPanel8MouseReleased
 
+    private void timeSendButtonPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_timeSendButtonPanelMouseClicked
+        guiM.sendTimeToDB(3, 5, "2020-11-28", "09:30", "13:00");
+    }//GEN-LAST:event_timeSendButtonPanelMouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel adminProjectPanel;
     private javax.swing.JPanel adminUserPanel;
@@ -876,6 +891,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     private javax.swing.JPanel timeSendButtonPanel;
     private javax.swing.JLabel timeStartLabel;
     private org.jdesktop.swingx.JXTextField timeStartTextfield;
+    private javax.swing.JLabel timeSucceededLabel;
     // End of variables declaration//GEN-END:variables
 
     
@@ -917,7 +933,12 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     }
     
     public void setCurrentUserLabel(String userLabel) {
+        //Sätter namnet på inloggad användare uppe till vänster i GUI
         currentUserLabel.setText(userLabel);
+    }
+    
+    public void setTimeSucceededLabelColor(Color color) {
+        timeSucceededLabel.setForeground(color);
     }
     
     public void selectedPanel(int menuNr) {
