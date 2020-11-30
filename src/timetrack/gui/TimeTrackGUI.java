@@ -7,7 +7,12 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
@@ -42,6 +47,62 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         Arrays.fill(menuArray, Boolean.FALSE);
     }
     
+    static String pStart;//Static eftersom alla ska ha tillgång till den.
+    static String pEnd;
+    static String pTotalTime;
+    
+    private static void projectStartTime() {
+
+        Locale sv = new Locale ("sv","SV");//Skapar en Locale så att datum visas på svenska, alltså "EEEE"(dag) står på svenska.
+        Date date = new Date();
+        Timestamp ts = new Timestamp(date.getTime());//Hämta/stämpla nuvarande tid
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-(EEEE) HH:mm",sv);//Spara tiden enligt år,måndad,dag(dag ej i siffror)timmar, dagar.
+        
+        String startTime = sdf.format(ts);//Spara värden i en string om vi vill använda värden senare, exempelvis en totalTime.
+        System.out.println(startTime);//Anledning till utskrivning är för att lätt kunan se om något händer.
+        
+        pStart=startTime;//Spara tiden i pStart i class så alla har tillgång till den.
+    }
+     private static void projectEndTime() {
+      Locale sv = new Locale ("sv","SV");
+      Date date = new Date();
+      Timestamp ts = new Timestamp(date.getTime());
+      SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-(EEEE) HH:mm",sv);
+      
+      String endTime = sdf.format(ts);
+      System.out.println(endTime);
+      
+      pEnd = endTime;
+    }
+  
+    private static void projectTotalTime()  {    
+        Locale sv = new Locale ("sv","SV");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd-(EEEE) HH:mm",sv);
+
+        Date d1 = null;
+        Date d2 = null;
+
+        try {
+            d1 = format.parse(pStart);//Formaterar till den format startTime och endTime har för att kunna göra uträkning.
+            d2 = format.parse(pEnd);
+
+            //in milliseconds
+            long diff = d2.getTime() - d1.getTime();//pEnd - pStart för uträkning
+
+            long diffMinutes = diff / (60 * 1000) % 60;//Gör om millisekunder till minut.
+            long diffHours = diff / (60 * 60 * 1000) % 24;//Gör om minut till timmar.
+            long diffDays = diff / (24 * 60 * 60 * 1000);//Gör om timmar till dagar.
+
+            System.out.print("Total project time: " +diffDays + " dagar, "+diffHours + " timmar, "+diffMinutes + " minuter, ");
+            String days = String.valueOf(diffDays);//Sparade alla dessa i String för att kunna slå ihop dem till en enda sträng.
+            String hours = String.valueOf(diffHours);
+            String minutes = String.valueOf(diffMinutes);
+            pTotalTime = "Dagar: "+days+" Timmar: "+hours+" Minuter: "+minutes;//Slår ihop alla till en sträng och spara i class.
+            
+        } 
+        catch (ParseException e) {
+        }
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
