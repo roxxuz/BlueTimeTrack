@@ -1,6 +1,7 @@
 
 package timetrack.gui;
 
+import java.awt.Color;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -23,7 +24,7 @@ import javax.swing.SwingUtilities;
  *
  * @author Akram
  */
-public class GUIMethods {
+public class GUIMethods{
     
     Connection cn;
     PreparedStatement pstat;
@@ -33,6 +34,7 @@ public class GUIMethods {
     String DBPass;
     JFrame loginJFrame;
     String currentUser;
+    TimeTrackGUI tGUI;
     
     //Konstruktor
     public GUIMethods() {
@@ -231,7 +233,8 @@ public class GUIMethods {
         }
     }
     
-                    public boolean deleteProject(int projectid){
+
+      public boolean deleteProject(int projectid){
             boolean success = false;
             try {
             pstat = cn.prepareStatement("delete from projects where projects_id = ?");
@@ -275,5 +278,70 @@ public class GUIMethods {
                         }
                 return success;
                 }
+
+    public class Thread2 extends Thread {
+      
+    public void run(){
+        //Ska från vit 255,255,255 till grön 60,117,57
+        try {
+            Thread.sleep(750);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        for (int i = 0; i < 255; i=i+2) {
+             
+            tGUI.setTimeSucceededLabelColor(new java.awt.Color(60, 117, 57, i));
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException ex) {
+                System.err.println("Fel i faden på texten \"Din tidredovisning har registrerats\"");
+            }
+        }
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        for (int i = 255; i > 0; i--) {
+             
+            tGUI.setTimeSucceededLabelColor(new java.awt.Color(60, 117, 57, i));
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException ex) {
+                System.err.println("Fel i faden på texten \"Din tidredovisning har registrerats\"");
+            }
+        }
+    }
+  }
     
+    public boolean sendTimeToDB(int userID, int project, String date, String startTime, String endTime){
+        String dateTimeStart = date + " " + startTime;
+        String dateTimeEnd = date + " " + endTime;
+        boolean success = false;
+        try {
+        pstat = cn.prepareStatement("INSERT INTO time (start_time, end_time, user_id, project_id) VALUES (?, ?, ?, ?);");
+        pstat.setString(1, dateTimeStart);
+        pstat.setString(2, dateTimeEnd);
+        pstat.setInt(3, userID);
+        pstat.setInt(4, project);
+        int re = pstat.executeUpdate();
+        //Kontrollerar om det är mer än 0 tillbaka så har det lyckats
+        if (re > 0) {
+            System.out.println("fungerade");
+            Thread2 thread2 = new Thread2();
+            thread2.start();
+        }
+        else {
+            System.out.println("fungerade INTE");
+        }
+    } catch (SQLException ex) {
+            System.out.println(ex);
+    }
+        return success;
+    }
+    
+    public void setTimeTrackGUI(TimeTrackGUI tGUI) {
+        this.tGUI = tGUI;
+    }
 }
