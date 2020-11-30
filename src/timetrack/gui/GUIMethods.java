@@ -233,9 +233,54 @@ public class GUIMethods{
         }
     }
     
+
+      public boolean deleteProject(int projectid){
+            boolean success = false;
+            try {
+            pstat = cn.prepareStatement("delete from projects where projects_id = ?");
+            pstat.setInt(1, projectid);
+            pstat.executeUpdate();
+            
+                success = true;
+        }   catch (SQLException ex) {
+                System.out.println(ex);
+        } 
+            return success;
+        }
+        
+            public boolean deleteUser(int userid){
+            boolean success = false;
+            try {
+            pstat = cn.prepareStatement("delete from users where user_id = ?");
+            pstat.setInt(1, userid);
+            pstat.executeUpdate();
+            
+                success = true;
+        }   catch (SQLException ex) {
+                System.out.println(ex);
+        } 
+            return success;
+        }
+            
+            public boolean createProject(String pname, String pdesc, int pstatus,int custid){
+                boolean success = false;
+                try {
+                    pstat = cn.prepareStatement("insert into projects (project_name, project_description, project_status_id, customer_id) VALUES (?,?,?,?)");
+                    pstat.setString(1, pname);
+                    pstat.setString(2, pdesc);
+                    pstat.setInt(3, pstatus);
+                    pstat.setInt(4, custid);
+                    pstat.executeUpdate();
+                    
+                    success = true;
+                } catch (SQLException ex) {
+                        System.out.println(ex);
+                        }
+                return success;
+                }
+
     public class Thread2 extends Thread {
-    
-    
+      
     public void run(){
         //Ska från vit 255,255,255 till grön 60,117,57
         try {
