@@ -239,7 +239,7 @@ public class GUIMethods{
     public void run(){
         //Ska från vit 255,255,255 till grön 60,117,57
         try {
-            Thread.sleep(1000);
+            Thread.sleep(750);
         } catch (InterruptedException ex) {
             Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
         }
