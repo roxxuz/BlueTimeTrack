@@ -597,22 +597,22 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel18.setText("Förnamn");
-        jPanel4.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 70, -1));
+        jPanel4.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 70, -1));
 
         jLabel19.setText("Efternamn");
-        jPanel4.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 70, -1));
+        jPanel4.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 70, -1));
 
         jLabel20.setText("Email");
-        jPanel4.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 70, -1));
+        jPanel4.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 70, -1));
 
         jLabel21.setText("Färdigheter");
-        jPanel4.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, 110, -1));
+        jPanel4.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 320, 110, -1));
 
         jLabel22.setText("Lösenord");
-        jPanel4.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 70, -1));
+        jPanel4.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 70, -1));
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel4.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 350, 290, 30));
+        jPanel4.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 340, 290, 30));
 
         jTable2.setBackground(new java.awt.Color(210, 219, 228));
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
@@ -629,7 +629,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         jTable2.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         jScrollPane3.setViewportView(jTable2);
 
-        jPanel4.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 20, 390, 190));
+        jPanel4.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 40, 390, 190));
         jPanel4.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, -1, -1));
 
         jLabel23.setText("Admin?");
