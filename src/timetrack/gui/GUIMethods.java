@@ -1,6 +1,7 @@
 
 package timetrack.gui;
 
+
 import java.awt.Color;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -294,7 +295,7 @@ public class GUIMethods{
             try {
                 Thread.sleep(10);
             } catch (InterruptedException ex) {
-                System.err.println("Fel i faden på texten \"Din tidredovisning har registrerats\"");
+                System.err.println("Fel i faden på texten \"Din tidrapportering har registrerats\"");
             }
         }
         try {
@@ -314,6 +315,22 @@ public class GUIMethods{
         }
     }
   }
+    public ResultSet getUserProjects(int userID) {
+    try {
+            //Skapar ett SELECT statement till PreparedStatement objekt
+            pstat = cn.prepareStatement("SELECT project_name FROM projects p\n" +
+                                        "join users_has_projects up on p.projects_id = up.project_id\n" +
+                                        "join users u on up.user_id = u.user_id\n" +
+                                        "where u.user_id = ?");
+            
+            pstat.setInt(1, userID);
+            //Utför SQL statement till Databas. Returnerar ett resultat till ResultSet rs
+            rs = pstat.executeQuery();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+    return rs;
+    }
     
     public boolean sendTimeToDB(int userID, int project, String date, String startTime, String endTime){
         String dateTimeStart = date + " " + startTime;
