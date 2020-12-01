@@ -356,6 +356,7 @@ public class GUIMethods{
             //Ny thread startar som kommer att visa en text med att rapporteringen har lyckats
             Thread2 thread2 = new Thread2();
             thread2.start();
+            tGUI.setTimeDefaultValues();
         }
         else {
             System.err.println("Något gick fel med att skicka tidrapporteringen");

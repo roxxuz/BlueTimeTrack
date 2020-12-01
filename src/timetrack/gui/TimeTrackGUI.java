@@ -462,12 +462,17 @@ public class TimeTrackGUI extends javax.swing.JFrame {
                 timeDateTextfieldFocusLost(evt);
             }
         });
+        timeDateTextfield.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                timeDateTextfieldActionPerformed(evt);
+            }
+        });
         timePanel.add(timeDateTextfield, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 60, 120, 30));
 
         timeProjectTextfield.setEditable(false);
         timeProjectTextfield.setBackground(new java.awt.Color(237, 237, 237));
         timeProjectTextfield.setBorder(null);
-        timeProjectTextfield.setForeground(new java.awt.Color(51, 51, 51));
+        timeProjectTextfield.setForeground(new java.awt.Color(165, 165, 165));
         timeProjectTextfield.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         timeProjectTextfield.setText("Välj projekt");
         timeProjectTextfield.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -490,6 +495,11 @@ public class TimeTrackGUI extends javax.swing.JFrame {
                 timeEndTextfieldFocusLost(evt);
             }
         });
+        timeEndTextfield.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                timeEndTextfieldActionPerformed(evt);
+            }
+        });
         timePanel.add(timeEndTextfield, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 60, 130, 30));
 
         timeStartTextfield.setBackground(new java.awt.Color(237, 237, 237));
@@ -503,6 +513,11 @@ public class TimeTrackGUI extends javax.swing.JFrame {
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 timeStartTextfieldFocusLost(evt);
+            }
+        });
+        timeStartTextfield.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                timeStartTextfieldActionPerformed(evt);
             }
         });
         timePanel.add(timeStartTextfield, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 60, 130, 30));
@@ -919,29 +934,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_menuPanel8MouseReleased
 
     private void timeSendButtonPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_timeSendButtonPanelMouseClicked
-        chooseProjectPanel.setVisible(false);
-        String projectName = timeProjectTextfield.getText();
-        //Metoden tar emot String med porjektnamn och returnerar tillhörande porjektID som en int
-        int projectID = guiM.getProjectID(projectName);
-        String date = timeDateTextfield.getText();
-        String startTime = timeStartTextfield.getText();
-        String endTime = timeEndTextfield.getText();
-        //Kollar om inmatningen i textfälten har rätt format
-        if(guiM.isCorrectTimeFields(date, startTime, endTime)) {
-            //Utför tidredovisningen mot databasen
-            guiM.sendTimeToDB(userID, projectID, date, startTime, endTime);
-        }
-        else if(projectName.equals("Välj projekt")) {
-            JOptionPane.showConfirmDialog(this, "Du måste välja ett projekt att rapportera tiden på!\n\n"
-                                               , "Välj projekt", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE);
-        }
-        else {
-            JOptionPane.showConfirmDialog(this, "Du har inte angett korrekt format vid inmatning av datum och tid.\n"
-                                               + "Kontrollera inmatningen och försök igen.\n\n"
-                                               + "Korrekt format för datum: yyyy-MM-dd (exempel 2020-08-29)\n"
-                                               + "Korrekt format för tid: HH:mm (exempel 08:30)\n"
-                                               , "Felaktig inmatning", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE);
-        }
+        sendTimeReport();
     }//GEN-LAST:event_timeSendButtonPanelMouseClicked
 
     private void timeProjectTextfieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_timeProjectTextfieldMouseClicked
@@ -977,25 +970,31 @@ public class TimeTrackGUI extends javax.swing.JFrame {
 
     private void timeDateTextfieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_timeDateTextfieldFocusGained
         chooseProjectPanel.setVisible(false);
+        if(timeDateTextfield.getText().equals("yyyy-mm-dd")) {
+            timeDateTextfield.setText("");
+        }
         timeDateTextfield.setForeground(new Color(51,51,51));
-        timeDateTextfield.selectAll();
     }//GEN-LAST:event_timeDateTextfieldFocusGained
 
     private void timeStartTextfieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_timeStartTextfieldFocusGained
         chooseProjectPanel.setVisible(false);
+        if(timeStartTextfield.getText().equals("hh:mm")) {
+            timeStartTextfield.setText("");
+        }
         timeStartTextfield.setForeground(new Color(51,51,51));
-        timeStartTextfield.selectAll();
     }//GEN-LAST:event_timeStartTextfieldFocusGained
 
     private void timeEndTextfieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_timeEndTextfieldFocusGained
         chooseProjectPanel.setVisible(false);
+        if(timeEndTextfield.getText().equals("hh:mm")) {
+            timeEndTextfield.setText("");
+        }
         timeEndTextfield.setForeground(new Color(51,51,51));
-        timeEndTextfield.selectAll();
     }//GEN-LAST:event_timeEndTextfieldFocusGained
 
     private void timeDateTextfieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_timeDateTextfieldFocusLost
         //Om textfältet lämnas tomt (eller oförändrat) så sätts informationen om formatet tillbaka
-        if(timeDateTextfield.getText().isEmpty() || timeDateTextfield.getText().equals("yyyy-mm-dd")) {
+        if(timeDateTextfield.getText().isEmpty()) {
             timeDateTextfield.setText("yyyy-mm-dd");
             timeDateTextfield.setForeground(new Color(165,165,165));
         }
@@ -1003,7 +1002,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
 
     private void timeStartTextfieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_timeStartTextfieldFocusLost
         //Om textfältet lämnas tomt (eller oförändrat) så sätts informationen om formatet tillbaka
-        if(timeStartTextfield.getText().isEmpty() || timeStartTextfield.getText().equals("hh:mm")) {
+        if(timeStartTextfield.getText().isEmpty()) {
             timeStartTextfield.setText("hh:mm");
             timeStartTextfield.setForeground(new Color(165,165,165));
         }
@@ -1011,7 +1010,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
 
     private void timeEndTextfieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_timeEndTextfieldFocusLost
         //Om textfältet lämnas tomt (eller oförändrat) så sätts informationen om formatet tillbaka
-        if(timeEndTextfield.getText().isEmpty() || timeEndTextfield.getText().equals("hh:mm")) {
+        if(timeEndTextfield.getText().isEmpty()) {
             timeEndTextfield.setText("hh:mm");
             timeEndTextfield.setForeground(new Color(165,165,165));
         }
@@ -1020,6 +1019,18 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     private void mainTopPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mainTopPanelMouseClicked
         chooseProjectPanel.setVisible(false);
     }//GEN-LAST:event_mainTopPanelMouseClicked
+
+    private void timeDateTextfieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_timeDateTextfieldActionPerformed
+        sendTimeReport();
+    }//GEN-LAST:event_timeDateTextfieldActionPerformed
+
+    private void timeStartTextfieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_timeStartTextfieldActionPerformed
+        sendTimeReport();
+    }//GEN-LAST:event_timeStartTextfieldActionPerformed
+
+    private void timeEndTextfieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_timeEndTextfieldActionPerformed
+        sendTimeReport();
+    }//GEN-LAST:event_timeEndTextfieldActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel adminProjectPanel;
@@ -1136,6 +1147,32 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         timeSucceededLabel.setForeground(color);
     }
     
+    private void sendTimeReport() {
+        chooseProjectPanel.setVisible(false);
+        String projectName = timeProjectTextfield.getText();
+        //Metoden tar emot String med porjektnamn och returnerar tillhörande porjektID som en int
+        int projectID = guiM.getProjectID(projectName);
+        String date = timeDateTextfield.getText();
+        String startTime = timeStartTextfield.getText();
+        String endTime = timeEndTextfield.getText();
+        //Kollar om inmatningen i textfälten har rätt format
+        if(guiM.isCorrectTimeFields(date, startTime, endTime)) {
+            //Utför tidredovisningen mot databasen
+            guiM.sendTimeToDB(userID, projectID, date, startTime, endTime);
+        }
+        else if(projectName.equals("Välj projekt")) {
+            JOptionPane.showConfirmDialog(this, "Du måste välja ett projekt att rapportera tiden på!\n\n"
+                                               , "Välj projekt", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE);
+        }
+        else {
+            JOptionPane.showConfirmDialog(this, "Du har inte angett korrekt format vid inmatning av datum och tid.\n"
+                                               + "Kontrollera inmatningen och försök igen.\n\n"
+                                               + "Korrekt format för datum: yyyy-MM-dd (exempel 2020-08-29)\n"
+                                               + "Korrekt format för tid: HH:mm (exempel 08:30)\n"
+                                               , "Felaktig inmatning", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE);
+        }
+    }
+    
     public void selectedPanel(int menuNr) {
         //Sätter först alla peneler till false
         //och sätter sedan vald panel till true via switch
@@ -1173,6 +1210,18 @@ public class TimeTrackGUI extends javax.swing.JFrame {
             default:
                 
         }
+    }
+    
+    public void setTimeDefaultValues() {
+        //Återställer till default values och färger efter att en rapportering har gjorts
+        timeProjectTextfield.setForeground(new Color(165,165,165));
+        timeProjectTextfield.setText("Välj projekt");
+        timeDateTextfield.setForeground(new Color(165,165,165));
+        timeDateTextfield.setText("yyyy-mm-dd");
+        timeStartTextfield.setForeground(new Color(165,165,165));
+        timeStartTextfield.setText("hh:mm");
+        timeEndTextfield.setForeground(new Color(165,165,165));
+        timeEndTextfield.setText("hh:mm");
     }
     
 }
