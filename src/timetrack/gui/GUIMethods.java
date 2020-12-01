@@ -12,8 +12,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -357,6 +363,71 @@ public class GUIMethods{
     }
         return success;
     }
+    
+    public int getProjectID(String projectName){
+        try {
+        pstat = cn.prepareStatement("select projects_id from projects where project_name = ?");
+        pstat.setString(1, projectName);
+        rs = pstat.executeQuery();
+        } catch (SQLException ex) {
+                System.out.println(ex);
+        }
+        int projectID = 0;
+        try {
+            if(rs.next()) {
+                projectID = rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return projectID;
+    }
+    
+    public boolean isCorrectTimeFields(String date, String startTime, String endTime) {
+        boolean isCorrect = false;
+        //Kollar så att inmatnig av datum och tid är i korrekt format
+        if(isValidFormat("yyyy-MM-dd", date, Locale.ENGLISH)
+        && isValidFormat("H:mm", startTime, Locale.ENGLISH)
+        && isValidFormat("H:mm", endTime, Locale.ENGLISH)) {
+            isCorrect = true;
+        }
+        if (isCorrect) {
+            System.out.println("RÄTT!");
+        } else {
+            System.out.println("FEL!");
+        }
+        
+        
+        return isCorrect;
+    }
+    
+    public boolean isValidFormat(String format, String value, Locale locale) {
+    LocalDateTime ldt = null;
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format, locale);
+
+    try {
+        ldt = LocalDateTime.parse(value, formatter);
+        String result = ldt.format(formatter);
+        return result.equals(value);
+    } catch (DateTimeParseException e) {
+        try {
+            LocalDate ld = LocalDate.parse(value, formatter);
+            String result = ld.format(formatter);
+            return result.equals(value);
+        } catch (DateTimeParseException exp) {
+            try {
+                LocalTime lt = LocalTime.parse(value, formatter);
+                String result = lt.format(formatter);
+                return result.equals(value);
+            } catch (DateTimeParseException e2) {
+                // Debugging purposes
+                //e2.printStackTrace();
+            }
+        }
+    }
+
+    return false;
+}
     
     public void setTimeTrackGUI(TimeTrackGUI tGUI) {
         this.tGUI = tGUI;

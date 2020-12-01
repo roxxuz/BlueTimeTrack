@@ -15,6 +15,7 @@ import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import java.sql.ResultSet;
 import java.util.Vector;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import net.proteanit.sql.DbUtils;
 
@@ -32,6 +33,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     //Boolean array som håller reda på vilket menyval som är aktivt
     Boolean[] menuArray = new Boolean[8];
     JFrame loginJFrame;
+    String selectedProject = "";
 
     public TimeTrackGUI(JFrame loginJFrame) {
         this.loginJFrame = loginJFrame;
@@ -47,7 +49,6 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         timePanel.setVisible(true);
         //Sätter alla booleans i arrayen till false
         Arrays.fill(menuArray, Boolean.FALSE);
-        chooseProjectPanel.setVisible(false);
         
     }
     
@@ -450,13 +451,15 @@ public class TimeTrackGUI extends javax.swing.JFrame {
 
         timeDateTextfield.setBackground(new java.awt.Color(237, 237, 237));
         timeDateTextfield.setBorder(null);
+        timeDateTextfield.setForeground(new java.awt.Color(165, 165, 165));
         timeDateTextfield.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        timeDateTextfield.setText("yyyy-mm-dd");
         timePanel.add(timeDateTextfield, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 60, 120, 30));
 
         timeProjectTextfield.setEditable(false);
         timeProjectTextfield.setBackground(new java.awt.Color(237, 237, 237));
         timeProjectTextfield.setBorder(null);
-        timeProjectTextfield.setForeground(new java.awt.Color(102, 102, 102));
+        timeProjectTextfield.setForeground(new java.awt.Color(165, 165, 165));
         timeProjectTextfield.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         timeProjectTextfield.setText("Välj projekt   ﹀");
         timeProjectTextfield.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -468,12 +471,16 @@ public class TimeTrackGUI extends javax.swing.JFrame {
 
         timeEndTextfield.setBackground(new java.awt.Color(237, 237, 237));
         timeEndTextfield.setBorder(null);
+        timeEndTextfield.setForeground(new java.awt.Color(165, 165, 165));
         timeEndTextfield.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        timeEndTextfield.setText("hh:mm");
         timePanel.add(timeEndTextfield, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 60, 130, 30));
 
         timeStartTextfield.setBackground(new java.awt.Color(237, 237, 237));
         timeStartTextfield.setBorder(null);
+        timeStartTextfield.setForeground(new java.awt.Color(165, 165, 165));
         timeStartTextfield.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        timeStartTextfield.setText("hh:mm");
         timePanel.add(timeStartTextfield, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 60, 130, 30));
 
         jPanel1.setBackground(new java.awt.Color(237, 237, 237));
@@ -883,7 +890,23 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_menuPanel8MouseReleased
 
     private void timeSendButtonPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_timeSendButtonPanelMouseClicked
-        guiM.sendTimeToDB(3, 5, "2020-11-28", "09:30", "13:00");
+        String projectName = timeProjectTextfield.getText();
+        //Metoden tar emot String med porjektnamn och returnerar tillhörande porjektID som en int
+        int projectID = guiM.getProjectID(projectName);
+        String date = timeDateTextfield.getText();
+        String startTime = timeStartTextfield.getText();
+        String endTime = timeEndTextfield.getText();
+        //Kollar om inmatningen i textfälten har rätt format
+        if(guiM.isCorrectTimeFields(date, startTime, endTime)) {
+            guiM.sendTimeToDB(userID, projectID, date, startTime, endTime);
+        }
+        else {
+            JOptionPane.showConfirmDialog(this, "Du har inte angett korrekt format vid inmatning av datum och tid.\n"
+                                               + "Kontrollera inmatningen och försök igen.\n\n"
+                                               + "Korrekt format för datum: yyyy-MM-dd (exempel 2020-08-29)\n"
+                                               + "Korrekt format för tid: HH:mm (exempel 08:30)\n"
+                                               , "Felaktig inmatning", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE);
+        }
     }//GEN-LAST:event_timeSendButtonPanelMouseClicked
 
     private void timeProjectTextfieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_timeProjectTextfieldMouseClicked
@@ -891,6 +914,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         chooseProjectPanel.setVisible(true);
         
         ResultSet rs = guiM.getUserProjects(userID);
+        //Sätter in resultatet i tabellen
         chooseProjectTable.setModel(DbUtils.resultSetToTableModel(rs));
     }//GEN-LAST:event_timeProjectTextfieldMouseClicked
 
