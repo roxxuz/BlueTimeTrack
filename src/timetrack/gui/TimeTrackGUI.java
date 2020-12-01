@@ -13,6 +13,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
+import java.sql.ResultSet;
+import java.util.Vector;
+import javax.swing.table.DefaultTableModel;
+import net.proteanit.sql.DbUtils;
 
 
 public class TimeTrackGUI extends javax.swing.JFrame {
@@ -20,7 +24,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     //Inloggad användare (ID från databasen)
     //Tilldelas värde med set-metoden setUserID.
     //default = 0 (ingen användare är inloggad).
-    private int userID = 0;
+    int userID = 0;
     //Skapar objekt av guiMethods
     GUIMethods guiM = new GUIMethods();
     //Skapar objekt av TimerThread som är en "inner class" i GUIMethods
@@ -43,8 +47,8 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         timePanel.setVisible(true);
         //Sätter alla booleans i arrayen till false
         Arrays.fill(menuArray, Boolean.FALSE);
-        //Inställningar för scrollPane som timeTable1 ligger i (Översta tabell där man rapporterar tid)
-        //timeScrollPane1.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+        chooseProjectPanel.setVisible(false);
+        
     }
     
     @SuppressWarnings("unchecked")
@@ -77,6 +81,11 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         menuLeftPanel8 = new javax.swing.JPanel();
         mainPanel = new javax.swing.JPanel();
         timePanel = new javax.swing.JPanel();
+        chooseProjectPanel = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        chooseProjectHeader = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        chooseProjectTable = new javax.swing.JTable();
         timeDateLabel = new javax.swing.JLabel();
         timeStartLabel = new javax.swing.JLabel();
         timeEndLabel = new javax.swing.JLabel();
@@ -120,6 +129,11 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         motionPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         mainLeftPanel.setBackground(new java.awt.Color(210, 219, 228));
+        mainLeftPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mainLeftPanelMouseClicked(evt);
+            }
+        });
         mainLeftPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         currentUserLabel.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
@@ -351,7 +365,52 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         mainPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         timePanel.setBackground(new java.awt.Color(255, 255, 255));
+        timePanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                timePanelMouseClicked(evt);
+            }
+        });
         timePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        chooseProjectPanel.setBackground(new java.awt.Color(210, 219, 228));
+        chooseProjectPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel2.setBackground(new java.awt.Color(47, 66, 84));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        chooseProjectHeader.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        chooseProjectHeader.setForeground(new java.awt.Color(255, 255, 255));
+        chooseProjectHeader.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        chooseProjectHeader.setText("Tilldelade projekt");
+        jPanel2.add(chooseProjectHeader, new org.netbeans.lib.awtextra.AbsoluteConstraints(9, 0, 180, 30));
+
+        chooseProjectPanel.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 200, 30));
+
+        chooseProjectTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null}
+            },
+            new String [] {
+                "Title 1"
+            }
+        ));
+        chooseProjectTable.setRowHeight(30);
+        chooseProjectTable.setTableHeader(null);
+        chooseProjectTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                chooseProjectTableMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(chooseProjectTable);
+
+        chooseProjectPanel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 180, 140));
+
+        timePanel.add(chooseProjectPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 200, 180));
 
         timeDateLabel.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         timeDateLabel.setForeground(new java.awt.Color(47, 66, 84));
@@ -397,12 +456,12 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         timeProjectTextfield.setEditable(false);
         timeProjectTextfield.setBackground(new java.awt.Color(237, 237, 237));
         timeProjectTextfield.setBorder(null);
-        timeProjectTextfield.setForeground(new java.awt.Color(153, 153, 153));
+        timeProjectTextfield.setForeground(new java.awt.Color(102, 102, 102));
         timeProjectTextfield.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        timeProjectTextfield.setText("-Välj projekt här-");
-        timeProjectTextfield.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                timeProjectTextfieldActionPerformed(evt);
+        timeProjectTextfield.setText("Välj projekt   ﹀");
+        timeProjectTextfield.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                timeProjectTextfieldMouseClicked(evt);
             }
         });
         timePanel.add(timeProjectTextfield, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, 140, 30));
@@ -759,10 +818,6 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         timeSendButtonPanel.setBackground(new java.awt.Color(92,126,162));
     }//GEN-LAST:event_timeSendButtonPanelMouseExited
 
-    private void timeProjectTextfieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_timeProjectTextfieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_timeProjectTextfieldActionPerformed
-
     private void timeSendButtonPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_timeSendButtonPanelMousePressed
         timeSendButtonPanel.setBackground(new java.awt.Color(56,79,101));
     }//GEN-LAST:event_timeSendButtonPanelMousePressed
@@ -831,9 +886,36 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         guiM.sendTimeToDB(3, 5, "2020-11-28", "09:30", "13:00");
     }//GEN-LAST:event_timeSendButtonPanelMouseClicked
 
+    private void timeProjectTextfieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_timeProjectTextfieldMouseClicked
+        
+        chooseProjectPanel.setVisible(true);
+        
+        ResultSet rs = guiM.getUserProjects(userID);
+        chooseProjectTable.setModel(DbUtils.resultSetToTableModel(rs));
+    }//GEN-LAST:event_timeProjectTextfieldMouseClicked
+
+    private void chooseProjectTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_chooseProjectTableMouseClicked
+        chooseProjectPanel.setVisible(false);
+        int column = 0;
+        int row = chooseProjectTable.getSelectedRow();
+        String project = chooseProjectTable.getModel().getValueAt(row, column).toString();
+        timeProjectTextfield.setText(project);
+    }//GEN-LAST:event_chooseProjectTableMouseClicked
+
+    private void timePanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_timePanelMouseClicked
+        chooseProjectPanel.setVisible(false);
+    }//GEN-LAST:event_timePanelMouseClicked
+
+    private void mainLeftPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mainLeftPanelMouseClicked
+        chooseProjectPanel.setVisible(false);
+    }//GEN-LAST:event_mainLeftPanelMouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel adminProjectPanel;
     private javax.swing.JPanel adminUserPanel;
+    private javax.swing.JLabel chooseProjectHeader;
+    private javax.swing.JPanel chooseProjectPanel;
+    private javax.swing.JTable chooseProjectTable;
     private javax.swing.JPanel closePanel;
     protected javax.swing.JLabel currentUserLabel;
     private static javax.swing.JLabel dateTimeLabel;
@@ -848,6 +930,8 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
