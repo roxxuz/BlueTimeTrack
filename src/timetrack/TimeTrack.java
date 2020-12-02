@@ -10,6 +10,7 @@ import timetrack.gui.*;
 public class TimeTrack {
 
     public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
+
         
         //Login
         LoginGUI loginGUI = new LoginGUI();
