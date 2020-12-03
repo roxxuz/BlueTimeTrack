@@ -346,6 +346,41 @@ public class GUIMethods{
                         }
                 return success;
                 }
+            
+            
+            
+              public boolean createUser(String name, String lastName, String email, String password, String skill, boolean isAdmin) {
+                boolean success = false;
+                try {
+                     pstat = cn.prepareStatement("insert into users (FName, LName, email, user_password, is_admin) VALUES (?,?,?,?,?) ");
+                     pstat.setString(1,name);            
+                     pstat.setString(2,lastName);
+                     pstat.setString(3,email);
+                     pstat.setString(4,password);
+                     pstat.setBoolean(5, isAdmin);
+                     pstat.executeUpdate();
+            
+                    success = true;
+            
+             } catch (SQLException ex) {
+                 System.out.println(ex);
+                        }
+                return success;
+             }
+            
+              public void getAvailableSkills() {
+                  tGUI.jComboBox1.removeAllItems();
+        try {
+            pstat = cn.prepareStatement("select skill from skills");
+            rs = pstat.executeQuery();
+            while(rs.next()) {
+                tGUI.jComboBox1.addItem(rs.getString(1));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+              }
 
     public class Thread2 extends Thread {
       
