@@ -368,6 +368,19 @@ public class GUIMethods{
                 return success;
              }
             
+              public void getAvailableSkills() {
+                  tGUI.jComboBox1.removeAllItems();
+        try {
+            pstat = cn.prepareStatement("select skill from skills");
+            rs = pstat.executeQuery();
+            while(rs.next()) {
+                tGUI.jComboBox1.addItem(rs.getString(1));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+              }
 
     public class Thread2 extends Thread {
       
