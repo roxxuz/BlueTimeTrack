@@ -482,6 +482,8 @@ public class GUIMethods{
         return projectID;
     }
     
+    
+    
     public boolean isCorrectTimeFields(String date, String startTime, String endTime) {
         boolean isCorrect = false;
         //Kollar så att inmatnig av datum och tid är i korrekt format
