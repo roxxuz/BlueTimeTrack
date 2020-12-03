@@ -161,6 +161,43 @@ public class GUIMethods{
     }
     }
     
+    public void insertUsersHasSkills(String email) {
+    int userID = 0;
+        try {
+            pstat = cn.prepareStatement("SELECT user_id FROM users WHERE email = ?");
+            pstat.setString(1, email);
+            rs = pstat.executeQuery();
+            rs.next();
+            userID = rs.getInt(1);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    
+    int rowCount = tGUI.jTable2.getRowCount();
+    for (int i = 0; i < rowCount; i++) {
+        try {
+            //Hämtar skillID för vald skill (loopar alla valda skills i tabellen)
+            pstat = cn.prepareStatement("SELECT skill_id FROM skills WHERE skill = ?");
+            String skillName = (String) tGUI.jTable2.getValueAt(i, 0);
+            pstat.setString(1, skillName);
+            rs = pstat.executeQuery();
+            rs.next();
+            int skillID = 0;
+            skillID = rs.getInt(1);
+            //Gör insert med vald skill + userID
+            pstat = cn.prepareStatement("INSERT INTO users_has_skills (skill_id, users_id) VALUES (?,?)");
+            pstat.setInt(1, skillID);
+            pstat.setInt(2, userID);
+            pstat.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(TimeTrackGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
+    }     
+            
+    }
+    
     public void startTimeTrack(JFrame loginJFrame, GUIMethods loginGUI_guiM, int userID){
         this.loginJFrame = loginJFrame;
         loginJFrame.setVisible(false);
