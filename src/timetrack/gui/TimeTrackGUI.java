@@ -1106,6 +1106,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
 
     private void jLabel16MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel16MouseClicked
        guiM.createUser(jTextField1.getText(), jTextField2.getText(),jTextField3.getText(), jPasswordField2.getText(), "", jRadioButton1.isSelected());
+       guiM.insertUsersHasSkills(jTextField3.getText());
     }//GEN-LAST:event_jLabel16MouseClicked
 
     private void jLabel17MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel17MouseClicked
@@ -1157,7 +1158,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
-    private javax.swing.JTable jTable2;
+    protected javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
