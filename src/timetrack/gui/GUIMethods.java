@@ -36,7 +36,6 @@ import javax.swing.table.DefaultTableModel;
  * @author Akram
  */
 public class GUIMethods{
-    
     Connection cn;
     PreparedStatement pstat;
     ResultSet rs;
@@ -47,7 +46,6 @@ public class GUIMethods{
     String currentUser;
     TimeTrackGUI tGUI;
     
-    //Konstruktor
     public GUIMethods() {
         readProperties();
         cn = prepareDBConnection();
@@ -95,8 +93,7 @@ public class GUIMethods{
         //ImageIcon icon = new ImageIcon("C:\\Users\\Akram\\OneDrive\\Skrivbord\\TimeTrack\\src\\timetrack\\gui\\ic_logo2.png");
         int input = JOptionPane.showConfirmDialog(null,message,title, JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
         
-            return input;
-           
+        return input;
     }
     
     private void readProperties(){
@@ -119,7 +116,6 @@ public class GUIMethods{
             Logger.getLogger(LoginGUI.class.getName()).log(Level.SEVERE, null, ex);
             System.err.println("Kanske saknas filen db.properties i src/timetrack/gui?");
         }
-        
     }
     
     public void setCurrentUserLabel(TimeTrackGUI tGUI) {
@@ -145,59 +141,55 @@ public class GUIMethods{
         pstat.setString(1, password);
         pstat.setInt(2, userid);
         pstat.executeUpdate();
-/*        if(rs.next()){
+        /*        if(rs.next()){
             System.out.println(result);
         }*/
             success = true;
-    } catch (SQLException ex) {
+        } catch (SQLException ex) {
             System.out.println(ex);
-    }
+        }
         return success;
     }
     
     public void closeDBConnection() {
-    try {
+        try {
         cn.close();
-    } catch (SQLException ex) {
+        } catch (SQLException ex) {
         Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
-    }
+        }
     }
     
     public void insertUsersHasSkills(String email) {
-    int userID = 0;
-        try {
-            pstat = cn.prepareStatement("SELECT user_id FROM users WHERE email = ?");
-            pstat.setString(1, email);
-            rs = pstat.executeQuery();
-            rs.next();
-            userID = rs.getInt(1);
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-    
-    int rowCount = tGUI.jTable2.getRowCount();
-    for (int i = 0; i < rowCount; i++) {
-        try {
-            //Hämtar skillID för vald skill (loopar alla valda skills i tabellen)
-            pstat = cn.prepareStatement("SELECT skill_id FROM skills WHERE skill = ?");
-            String skillName = (String) tGUI.jTable2.getValueAt(i, 0);
-            pstat.setString(1, skillName);
-            rs = pstat.executeQuery();
-            rs.next();
-            int skillID = 0;
-            skillID = rs.getInt(1);
-            //Gör insert med vald skill + userID
-            pstat = cn.prepareStatement("INSERT INTO users_has_skills (skill_id, users_id) VALUES (?,?)");
-            pstat.setInt(1, skillID);
-            pstat.setInt(2, userID);
-            pstat.executeUpdate();
-        } catch (SQLException ex) {
-            Logger.getLogger(TimeTrackGUI.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-
-    }     
-            
+        int userID = 0;
+            try {
+                pstat = cn.prepareStatement("SELECT user_id FROM users WHERE email = ?");
+                pstat.setString(1, email);
+                rs = pstat.executeQuery();
+                rs.next();
+                userID = rs.getInt(1);
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        int rowCount = tGUI.jTable2.getRowCount();
+        for (int i = 0; i < rowCount; i++) {
+            try {
+                //Hämtar skillID för vald skill (loopar alla valda skills i tabellen)
+                pstat = cn.prepareStatement("SELECT skill_id FROM skills WHERE skill = ?");
+                String skillName = (String) tGUI.jTable2.getValueAt(i, 0);
+                pstat.setString(1, skillName);
+                rs = pstat.executeQuery();
+                rs.next();
+                int skillID = 0;
+                skillID = rs.getInt(1);
+                //Gör insert med vald skill + userID
+                pstat = cn.prepareStatement("INSERT INTO users_has_skills (skill_id, users_id) VALUES (?,?)");
+                pstat.setInt(1, skillID);
+                pstat.setInt(2, userID);
+                pstat.executeUpdate();
+            } catch (SQLException ex) {
+                Logger.getLogger(TimeTrackGUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }     
     }
     
     public void startTimeTrack(JFrame loginJFrame, GUIMethods loginGUI_guiM, int userID){
@@ -213,22 +205,18 @@ public class GUIMethods{
         tGUI.setVisible(true);
     }
     
-    
-    
     public class TimerThread extends Thread{
         //Så länge som isRunning=true så uppdateras tiden
         boolean isRunning;
         //Här anges i vilket format som datum och tid ska visas
         SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, d MMM yyyy");
         SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
-
         public TimerThread() {
             //isRunning sätts till true direkt i konstruktorn
             //Metoden getRunning() kan användas för att se om den är igång eller inte
             //Det kan behövs för att veta om man måste stänga den när programmet avslutas
             this.isRunning = true;
         }
-        
         //Gör Override på metoden run() (kolla i klassen Thread för att se hur run() fungerar)
         @Override
         public void run() {
@@ -248,7 +236,6 @@ public class GUIMethods{
                         //Eftersom tiden inte ska behandlas på olika sätt för
                         //olika objekt så valde jag att göra den static
                         TimeTrackGUI.updateDateTime(dateTime);
-                        
                     }
                 });
                 try {
@@ -261,7 +248,6 @@ public class GUIMethods{
                 }
             }
         }
-        
         //Metod för att kunna stänga av uppdateringen av tid och datum
         //Eftersom while-loopen använder denna så kommer den av avbrytas
         //om isRunning sätts till false.
@@ -271,7 +257,6 @@ public class GUIMethods{
         public void setRunning(boolean isRunning) {
             this.isRunning = isRunning;
         }
-        
         //Metod för att kunna kolla om denna Thread körs
         //Denna kan vi använda för att veta om vi måste stänga av den i samband
         //med att användaren stänger programmet.
@@ -281,34 +266,32 @@ public class GUIMethods{
         }
     }
     
-
-      public boolean deleteProject(int projectid){
-            boolean success = false;
-            try {
+    public boolean deleteProject(int projectid){
+        boolean success = false;
+        try {
             pstat = cn.prepareStatement("delete from projects where projects_id = ?");
             pstat.setInt(1, projectid);
             pstat.executeUpdate();
-            
-                success = true;
-        }   catch (SQLException ex) {
-                System.out.println(ex);
+            success = true;
+        }catch(SQLException ex) {
+            System.out.println(ex);
         } 
-            return success;
-        }
+        return success;
+    }
         
-            public boolean deleteUser(int userid){
-            boolean success = false;
-            try {
+    public boolean deleteUser(int userid){
+        boolean success = false;
+        try {
             pstat = cn.prepareStatement("delete from users where user_id = ?");
             pstat.setInt(1, userid);
             pstat.executeUpdate();
             
-                success = true;
-        }   catch (SQLException ex) {
-                System.out.println(ex);
+            success = true;
+        }catch(SQLException ex) {
+            System.out.println(ex);
         } 
-            return success;
-        }
+        return success;
+    }
 
         
     static String pStart;//Static eftersom alla ska ha tillgång till den.
@@ -316,7 +299,6 @@ public class GUIMethods{
     static String pTotalTime;
     
     private static void projectStartTime() {
-
         Locale sv = new Locale ("sv","SV");//Skapar en Locale så att datum visas på svenska, alltså "EEEE"(dag) står på svenska.
         Date date = new Date();
         Timestamp ts = new Timestamp(date.getTime());//Hämta/stämpla nuvarande tid
@@ -327,16 +309,17 @@ public class GUIMethods{
         
         pStart=startTime;//Spara tiden i pStart i class så alla har tillgång till den.
     }
-     private static void projectEndTime() {
-      Locale sv = new Locale ("sv","SV");
-      Date date = new Date();
-      Timestamp ts = new Timestamp(date.getTime());
-      SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-(EEEE) HH:mm",sv);
-      
-      String endTime = sdf.format(ts);
-      System.out.println(endTime);
-      
-      pEnd = endTime;
+    
+    private static void projectEndTime() {
+        Locale sv = new Locale ("sv","SV");
+        Date date = new Date();
+        Timestamp ts = new Timestamp(date.getTime());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-(EEEE) HH:mm",sv);
+
+        String endTime = sdf.format(ts);
+        System.out.println(endTime);
+
+        pEnd = endTime;
     }
   
     private static void projectTotalTime()  {    
@@ -362,101 +345,96 @@ public class GUIMethods{
             String hours = String.valueOf(diffHours);
             String minutes = String.valueOf(diffMinutes);
             pTotalTime = "Dagar: "+days+" Timmar: "+hours+" Minuter: "+minutes;//Slår ihop alla till en sträng och spara i class.
-            
         } 
         catch (ParseException e) {
         }
     }
 
-            
-            public boolean createProject(String pname, String pdesc, int pstatus,int custid){
-                boolean success = false;
-                try {
-                    pstat = cn.prepareStatement("insert into projects (project_name, project_description, project_status_id, customer_id) VALUES (?,?,?,?)");
-                    pstat.setString(1, pname);
-                    pstat.setString(2, pdesc);
-                    pstat.setInt(3, pstatus);
-                    pstat.setInt(4, custid);
-                    pstat.executeUpdate();
-                    
-                    success = true;
-                } catch (SQLException ex) {
-                        System.out.println(ex);
-                        }
-                return success;
-                }
-            
+    public boolean createProject(String pname, String pdesc, int pstatus,int custid){
+        boolean success = false;
+        try {
+            pstat = cn.prepareStatement("insert into projects (project_name, project_description, project_status_id, customer_id) VALUES (?,?,?,?)");
+            pstat.setString(1, pname);
+            pstat.setString(2, pdesc);
+            pstat.setInt(3, pstatus);
+            pstat.setInt(4, custid);
+            pstat.executeUpdate();
+
+            success = true;
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        return success;
+    }
             
             
-              public boolean createUser(String name, String lastName, String email, String password, String skill, boolean isAdmin) {
-                boolean success = false;
-                try {
-                     pstat = cn.prepareStatement("insert into users (FName, LName, email, user_password, is_admin) VALUES (?,?,?,?,?) ");
-                     pstat.setString(1,name);            
-                     pstat.setString(2,lastName);
-                     pstat.setString(3,email);
-                     pstat.setString(4,password);
-                     pstat.setBoolean(5, isAdmin);
-                     pstat.executeUpdate();
+    public boolean createUser(String name, String lastName, String email, String password, String skill, boolean isAdmin) {
+        boolean success = false;
+        try {
+             pstat = cn.prepareStatement("insert into users (FName, LName, email, user_password, is_admin) VALUES (?,?,?,?,?) ");
+             pstat.setString(1,name);            
+             pstat.setString(2,lastName);
+             pstat.setString(3,email);
+             pstat.setString(4,password);
+             pstat.setBoolean(5, isAdmin);
+             pstat.executeUpdate();
+
+            success = true;
+        } catch (SQLException ex) {
+         System.out.println(ex);
+        }
+        return success;
+    }
             
-                    success = true;
-            
-             } catch (SQLException ex) {
-                 System.out.println(ex);
-                        }
-                return success;
-             }
-            
-              public void getAvailableSkills() {
-                  tGUI.jComboBox1.removeAllItems();
+    public void getAvailableSkills() {
+        tGUI.jComboBox1.removeAllItems();
         try {
             pstat = cn.prepareStatement("select skill from skills");
             rs = pstat.executeQuery();
             while(rs.next()) {
-                tGUI.jComboBox1.addItem(rs.getString(1));
-            }
-        } catch (SQLException ex) {
+            tGUI.jComboBox1.addItem(rs.getString(1));
+        }
+        }catch (SQLException ex) {
             Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
         }
-            
-              }
+    }
 
     public class Thread2 extends Thread {
       
-    public void run(){
-        //Gör en fade in och fade out på en Label
-        //Ska från vit 255,255,255 till grön 60,117,57
-        try {
-            Thread.sleep(750);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        for (int i = 0; i < 255; i=i+2) {
-             
-            tGUI.setTimeSucceededLabelColor(new java.awt.Color(60, 117, 57, i));
+        public void run(){
+            //Gör en fade in och fade out på en Label
+            //Ska från vit 255,255,255 till grön 60,117,57
             try {
-                Thread.sleep(10);
+                Thread.sleep(750);
             } catch (InterruptedException ex) {
-                System.err.println("Fel i faden på texten \"Din tidrapportering har registrerats\"");
+                Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        for (int i = 255; i > 0; i--) {
-             
-            tGUI.setTimeSucceededLabelColor(new java.awt.Color(60, 117, 57, i));
+            for (int i = 0; i < 255; i=i+2) {
+                tGUI.setTimeSucceededLabelColor(new java.awt.Color(60, 117, 57, i));
+                try {
+                    Thread.sleep(10);
+                } catch (InterruptedException ex) {
+                    System.err.println("Fel i faden på texten \"Din tidrapportering har registrerats\"");
+                }
+            }
             try {
-                Thread.sleep(10);
+                Thread.sleep(3000);
             } catch (InterruptedException ex) {
-                System.err.println("Fel i faden på texten \"Din tidredovisning har registrerats\"");
+                Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            for (int i = 255; i > 0; i--) {
+
+                tGUI.setTimeSucceededLabelColor(new java.awt.Color(60, 117, 57, i));
+                try {
+                    Thread.sleep(10);
+                } catch (InterruptedException ex) {
+                    System.err.println("Fel i faden på texten \"Din tidredovisning har registrerats\"");
+                }
             }
         }
     }
-  }
+    
     public ResultSet getUserProjects(int userID) {
     try {
             //Skapar ett SELECT statement till PreparedStatement objekt
@@ -496,9 +474,9 @@ public class GUIMethods{
         else {
             System.err.println("Något gick fel med att skicka tidrapporteringen");
         }
-    } catch (SQLException ex) {
+        } catch (SQLException ex) {
             System.out.println(ex);
-    }
+        }
         return success;
     }
     
@@ -521,9 +499,7 @@ public class GUIMethods{
         return projectID;
     }
     
-  
-    
-     public boolean isCorrectTimeFields(String date, String startTime, String endTime) {
+    public boolean isCorrectTimeFields(String date, String startTime, String endTime) {
         boolean isCorrect = false;
         //Kollar så att inmatnig av datum och tid är i korrekt format
         if(isValidFormat("yyyy-MM-dd", date, Locale.ENGLISH)
