@@ -23,11 +23,13 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Properties;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -563,5 +565,61 @@ public class GUIMethods{
     public void setTimeTrackGUI(TimeTrackGUI tGUI) {
         this.tGUI = tGUI;
     }
+    
+    public void insertSkillValue() {
+             String skill = (String) tGUI.jComboBox1.getSelectedItem();
+        DefaultTableModel model = (DefaultTableModel)tGUI.jTable2.getModel();
+        
+       
+        
+        for(int i = 0; i < tGUI.jTable2.getRowCount(); i++) {
+            if(tGUI.jTable2.getModel().getValueAt(i,0).equals(tGUI.jComboBox1.getSelectedItem())) {
+               return;
+                
+         
+            }
+        }  
+        
+       Vector row = new Vector();
+       row.add(skill);
+       model.addRow(row);
+    }
 
-}
+    public boolean emailIsAvailable(String email) {
+        //Kontrollerar att emailen inte redan finns i databasen.
+        boolean availableEmail = false;
+        try {
+            pstat = cn.prepareStatement("SELECT email FROM users WHERE email = ?");
+            pstat.setString(1, email);
+            rs = pstat.executeQuery();
+            if(!rs.next()) {
+                availableEmail = true;
+            }
+            else {
+                //För tydlighetens skull
+                availableEmail = false;
+            }
+            
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return availableEmail;
+    }
+    
+    public void clearAllTextFieldsInCreateUser() {
+        tGUI.jTextField1.setText("");
+        tGUI.jTextField2.setText("");
+        tGUI.jTextField3.setText("");
+        tGUI.jPasswordField2.setText("");
+        
+        DefaultTableModel model = (DefaultTableModel)tGUI.jTable2.getModel();
+        
+        int a = tGUI.jTable2.getRowCount();
+         
+        for(int i = a; i > 0 ; i--) {
+               model.removeRow(i -1);
+             }
+        }  
+    }
+
+
