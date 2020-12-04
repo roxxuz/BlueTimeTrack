@@ -3,6 +3,8 @@ package timetrack.gui;
 
 
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -14,6 +16,9 @@ import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import java.sql.ResultSet;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -49,6 +54,8 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         //Sätter alla booleans i arrayen till false
         Arrays.fill(menuArray, Boolean.FALSE);
         chooseProjectPanel.setVisible(false);
+        dp.getEditor().setBorder(null);
+        dp.getEditor().setVisible(false);
     }
     
     @SuppressWarnings("unchecked")
@@ -93,10 +100,13 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         jSeparator2 = new javax.swing.JSeparator(javax.swing.JSeparator.VERTICAL);
         jSeparator4 = new javax.swing.JSeparator(javax.swing.JSeparator.VERTICAL);
         jSeparator5 = new javax.swing.JSeparator(javax.swing.JSeparator.VERTICAL);
+        timeDateLabelNew = new javax.swing.JLabel();
         timeDateTextfield = new org.jdesktop.swingx.JXTextField();
         timeProjectTextfield = new org.jdesktop.swingx.JXTextField();
         timeEndTextfield = new org.jdesktop.swingx.JXTextField();
         timeStartTextfield = new org.jdesktop.swingx.JXTextField();
+        jPanel5 = new javax.swing.JPanel();
+        dp = new org.jdesktop.swingx.JXDatePicker();
         jPanel1 = new javax.swing.JPanel();
         timeSendButtonPanel = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -431,7 +441,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         timeDateLabel.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         timeDateLabel.setForeground(new java.awt.Color(47, 66, 84));
         timeDateLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        timeDateLabel.setText(" Datum");
+        timeDateLabel.setText("   Datum");
         timePanel.add(timeDateLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 30, 130, 30));
 
         timeStartLabel.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
@@ -464,6 +474,12 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         jSeparator5.setForeground(new java.awt.Color(219, 219, 219));
         timePanel.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 70, 10, 10));
 
+        timeDateLabelNew.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        timeDateLabelNew.setForeground(new java.awt.Color(165, 165, 165));
+        timeDateLabelNew.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        timeDateLabelNew.setText("Välj datum");
+        timePanel.add(timeDateLabelNew, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 60, 120, 30));
+
         timeDateTextfield.setBackground(new java.awt.Color(237, 237, 237));
         timeDateTextfield.setBorder(null);
         timeDateTextfield.setForeground(new java.awt.Color(165, 165, 165));
@@ -482,7 +498,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
                 timeDateTextfieldActionPerformed(evt);
             }
         });
-        timePanel.add(timeDateTextfield, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 60, 120, 30));
+        timePanel.add(timeDateTextfield, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 270, 120, 30));
 
         timeProjectTextfield.setEditable(false);
         timeProjectTextfield.setBackground(new java.awt.Color(237, 237, 237));
@@ -536,6 +552,20 @@ public class TimeTrackGUI extends javax.swing.JFrame {
             }
         });
         timePanel.add(timeStartTextfield, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 60, 130, 30));
+
+        jPanel5.setBackground(new java.awt.Color(237, 237, 237));
+        timePanel.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 60, 120, 30));
+
+        dp.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
+                dpPopupMenuWillBecomeInvisible(evt);
+            }
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+            }
+        });
+        timePanel.add(dp, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 60, 40, 30));
 
         jPanel1.setBackground(new java.awt.Color(237, 237, 237));
         timePanel.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, 560, 30));
@@ -619,7 +649,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         jLabel14.setText("Färdigheter");
         adminUserPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, -1));
 
-        jComboBox1.setToolTipText("");
+        jComboBox1.setToolTipText(null);
         jComboBox1.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
             public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
             }
@@ -1143,6 +1173,13 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jComboBox1PopupMenuWillBecomeInvisible
 
+    private void dpPopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_dpPopupMenuWillBecomeInvisible
+        Date oDate = dp.getDate();        
+        DateFormat oDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String newDate = oDateFormat.format(oDate);
+        timeDateLabelNew.setText(newDate);
+    }//GEN-LAST:event_dpPopupMenuWillBecomeInvisible
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel adminProjectPanel;
     private javax.swing.JPanel adminUserPanel1;
@@ -1152,6 +1189,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     private javax.swing.JPanel closePanel;
     protected javax.swing.JLabel currentUserLabel;
     private static javax.swing.JLabel dateTimeLabel;
+    private org.jdesktop.swingx.JXDatePicker dp;
     protected javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -1173,6 +1211,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel5;
     protected javax.swing.JPasswordField jPasswordField2;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -1215,6 +1254,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     private javax.swing.JPanel projectPanel;
     private javax.swing.JPanel settingsPanel;
     private javax.swing.JLabel timeDateLabel;
+    private javax.swing.JLabel timeDateLabelNew;
     private org.jdesktop.swingx.JXTextField timeDateTextfield;
     private javax.swing.JLabel timeEndLabel;
     private org.jdesktop.swingx.JXTextField timeEndTextfield;
