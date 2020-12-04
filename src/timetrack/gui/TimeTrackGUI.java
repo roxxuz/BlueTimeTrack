@@ -122,7 +122,6 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
-        jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         adminProjectPanel = new javax.swing.JPanel();
@@ -632,8 +631,8 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         });
         adminUserPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 190, 30));
 
-        jLabel15.setText("jLabel15");
-        adminUserPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 180, 80, 30));
+        jLabel15.setText("Admin");
+        adminUserPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 180, 80, 30));
 
         jLabel16.setForeground(new java.awt.Color(0, 51, 153));
         jLabel16.setText("Skapa användare");
@@ -653,28 +652,20 @@ public class TimeTrackGUI extends javax.swing.JFrame {
                 "Title 1"
             }
         ));
+        jTable2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jScrollPane3.setViewportView(jTable2);
 
-        adminUserPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 290, 90));
-
-        jLabel17.setText("Lägg till ");
-        jLabel17.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel17MouseClicked(evt);
-            }
-        });
-        adminUserPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 180, 90, 30));
-
-        jLabel18.setText("jLabel18");
+        adminUserPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 290, 120));
         adminUserPanel1.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 260, 290, 90));
 
-        jLabel19.setText("Ta bort");
+        jLabel19.setText("Ta bort markerad");
+        jLabel19.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel19.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel19MouseClicked(evt);
             }
         });
-        adminUserPanel1.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 220, 90, 30));
+        adminUserPanel1.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 380, 110, 30));
 
         mainPanel.add(adminUserPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 780, 510));
 
@@ -1129,25 +1120,16 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     private void jLabel16MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel16MouseClicked
        
        if(validTextFieldsInput()) {
-           guiM.createUser(jTextField1.getText(), jTextField2.getText(),jTextField3.getText(), jPasswordField2.getText(), "", jRadioButton1.isSelected());
-       guiM.insertUsersHasSkills(jTextField3.getText());
+           if(guiM.emailIsAvailable(jTextField3.getText())) {
+                guiM.createUser(jTextField1.getText(), jTextField2.getText(),jTextField3.getText(), jPasswordField2.getText(), "", jRadioButton1.isSelected());
+                guiM.insertUsersHasSkills(jTextField3.getText());
+                guiM.clearAllTextFieldsInCreateUser();
+           } else {
+               jLabel18.setText("Email-Adressen är redan upptagen, välj en ny!");
+           }
+                
        }
     }//GEN-LAST:event_jLabel16MouseClicked
-
-    private void jLabel17MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel17MouseClicked
-//        String skill = (String) jComboBox1.getSelectedItem();
-//        DefaultTableModel model = (DefaultTableModel)jTable2.getModel();
-//        
-//        Vector row = new Vector();
-//        
-//       row.add(skill);
-//      
-//       
-//        model.addRow(row);
-//        
-       
-        
-    }//GEN-LAST:event_jLabel17MouseClicked
 
     private void jLabel19MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel19MouseClicked
         DefaultTableModel model = (DefaultTableModel)jTable2.getModel();
@@ -1157,21 +1139,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel19MouseClicked
 
     private void jComboBox1PopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_jComboBox1PopupMenuWillBecomeInvisible
-           String skill = (String) jComboBox1.getSelectedItem();
-        DefaultTableModel model = (DefaultTableModel)jTable2.getModel();
-        
-       
-        
-        for(int i = 0; i < jTable2.getRowCount(); i++) {
-            if(jTable2.getModel().getValueAt(i,0).equals(jComboBox1.getSelectedItem())) {
-                model.removeRow(i);
-                
-            }
-        }  
-        
-        Vector row = new Vector();
-        row.add(skill);
-        model.addRow(row);
+       guiM.insertSkillValue();
         
     }//GEN-LAST:event_jComboBox1PopupMenuWillBecomeInvisible
 
@@ -1193,7 +1161,6 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     protected javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
     protected javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
