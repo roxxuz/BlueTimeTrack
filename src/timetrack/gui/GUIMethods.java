@@ -36,7 +36,6 @@ import javax.swing.table.DefaultTableModel;
  * @author Akram
  */
 public class GUIMethods{
-    
     Connection cn;
     PreparedStatement pstat;
     ResultSet rs;
@@ -47,7 +46,6 @@ public class GUIMethods{
     String currentUser;
     TimeTrackGUI tGUI;
     
-    //Konstruktor
     public GUIMethods() {
         readProperties();
         cn = prepareDBConnection();
@@ -213,8 +211,6 @@ public class GUIMethods{
         tGUI.setVisible(true);
     }
     
-    
-    
     public class TimerThread extends Thread{
         //Så länge som isRunning=true så uppdateras tiden
         boolean isRunning;
@@ -281,8 +277,7 @@ public class GUIMethods{
         }
     }
     
-
-      public boolean deleteProject(int projectid){
+    public boolean deleteProject(int projectid){
             boolean success = false;
             try {
             pstat = cn.prepareStatement("delete from projects where projects_id = ?");
@@ -296,7 +291,7 @@ public class GUIMethods{
             return success;
         }
         
-            public boolean deleteUser(int userid){
+    public boolean deleteUser(int userid){
             boolean success = false;
             try {
             pstat = cn.prepareStatement("delete from users where user_id = ?");
@@ -327,7 +322,8 @@ public class GUIMethods{
         
         pStart=startTime;//Spara tiden i pStart i class så alla har tillgång till den.
     }
-     private static void projectEndTime() {
+    
+    private static void projectEndTime() {
       Locale sv = new Locale ("sv","SV");
       Date date = new Date();
       Timestamp ts = new Timestamp(date.getTime());
@@ -368,8 +364,7 @@ public class GUIMethods{
         }
     }
 
-            
-            public boolean createProject(String pname, String pdesc, int pstatus,int custid){
+    public boolean createProject(String pname, String pdesc, int pstatus,int custid){
                 boolean success = false;
                 try {
                     pstat = cn.prepareStatement("insert into projects (project_name, project_description, project_status_id, customer_id) VALUES (?,?,?,?)");
@@ -387,8 +382,7 @@ public class GUIMethods{
                 }
             
             
-            
-              public boolean createUser(String name, String lastName, String email, String password, String skill, boolean isAdmin) {
+    public boolean createUser(String name, String lastName, String email, String password, String skill, boolean isAdmin) {
                 boolean success = false;
                 try {
                      pstat = cn.prepareStatement("insert into users (FName, LName, email, user_password, is_admin) VALUES (?,?,?,?,?) ");
@@ -407,7 +401,7 @@ public class GUIMethods{
                 return success;
              }
             
-              public void getAvailableSkills() {
+    public void getAvailableSkills() {
                   tGUI.jComboBox1.removeAllItems();
         try {
             pstat = cn.prepareStatement("select skill from skills");
@@ -457,6 +451,7 @@ public class GUIMethods{
         }
     }
   }
+    
     public ResultSet getUserProjects(int userID) {
     try {
             //Skapar ett SELECT statement till PreparedStatement objekt
@@ -521,9 +516,7 @@ public class GUIMethods{
         return projectID;
     }
     
-  
-    
-     public boolean isCorrectTimeFields(String date, String startTime, String endTime) {
+    public boolean isCorrectTimeFields(String date, String startTime, String endTime) {
         boolean isCorrect = false;
         //Kollar så att inmatnig av datum och tid är i korrekt format
         if(isValidFormat("yyyy-MM-dd", date, Locale.ENGLISH)
