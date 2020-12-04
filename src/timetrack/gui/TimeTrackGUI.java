@@ -143,13 +143,18 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         ProjectTextField2 = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         ProjectTextArea1 = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
+        setProject = new javax.swing.JButton();
         jLabel17 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        saveProjectChange = new javax.swing.JButton();
+        newProject = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList<>();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jList2 = new javax.swing.JList<>();
         settingsPanel = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         dateTimeLabel = new javax.swing.JLabel();
@@ -719,15 +724,15 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         jLabel5.setText("Admin Projekt");
         adminProjectPanel.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 20, -1, -1));
 
-        adminProjectPanel.add(ProjectsComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, 130, -1));
+        adminProjectPanel.add(ProjectsComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, 150, -1));
 
-        adminProjectPanel.add(StatusComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 150, 130, -1));
+        adminProjectPanel.add(StatusComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 150, 180, -1));
 
-        adminProjectPanel.add(CustomerComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 190, 130, -1));
+        adminProjectPanel.add(CustomerComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 190, 180, -1));
 
         ProjectTextField1.setEditable(false);
         adminProjectPanel.add(ProjectTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, 40, -1));
-        adminProjectPanel.add(ProjectTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 106, 110, 30));
+        adminProjectPanel.add(ProjectTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 106, 170, 30));
 
         ProjectTextArea1.setColumns(20);
         ProjectTextArea1.setLineWrap(true);
@@ -737,13 +742,13 @@ public class TimeTrackGUI extends javax.swing.JFrame {
 
         adminProjectPanel.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 240, -1, -1));
 
-        jButton1.setText("Välj");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        setProject.setText("Välj");
+        setProject.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                setProjectActionPerformed(evt);
             }
         });
-        adminProjectPanel.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 20, -1, -1));
+        adminProjectPanel.add(setProject, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 20, -1, -1));
 
         jLabel17.setText("ID");
         adminProjectPanel.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, -1, -1));
@@ -760,8 +765,29 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         jLabel23.setText("Beskrivning");
         adminProjectPanel.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, -1, -1));
 
-        jButton2.setText("Spara");
-        adminProjectPanel.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 340, -1, -1));
+        saveProjectChange.setText("Spara Ändringar");
+        saveProjectChange.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveProjectChangeActionPerformed(evt);
+            }
+        });
+        adminProjectPanel.add(saveProjectChange, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 340, -1, -1));
+
+        newProject.setText("Skapa Nytt");
+        newProject.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newProjectActionPerformed(evt);
+            }
+        });
+        adminProjectPanel.add(newProject, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 340, -1, -1));
+
+        jScrollPane4.setViewportView(jList1);
+
+        adminProjectPanel.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 70, 190, -1));
+
+        jScrollPane5.setViewportView(jList2);
+
+        adminProjectPanel.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 240, 190, -1));
 
         mainPanel.add(adminProjectPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 780, 510));
 
@@ -1023,6 +1049,8 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         Arrays.fill(menuArray, Boolean.FALSE);
         menuArray[5] = true;
         guiM.projectCombobox();
+        guiM.StatusCombobox();
+        guiM.CustomerCombobox();
         
     }//GEN-LAST:event_menuPanel6MouseClicked
 
@@ -1240,11 +1268,39 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         timeDateLabelNew.setText(newDate);
     }//GEN-LAST:event_dpPopupMenuWillBecomeInvisible
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void setProjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setProjectActionPerformed
         guiM.setProjectInfo();
-        guiM.CustomerCombobox();
+  //      guiM.CustomerCombobox();
+  //      guiM.StatusCombobox();
+    }//GEN-LAST:event_setProjectActionPerformed
+
+    private void saveProjectChangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveProjectChangeActionPerformed
+        guiM.updateProject();
+//        Object o = ProjectsComboBox.getSelectedItem();
+        ProjectsComboBox.removeAllItems();
+    //    CustomerComboBox.removeAllItems();
+    //    StatusComboBox.removeAllItems();
+        guiM.projectCombobox();
+    //    guiM.StatusCombobox();
+    //    guiM.CustomerCombobox();
+                
+    }//GEN-LAST:event_saveProjectChangeActionPerformed
+
+    private void newProjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newProjectActionPerformed
+        if(guiM.question()){
+    //    guiM.newProject();
+        ProjectTextField2.setText("");
+        ProjectTextArea1.setText("");
+        ProjectsComboBox.removeAllItems();
+        CustomerComboBox.removeAllItems();
+        StatusComboBox.removeAllItems();
+        guiM.projectCombobox();
         guiM.StatusCombobox();
-    }//GEN-LAST:event_jButton1ActionPerformed
+        guiM.CustomerCombobox();
+        }
+        else{            
+        }
+    }//GEN-LAST:event_newProjectActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     protected javax.swing.JComboBox<String> CustomerComboBox;
@@ -1262,8 +1318,6 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     protected javax.swing.JLabel currentUserLabel;
     private static javax.swing.JLabel dateTimeLabel;
     private org.jdesktop.swingx.JXDatePicker dp;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     protected javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -1288,6 +1342,8 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JList<String> jList1;
+    private javax.swing.JList<String> jList2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel5;
@@ -1296,6 +1352,8 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
@@ -1330,8 +1388,11 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     private javax.swing.JLabel minimizeLabel;
     private javax.swing.JPanel minimizePanel;
     private javax.swing.JPanel motionPanel;
+    private javax.swing.JButton newProject;
     private javax.swing.JPanel overviewPanel;
     private javax.swing.JPanel projectPanel;
+    private javax.swing.JButton saveProjectChange;
+    private javax.swing.JButton setProject;
     private javax.swing.JPanel settingsPanel;
     private javax.swing.JLabel timeDateLabel;
     private javax.swing.JLabel timeDateLabelNew;
