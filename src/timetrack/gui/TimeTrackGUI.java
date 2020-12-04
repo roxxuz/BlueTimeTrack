@@ -123,6 +123,8 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
         adminProjectPanel = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         settingsPanel = new javax.swing.JPanel();
@@ -619,6 +621,15 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         adminUserPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, -1));
 
         jComboBox1.setToolTipText("");
+        jComboBox1.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
+                jComboBox1PopupMenuWillBecomeInvisible(evt);
+            }
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+            }
+        });
         adminUserPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 190, 30));
 
         jLabel15.setText("jLabel15");
@@ -644,7 +655,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         ));
         jScrollPane3.setViewportView(jTable2);
 
-        adminUserPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, 290, 90));
+        adminUserPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 290, 90));
 
         jLabel17.setText("Lägg till ");
         jLabel17.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -652,7 +663,18 @@ public class TimeTrackGUI extends javax.swing.JFrame {
                 jLabel17MouseClicked(evt);
             }
         });
-        adminUserPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 210, 90, 30));
+        adminUserPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 180, 90, 30));
+
+        jLabel18.setText("jLabel18");
+        adminUserPanel1.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 260, 290, 90));
+
+        jLabel19.setText("Ta bort");
+        jLabel19.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel19MouseClicked(evt);
+            }
+        });
+        adminUserPanel1.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 220, 90, 30));
 
         mainPanel.add(adminUserPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 780, 510));
 
@@ -1105,22 +1127,53 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_timeEndTextfieldActionPerformed
 
     private void jLabel16MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel16MouseClicked
-       guiM.createUser(jTextField1.getText(), jTextField2.getText(),jTextField3.getText(), jPasswordField2.getText(), "", jRadioButton1.isSelected());
+       
+       if(validTextFieldsInput()) {
+           guiM.createUser(jTextField1.getText(), jTextField2.getText(),jTextField3.getText(), jPasswordField2.getText(), "", jRadioButton1.isSelected());
        guiM.insertUsersHasSkills(jTextField3.getText());
+       }
     }//GEN-LAST:event_jLabel16MouseClicked
 
     private void jLabel17MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel17MouseClicked
-        String skill = (String) jComboBox1.getSelectedItem();
-        DefaultTableModel model = (DefaultTableModel)jTable2.getModel();
-        
-        Vector row = new Vector();
-        
-       row.add(skill);
-      
-        System.out.println(row.get(0));
-        model.addRow(row);
+//        String skill = (String) jComboBox1.getSelectedItem();
+//        DefaultTableModel model = (DefaultTableModel)jTable2.getModel();
+//        
+//        Vector row = new Vector();
+//        
+//       row.add(skill);
+//      
+//       
+//        model.addRow(row);
+//        
+       
         
     }//GEN-LAST:event_jLabel17MouseClicked
+
+    private void jLabel19MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel19MouseClicked
+        DefaultTableModel model = (DefaultTableModel)jTable2.getModel();
+        
+        int row = jTable2.getSelectedRow();
+         model.removeRow(row);
+    }//GEN-LAST:event_jLabel19MouseClicked
+
+    private void jComboBox1PopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_jComboBox1PopupMenuWillBecomeInvisible
+           String skill = (String) jComboBox1.getSelectedItem();
+        DefaultTableModel model = (DefaultTableModel)jTable2.getModel();
+        
+       
+        
+        for(int i = 0; i < jTable2.getRowCount(); i++) {
+            if(jTable2.getModel().getValueAt(i,0).equals(jComboBox1.getSelectedItem())) {
+                model.removeRow(i);
+                
+            }
+        }  
+        
+        Vector row = new Vector();
+        row.add(skill);
+        model.addRow(row);
+        
+    }//GEN-LAST:event_jComboBox1PopupMenuWillBecomeInvisible
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel adminProjectPanel;
@@ -1139,8 +1192,10 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
+    protected javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
+    protected javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1151,7 +1206,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPasswordField jPasswordField2;
+    protected javax.swing.JPasswordField jPasswordField2;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
@@ -1159,9 +1214,9 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
     protected javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    protected javax.swing.JTextField jTextField1;
+    protected javax.swing.JTextField jTextField2;
+    protected javax.swing.JTextField jTextField3;
     private javax.swing.JLabel logoLabel;
     private javax.swing.JPanel mainLeftPanel;
     private javax.swing.JPanel mainPanel;
@@ -1327,6 +1382,39 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         timeStartTextfield.setText("hh:mm");
         timeEndTextfield.setForeground(new Color(165,165,165));
         timeEndTextfield.setText("hh:mm");
+    }
+    
+    public boolean validTextFieldsInput() {
+       boolean sucess = false;
+        if(jTextField1.getText().trim().isEmpty() 
+                && jTextField2.getText().trim().isEmpty()
+                && jTextField3.getText().trim().isEmpty() 
+                && jPasswordField2.getText().trim().isEmpty()
+                && jTable2.getRowCount() < 1) {
+            
+            jLabel18.setText("Alla fält är inte ifyllda, fyll i alla fält!");
+        }
+        else if(jTextField1.getText().trim().isEmpty()){
+             jLabel18.setText("Fyll i ett Förnamn");
+        } 
+         else if(jTextField2.getText().trim().isEmpty()) {
+             jLabel18.setText("Fyll i ett Efternamn");
+        }
+         else if(jTextField3.getText().trim().isEmpty()) {
+             jLabel18.setText("Fyll i en Email");
+        }
+         else if(jPasswordField2.getText().trim().isEmpty()) {
+             jLabel18.setText("Fyll i ett Lösenord");
+        }
+         else if(jTable2.getRowCount() < 1) {
+             jLabel18.setText("Vi anställer inga utan skills");
+        } else {
+             sucess = true;
+         }
+        return sucess;
+        
+        
+        
     }
     
 }
