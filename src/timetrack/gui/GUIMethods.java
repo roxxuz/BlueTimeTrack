@@ -596,6 +596,130 @@ public class GUIMethods{
                model.removeRow(i -1);
              }
         }  
+    
+         public void projectCombobox(){
+
+        try {
+            pstat = cn.prepareStatement("select project_name from projects");
+            rs = pstat.executeQuery();       
+        
+        while (rs.next()) {
+            
+            tGUI.ProjectsComboBox.addItem(rs.getString(1));                      
+        }
+
+            } catch (SQLException ex) {
+            Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+         public void StatusCombobox(){
+
+        try {
+            pstat = cn.prepareStatement("select status from project_status");
+            rs = pstat.executeQuery();       
+        
+        while (rs.next()) {
+            
+            tGUI.StatusComboBox.addItem(rs.getString(1));                      
+        }
+
+            } catch (SQLException ex) {
+            Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+         
+        public void CustomerCombobox(){
+
+        try {
+            pstat = cn.prepareStatement("select customer from customers");
+            rs = pstat.executeQuery();       
+        
+        while (rs.next()) {
+            
+            tGUI.CustomerComboBox.addItem(rs.getString(1));                      
+        }
+
+            } catch (SQLException ex) {
+            Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+     
+    public void setProjectInfo() {
+        
+        String projectName = tGUI.ProjectsComboBox.getSelectedItem().toString();
+        
+        try {
+            pstat = cn.prepareStatement("select projects_id, project_name, project_description, ps.status, c.customer from projects p\n" +
+                                        "join project_status ps\n" +
+                                        "on p.project_status_id = ps.project_status_id \n" +                 
+                                        "join customers c\n" +
+                                        "on p.customer_id=c.customer_id\n" +
+                                        "where project_name = ?");
+            pstat.setString(1, projectName);
+            rs = pstat.executeQuery();
+            
+            while (rs.next()) {
+
+                tGUI.ProjectTextField1.setText(rs.getString(1));
+                tGUI.ProjectTextField2.setText(rs.getString(2));
+                tGUI.ProjectTextArea1.setText(rs.getString(3));
+                tGUI.StatusComboBox.setSelectedItem(rs.getString(4));
+                tGUI.CustomerComboBox.setSelectedItem(rs.getString(5));
+            }
+         
+            } catch (SQLException ex) {
+            Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+        public void updateProject() {
+            
+
+            
+            String statusID = tGUI.StatusComboBox.getSelectedItem().toString();
+            String CustomerID = tGUI.ProjectsComboBox.getSelectedItem().toString();
+                       try {
+            pstat = cn.prepareStatement("select project_status_id from project_status where status = ?");
+                    pstat.setString(1, statusID);
+                    rs = pstat.executeQuery();
+                    while (rs.next()) {
+                    String sid = rs.getString(1);                  
+                    int sidint = Integer.parseInt(sid);
+                    
+                    
+            pstat = cn.prepareStatement("select customer_id from customers where customer = ?");
+                    pstat.setString(1, CustomerID);
+                    rs = pstat.executeQuery();
+                    while (rs.next()) {
+                    String cid = rs.getString(1);                    
+                    int cidint = Integer.parseInt(cid);                    
+                    
+            
+            String projectID = tGUI.ProjectTextField1.getText();
+            String pn = tGUI.ProjectTextField2.getText();
+            String pd = tGUI.ProjectTextArea1.getText();
+            
+ 
+            pstat = cn.prepareStatement("update projects  set project_name = ?, project_description = ?, project_status_id = ?, customer_id = ? where projects_id = ?");
+            pstat.setString(1, pd);
+            pstat.setString(2, pn);
+            pstat.setInt(3, sidint);
+            pstat.setInt(4, cidint);
+            pstat.setString(5, projectID);
+            pstat.executeUpdate();
+          
+            }
+                    }}
+            catch (SQLException ex) {
+            Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println("ERROR");
+        }
+        }
+    
     }
 
 
