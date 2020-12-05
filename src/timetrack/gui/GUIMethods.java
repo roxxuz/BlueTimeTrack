@@ -26,6 +26,7 @@ import java.util.Properties;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
@@ -598,7 +599,7 @@ public class GUIMethods{
         }  
     
          public void projectCombobox(){
-
+             ////SÄTTER IN ALLA PROJEKT I EN COMBOBOX///
         try {
             pstat = cn.prepareStatement("select project_name from projects");
             rs = pstat.executeQuery();       
@@ -611,11 +612,11 @@ public class GUIMethods{
             } catch (SQLException ex) {
             Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+            tGUI.ProjectsComboBox.setSelectedItem(null);
     }
 
          public void StatusCombobox(){
-
+                ///SÄTTER IN VAL AV STATUS I EN COMBOBOX///
         try {
             pstat = cn.prepareStatement("select status from project_status");
             rs = pstat.executeQuery();       
@@ -628,11 +629,11 @@ public class GUIMethods{
             } catch (SQLException ex) {
             Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+            tGUI.StatusComboBox.setSelectedItem(null);
     }
          
         public void CustomerCombobox(){
-
+                ///SÄTTER IN LISTA AV KUNDER I COMBOBOX///
         try {
             pstat = cn.prepareStatement("select customer from customers");
             rs = pstat.executeQuery();       
@@ -645,11 +646,11 @@ public class GUIMethods{
             } catch (SQLException ex) {
             Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+            tGUI.CustomerComboBox.setSelectedItem(null);
     }
      
     public void setProjectInfo() {
-        
+            ///HÄMTAR INFO OM PROJEKT MAN VÄLJER I COMBOBOX OCH SÄTTER I TEXTFIELDS/COMBOBOX///
         String projectName = tGUI.ProjectsComboBox.getSelectedItem().toString();
         
         try {
@@ -674,52 +675,197 @@ public class GUIMethods{
             } catch (SQLException ex) {
             Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
         }
+    //    return;
     }
     
-        public void updateProject() {
-            
+        public void updateProject() {            
+                ///SPARAR ÄNDRINGAR MAN GJORT I TEXTFIELDS/COMBOBOX///
 
-            
-            String statusID = tGUI.StatusComboBox.getSelectedItem().toString();
-            String CustomerID = tGUI.ProjectsComboBox.getSelectedItem().toString();
-                       try {
-            pstat = cn.prepareStatement("select project_status_id from project_status where status = ?");
-                    pstat.setString(1, statusID);
-                    rs = pstat.executeQuery();
-                    while (rs.next()) {
-                    String sid = rs.getString(1);                  
-                    int sidint = Integer.parseInt(sid);
-                    
-                    
-            pstat = cn.prepareStatement("select customer_id from customers where customer = ?");
-                    pstat.setString(1, CustomerID);
-                    rs = pstat.executeQuery();
-                    while (rs.next()) {
-                    String cid = rs.getString(1);                    
-                    int cidint = Integer.parseInt(cid);                    
-                    
-            
             String projectID = tGUI.ProjectTextField1.getText();
             String pn = tGUI.ProjectTextField2.getText();
             String pd = tGUI.ProjectTextArea1.getText();
-            
- 
-            pstat = cn.prepareStatement("update projects  set project_name = ?, project_description = ?, project_status_id = ?, customer_id = ? where projects_id = ?");
-            pstat.setString(1, pd);
-            pstat.setString(2, pn);
-            pstat.setInt(3, sidint);
-            pstat.setInt(4, cidint);
+            String statusID = tGUI.StatusComboBox.getSelectedItem().toString();
+            String customerID = tGUI.CustomerComboBox.getSelectedItem().toString();                   
+        
+            ///HÄMTAR/GÖR OM STATUS/CUSTOMER-NAMN TILL ID///
+            int sstatusID = getStatusID(statusID);
+            int ccustomerID = getCustomerID(customerID);
+                              
+            try {
+            pstat = cn.prepareStatement("update projects set project_name = ?, project_description = ?, project_status_id = ?, customer_id = ? where projects_id = ?");
+            pstat.setString(1, pn);
+            pstat.setString(2, pd);
+            pstat.setInt(3, sstatusID);
+            pstat.setInt(4, ccustomerID);
             pstat.setString(5, projectID);
             pstat.executeUpdate();
-          
-            }
-                    }}
+            
+            }                    
             catch (SQLException ex) {
             Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
-                System.out.println("ERROR");
+        } //return;
         }
+
+        public int getStatusID(String statusName){
+            
+            ///HÄMTAR STATUS ID FRÅN STATUS NAMN///
+        try {
+        pstat = cn.prepareStatement("select project_status_id from project_status where status = ?");
+        pstat.setString(1, statusName);
+        rs = pstat.executeQuery();
+        } catch (SQLException ex) {
+                System.out.println(ex);
         }
-    
+        int statusID = 0;
+        try {
+            if(rs.next()) {
+                statusID = rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return statusID;
+    }
+        
+        public int getCustomerID(String customerName){
+            ///HÄMTAR CUSTOMER ID FRÅN CUSTOMER NAMN///
+        try {
+        pstat = cn.prepareStatement("select customer_id from customers where customer = ?");
+        pstat.setString(1, customerName);
+        rs = pstat.executeQuery();
+        } catch (SQLException ex) {
+                System.out.println(ex);
+        }
+        int customerID = 0;
+        try {
+            if(rs.next()) {
+                customerID = rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return customerID;
+    }
+        
+        public void newProject(){
+            ///SKAPAR ETT NYTT PROJEKT///
+        String pn = tGUI.ProjectTextField2.getText();
+        String pd = tGUI.ProjectTextArea1.getText();
+        String statusID = tGUI.StatusComboBox.getSelectedItem().toString();
+        String customerID = tGUI.CustomerComboBox.getSelectedItem().toString();                   
+
+        int sstatusID = getStatusID(statusID);
+        int ccustomerID = getCustomerID(customerID);
+
+        try {    
+        pstat = cn.prepareStatement ("insert into projects (project_name, project_description, project_status_id, customer_id) VALUES (?,?,?,?)");
+        pstat.setString(1, pn);
+        pstat.setString(2,pd);
+        pstat.setInt(3, sstatusID);
+        pstat.setInt(4, ccustomerID);
+        pstat.executeUpdate();
+        
+        }catch (SQLException ex) {
+        Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
+        }        
+        }
+        
+        public boolean question(){
+            ///DIALOGRUTA SOM FRÅGAR OM MAN VILL SPARA VAD MAN SKRIVIT I TEXTFIELDS///
+            boolean q;
+        String pn = tGUI.ProjectTextField2.getText();
+        String pd = tGUI.ProjectTextArea1.getText();
+        String statusID = tGUI.StatusComboBox.getSelectedItem().toString();
+        String customerID = tGUI.CustomerComboBox.getSelectedItem().toString(); 
+                            {
+                    int svar = JOptionPane.showConfirmDialog(null, 
+                        "Namn - " + pn + "\n"+ 
+                        "Beskrivning - " + pd + "\n"+ 
+                        "Status - " + statusID + "\n"+ 
+                        "Kund - " + customerID + "\n\n"+         
+                                "Vill du spara?\n", "Spara nytt projekt?", 
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.QUESTION_MESSAGE);
+                    if (svar == JOptionPane.YES_OPTION){
+                        
+                        newProject();
+                        q = true;                                }
+                    else{
+                        q = false;
+                        }
+                            } 
+                    return q;
+        }
+               
+        public void getAvailableSkillsProject() {
+        
+            tGUI.SkillBox.removeAllItems();
+        try {
+            pstat = cn.prepareStatement("select skill from skills");
+            rs = pstat.executeQuery();
+            while(rs.next()) {
+            tGUI.SkillBox.addItem(rs.getString(1));
+        }
+        }catch (SQLException ex) {
+            Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        tGUI.SkillBox.setSelectedItem(null);
+    }
+            
+        public void setSkillUsers() {
+        DefaultListModel what = new DefaultListModel();
+        String skill = tGUI.SkillBox.getSelectedItem().toString();
+        int sskill = getSkillID(skill);
+        
+        try {
+            pstat = cn.prepareStatement("select users.FName, users.LName\n" +
+                                        "from users_has_skills\n" +
+                                        "join users \n" +
+                                        "on users_has_skills.user_id=users.user_id\n" +
+                                        "join skills\n" +
+                                        "on users_has_skills.skill_id=skills.skill_id\n" +
+                                        "where users_has_skills.skill_id = ?");
+            
+            pstat.setInt(1, sskill);
+            rs = pstat.executeQuery();
+            
+            while (rs.next()) {
+                String FNamn = rs.getString("FName");
+                String LNamn = rs.getString("LName");
+                            what.addElement(FNamn + " " + LNamn);
+            }
+            tGUI.Users.setModel(what);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            }
+         
+            
+        
+                public int getSkillID(String skill){
+            ///HÄMTAR CUSTOMER ID FRÅN CUSTOMER NAMN///
+        try {
+        pstat = cn.prepareStatement("select skill_id from skills where skill = ?");
+        pstat.setString(1, skill);
+        rs = pstat.executeQuery();
+        } catch (SQLException ex) {
+                System.out.println(ex);
+        }
+        int skillID = 0;
+        try {
+            if(rs.next()) {
+                skillID = rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return skillID;
+    }
+                
+            public void usersHasSkills() {
+                    
+            
     }
 
 
