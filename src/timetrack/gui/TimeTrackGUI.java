@@ -3,6 +3,18 @@ package timetrack.gui;
 
 
 import java.awt.Color;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.StringSelection;
+import java.awt.datatransfer.Transferable;
+import java.awt.dnd.DnDConstants;
+import java.awt.dnd.DragGestureEvent;
+import java.awt.dnd.DragGestureListener;
+import java.awt.dnd.DragGestureRecognizer;
+import java.awt.dnd.DragSource;
+import java.awt.dnd.DragSourceDragEvent;
+import java.awt.dnd.DragSourceDropEvent;
+import java.awt.dnd.DragSourceEvent;
+import java.awt.dnd.DragSourceListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -20,7 +32,10 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Vector;
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.TransferHandler;
 import javax.swing.table.DefaultTableModel;
 import net.proteanit.sql.DbUtils;
 
@@ -56,6 +71,11 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         chooseProjectPanel.setVisible(false);
         dp.getEditor().setBorder(null);
         dp.getEditor().setVisible(false);
+        DefaultListModel what = new DefaultListModel();
+    //    String test = "";
+    //    what.addElement(test);
+        UserList.setModel(what);
+
     }
     
     @SuppressWarnings("unchecked")
@@ -136,6 +156,36 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         jLabel19 = new javax.swing.JLabel();
         adminProjectPanel = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
+        ProjectsComboBox = new javax.swing.JComboBox<>();
+        StatusComboBox = new javax.swing.JComboBox<>();
+        CustomerComboBox = new javax.swing.JComboBox<>();
+        ProjectTextField1 = new javax.swing.JTextField();
+        ProjectTextField2 = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        ProjectTextArea1 = new javax.swing.JTextArea();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        saveProjectChange = new javax.swing.JButton();
+        newProject = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        Users = new javax.swing.JList<>();
+        sTextField1 = new javax.swing.JTextField();
+        sTextField2 = new javax.swing.JTextField();
+        sTextField3 = new javax.swing.JTextField();
+        sTextField4 = new javax.swing.JTextField();
+        sTextField5 = new javax.swing.JTextField();
+        sTextField6 = new javax.swing.JTextField();
+        sTextField7 = new javax.swing.JTextField();
+        sTextField8 = new javax.swing.JTextField();
+        sTextField9 = new javax.swing.JTextField();
+        sTextField10 = new javax.swing.JTextField();
+        jLabel24 = new javax.swing.JLabel();
+        SkillBox = new javax.swing.JComboBox<>();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        UserList = new javax.swing.JList<>();
         settingsPanel = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         dateTimeLabel = new javax.swing.JLabel();
@@ -703,7 +753,172 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         adminProjectPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel5.setText("Admin Projekt");
-        adminProjectPanel.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 240, -1, -1));
+        adminProjectPanel.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 480, -1, -1));
+
+        ProjectsComboBox.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
+                ProjectsComboBoxPopupMenuWillBecomeInvisible(evt);
+            }
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+            }
+        });
+        adminProjectPanel.add(ProjectsComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, 150, -1));
+
+        adminProjectPanel.add(StatusComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 150, 180, -1));
+
+        adminProjectPanel.add(CustomerComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 190, 180, -1));
+
+        ProjectTextField1.setEditable(false);
+        adminProjectPanel.add(ProjectTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, 40, -1));
+        adminProjectPanel.add(ProjectTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 106, 170, 30));
+
+        ProjectTextArea1.setColumns(20);
+        ProjectTextArea1.setLineWrap(true);
+        ProjectTextArea1.setRows(5);
+        ProjectTextArea1.setWrapStyleWord(true);
+        jScrollPane2.setViewportView(ProjectTextArea1);
+
+        adminProjectPanel.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 240, -1, -1));
+
+        jLabel17.setText("ID");
+        adminProjectPanel.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, -1, -1));
+
+        jLabel20.setText("Namn");
+        adminProjectPanel.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, -1, -1));
+
+        jLabel21.setText("Status");
+        adminProjectPanel.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, -1, -1));
+
+        jLabel22.setText("Kund");
+        adminProjectPanel.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, -1, -1));
+
+        jLabel23.setText("Beskrivning");
+        adminProjectPanel.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, -1, -1));
+
+        saveProjectChange.setText("Spara Ändringar");
+        saveProjectChange.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveProjectChangeActionPerformed(evt);
+            }
+        });
+        adminProjectPanel.add(saveProjectChange, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 340, -1, -1));
+
+        newProject.setText("Skapa Nytt");
+        newProject.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newProjectActionPerformed(evt);
+            }
+        });
+        adminProjectPanel.add(newProject, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 340, -1, -1));
+
+        Users.setDragEnabled(true);
+        Users.setDropMode(javax.swing.DropMode.ON);
+        jScrollPane4.setViewportView(Users);
+
+        adminProjectPanel.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 70, 190, 150));
+
+        sTextField1.setEditable(false);
+        sTextField1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                sTextField1MouseDragged(evt);
+            }
+        });
+        sTextField1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                sTextField1FocusGained(evt);
+            }
+        });
+        adminProjectPanel.add(sTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 230, 190, -1));
+
+        sTextField2.setVisible(false);
+        sTextField2.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                sTextField2CaretUpdate(evt);
+            }
+        });
+        adminProjectPanel.add(sTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 250, 190, -1));
+
+        sTextField3.setVisible(false);
+        sTextField3.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                sTextField3CaretUpdate(evt);
+            }
+        });
+        adminProjectPanel.add(sTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 270, 190, -1));
+
+        sTextField4.setVisible(false);
+        sTextField4.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                sTextField4CaretUpdate(evt);
+            }
+        });
+        adminProjectPanel.add(sTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 290, 190, -1));
+
+        sTextField5.setVisible(false);
+        sTextField5.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                sTextField5CaretUpdate(evt);
+            }
+        });
+        adminProjectPanel.add(sTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 310, 190, -1));
+
+        sTextField6.setVisible(false);
+        sTextField6.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                sTextField6CaretUpdate(evt);
+            }
+        });
+        adminProjectPanel.add(sTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 330, 190, -1));
+
+        sTextField7.setVisible(false);
+        sTextField7.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                sTextField7CaretUpdate(evt);
+            }
+        });
+        adminProjectPanel.add(sTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 350, 190, -1));
+
+        sTextField8.setVisible(false);
+        sTextField8.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                sTextField8CaretUpdate(evt);
+            }
+        });
+        adminProjectPanel.add(sTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 370, 190, -1));
+
+        sTextField9.setVisible(false);
+        sTextField9.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                sTextField9CaretUpdate(evt);
+            }
+        });
+        adminProjectPanel.add(sTextField9, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 390, 190, -1));
+
+        sTextField10.setVisible(false);
+        adminProjectPanel.add(sTextField10, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 410, 190, -1));
+
+        jLabel24.setText("Projekt");
+        adminProjectPanel.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, -1, -1));
+
+        SkillBox.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
+                SkillBoxPopupMenuWillBecomeInvisible(evt);
+            }
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+            }
+        });
+        adminProjectPanel.add(SkillBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 20, 160, -1));
+
+        UserList.setDragEnabled(true);
+        UserList.setDropMode(javax.swing.DropMode.INSERT);
+        UserList.setTransferHandler(new ListTransferHandler());
+        jScrollPane5.setViewportView(UserList);
+
+        adminProjectPanel.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 370, 270, 120));
 
         mainPanel.add(adminProjectPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 780, 510));
 
@@ -964,6 +1179,11 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         menuPanel8.setBackground(new java.awt.Color(92,126,162));
         Arrays.fill(menuArray, Boolean.FALSE);
         menuArray[5] = true;
+        guiM.projectCombobox();
+        guiM.StatusCombobox();
+        guiM.CustomerCombobox();
+        guiM.getAvailableSkillsProject();
+        
     }//GEN-LAST:event_menuPanel6MouseClicked
 
     private void menuPanel6MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuPanel6MouseEntered
@@ -1180,7 +1400,94 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         timeDateLabelNew.setText(newDate);
     }//GEN-LAST:event_dpPopupMenuWillBecomeInvisible
 
+    private void saveProjectChangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveProjectChangeActionPerformed
+        guiM.updateProject();
+//        Object o = ProjectsComboBox.getSelectedItem();
+        ProjectsComboBox.removeAllItems();
+    //    CustomerComboBox.removeAllItems();
+    //    StatusComboBox.removeAllItems();
+        guiM.projectCombobox();
+    //    guiM.StatusCombobox();
+    //    guiM.CustomerCombobox();
+                
+    }//GEN-LAST:event_saveProjectChangeActionPerformed
+
+    private void newProjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newProjectActionPerformed
+        if(guiM.question()){
+    //    guiM.newProject();
+        ProjectTextField2.setText("");
+        ProjectTextArea1.setText("");
+        ProjectsComboBox.removeAllItems();
+        CustomerComboBox.removeAllItems();
+        StatusComboBox.removeAllItems();
+        guiM.projectCombobox();
+        guiM.StatusCombobox();
+        guiM.CustomerCombobox();
+        }
+        else{            
+        }
+    }//GEN-LAST:event_newProjectActionPerformed
+
+    private void sTextField2CaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_sTextField2CaretUpdate
+        sTextField3.setVisible(true);
+    }//GEN-LAST:event_sTextField2CaretUpdate
+
+    private void sTextField3CaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_sTextField3CaretUpdate
+        sTextField4.setVisible(true);
+    }//GEN-LAST:event_sTextField3CaretUpdate
+
+    private void sTextField4CaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_sTextField4CaretUpdate
+        sTextField5.setVisible(true);
+    }//GEN-LAST:event_sTextField4CaretUpdate
+
+    private void sTextField5CaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_sTextField5CaretUpdate
+        sTextField6.setVisible(true);
+    }//GEN-LAST:event_sTextField5CaretUpdate
+
+    private void sTextField6CaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_sTextField6CaretUpdate
+        sTextField7.setVisible(true);
+    }//GEN-LAST:event_sTextField6CaretUpdate
+
+    private void sTextField7CaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_sTextField7CaretUpdate
+        sTextField8.setVisible(true);
+    }//GEN-LAST:event_sTextField7CaretUpdate
+
+    private void sTextField8CaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_sTextField8CaretUpdate
+        sTextField9.setVisible(true);
+    }//GEN-LAST:event_sTextField8CaretUpdate
+
+    private void sTextField9CaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_sTextField9CaretUpdate
+        sTextField10.setVisible(true);
+    }//GEN-LAST:event_sTextField9CaretUpdate
+
+    private void sTextField1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_sTextField1FocusGained
+        String test = Users.getSelectedValue();
+        System.out.println(test);
+        sTextField1.setEditable(false);
+    }//GEN-LAST:event_sTextField1FocusGained
+
+    private void sTextField1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sTextField1MouseDragged
+        sTextField1.setEditable(true);
+    }//GEN-LAST:event_sTextField1MouseDragged
+
+    private void ProjectsComboBoxPopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_ProjectsComboBoxPopupMenuWillBecomeInvisible
+        guiM.setProjectInfo();
+    }//GEN-LAST:event_ProjectsComboBoxPopupMenuWillBecomeInvisible
+
+    private void SkillBoxPopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_SkillBoxPopupMenuWillBecomeInvisible
+        guiM.setSkillUsers();
+    }//GEN-LAST:event_SkillBoxPopupMenuWillBecomeInvisible
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    protected javax.swing.JComboBox<String> CustomerComboBox;
+    protected javax.swing.JTextArea ProjectTextArea1;
+    protected javax.swing.JTextField ProjectTextField1;
+    protected javax.swing.JTextField ProjectTextField2;
+    protected javax.swing.JComboBox<String> ProjectsComboBox;
+    protected javax.swing.JComboBox<String> SkillBox;
+    protected javax.swing.JComboBox<String> StatusComboBox;
+    private javax.swing.JList<String> UserList;
+    protected javax.swing.JList<String> Users;
     private javax.swing.JPanel adminProjectPanel;
     private javax.swing.JPanel adminUserPanel1;
     private javax.swing.JLabel chooseProjectHeader;
@@ -1199,9 +1506,15 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     protected javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     protected javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1215,7 +1528,10 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     protected javax.swing.JPasswordField jPasswordField2;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
@@ -1250,8 +1566,20 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     private javax.swing.JLabel minimizeLabel;
     private javax.swing.JPanel minimizePanel;
     private javax.swing.JPanel motionPanel;
+    private javax.swing.JButton newProject;
     private javax.swing.JPanel overviewPanel;
     private javax.swing.JPanel projectPanel;
+    protected javax.swing.JTextField sTextField1;
+    protected javax.swing.JTextField sTextField10;
+    protected javax.swing.JTextField sTextField2;
+    protected javax.swing.JTextField sTextField3;
+    protected javax.swing.JTextField sTextField4;
+    protected javax.swing.JTextField sTextField5;
+    protected javax.swing.JTextField sTextField6;
+    protected javax.swing.JTextField sTextField7;
+    private javax.swing.JTextField sTextField8;
+    protected javax.swing.JTextField sTextField9;
+    private javax.swing.JButton saveProjectChange;
     private javax.swing.JPanel settingsPanel;
     private javax.swing.JLabel timeDateLabel;
     private javax.swing.JLabel timeDateLabelNew;
