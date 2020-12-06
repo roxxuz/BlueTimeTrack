@@ -600,6 +600,7 @@ public class GUIMethods{
     
          public void projectCombobox(){
              ////SÄTTER IN ALLA PROJEKT I EN COMBOBOX///
+             tGUI.ProjectsComboBox.removeAllItems();
         try {
             pstat = cn.prepareStatement("select project_name from projects");
             rs = pstat.executeQuery();       
@@ -617,6 +618,7 @@ public class GUIMethods{
 
          public void StatusCombobox(){
                 ///SÄTTER IN VAL AV STATUS I EN COMBOBOX///
+                tGUI.StatusComboBox.removeAllItems();
         try {
             pstat = cn.prepareStatement("select status from project_status");
             rs = pstat.executeQuery();       
@@ -634,6 +636,7 @@ public class GUIMethods{
          
         public void CustomerCombobox(){
                 ///SÄTTER IN LISTA AV KUNDER I COMBOBOX///
+                tGUI.CustomerComboBox.removeAllItems();
         try {
             pstat = cn.prepareStatement("select customer from customers");
             rs = pstat.executeQuery();       
@@ -865,7 +868,7 @@ public class GUIMethods{
                 
             public void usersHasSkills() {
                     
-            
+            }
     }
 
 
