@@ -502,45 +502,6 @@ public class GUIMethods{
         return projectID;
     }
     
-    public boolean isCorrectTimeFields(String date, String startTime, String endTime) {
-        boolean isCorrect = false;
-        //Kollar så att inmatnig av datum och tid är i korrekt format
-        if(isValidFormat("yyyy-MM-dd", date, Locale.ENGLISH)
-        && isValidFormat("H:mm", startTime, Locale.ENGLISH)
-        && isValidFormat("H:mm", endTime, Locale.ENGLISH)) {
-            isCorrect = true;
-        }
-        return isCorrect;
-    }
-    
-    public boolean isValidFormat(String format, String value, Locale locale) {
-    //Kontrollerar om datum eller tid är angett i korrekt format
-    //Kolla i metoden isCorrectTimeFields() för att se hur den kan användas
-    LocalDateTime ldt = null;
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format, locale);
-
-    try {
-        ldt = LocalDateTime.parse(value, formatter);
-        String result = ldt.format(formatter);
-        return result.equals(value);
-    } catch (DateTimeParseException e) {
-        try {
-            LocalDate ld = LocalDate.parse(value, formatter);
-            String result = ld.format(formatter);
-            return result.equals(value);
-        } catch (DateTimeParseException exp) {
-            try {
-                LocalTime lt = LocalTime.parse(value, formatter);
-                String result = lt.format(formatter);
-                return result.equals(value);
-            } catch (DateTimeParseException e2) {
-            }
-        }
-    }
-
-    return false;
-}
-    
     public void setTimeTrackGUI(TimeTrackGUI tGUI) {
         this.tGUI = tGUI;
     }
@@ -604,7 +565,6 @@ public class GUIMethods{
         }catch (SQLException ex) {
             Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
         }
-        ((JLabel)tGUI.timeChooseProjectCB.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
     }
     
     public void clearAllTextFieldsInCreateUser() {
