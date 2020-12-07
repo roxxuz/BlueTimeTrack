@@ -28,7 +28,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
@@ -581,6 +583,28 @@ public class GUIMethods{
             System.out.println(e);
         }
         return availableEmail;
+    }
+    
+    public void getAvailableProjects(int userID) {
+        tGUI.timeChooseProjectCB.removeAllItems();
+        tGUI.timeChooseProjectCB.addItem("Välj projekt");
+        try {
+            //Skapar ett SELECT statement till PreparedStatement objekt
+            pstat = cn.prepareStatement("SELECT project_name FROM projects p\n" +
+                                        "join users_has_projects up on p.projects_id = up.project_id\n" +
+                                        "join users u on up.user_id = u.user_id\n" +
+                                        "where u.user_id = ?");
+            
+            pstat.setInt(1, userID);
+            //Utför SQL statement till Databas. Returnerar ett resultat till ResultSet rs
+            rs = pstat.executeQuery();
+            while(rs.next()) {
+                tGUI.timeChooseProjectCB.addItem(rs.getString(1));
+            }
+        }catch (SQLException ex) {
+            Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        ((JLabel)tGUI.timeChooseProjectCB.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
     }
     
     public void clearAllTextFieldsInCreateUser() {
