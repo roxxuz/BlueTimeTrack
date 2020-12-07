@@ -46,6 +46,7 @@ import javax.swing.UIManager;
 import javax.swing.plaf.basic.BasicComboBoxUI;
 import javax.swing.table.DefaultTableModel;
 import net.proteanit.sql.DbUtils;
+import org.jdesktop.swingx.JXDatePicker;
 
 
 public class TimeTrackGUI extends javax.swing.JFrame {
@@ -121,6 +122,8 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         menuLeftPanel4 = new javax.swing.JPanel();
         timeSucceededLabel = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
         projectPanel = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         overviewPanel = new javax.swing.JPanel();
@@ -431,46 +434,46 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         timeDateLabel.setForeground(new java.awt.Color(47, 66, 84));
         timeDateLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         timeDateLabel.setText("   Datum");
-        timePanel.add(timeDateLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 30, 130, 30));
+        timePanel.add(timeDateLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 70, 130, 30));
 
         timeStartLabel.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         timeStartLabel.setForeground(new java.awt.Color(47, 66, 84));
         timeStartLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         timeStartLabel.setText(" Starttid");
-        timePanel.add(timeStartLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 30, 140, 30));
+        timePanel.add(timeStartLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 70, 140, 30));
 
         timeEndLabel.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         timeEndLabel.setForeground(new java.awt.Color(47, 66, 84));
         timeEndLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         timeEndLabel.setText(" Sluttid");
-        timePanel.add(timeEndLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 30, 140, 30));
+        timePanel.add(timeEndLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 70, 140, 30));
 
         timeProjectLabel.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         timeProjectLabel.setForeground(new java.awt.Color(47, 66, 84));
         timeProjectLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         timeProjectLabel.setText(" Projekt");
-        timePanel.add(timeProjectLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, 150, 30));
+        timePanel.add(timeProjectLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70, 150, 30));
 
         jSeparator2.setBackground(new java.awt.Color(219, 219, 219));
         jSeparator2.setForeground(new java.awt.Color(219, 219, 219));
-        timePanel.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 70, 10, 10));
+        timePanel.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 110, 10, 10));
 
         jSeparator4.setBackground(new java.awt.Color(219, 219, 219));
         jSeparator4.setForeground(new java.awt.Color(219, 219, 219));
-        timePanel.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 70, 10, 10));
+        timePanel.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 110, 10, 10));
 
         jSeparator5.setBackground(new java.awt.Color(219, 219, 219));
         jSeparator5.setForeground(new java.awt.Color(219, 219, 219));
-        timePanel.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 70, 10, 10));
+        timePanel.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 110, 10, 10));
 
         timeDateLabelNew.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         timeDateLabelNew.setForeground(new java.awt.Color(165, 165, 165));
         timeDateLabelNew.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         timeDateLabelNew.setText("Välj datum");
-        timePanel.add(timeDateLabelNew, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 60, 120, 30));
+        timePanel.add(timeDateLabelNew, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 100, 120, 30));
 
         jPanel5.setBackground(new java.awt.Color(237, 237, 237));
-        timePanel.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 60, 120, 30));
+        timePanel.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 100, 120, 30));
 
         dp.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
             public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
@@ -481,7 +484,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
             public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
             }
         });
-        timePanel.add(dp, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 60, 40, 30));
+        timePanel.add(dp, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 100, 40, 30));
 
         timeChooseProjectCB.setBackground(new java.awt.Color(237, 237, 237));
         timeChooseProjectCB.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
@@ -498,7 +501,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
                 timeChooseProjectCBPopupMenuWillBecomeVisible(evt);
             }
         });
-        timePanel.add(timeChooseProjectCB, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, 140, 30));
+        timePanel.add(timeChooseProjectCB, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, 140, 30));
 
         timeChooseStartTimeCB.setBackground(new java.awt.Color(237, 237, 237));
         timeChooseStartTimeCB.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
@@ -516,7 +519,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
                 timeChooseStartTimeCBPopupMenuWillBecomeVisible(evt);
             }
         });
-        timePanel.add(timeChooseStartTimeCB, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 60, 130, 30));
+        timePanel.add(timeChooseStartTimeCB, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 100, 130, 30));
 
         timeChooseEndTimeCB.setBackground(new java.awt.Color(237, 237, 237));
         timeChooseEndTimeCB.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
@@ -534,10 +537,10 @@ public class TimeTrackGUI extends javax.swing.JFrame {
                 timeChooseEndTimeCBPopupMenuWillBecomeVisible(evt);
             }
         });
-        timePanel.add(timeChooseEndTimeCB, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 60, 130, 30));
+        timePanel.add(timeChooseEndTimeCB, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 100, 130, 30));
 
         jPanel1.setBackground(new java.awt.Color(237, 237, 237));
-        timePanel.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, 560, 30));
+        timePanel.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 100, 560, 30));
 
         timeSendButtonPanel.setBackground(new java.awt.Color(92, 126, 162));
         timeSendButtonPanel.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -568,12 +571,22 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         menuLeftPanel4.setBackground(new java.awt.Color(47, 66, 84));
         timeSendButtonPanel.add(menuLeftPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 30));
 
-        timePanel.add(timeSendButtonPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 60, 90, 30));
+        timePanel.add(timeSendButtonPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 100, 90, 30));
 
-        timeSucceededLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        timeSucceededLabel.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         timeSucceededLabel.setForeground(new java.awt.Color(255, 255, 255));
+        timeSucceededLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         timeSucceededLabel.setText("Din tidredovisning har registrerats");
-        timePanel.add(timeSucceededLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 100, -1, -1));
+        timePanel.add(timeSucceededLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 780, 30));
+
+        jLabel25.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel25.setForeground(new java.awt.Color(165, 165, 165));
+        jLabel25.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel25.setText("RAPPORTERA TID");
+        timePanel.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 780, 30));
+
+        jSeparator1.setForeground(new java.awt.Color(165, 165, 165));
+        timePanel.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 220, 540, 10));
 
         mainPanel.add(timePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 780, 510));
 
@@ -1361,6 +1374,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1376,6 +1390,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;

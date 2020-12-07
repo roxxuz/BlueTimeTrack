@@ -412,7 +412,7 @@ public class GUIMethods{
             } catch (InterruptedException ex) {
                 Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
             }
-            for (int i = 0; i < 255; i=i+2) {
+            for (int i = 0; i < 180; i=i+2) {
                 tGUI.setTimeSucceededLabelColor(new java.awt.Color(60, 117, 57, i));
                 try {
                     Thread.sleep(10);
@@ -426,7 +426,7 @@ public class GUIMethods{
                 Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-            for (int i = 255; i > 0; i--) {
+            for (int i = 180; i > 0; i--) {
 
                 tGUI.setTimeSucceededLabelColor(new java.awt.Color(60, 117, 57, i));
                 try {

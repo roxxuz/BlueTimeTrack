@@ -3,14 +3,16 @@ MAINKLASSEN
 */
 package timetrack;
 
+import javax.swing.LookAndFeel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import org.jdesktop.swingx.plaf.DatePickerAddon;
 import timetrack.gui.*;
 
 public class TimeTrack {
 
     public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
-
+        
         
         //Login
         LoginGUI loginGUI = new LoginGUI();
