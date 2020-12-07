@@ -75,6 +75,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     //    String test = "";
     //    what.addElement(test);
         UserList.setModel(what);
+        
 
     }
     
@@ -121,7 +122,6 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         jSeparator4 = new javax.swing.JSeparator(javax.swing.JSeparator.VERTICAL);
         jSeparator5 = new javax.swing.JSeparator(javax.swing.JSeparator.VERTICAL);
         timeDateLabelNew = new javax.swing.JLabel();
-        timeDateTextfield = new org.jdesktop.swingx.JXTextField();
         timeProjectTextfield = new org.jdesktop.swingx.JXTextField();
         timeEndTextfield = new org.jdesktop.swingx.JXTextField();
         timeStartTextfield = new org.jdesktop.swingx.JXTextField();
@@ -530,26 +530,6 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         timeDateLabelNew.setText("Välj datum");
         timePanel.add(timeDateLabelNew, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 60, 120, 30));
 
-        timeDateTextfield.setBackground(new java.awt.Color(237, 237, 237));
-        timeDateTextfield.setBorder(null);
-        timeDateTextfield.setForeground(new java.awt.Color(165, 165, 165));
-        timeDateTextfield.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        timeDateTextfield.setText("yyyy-mm-dd");
-        timeDateTextfield.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                timeDateTextfieldFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                timeDateTextfieldFocusLost(evt);
-            }
-        });
-        timeDateTextfield.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                timeDateTextfieldActionPerformed(evt);
-            }
-        });
-        timePanel.add(timeDateTextfield, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 270, 120, 30));
-
         timeProjectTextfield.setEditable(false);
         timeProjectTextfield.setBackground(new java.awt.Color(237, 237, 237));
         timeProjectTextfield.setBorder(null);
@@ -913,7 +893,6 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         });
         adminProjectPanel.add(SkillBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 20, 160, -1));
 
-        UserList.setDragEnabled(true);
         UserList.setDropMode(javax.swing.DropMode.INSERT);
         UserList.setTransferHandler(new ListTransferHandler());
         jScrollPane5.setViewportView(UserList);
@@ -1303,14 +1282,6 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         chooseProjectPanel.setVisible(false);
     }//GEN-LAST:event_mainLeftPanelMouseClicked
 
-    private void timeDateTextfieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_timeDateTextfieldFocusGained
-        chooseProjectPanel.setVisible(false);
-        if(timeDateTextfield.getText().equals("yyyy-mm-dd")) {
-            timeDateTextfield.setText("");
-        }
-        timeDateTextfield.setForeground(new Color(51,51,51));
-    }//GEN-LAST:event_timeDateTextfieldFocusGained
-
     private void timeStartTextfieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_timeStartTextfieldFocusGained
         chooseProjectPanel.setVisible(false);
         if(timeStartTextfield.getText().equals("hh:mm")) {
@@ -1326,14 +1297,6 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         }
         timeEndTextfield.setForeground(new Color(51,51,51));
     }//GEN-LAST:event_timeEndTextfieldFocusGained
-
-    private void timeDateTextfieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_timeDateTextfieldFocusLost
-        //Om textfältet lämnas tomt (eller oförändrat) så sätts informationen om formatet tillbaka
-        if(timeDateTextfield.getText().isEmpty()) {
-            timeDateTextfield.setText("yyyy-mm-dd");
-            timeDateTextfield.setForeground(new Color(165,165,165));
-        }
-    }//GEN-LAST:event_timeDateTextfieldFocusLost
 
     private void timeStartTextfieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_timeStartTextfieldFocusLost
         //Om textfältet lämnas tomt (eller oförändrat) så sätts informationen om formatet tillbaka
@@ -1354,10 +1317,6 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     private void mainTopPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mainTopPanelMouseClicked
         chooseProjectPanel.setVisible(false);
     }//GEN-LAST:event_mainTopPanelMouseClicked
-
-    private void timeDateTextfieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_timeDateTextfieldActionPerformed
-        sendTimeReport();
-    }//GEN-LAST:event_timeDateTextfieldActionPerformed
 
     private void timeStartTextfieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_timeStartTextfieldActionPerformed
         sendTimeReport();
@@ -1583,7 +1542,6 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     private javax.swing.JPanel settingsPanel;
     private javax.swing.JLabel timeDateLabel;
     private javax.swing.JLabel timeDateLabelNew;
-    private org.jdesktop.swingx.JXTextField timeDateTextfield;
     private javax.swing.JLabel timeEndLabel;
     private org.jdesktop.swingx.JXTextField timeEndTextfield;
     private javax.swing.JPanel timePanel;
