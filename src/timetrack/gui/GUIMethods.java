@@ -2,7 +2,6 @@
 package timetrack.gui;
 
 
-import java.awt.Color;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -14,11 +13,6 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -28,9 +22,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
@@ -132,7 +124,7 @@ public class GUIMethods{
         try {
             con = DriverManager.getConnection(DBAddress, DBUser, DBPass);
         } catch (SQLException ex) {
-            Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println("Uppkopplingen till databasen misslyckades. \n Förmodligen p.g.a för många användare aktiva");
         }
         return con;
     }

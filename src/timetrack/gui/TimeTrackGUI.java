@@ -3,50 +3,26 @@ package timetrack.gui;
 
 
 import java.awt.Color;
-import java.awt.datatransfer.DataFlavor;
-import java.awt.datatransfer.StringSelection;
-import java.awt.datatransfer.Transferable;
-import java.awt.dnd.DnDConstants;
-import java.awt.dnd.DragGestureEvent;
-import java.awt.dnd.DragGestureListener;
-import java.awt.dnd.DragGestureRecognizer;
-import java.awt.dnd.DragSource;
-import java.awt.dnd.DragSourceDragEvent;
-import java.awt.dnd.DragSourceDropEvent;
-import java.awt.dnd.DragSourceEvent;
-import java.awt.dnd.DragSourceListener;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.util.Arrays;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFrame;
-import javax.swing.JScrollPane;
-import java.sql.ResultSet;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Vector;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
-import javax.swing.TransferHandler;
+import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.plaf.basic.BasicComboBoxUI;
 import javax.swing.table.DefaultTableModel;
-import net.proteanit.sql.DbUtils;
-import org.jdesktop.swingx.JXDatePicker;
+import org.jdesktop.swingx.plaf.basic.BasicDatePickerUI;
 
 
 public class TimeTrackGUI extends javax.swing.JFrame {
@@ -65,6 +41,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     String selectedProject = "";
     //Behöver ett defaultvärde på comboboxen för att den ska fungera. Det byts senare ut
     String[] defaultComboBox = {""};
+    boolean dateChangedAllowed = false;
     
     
 
@@ -112,8 +89,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         jSeparator4 = new javax.swing.JSeparator(javax.swing.JSeparator.VERTICAL);
         jSeparator5 = new javax.swing.JSeparator(javax.swing.JSeparator.VERTICAL);
         timeDateLabelNew = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
-        dp = new org.jdesktop.swingx.JXDatePicker();
+        timeDatePanel = new javax.swing.JPanel();
         timeChooseProjectCB = new MyComboBox<>(defaultComboBox);
         timeChooseStartTimeCB = new MyComboBox<>(defaultComboBox);
         timeChooseEndTimeCB = new MyComboBox<>(defaultComboBox);
@@ -122,8 +98,14 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         menuLeftPanel4 = new javax.swing.JPanel();
         timeSucceededLabel = new javax.swing.JLabel();
-        jLabel25 = new javax.swing.JLabel();
+        timeStampHeaderLabel = new javax.swing.JLabel();
+        timeEditHeaderLabel = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
+        dp1 = new org.jdesktop.swingx.JXDatePicker();
+        dp2 = new org.jdesktop.swingx.JXDatePicker();
+        timeEditDateLabelNew = new javax.swing.JLabel();
+        timeEditDatePanel = new javax.swing.JPanel();
+        timeDateLabel1 = new javax.swing.JLabel();
         projectPanel = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         overviewPanel = new javax.swing.JPanel();
@@ -470,21 +452,20 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         timeDateLabelNew.setForeground(new java.awt.Color(165, 165, 165));
         timeDateLabelNew.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         timeDateLabelNew.setText("Välj datum");
-        timePanel.add(timeDateLabelNew, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 100, 120, 30));
-
-        jPanel5.setBackground(new java.awt.Color(237, 237, 237));
-        timePanel.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 100, 120, 30));
-
-        dp.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
-            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
-            }
-            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
-                dpPopupMenuWillBecomeInvisible(evt);
-            }
-            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+        timeDateLabelNew.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                timeDateLabelNewMouseClicked(evt);
             }
         });
-        timePanel.add(dp, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 100, 40, 30));
+        timeDateLabelNew.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                timeDateLabelNewPropertyChange(evt);
+            }
+        });
+        timePanel.add(timeDateLabelNew, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 100, 120, 30));
+
+        timeDatePanel.setBackground(new java.awt.Color(237, 237, 237));
+        timePanel.add(timeDatePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 100, 120, 30));
 
         timeChooseProjectCB.setBackground(new java.awt.Color(237, 237, 237));
         timeChooseProjectCB.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
@@ -579,14 +560,59 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         timeSucceededLabel.setText("Din tidredovisning har registrerats");
         timePanel.add(timeSucceededLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 780, 30));
 
-        jLabel25.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel25.setForeground(new java.awt.Color(165, 165, 165));
-        jLabel25.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel25.setText("RAPPORTERA TID");
-        timePanel.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 780, 30));
+        timeStampHeaderLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        timeStampHeaderLabel.setForeground(new java.awt.Color(165, 165, 165));
+        timeStampHeaderLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        timeStampHeaderLabel.setText("RAPPORTERA TID");
+        timePanel.add(timeStampHeaderLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 780, 30));
+
+        timeEditHeaderLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        timeEditHeaderLabel.setForeground(new java.awt.Color(165, 165, 165));
+        timeEditHeaderLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        timeEditHeaderLabel.setText("REDIGERA HISTORISK TIDRAPPORT");
+        timePanel.add(timeEditHeaderLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 780, 30));
 
         jSeparator1.setForeground(new java.awt.Color(165, 165, 165));
-        timePanel.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 700, 10));
+        timePanel.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, 700, 10));
+
+        dp1.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                dp1PropertyChange(evt);
+            }
+        });
+        timePanel.add(dp1, new org.netbeans.lib.awtextra.AbsoluteConstraints(183, 108, 0, 20));
+
+        dp2.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                dp2PropertyChange(evt);
+            }
+        });
+        timePanel.add(dp2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 290, 0, 20));
+
+        timeEditDateLabelNew.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        timeEditDateLabelNew.setForeground(new java.awt.Color(165, 165, 165));
+        timeEditDateLabelNew.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        timeEditDateLabelNew.setText("Välj datum");
+        timeEditDateLabelNew.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                timeEditDateLabelNewMouseClicked(evt);
+            }
+        });
+        timeEditDateLabelNew.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                timeEditDateLabelNewPropertyChange(evt);
+            }
+        });
+        timePanel.add(timeEditDateLabelNew, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 280, 120, 30));
+
+        timeEditDatePanel.setBackground(new java.awt.Color(237, 237, 237));
+        timePanel.add(timeEditDatePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 280, 120, 30));
+
+        timeDateLabel1.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        timeDateLabel1.setForeground(new java.awt.Color(47, 66, 84));
+        timeDateLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        timeDateLabel1.setText("   Datum");
+        timePanel.add(timeDateLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 250, 130, 30));
 
         mainPanel.add(timePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 780, 510));
 
@@ -1220,14 +1246,6 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jComboBox1PopupMenuWillBecomeInvisible
 
-    private void dpPopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_dpPopupMenuWillBecomeInvisible
-        Date oDate = dp.getDate();        
-        DateFormat oDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        String newDate = oDateFormat.format(oDate);
-        timeDateLabelNew.setForeground(new Color(51,51,51));
-        timeDateLabelNew.setText(newDate);
-    }//GEN-LAST:event_dpPopupMenuWillBecomeInvisible
-
     private void saveProjectChangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveProjectChangeActionPerformed
         guiM.updateProject();
 //        Object o = ProjectsComboBox.getSelectedItem();
@@ -1340,6 +1358,39 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         timeChooseEndTimeCB.setForeground(new Color(51,51,51));
     }//GEN-LAST:event_timeChooseEndTimeCBPopupMenuWillBecomeVisible
 
+    private void dp1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dp1PropertyChange
+        if(dateChangedAllowed) {
+            Date oDate = dp1.getDate();        
+            DateFormat oDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            String newDate = oDateFormat.format(oDate);
+            timeDateLabelNew.setForeground(new Color(51,51,51));
+            timeDateLabelNew.setText(newDate);
+        }
+        dp1.setVisible(false);
+    }//GEN-LAST:event_dp1PropertyChange
+
+    private void timeDateLabelNewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_timeDateLabelNewMouseClicked
+        dp1.setVisible(true);
+        dp1.requestFocus();
+    }//GEN-LAST:event_timeDateLabelNewMouseClicked
+
+    private void timeDateLabelNewPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_timeDateLabelNewPropertyChange
+        timeSendButtonPanel.requestFocus(false);
+    }//GEN-LAST:event_timeDateLabelNewPropertyChange
+
+    private void dp2PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dp2PropertyChange
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dp2PropertyChange
+
+    private void timeEditDateLabelNewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_timeEditDateLabelNewMouseClicked
+        dp2.setVisible(true);
+        dp2.requestFocus();
+    }//GEN-LAST:event_timeEditDateLabelNewMouseClicked
+
+    private void timeEditDateLabelNewPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_timeEditDateLabelNewPropertyChange
+        timeSendButtonPanel.requestFocus(false);
+    }//GEN-LAST:event_timeEditDateLabelNewPropertyChange
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     protected javax.swing.JComboBox<String> CustomerComboBox;
     protected javax.swing.JTextArea ProjectTextArea1;
@@ -1355,7 +1406,8 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     private javax.swing.JPanel closePanel;
     protected javax.swing.JLabel currentUserLabel;
     private static javax.swing.JLabel dateTimeLabel;
-    private org.jdesktop.swingx.JXDatePicker dp;
+    private org.jdesktop.swingx.JXDatePicker dp1;
+    private org.jdesktop.swingx.JXDatePicker dp2;
     protected javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -1374,7 +1426,6 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1383,7 +1434,6 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel5;
     protected javax.swing.JPasswordField jPasswordField2;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -1444,11 +1494,17 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     protected javax.swing.JComboBox<String> timeChooseProjectCB;
     protected javax.swing.JComboBox<String> timeChooseStartTimeCB;
     private javax.swing.JLabel timeDateLabel;
+    private javax.swing.JLabel timeDateLabel1;
     private javax.swing.JLabel timeDateLabelNew;
+    private javax.swing.JPanel timeDatePanel;
+    private javax.swing.JLabel timeEditDateLabelNew;
+    private javax.swing.JPanel timeEditDatePanel;
+    private javax.swing.JLabel timeEditHeaderLabel;
     private javax.swing.JLabel timeEndLabel;
     private javax.swing.JPanel timePanel;
     private javax.swing.JLabel timeProjectLabel;
     private javax.swing.JPanel timeSendButtonPanel;
+    private javax.swing.JLabel timeStampHeaderLabel;
     private javax.swing.JLabel timeStartLabel;
     private javax.swing.JLabel timeSucceededLabel;
     // End of variables declaration//GEN-END:variables
@@ -1711,9 +1767,40 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     }
     
     private void timeDatePickerSettings() {
-        dp.getEditor().setBorder(null);
-        dp.getEditor().setVisible(false);
-        dp.setDate(Calendar.getInstance().getTime());
+        //Override på metoder i JXDatePicker1 för att den ska öppna när den får fokus
+        dp1.getEditor().addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                BasicDatePickerUI pickerUI = (BasicDatePickerUI) dp1.getUI();
+                if (!pickerUI.isPopupVisible() && e.getOppositeComponent() != getRootPane() && e.getOppositeComponent() != dp1.getMonthView()) {
+                    pickerUI.toggleShowPopup();
+            }
+        }
+        @Override
+        public void focusLost(FocusEvent e) { 
+            }
+        });
+        
+        //Override på metoder i JXDatePicker2 för att den ska öppna när den får fokus
+        dp2.getEditor().addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                BasicDatePickerUI pickerUI = (BasicDatePickerUI) dp2.getUI();
+                if (!pickerUI.isPopupVisible() && e.getOppositeComponent() != getRootPane() && e.getOppositeComponent() != dp1.getMonthView()) {
+                    pickerUI.toggleShowPopup();
+            }
+        }
+        @Override
+        public void focusLost(FocusEvent e) { 
+            }
+        });
+        
+        //Ger defaultvärde dagens datum till JXDatePicker
+        //dp1.setDate(Calendar.getInstance().getTime());
+        
+        //Ändrar boolean till true för att det nu går att hämta värdet från JXDatePicker utan crash
+        //Crashen beror på att Event Property Change används och har först inget värde vid uppstart av programmet
+        dateChangedAllowed = true;
     }
     
     private void timeComboBoxSettings() {
