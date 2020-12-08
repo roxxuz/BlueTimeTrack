@@ -21,10 +21,13 @@ import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
+import net.proteanit.sql.DbUtils;
 
 /**
  *
@@ -395,6 +398,12 @@ public class GUIMethods{
     }
 
     public class Thread2 extends Thread {
+        
+        JLabel jLabel;
+        
+        public Thread2(JLabel jLabel) {
+            this.jLabel = jLabel;
+        }
       
         public void run(){
             //Gör en fade in och fade out på en Label
@@ -405,7 +414,7 @@ public class GUIMethods{
                 Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
             }
             for (int i = 0; i < 180; i=i+2) {
-                tGUI.setTimeSucceededLabelColor(new java.awt.Color(60, 117, 57, i));
+                jLabel.setForeground(new java.awt.Color(60, 117, 57, i));
                 try {
                     Thread.sleep(10);
                 } catch (InterruptedException ex) {
@@ -420,13 +429,14 @@ public class GUIMethods{
 
             for (int i = 180; i > 0; i--) {
 
-                tGUI.setTimeSucceededLabelColor(new java.awt.Color(60, 117, 57, i));
+                jLabel.setForeground(new java.awt.Color(60, 117, 57, i));
                 try {
                     Thread.sleep(10);
                 } catch (InterruptedException ex) {
                     System.err.println("Fel i faden på texten \"Din tidredovisning har registrerats\"");
                 }
             }
+            tGUI.menuTimeDefaultValues();
         }
     }
     
@@ -462,13 +472,47 @@ public class GUIMethods{
         //Kontrollerar om det är mer än 0 tillbaka så har det lyckats
         if (re > 0) {
             //Ny thread startar som kommer att visa en text med att rapporteringen har lyckats
-            Thread2 thread2 = new Thread2();
+            Thread2 thread2 = new Thread2(tGUI.timeSucceededLabel);
             thread2.start();
             tGUI.setTimeDefaultValues();
         }
         else {
             System.err.println("Något gick fel med att skicka tidrapporteringen");
         }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        return success;
+    }
+    
+    public boolean sendTimeUpdateToDB(int userID, int timeID, int project, String date, String startTime, String endTime){
+        //Slår samman datum och tid till en sträng. Det är så den lagras i databasen
+        String dateTimeStart = date + " " + startTime;
+        String dateTimeEnd = date + " " + endTime;
+        boolean success = false;
+        try {
+            pstat = cn.prepareStatement("UPDATE time " +
+                                        "SET start_time = ?, " +
+                                        "end_time = ?, " +
+                                        "user_id = ?, " +
+                                        "project_id = ? " +
+                                        "WHERE time_id = ?");
+            pstat.setString(1, dateTimeStart);
+            pstat.setString(2, dateTimeEnd);
+            pstat.setInt(3, userID);
+            pstat.setInt(4, project);
+            pstat.setInt(5, timeID);
+            int re = pstat.executeUpdate();
+            //Kontrollerar om det är mer än 0 tillbaka så har det lyckats
+            if (re > 0) {
+                //Ny thread startar som kommer att visa en text med att rapporteringen har lyckats
+                Thread2 thread2 = new Thread2(tGUI.timeSucceededLabel1);
+                thread2.start();
+                tGUI.setTimeDefaultValues();
+            }
+            else {
+                System.err.println("Något gick fel med att skicka tidrapporteringen");
+            }
         } catch (SQLException ex) {
             System.out.println(ex);
         }
@@ -538,9 +582,10 @@ public class GUIMethods{
         return availableEmail;
     }
     
-    public void getAvailableProjects(int userID) {
-        tGUI.timeChooseProjectCB.removeAllItems();
-        tGUI.timeChooseProjectCB.addItem("Välj projekt");
+    public void getAvailableProjects(int userID, JComboBox comboBox) {
+        
+        comboBox.removeAllItems();
+        comboBox.addItem("Välj projekt");
         try {
             //Skapar ett SELECT statement till PreparedStatement objekt
             pstat = cn.prepareStatement("SELECT project_name FROM projects p\n" +
@@ -552,7 +597,7 @@ public class GUIMethods{
             //Utför SQL statement till Databas. Returnerar ett resultat till ResultSet rs
             rs = pstat.executeQuery();
             while(rs.next()) {
-                tGUI.timeChooseProjectCB.addItem(rs.getString(1));
+                comboBox.addItem(rs.getString(1));
             }
         }catch (SQLException ex) {
             Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
@@ -842,9 +887,33 @@ public class GUIMethods{
         return skillID;
     }
                 
-            public void usersHasSkills() {
-                    
-            }
+    public void usersHasSkills() {
+
     }
+            
+            
+    protected ResultSet getTimeStampFromDB(int userID, String date) {                                         
+        //Select till tabell
+        System.out.println(userID + " " + date);
+        try {
+            pstat = cn.prepareStatement("SELECT t.time_id \"Tid-ID\", " +
+                                        "p.project_name Projekt, " +
+                                        "DATE(t.start_time) Datum, " +
+                                        "DATE_FORMAT(t.start_time,'%H:%i') Starttid, " +
+                                        "DATE_FORMAT(t.end_time,'%H:%i') Sluttid " +
+                                        "FROM time t " +
+                                        "JOIN projects p ON t.project_id = p.projects_id " +
+                                        "WHERE t.user_id = ? " +
+                                        "AND DATE(t.start_time) = ?");
+            pstat.setInt(1, userID);
+            pstat.setString(2, date);
+            rs = pstat.executeQuery();
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+        return rs;
+    }
+}
 
 
