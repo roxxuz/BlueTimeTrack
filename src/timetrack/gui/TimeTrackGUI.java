@@ -586,7 +586,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         timePanel.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 780, 30));
 
         jSeparator1.setForeground(new java.awt.Color(165, 165, 165));
-        timePanel.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 220, 540, 10));
+        timePanel.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 700, 10));
 
         mainPanel.add(timePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 780, 510));
 
