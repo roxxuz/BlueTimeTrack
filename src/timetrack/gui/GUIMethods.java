@@ -28,7 +28,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
@@ -410,7 +412,7 @@ public class GUIMethods{
             } catch (InterruptedException ex) {
                 Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
             }
-            for (int i = 0; i < 255; i=i+2) {
+            for (int i = 0; i < 180; i=i+2) {
                 tGUI.setTimeSucceededLabelColor(new java.awt.Color(60, 117, 57, i));
                 try {
                     Thread.sleep(10);
@@ -424,7 +426,7 @@ public class GUIMethods{
                 Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-            for (int i = 255; i > 0; i--) {
+            for (int i = 180; i > 0; i--) {
 
                 tGUI.setTimeSucceededLabelColor(new java.awt.Color(60, 117, 57, i));
                 try {
@@ -500,45 +502,6 @@ public class GUIMethods{
         return projectID;
     }
     
-    public boolean isCorrectTimeFields(String date, String startTime, String endTime) {
-        boolean isCorrect = false;
-        //Kollar så att inmatnig av datum och tid är i korrekt format
-        if(isValidFormat("yyyy-MM-dd", date, Locale.ENGLISH)
-        && isValidFormat("H:mm", startTime, Locale.ENGLISH)
-        && isValidFormat("H:mm", endTime, Locale.ENGLISH)) {
-            isCorrect = true;
-        }
-        return isCorrect;
-    }
-    
-    public boolean isValidFormat(String format, String value, Locale locale) {
-    //Kontrollerar om datum eller tid är angett i korrekt format
-    //Kolla i metoden isCorrectTimeFields() för att se hur den kan användas
-    LocalDateTime ldt = null;
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format, locale);
-
-    try {
-        ldt = LocalDateTime.parse(value, formatter);
-        String result = ldt.format(formatter);
-        return result.equals(value);
-    } catch (DateTimeParseException e) {
-        try {
-            LocalDate ld = LocalDate.parse(value, formatter);
-            String result = ld.format(formatter);
-            return result.equals(value);
-        } catch (DateTimeParseException exp) {
-            try {
-                LocalTime lt = LocalTime.parse(value, formatter);
-                String result = lt.format(formatter);
-                return result.equals(value);
-            } catch (DateTimeParseException e2) {
-            }
-        }
-    }
-
-    return false;
-}
-    
     public void setTimeTrackGUI(TimeTrackGUI tGUI) {
         this.tGUI = tGUI;
     }
@@ -581,6 +544,27 @@ public class GUIMethods{
             System.out.println(e);
         }
         return availableEmail;
+    }
+    
+    public void getAvailableProjects(int userID) {
+        tGUI.timeChooseProjectCB.removeAllItems();
+        tGUI.timeChooseProjectCB.addItem("Välj projekt");
+        try {
+            //Skapar ett SELECT statement till PreparedStatement objekt
+            pstat = cn.prepareStatement("SELECT project_name FROM projects p\n" +
+                                        "join users_has_projects up on p.projects_id = up.project_id\n" +
+                                        "join users u on up.user_id = u.user_id\n" +
+                                        "where u.user_id = ?");
+            
+            pstat.setInt(1, userID);
+            //Utför SQL statement till Databas. Returnerar ett resultat till ResultSet rs
+            rs = pstat.executeQuery();
+            while(rs.next()) {
+                tGUI.timeChooseProjectCB.addItem(rs.getString(1));
+            }
+        }catch (SQLException ex) {
+            Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public void clearAllTextFieldsInCreateUser() {
