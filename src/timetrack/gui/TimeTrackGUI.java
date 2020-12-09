@@ -37,6 +37,8 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     //Tilldelas värde med set-metoden setUserID.
     //default = 0 (ingen användare är inloggad).
     int userID = 0;
+    //default false (ej admin)
+    boolean isAdmin = false;
     //Skapar objekt av guiMethods
     GUIMethods guiM = new GUIMethods();
     //Skapar objekt av TimerThread som är en "inner class" i GUIMethods
@@ -48,6 +50,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     //Behöver ett defaultvärde på comboboxen för att den ska fungera. Det byts senare ut
     String[] defaultComboBox = {""};
     boolean dateChangedAllowed = false;
+    private boolean shuttingDown = false;
     
     
 
@@ -597,7 +600,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         timeEditHeaderLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         timeEditHeaderLabel.setForeground(new java.awt.Color(165, 165, 165));
         timeEditHeaderLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        timeEditHeaderLabel.setText("REDIGERA HISTORISK TIDRAPPORT");
+        timeEditHeaderLabel.setText("REDIGERA TIDRAPPORT");
         timePanel.add(timeEditHeaderLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 780, 30));
 
         jSeparator1.setForeground(new java.awt.Color(165, 165, 165));
@@ -1254,6 +1257,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         menuPanel7.setBackground(new java.awt.Color(92,126,162));
         Arrays.fill(menuArray, Boolean.FALSE);
         menuArray[7] = true;
+        shuttingDown = true;
         signOut();
     }//GEN-LAST:event_menuPanel8MouseClicked
 
@@ -1559,14 +1563,16 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_timeChooseEndTimeCBPopupMenuWillBecomeVisible
 
     private void dp1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dp1PropertyChange
-        if(dateChangedAllowed) {
-            Date oDate = dp1.getDate();        
-            DateFormat oDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            String newDate = oDateFormat.format(oDate);
-            timeDateLabelNew.setForeground(new Color(51,51,51));
-            timeDateLabelNew.setText(newDate);
+        if(!shuttingDown) {
+            if(dateChangedAllowed) {
+                Date oDate = dp1.getDate();        
+                DateFormat oDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                String newDate = oDateFormat.format(oDate);
+                timeDateLabelNew.setForeground(new Color(51,51,51));
+                timeDateLabelNew.setText(newDate);
+            }
+            dp1.setVisible(false);
         }
-        dp1.setVisible(false);
     }//GEN-LAST:event_dp1PropertyChange
 
     private void timeDateLabelNewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_timeDateLabelNewMouseClicked
@@ -1579,14 +1585,16 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_timeDateLabelNewPropertyChange
 
     private void dp2PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dp2PropertyChange
-        if(dateChangedAllowed) {
-            Date oDate = dp2.getDate();        
-            DateFormat oDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            String newDate = oDateFormat.format(oDate);
-            timeEditDateLabelNew.setForeground(new Color(51,51,51));
-            timeEditDateLabelNew.setText(newDate);
+        if(!shuttingDown) {
+            if(dateChangedAllowed) {
+                Date oDate = dp2.getDate();        
+                DateFormat oDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                String newDate = oDateFormat.format(oDate);
+                timeEditDateLabelNew.setForeground(new Color(51,51,51));
+                timeEditDateLabelNew.setText(newDate);
+            }
+            dp2.setVisible(false);
         }
-        dp2.setVisible(false);
     }//GEN-LAST:event_dp2PropertyChange
 
     private void timeEditDateLabelNewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_timeEditDateLabelNewMouseClicked
@@ -1597,21 +1605,26 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_timeEditDateLabelNewMouseClicked
 
     private void timeEditDateLabelNewPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_timeEditDateLabelNewPropertyChange
-        timeSendButtonPanel.requestFocus(false);
-        //Inväntar dateChangedAllowed = true för att inte programmet ska crasha
-        //Den sätts till true vid uppstart.
-        if(dateChangedAllowed) {
-            //Sparar valt datum från jLabel till String
-            String date = timeEditDateLabelNew.getText();
-            //Kör metoden för att hämta tidsdata baserat på användarnamn och valt datum
-            ResultSet rs = guiM.getTimeStampFromDB(userID, date);
-            timeEditStampTable.setModel(DbUtils.resultSetToTableModel(rs));
-            //Gör panelen med tabellen synlig
-            timeLastEditStampPanel.setVisible(false);
-            timeEditStampPanel.setVisible(true);
+        if(!shuttingDown) {
+            //Ska inte utföras om texten endast ändras till "välj datum"
+            if(!timeEditDateLabelNew.equals("Välj datum")) {
+                timeSendButtonPanel.requestFocus(false);
+                //Inväntar dateChangedAllowed = true för att inte programmet ska crasha
+                //Den sätts till true vid uppstart.
+                if(dateChangedAllowed) {
+                    //Sparar valt datum från jLabel till String
+                    String date = timeEditDateLabelNew.getText();
+                    //Kör metoden för att hämta tidsdata baserat på användarnamn och valt datum
+                    ResultSet rs = guiM.getTimeStampFromDB(userID, date);
+                    timeEditStampTable.setModel(DbUtils.resultSetToTableModel(rs));
+                    //Gör panelen med tabellen synlig
+                    timeLastEditStampPanel.setVisible(false);
+                    timeEditStampPanel.setVisible(true);
+                }
+                //Centrerar allt i tabellen
+                setTableCellsAlignment(timeEditStampTable, SwingConstants.CENTER);
+            }
         }
-        //Centrerar allt i tabellen
-        setTableCellsAlignment(timeEditStampTable, SwingConstants.CENTER);
     }//GEN-LAST:event_timeEditDateLabelNewPropertyChange
 
     private void timeDateLabelNew1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_timeDateLabelNew1MouseClicked
@@ -1679,14 +1692,16 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_timeSendButtonPanel1MouseReleased
 
     private void dp3PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dp3PropertyChange
-        if(dateChangedAllowed) {
-            Date oDate = dp3.getDate();        
-            DateFormat oDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            String newDate = oDateFormat.format(oDate);
-            timeDateLabelNew1.setForeground(new Color(51,51,51));
-            timeDateLabelNew1.setText(newDate);
+        if(!shuttingDown) {
+            if(dateChangedAllowed) {
+                Date oDate = dp3.getDate();        
+                DateFormat oDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                String newDate = oDateFormat.format(oDate);
+                timeDateLabelNew1.setForeground(new Color(51,51,51));
+                timeDateLabelNew1.setText(newDate);
+            }
+            dp3.setVisible(false);
         }
-        dp3.setVisible(false);
     }//GEN-LAST:event_dp3PropertyChange
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1890,22 +1905,22 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         
         if(projectName.equals("Välj projekt")) {
             missingField = true;
-            missingFieldsMsg = missingFieldsMsg + "Du måste välja ett projekt att rapportera tiden på.\n";
+            missingFieldsMsg = missingFieldsMsg + "Projekt, ";
         }
         if(date.equals("Välj datum")) {
             missingField = true;
-            missingFieldsMsg = missingFieldsMsg + "Du måste välja ett datum att rapportera tiden på.\n";
+            missingFieldsMsg = missingFieldsMsg + "Datum, ";
         }
         if(startTime.equals("Välj starttid")) {
             missingField = true;
-            missingFieldsMsg = missingFieldsMsg + "Du måste välja en starttid att rapportera tiden på.\n";
+            missingFieldsMsg = missingFieldsMsg + "Starttid, ";
         }
         if(endTime.equals("Välj sluttid")) {
             missingField = true;
-            missingFieldsMsg = missingFieldsMsg + "Du måste välja en sluttid att rapportera tiden på.\n";
+            missingFieldsMsg = missingFieldsMsg + "Sluttid, ";
         }
         if(missingField) {
-            JOptionPane.showConfirmDialog(this, missingFieldsMsg
+            JOptionPane.showConfirmDialog(this, "Du måste ange " + missingFieldsMsg + "för att rapportera tiden"
                                                , "Missade fält", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE);
         }
         else{
@@ -2183,22 +2198,22 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         
         if(projectName.equals("Välj projekt")) {
             missingField = true;
-            missingFieldsMsg = missingFieldsMsg + "Du måste välja ett projekt för att uppdatera tidrapporten.\n";
+            missingFieldsMsg = missingFieldsMsg + "Projekt, ";
         }
         if(date.equals("Välj datum")) {
             missingField = true;
-            missingFieldsMsg = missingFieldsMsg + "Du måste välja ett datum för att uppdatera tidrapporten.\n";
+            missingFieldsMsg = missingFieldsMsg + "Datum, ";
         }
         if(startTime.equals("Välj starttid")) {
             missingField = true;
-            missingFieldsMsg = missingFieldsMsg + "Du måste välja en starttid för att uppdatera tidrapporten.\n";
+            missingFieldsMsg = missingFieldsMsg + "Starttid, ";
         }
         if(endTime.equals("Välj sluttid")) {
             missingField = true;
-            missingFieldsMsg = missingFieldsMsg + "Du måste välja en sluttid för att uppdatera tidrapporten.\n";
+            missingFieldsMsg = missingFieldsMsg + "Sluttid, ";
         }
         if(missingField) {
-            JOptionPane.showConfirmDialog(this, missingFieldsMsg
+            JOptionPane.showConfirmDialog(this, "Du måste ange " + missingFieldsMsg + " för att uppdatera tidrapporten."
                                                , "Missade fält", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE);
         }
         else{
@@ -2259,6 +2274,15 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         });
     }
     
+    private void adminSettings() {
+        isAdmin = guiM.getIsAdmin();
+        //Slår av funktioner som icke-admin ej ska ha tillgång till
+        if(!isAdmin) {
+            menuPanel5.setVisible(false);
+            menuPanel6.setVisible(false);
+        }
+    }
+    
     private void timeHidePanels() {
         timeEditStampPanel.setVisible(false);
         timeLastEditStampPanel.setVisible(false);
@@ -2279,6 +2303,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         guiM.setTimeTrackGUI(this);
         defaultMenuSettings();
         timeSettings();
+        adminSettings();
         
         DefaultListModel what = new DefaultListModel();
     //    String test = "";

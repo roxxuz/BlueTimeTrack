@@ -43,6 +43,8 @@ public class GUIMethods{
     JFrame loginJFrame;
     String currentUser;
     TimeTrackGUI tGUI;
+    //Kan ändras till private när logingenvägarna har tagits bort
+    protected static int adminInt;
     
     public GUIMethods() {
         readProperties();
@@ -70,6 +72,7 @@ public class GUIMethods{
                 //sparar värdet från första kolumnen (userID) från Select statemant.
                 returnUserID = rs.getInt(1);
                 currentUser = rs.getString(2) + " " + rs.getString(3);
+                adminInt = rs.getInt(6);
             }
             //Om ingen rad returneras från select statemant så betyder det att kombinationen
             //av användarnamn och lösenord ej hittades i databasen och då körs istället else.
@@ -835,6 +838,12 @@ public class GUIMethods{
         }
         tGUI.SkillBox.setSelectedItem(null);
     }
+        
+        protected boolean getIsAdmin() {
+            boolean isAdmin;
+            isAdmin = adminInt==1;
+            return isAdmin;
+        }
             
         public void setSkillUsers() {
         DefaultListModel what = new DefaultListModel();

@@ -210,10 +210,12 @@ public class LoginGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_emailInputActionPerformed
 
     private void loginLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginLabelMouseClicked
+        GUIMethods.adminInt = 1;
         guiM.startTimeTrack(this, guiM, 6);
     }//GEN-LAST:event_loginLabelMouseClicked
 
     private void userLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userLoginMouseClicked
+        GUIMethods.adminInt = 0;
         guiM.startTimeTrack(this, guiM, 2);
     }//GEN-LAST:event_userLoginMouseClicked
 
