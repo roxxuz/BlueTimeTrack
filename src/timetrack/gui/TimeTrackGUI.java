@@ -586,7 +586,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         timeSucceededLabel.setForeground(new java.awt.Color(255, 255, 255));
         timeSucceededLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         timeSucceededLabel.setText("Din tidredovisning har registrerats");
-        timePanel.add(timeSucceededLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 780, 30));
+        timePanel.add(timeSucceededLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 780, 30));
 
         timeStampHeaderLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         timeStampHeaderLabel.setForeground(new java.awt.Color(165, 165, 165));
@@ -807,7 +807,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         timeSucceededLabel1.setForeground(new java.awt.Color(255, 255, 255));
         timeSucceededLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         timeSucceededLabel1.setText("Din tidredovisning har uppdaterats");
-        timeLastEditStampPanel.add(timeSucceededLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 780, 30));
+        timeLastEditStampPanel.add(timeSucceededLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 780, 30));
 
         dp3.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
@@ -1884,26 +1884,25 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         String date = timeDateLabelNew.getText();
         String startTime = (String) timeChooseStartTimeCB.getSelectedItem();
         String endTime = (String) timeChooseEndTimeCB.getSelectedItem();
-        //Kollar om inmatningen i textfälten har rätt format
         
         String missingFieldsMsg = "";
         boolean missingField = false;
         
         if(projectName.equals("Välj projekt")) {
             missingField = true;
-            missingFieldsMsg = missingFieldsMsg + "Du måste välja ett projekt att rapportera tiden på.\n\n";
+            missingFieldsMsg = missingFieldsMsg + "Du måste välja ett projekt att rapportera tiden på.\n";
         }
         if(date.equals("Välj datum")) {
             missingField = true;
-            missingFieldsMsg = missingFieldsMsg + "Du måste välja ett datum att rapportera tiden på.\n\n";
+            missingFieldsMsg = missingFieldsMsg + "Du måste välja ett datum att rapportera tiden på.\n";
         }
         if(startTime.equals("Välj starttid")) {
             missingField = true;
-            missingFieldsMsg = missingFieldsMsg + "Du måste välja en starttid att rapportera tiden på.\n\n";
+            missingFieldsMsg = missingFieldsMsg + "Du måste välja en starttid att rapportera tiden på.\n";
         }
         if(endTime.equals("Välj sluttid")) {
             missingField = true;
-            missingFieldsMsg = missingFieldsMsg + "Du måste välja en sluttid att rapportera tiden på.\n\n";
+            missingFieldsMsg = missingFieldsMsg + "Du måste välja en sluttid att rapportera tiden på.\n";
         }
         if(missingField) {
             JOptionPane.showConfirmDialog(this, missingFieldsMsg
@@ -2178,13 +2177,37 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         //Sparar sluttid från combobox
         String endTime = (String) timeChooseEndTimeCB1.getSelectedItem();
         //Skickar uppdatering till databasen med metoden sendTimeUpdateToDB()
-        guiM.sendTimeUpdateToDB(userID, timeID, projectID, date, startTime, endTime);
+        
+        String missingFieldsMsg = "";
+        boolean missingField = false;
+        
+        if(projectName.equals("Välj projekt")) {
+            missingField = true;
+            missingFieldsMsg = missingFieldsMsg + "Du måste välja ett projekt för att uppdatera tidrapporten.\n";
+        }
+        if(date.equals("Välj datum")) {
+            missingField = true;
+            missingFieldsMsg = missingFieldsMsg + "Du måste välja ett datum för att uppdatera tidrapporten.\n";
+        }
+        if(startTime.equals("Välj starttid")) {
+            missingField = true;
+            missingFieldsMsg = missingFieldsMsg + "Du måste välja en starttid för att uppdatera tidrapporten.\n";
+        }
+        if(endTime.equals("Välj sluttid")) {
+            missingField = true;
+            missingFieldsMsg = missingFieldsMsg + "Du måste välja en sluttid för att uppdatera tidrapporten.\n";
+        }
+        if(missingField) {
+            JOptionPane.showConfirmDialog(this, missingFieldsMsg
+                                               , "Missade fält", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE);
+        }
+        else{
+            //Om inga fält saknas så utförs tidrapporteringen
+            guiM.sendTimeUpdateToDB(userID, timeID, projectID, date, startTime, endTime);
+        }
     }
     
     protected void menuTimeDefaultValues() {
-        //Paneler för redigering av tidrapport döljs
-        timeLastEditStampPanel.setVisible(false);
-        timeEditStampPanel.setVisible(false);
         //Hämtar alla tillgängliga projekt för inloggad användare och lägger i comboboxen
         //guiM.getAvailableProjects(userID, );
         setGreyForeground(timeChooseProjectCB, true);
@@ -2195,6 +2218,11 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         timeChooseProjectCB.addItem("Välj projekt");
         timeDateLabelNew.setText("Välj datum");
         timeDateLabelNew.setForeground(new Color(165,165,165));
+        timeEditDateLabelNew.setText("Välj datum");
+        timeEditDateLabelNew.setForeground(new Color(165,165,165));
+        //Paneler för redigering av tidrapport döljs
+        timeEditStampPanel.setVisible(false);
+        timeLastEditStampPanel.setVisible(false);
     }
     
     private void timeEditTableSettings() {
