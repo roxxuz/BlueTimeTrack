@@ -142,7 +142,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         dp3 = new org.jdesktop.swingx.JXDatePicker();
         projectPanel = new javax.swing.JPanel();
         projectHeaderLabel1 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        projectAvailableScrollPane = new javax.swing.JScrollPane();
         projectAvailableTable = new javax.swing.JTable();
         projectTableHeaderLabel = new javax.swing.JLabel();
         projectInfoPanel = new javax.swing.JPanel();
@@ -866,11 +866,12 @@ public class TimeTrackGUI extends javax.swing.JFrame {
                 "Title 1"
             }
         ));
+        projectAvailableTable.setGridColor(new java.awt.Color(255, 255, 255));
         projectAvailableTable.setRowHeight(30);
         projectAvailableTable.setTableHeader(null);
-        jScrollPane1.setViewportView(projectAvailableTable);
+        projectAvailableScrollPane.setViewportView(projectAvailableTable);
 
-        projectPanel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, 380, 120));
+        projectPanel.add(projectAvailableScrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 80, 280, 120));
 
         projectTableHeaderLabel.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         projectTableHeaderLabel.setForeground(new java.awt.Color(47, 66, 84));
@@ -1381,6 +1382,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         Arrays.fill(menuArray, Boolean.FALSE);
         menuArray[1] = true;
         availableProjectsToTable(projectAvailableTable);
+        projectInfoPanel.setVisible(false);
         
     }//GEN-LAST:event_menuPanel2MouseClicked
 
@@ -1896,7 +1898,6 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     protected javax.swing.JPasswordField jPasswordField2;
     private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -1946,6 +1947,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     private javax.swing.JPanel motionPanel;
     private javax.swing.JButton newProject;
     private javax.swing.JPanel overviewPanel;
+    private javax.swing.JScrollPane projectAvailableScrollPane;
     private javax.swing.JTable projectAvailableTable;
     private javax.swing.JLabel projectColleagueLabel;
     private javax.swing.JTable projectColleagueTable;
@@ -2451,6 +2453,8 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     }
     
     private void projectTableSettings() {
+        //Sätter bakgrund på scrollpane till vit (så att tabellen har vit bakgrund där inga rader finns)
+        projectAvailableScrollPane.getViewport().setBackground(Color.white);
         //Ändrar så att endast en rad åt gången kan väljas på tabellen
         projectAvailableTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         //Lägger till en listener som triggas direkt när man markerar en rad i tabellen
@@ -2467,6 +2471,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
                 ResultSet rs = guiM.getAllProjectInfo(projectID);
                 //Skriver ut all info på rätt plats i GUI
                 setGUIProjectInfo(rs);
+                projectInfoPanel.setVisible(true);
                 
             } catch (Exception e) {
                 System.err.println("Något gick fel i Override av valueChanged() i metoden projectTableSettings()");
