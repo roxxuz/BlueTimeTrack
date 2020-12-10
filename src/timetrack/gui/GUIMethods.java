@@ -585,7 +585,7 @@ public class GUIMethods{
         return availableEmail;
     }
     
-    public void getAvailableProjects(int userID, JComboBox comboBox) {
+    public ResultSet getAvailableProjects(int userID, JComboBox comboBox, boolean cBox) {
         
         comboBox.removeAllItems();
         comboBox.addItem("Välj projekt");
@@ -599,12 +599,15 @@ public class GUIMethods{
             pstat.setInt(1, userID);
             //Utför SQL statement till Databas. Returnerar ett resultat till ResultSet rs
             rs = pstat.executeQuery();
-            while(rs.next()) {
-                comboBox.addItem(rs.getString(1));
+            if(cBox) {
+                while(rs.next()) {
+                    comboBox.addItem(rs.getString(1));
+                }
             }
         }catch (SQLException ex) {
             Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return rs;
     }
     
     public void clearAllTextFieldsInCreateUser() {
