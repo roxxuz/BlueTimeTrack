@@ -2459,7 +2459,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         public void valueChanged(ListSelectionEvent event) {
             try {
                 //Sparar markerat projekt i string projectName
-                String projectName = projectAvailableTable.getValueAt(projectAvailableTable.getSelectedRow(), 1).toString();
+                String projectName = projectAvailableTable.getValueAt(projectAvailableTable.getSelectedRow(), 0).toString();
                 System.out.println("Projektnamn: " + projectName);
                 //Hämtar markerat projektID med hjälp av projektnamnet
                 int projectID = guiM.getProjectID(projectName);
@@ -2469,7 +2469,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
                 setGUIProjectInfo(rs);
                 
             } catch (Exception e) {
-                System.err.println("Något gick fel i metoden projectTableSettings()");
+                System.err.println("Något gick fel i Override av valueChanged() i metoden projectTableSettings()");
             }
             
         }
@@ -2480,6 +2480,11 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         //Skriver ut all info på rätt plats i GUI, från ResultSet
         try {
             projectNameTextField.setText(rs.getString(1));
+            projectCustomerTextField.setText(rs.getString(2));
+            projectContactTextField.setText(rs.getString(3));
+            projectPhoneTextField.setText(rs.getString(4));
+            projectEmailTextField.setText(rs.getString(5));
+            projectDescriptionTextArea.setText(rs.getString(6));
         } catch (SQLException ex) {
             Logger.getLogger(TimeTrackGUI.class.getName()).log(Level.SEVERE, null, ex);
         }

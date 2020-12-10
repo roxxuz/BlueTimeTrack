@@ -550,6 +550,7 @@ public class GUIMethods{
                                         "WHERE p.projects_id = ?");
             pstat.setInt(1, projectID);
             rs = pstat.executeQuery();
+            rs.next();
         } catch (SQLException ex) {
                 System.out.println(ex);
         }
