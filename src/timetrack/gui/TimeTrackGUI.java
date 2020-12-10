@@ -22,6 +22,9 @@ import javax.swing.plaf.basic.BasicComboBoxUI;
 import javax.swing.table.DefaultTableModel;
 import org.jdesktop.swingx.plaf.basic.BasicDatePickerUI;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
@@ -143,22 +146,22 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         projectAvailableTable = new javax.swing.JTable();
         projectTableHeaderLabel = new javax.swing.JLabel();
         projectInfoPanel = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        jLabel25 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
-        jLabel26 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
-        jLabel27 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
-        jLabel28 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
-        jLabel29 = new javax.swing.JLabel();
+        projectNameLabel = new javax.swing.JLabel();
+        projectNameTextField = new javax.swing.JTextField();
+        projectCustomerLabel = new javax.swing.JLabel();
+        projectCustomerTextField = new javax.swing.JTextField();
+        projectContactLabel = new javax.swing.JLabel();
+        projectContactTextField = new javax.swing.JTextField();
+        projectPhoneLabel = new javax.swing.JLabel();
+        projectPhoneTextField = new javax.swing.JTextField();
+        projectEmailLabel = new javax.swing.JLabel();
+        projectEmailTextField = new javax.swing.JTextField();
+        projectColleagueLabel = new javax.swing.JLabel();
         jScrollPane7 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jLabel30 = new javax.swing.JLabel();
+        projectDescriptionTextArea = new javax.swing.JTextArea();
+        projectDescriptionLabel = new javax.swing.JLabel();
         jScrollPane8 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        projectColleagueTable = new javax.swing.JTable();
         jSeparator8 = new javax.swing.JSeparator();
         overviewPanel = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
@@ -878,84 +881,84 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         projectInfoPanel.setBackground(new java.awt.Color(255, 255, 255));
         projectInfoPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel4.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(47, 66, 84));
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel4.setText("Projektnamn");
-        projectInfoPanel.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 90, -1));
+        projectNameLabel.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        projectNameLabel.setForeground(new java.awt.Color(47, 66, 84));
+        projectNameLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        projectNameLabel.setText("Projektnamn");
+        projectInfoPanel.add(projectNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 90, -1));
 
-        jTextField4.setEditable(false);
-        jTextField4.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField4.setText("Javautbildning");
-        projectInfoPanel.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 200, 30));
+        projectNameTextField.setEditable(false);
+        projectNameTextField.setBackground(new java.awt.Color(255, 255, 255));
+        projectNameTextField.setText("Javautbildning");
+        projectInfoPanel.add(projectNameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 200, 30));
 
-        jLabel25.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        jLabel25.setForeground(new java.awt.Color(47, 66, 84));
-        jLabel25.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel25.setText("Kund");
-        projectInfoPanel.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 90, 20));
+        projectCustomerLabel.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        projectCustomerLabel.setForeground(new java.awt.Color(47, 66, 84));
+        projectCustomerLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        projectCustomerLabel.setText("Kund");
+        projectInfoPanel.add(projectCustomerLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 90, 20));
 
-        jTextField5.setEditable(false);
-        jTextField5.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField5.setText("Malmö Stad");
-        projectInfoPanel.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 200, 30));
+        projectCustomerTextField.setEditable(false);
+        projectCustomerTextField.setBackground(new java.awt.Color(255, 255, 255));
+        projectCustomerTextField.setText("Malmö Stad");
+        projectInfoPanel.add(projectCustomerTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 200, 30));
 
-        jLabel26.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        jLabel26.setForeground(new java.awt.Color(47, 66, 84));
-        jLabel26.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel26.setText("Kontakt");
-        projectInfoPanel.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 0, 90, 20));
+        projectContactLabel.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        projectContactLabel.setForeground(new java.awt.Color(47, 66, 84));
+        projectContactLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        projectContactLabel.setText("Kontakt");
+        projectInfoPanel.add(projectContactLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 0, 90, 20));
 
-        jTextField6.setEditable(false);
-        jTextField6.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField6.setText("Jan Malmström");
-        projectInfoPanel.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 20, 200, 30));
+        projectContactTextField.setEditable(false);
+        projectContactTextField.setBackground(new java.awt.Color(255, 255, 255));
+        projectContactTextField.setText("Jan Malmström");
+        projectInfoPanel.add(projectContactTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 20, 200, 30));
 
-        jLabel27.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        jLabel27.setForeground(new java.awt.Color(47, 66, 84));
-        jLabel27.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel27.setText("Telefon");
-        projectInfoPanel.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 60, 90, 20));
+        projectPhoneLabel.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        projectPhoneLabel.setForeground(new java.awt.Color(47, 66, 84));
+        projectPhoneLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        projectPhoneLabel.setText("Telefon");
+        projectInfoPanel.add(projectPhoneLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 60, 90, 20));
 
-        jTextField7.setEditable(false);
-        jTextField7.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField7.setText("0760445576");
-        projectInfoPanel.add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 80, 200, 30));
+        projectPhoneTextField.setEditable(false);
+        projectPhoneTextField.setBackground(new java.awt.Color(255, 255, 255));
+        projectPhoneTextField.setText("0760445576");
+        projectInfoPanel.add(projectPhoneTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 80, 200, 30));
 
-        jLabel28.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        jLabel28.setForeground(new java.awt.Color(47, 66, 84));
-        jLabel28.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel28.setText("Email");
-        projectInfoPanel.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 120, 90, 20));
+        projectEmailLabel.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        projectEmailLabel.setForeground(new java.awt.Color(47, 66, 84));
+        projectEmailLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        projectEmailLabel.setText("Email");
+        projectInfoPanel.add(projectEmailLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 120, 90, 20));
 
-        jTextField8.setEditable(false);
-        jTextField8.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField8.setText("jan.malmstrom@malmostad.se");
-        projectInfoPanel.add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 140, 200, 30));
+        projectEmailTextField.setEditable(false);
+        projectEmailTextField.setBackground(new java.awt.Color(255, 255, 255));
+        projectEmailTextField.setText("jan.malmstrom@malmostad.se");
+        projectInfoPanel.add(projectEmailTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 140, 200, 30));
 
-        jLabel29.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        jLabel29.setForeground(new java.awt.Color(47, 66, 84));
-        jLabel29.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel29.setText("Kollegor i projektet");
-        projectInfoPanel.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 120, 130, 20));
+        projectColleagueLabel.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        projectColleagueLabel.setForeground(new java.awt.Color(47, 66, 84));
+        projectColleagueLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        projectColleagueLabel.setText("Kollegor i projektet");
+        projectInfoPanel.add(projectColleagueLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 120, 130, 20));
 
-        jTextArea1.setEditable(false);
-        jTextArea1.setColumns(20);
-        jTextArea1.setLineWrap(true);
-        jTextArea1.setRows(5);
-        jTextArea1.setText("Utbilda två klasser i Java grundkurs, HT 2020 och VT 2021. Kursplan...\n");
-        jTextArea1.setWrapStyleWord(true);
-        jScrollPane7.setViewportView(jTextArea1);
+        projectDescriptionTextArea.setEditable(false);
+        projectDescriptionTextArea.setColumns(20);
+        projectDescriptionTextArea.setLineWrap(true);
+        projectDescriptionTextArea.setRows(5);
+        projectDescriptionTextArea.setText("Utbilda två klasser i Java grundkurs, HT 2020 och VT 2021. Kursplan...\n");
+        projectDescriptionTextArea.setWrapStyleWord(true);
+        jScrollPane7.setViewportView(projectDescriptionTextArea);
 
         projectInfoPanel.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 20, 260, 90));
 
-        jLabel30.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        jLabel30.setForeground(new java.awt.Color(47, 66, 84));
-        jLabel30.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel30.setText("Projektbeskrivning");
-        projectInfoPanel.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 0, 130, 20));
+        projectDescriptionLabel.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        projectDescriptionLabel.setForeground(new java.awt.Color(47, 66, 84));
+        projectDescriptionLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        projectDescriptionLabel.setText("Projektbeskrivning");
+        projectInfoPanel.add(projectDescriptionLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 0, 130, 20));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        projectColleagueTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -963,7 +966,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
                 "Title 1", "Title 2"
             }
         ));
-        jScrollPane8.setViewportView(jTable1);
+        jScrollPane8.setViewportView(projectColleagueTable);
 
         projectInfoPanel.add(jScrollPane8, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 140, 260, 90));
 
@@ -1883,14 +1886,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel28;
-    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel30;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -1916,17 +1912,10 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JSeparator jSeparator7;
     private javax.swing.JSeparator jSeparator8;
-    private javax.swing.JTable jTable1;
     protected javax.swing.JTable jTable2;
-    private javax.swing.JTextArea jTextArea1;
     protected javax.swing.JTextField jTextField1;
     protected javax.swing.JTextField jTextField2;
     protected javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
     private javax.swing.JLabel logoLabel;
     private javax.swing.JPanel mainLeftPanel;
     private javax.swing.JPanel mainPanel;
@@ -1958,9 +1947,23 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     private javax.swing.JButton newProject;
     private javax.swing.JPanel overviewPanel;
     private javax.swing.JTable projectAvailableTable;
+    private javax.swing.JLabel projectColleagueLabel;
+    private javax.swing.JTable projectColleagueTable;
+    private javax.swing.JLabel projectContactLabel;
+    private javax.swing.JTextField projectContactTextField;
+    private javax.swing.JLabel projectCustomerLabel;
+    private javax.swing.JTextField projectCustomerTextField;
+    private javax.swing.JLabel projectDescriptionLabel;
+    private javax.swing.JTextArea projectDescriptionTextArea;
+    private javax.swing.JLabel projectEmailLabel;
+    private javax.swing.JTextField projectEmailTextField;
     private javax.swing.JLabel projectHeaderLabel1;
     private javax.swing.JPanel projectInfoPanel;
+    private javax.swing.JLabel projectNameLabel;
+    private javax.swing.JTextField projectNameTextField;
     private javax.swing.JPanel projectPanel;
+    private javax.swing.JLabel projectPhoneLabel;
+    private javax.swing.JTextField projectPhoneTextField;
     private javax.swing.JLabel projectTableHeaderLabel;
     protected javax.swing.JTextField sTextField1;
     protected javax.swing.JTextField sTextField10;
@@ -2447,6 +2450,41 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         });
     }
     
+    private void projectTableSettings() {
+        //Ändrar så att endast en rad åt gången kan väljas på tabellen
+        projectAvailableTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        //Lägger till en listener som triggas direkt när man markerar en rad i tabellen
+        projectAvailableTable.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
+        @Override
+        public void valueChanged(ListSelectionEvent event) {
+            try {
+                //Sparar markerat projekt i string projectName
+                String projectName = projectAvailableTable.getValueAt(projectAvailableTable.getSelectedRow(), 1).toString();
+                System.out.println("Projektnamn: " + projectName);
+                //Hämtar markerat projektID med hjälp av projektnamnet
+                int projectID = guiM.getProjectID(projectName);
+                //Hämtar all info om projektet baserat på projektID och sparar return i en ResultSet
+                ResultSet rs = guiM.getAllProjectInfo(projectID);
+                //Skriver ut all info på rätt plats i GUI
+                setGUIProjectInfo(rs);
+                
+            } catch (Exception e) {
+                System.err.println("Något gick fel i metoden projectTableSettings()");
+            }
+            
+        }
+        });
+    }
+    
+    public void setGUIProjectInfo(ResultSet rs) {
+        //Skriver ut all info på rätt plats i GUI, från ResultSet
+        try {
+            projectNameTextField.setText(rs.getString(1));
+        } catch (SQLException ex) {
+            Logger.getLogger(TimeTrackGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     private void adminSettings() {
         isAdmin = guiM.getIsAdmin();
         //Slår av funktioner som icke-admin ej ska ha tillgång till
@@ -2469,7 +2507,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     }
     
     private void projectSettings() {
-        
+        projectTableSettings();
     }
     
     private void timeTrackSettings() {

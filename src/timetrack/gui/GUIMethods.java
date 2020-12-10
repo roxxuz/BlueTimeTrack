@@ -541,6 +541,22 @@ public class GUIMethods{
         return projectID;
     }
     
+    public ResultSet getAllProjectInfo(int projectID) {
+        try {
+            pstat = cn.prepareStatement("SELECT p.project_name, c.customer, c.contact, c.phone, c.email, p.project_description, ps.status " +
+                                        "FROM projects p " +
+                                        "JOIN customers c ON p.customer_id = c.customer_id " +
+                                        "JOIN project_status ps ON p.project_status_id = ps.project_status_id " +
+                                        "WHERE p.projects_id = ?");
+            pstat.setInt(1, projectID);
+            rs = pstat.executeQuery();
+        } catch (SQLException ex) {
+                System.out.println(ex);
+        }
+        
+        return rs;
+    }
+    
     public void setTimeTrackGUI(TimeTrackGUI tGUI) {
         this.tGUI = tGUI;
     }
