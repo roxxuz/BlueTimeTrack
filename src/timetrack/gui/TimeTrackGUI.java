@@ -1050,6 +1050,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         adminProjectPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         adminProjectPanel.add(pCurrent, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 80, 20));
 
+        ProjectsComboBox.setVisible(false);
         ProjectsComboBox.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
             public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
             }
@@ -1059,14 +1060,15 @@ public class TimeTrackGUI extends javax.swing.JFrame {
             public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
             }
         });
-        SkillBox.setRenderer(new PromptComboBoxRenderer(""));
-        SkillBox.setSelectedIndex(-1);
+        ProjectsComboBox.setRenderer(new PromptComboBoxRenderer(""));
+        ProjectsComboBox.setSelectedIndex(-1);
         adminProjectPanel.add(ProjectsComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 90, 150, -1));
 
         adminProjectPanel.add(StatusComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 210, 180, -1));
 
         adminProjectPanel.add(CustomerComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 250, 180, -1));
 
+        ProjectTextField1.setVisible(false);
         ProjectTextField1.setEditable(false);
         adminProjectPanel.add(ProjectTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, 40, -1));
         adminProjectPanel.add(ProjectTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 170, 170, 30));
@@ -1079,6 +1081,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
 
         adminProjectPanel.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 290, -1, -1));
 
+        jLabel17.setVisible(false);
         jLabel17.setText("ID");
         adminProjectPanel.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, -1, -1));
 
@@ -1102,6 +1105,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         });
         adminProjectPanel.add(newProject, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 380, -1, -1));
 
+        jLabel24.setVisible(false);
         jLabel24.setText("Projekt");
         adminProjectPanel.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, -1, -1));
 
@@ -1127,6 +1131,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         jLabel26.setText("<html>Användare<br>på projekt</html>");
         adminProjectPanel.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 180, -1, -1));
 
+        sSkillChosenBox.setEnabled(false);
         sSkillChosenBox.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
             public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
             }
@@ -1136,18 +1141,19 @@ public class TimeTrackGUI extends javax.swing.JFrame {
             public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
             }
         });
-        SkillBox.setRenderer(new PromptComboBoxRenderer(""));
-        SkillBox.setSelectedIndex(-1);
+        sSkillChosenBox.setRenderer(new PromptComboBoxRenderer(""));
+        sSkillChosenBox.setSelectedIndex(-1);
         adminProjectPanel.add(sSkillChosenBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 140, 160, -1));
 
         sSkillTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null}
+                {null, null}
             },
             new String [] {
-                "Title 1"
+                "User ID", "Name"
             }
         ));
+        sSkillTable.getColumnModel().getColumn(0).setMaxWidth(60);
         jScrollPane1.setViewportView(sSkillTable);
 
         adminProjectPanel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 180, 200, 200));
@@ -1546,14 +1552,34 @@ public class TimeTrackGUI extends javax.swing.JFrame {
 
     private void newProjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newProjectActionPerformed
 
-        ProjectTextField2.setText("");
-        ProjectTextArea1.setText("");
-        ProjectsComboBox.removeAllItems();
-        CustomerComboBox.removeAllItems();
-        StatusComboBox.removeAllItems();
-        pM.projectCombobox();
-        pM.StatusCombobox();
-        pM.CustomerCombobox();
+    String pname = ProjectTextField2.getText();
+        int pid = pM.getProjectIdFromProjectName(pname);
+
+        if (saveNewProject){
+            pM.newProject();
+            pM.usersHasProject();
+            //    ProjectTextField2.setText("");
+            //    ProjectTextArea1.setText("");
+            ProjectsComboBox.removeAllItems();
+            CustomerComboBox.removeAllItems();
+            StatusComboBox.removeAllItems();
+            pM.projectCombobox();
+            pM.StatusCombobox();
+            pM.CustomerCombobox();
+
+            ProjectsComboBox.setVisible(true);
+            ProjectTextField1.setVisible(true);
+            jLabel24.setVisible(true);
+            jLabel17.setVisible(true);
+            ProjectsComboBox.setSelectedItem(pname);
+            pM.setProjectInfo();
+
+        }else{
+            pM.updateProject();
+            pM.usersHasProject();
+            ProjectsComboBox.removeAllItems();
+            pM.projectCombobox();
+        }
 
     }//GEN-LAST:event_newProjectActionPerformed
 
