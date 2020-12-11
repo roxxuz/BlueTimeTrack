@@ -2470,7 +2470,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
                 //Hämtar all info om projektet baserat på projektID och sparar return i en ResultSet
                 ResultSet rs = guiM.getAllProjectInfo(projectID);
                 //Skriver ut all info på rätt plats i GUI
-                setGUIProjectInfo(rs);
+                setGUIProjectInfo(rs, projectID);
                 projectInfoPanel.setVisible(true);
                 
             } catch (Exception e) {
@@ -2481,7 +2481,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         });
     }
     
-    public void setGUIProjectInfo(ResultSet rs) {
+    public void setGUIProjectInfo(ResultSet rs, int projectID) {
         //Skriver ut all info på rätt plats i GUI, från ResultSet
         try {
             projectNameTextField.setText(rs.getString(1));
@@ -2490,6 +2490,8 @@ public class TimeTrackGUI extends javax.swing.JFrame {
             projectPhoneTextField.setText(rs.getString(4));
             projectEmailTextField.setText(rs.getString(5));
             projectDescriptionTextArea.setText(rs.getString(6));
+            //Placerar ResultSet i tabellen från return av metoden getColleaguesFromDB()
+            projectColleagueTable.setModel(DbUtils.resultSetToTableModel(guiM.getColleaguesFromDB(projectID)));
         } catch (SQLException ex) {
             Logger.getLogger(TimeTrackGUI.class.getName()).log(Level.SEVERE, null, ex);
         }

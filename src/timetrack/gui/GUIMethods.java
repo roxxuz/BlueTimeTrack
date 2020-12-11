@@ -920,7 +920,6 @@ public class GUIMethods{
 
     }
             
-            
     protected ResultSet getTimeStampFromDB(int userID, String date) {                                         
         //Select till tabell
         System.out.println(userID + " " + date);
@@ -943,6 +942,24 @@ public class GUIMethods{
         }
         return rs;
     }
+    
+    protected ResultSet getColleaguesFromDB(int projectID) {                                         
+        //Select till tabell
+        try {
+            pstat = cn.prepareStatement("SELECT CONCAT_WS(\" \", u.FName, u.LName) AS Namn, MAX(DATE(t.start_time)) AS \"Senast aktiv\"" +
+                                        "FROM users u" +
+                                        "JOIN time t ON u.user_id = t.user_id" +
+                                        "JOIN users_has_projects up ON u.user_id = up.user_id" +
+                                        "WHERE up.project_id = ?");
+            pstat.setInt(1, projectID);
+            rs = pstat.executeQuery();
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+        return rs;
+    }
+    
 }
 
 
