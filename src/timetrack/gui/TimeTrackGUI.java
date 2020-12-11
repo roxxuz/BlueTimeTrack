@@ -1573,12 +1573,14 @@ public class TimeTrackGUI extends javax.swing.JFrame {
             jLabel17.setVisible(true);
             ProjectsComboBox.setSelectedItem(pname);
             pM.setProjectInfo();
+            SaveNewPoject = false;
 
         }else{
             pM.updateProject();
             pM.usersHasProject();
             ProjectsComboBox.removeAllItems();
             pM.projectCombobox();
+            ProjectsComboBox.setSelectedItem(pname);
         }
 
     }//GEN-LAST:event_newProjectActionPerformed
