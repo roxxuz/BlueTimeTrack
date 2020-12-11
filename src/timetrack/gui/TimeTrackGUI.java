@@ -44,6 +44,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     boolean isAdmin = false;
     //Skapar objekt av guiMethods
     GUIMethods guiM = new GUIMethods();
+    ProjectMethods pM = new ProjectMethods();
     //Skapar objekt av TimerThread som är en "inner class" i GUIMethods
     GUIMethods.TimerThread timerThread = guiM.new TimerThread();
     //Boolean array som håller reda på vilket menyval som är aktivt
@@ -54,7 +55,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     String[] defaultComboBox = {""};
     boolean dateChangedAllowed = false;
     private boolean shuttingDown = false;
-    
+    boolean saveNewProject;
     
 
     public TimeTrackGUI(JFrame loginJFrame) {
@@ -1418,10 +1419,10 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         menuPanel8.setBackground(new java.awt.Color(92,126,162));
         Arrays.fill(menuArray, Boolean.FALSE);
         menuArray[5] = true;
-        guiM.projectCombobox();
-        guiM.StatusCombobox();
-        guiM.CustomerCombobox();
-        guiM.getAvailableSkillsProject();
+        pM.projectCombobox();
+        pM.StatusCombobox();
+        pM.CustomerCombobox();
+        pM.getAvailableSkillsProject();
         
     }//GEN-LAST:event_menuPanel6MouseClicked
 
@@ -1538,27 +1539,24 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox1PopupMenuWillBecomeInvisible
 
     private void newProjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newProjectActionPerformed
-        if(guiM.question()){
-    //    guiM.newProject();
+
         ProjectTextField2.setText("");
         ProjectTextArea1.setText("");
         ProjectsComboBox.removeAllItems();
         CustomerComboBox.removeAllItems();
         StatusComboBox.removeAllItems();
-        guiM.projectCombobox();
-        guiM.StatusCombobox();
-        guiM.CustomerCombobox();
-        }
-        else{            
-        }
+        pM.projectCombobox();
+        pM.StatusCombobox();
+        pM.CustomerCombobox();
+
     }//GEN-LAST:event_newProjectActionPerformed
 
     private void ProjectsComboBoxPopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_ProjectsComboBoxPopupMenuWillBecomeInvisible
-        guiM.setProjectInfo();
+        pM.setProjectInfo();
     }//GEN-LAST:event_ProjectsComboBoxPopupMenuWillBecomeInvisible
 
     private void SkillBoxPopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_SkillBoxPopupMenuWillBecomeInvisible
-        guiM.setSkillUsers();
+        pM.setSkillUsers();
     }//GEN-LAST:event_SkillBoxPopupMenuWillBecomeInvisible
 
     private void timeChooseProjectCBPopupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_timeChooseProjectCBPopupMenuWillBecomeVisible
@@ -1738,19 +1736,41 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_dp3PropertyChange
 
     private void sSkillChosenBoxPopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_sSkillChosenBoxPopupMenuWillBecomeInvisible
-        // TODO add your handling code here:
+        pM.setProjectSkillUsers2();
     }//GEN-LAST:event_sSkillChosenBoxPopupMenuWillBecomeInvisible
 
     private void NewProjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewProjectActionPerformed
-        // TODO add your handling code here:
+  
+        saveNewProject = true;
+        pM.clearAllProjectFields();
+        ProjectsComboBox.setVisible(false);
+        ProjectTextField1.setVisible(false);
+        jLabel24.setVisible(false);
+        jLabel17.setVisible(false);
+        pM.projectCombobox();
+        pM.StatusCombobox();
+        pM.CustomerCombobox();
+        pM.getAvailableSkillsProject();
+
     }//GEN-LAST:event_NewProjectActionPerformed
 
     private void EditProjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditProjectActionPerformed
-        // TODO add your handling code here:
+        saveNewProject = false;
+        pM.clearAllProjectFields();
+        ProjectsComboBox.setVisible(true);
+        ProjectTextField1.setVisible(true);
+        jLabel24.setVisible(true);
+        jLabel17.setVisible(true);
+        pM.projectCombobox();
+        pM.StatusCombobox();
+        pM.CustomerCombobox();
+        pM.getAvailableSkillsProject();
     }//GEN-LAST:event_EditProjectActionPerformed
 
     private void sRemoveSelectedMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sRemoveSelectedMouseClicked
-        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel)sSkillTable.getModel();
+        int row = sSkillTable.getSelectedRow();
+        model.removeRow(row);
     }//GEN-LAST:event_sRemoveSelectedMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -2433,5 +2453,33 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     //    what.addElement(test);
 
         
+    }
+}
+
+
+class PromptComboBoxRenderer extends BasicComboBoxRenderer
+{
+    private String prompt;
+
+    /*
+     *  Set the text to display when no item has been selected.
+     */
+    public PromptComboBoxRenderer(String prompt)
+    {
+        this.prompt = "Inget valt";
+    }
+
+    /*
+     *  Custom rendering to display the prompt text when no item is selected
+     */
+    public Component getListCellRendererComponent(
+            JList list, Object value, int index, boolean isSelected, boolean cellHasFocus)
+    {
+        super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+
+        if (value == null)
+            setText( prompt );
+
+        return this;
     }
 }
