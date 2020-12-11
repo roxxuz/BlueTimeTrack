@@ -541,6 +541,23 @@ public class GUIMethods{
         return projectID;
     }
     
+    public ResultSet getAllProjectInfo(int projectID) {
+        try {
+            pstat = cn.prepareStatement("SELECT p.project_name, c.customer, c.contact, c.phone, c.email, p.project_description, ps.status " +
+                                        "FROM projects p " +
+                                        "JOIN customers c ON p.customer_id = c.customer_id " +
+                                        "JOIN project_status ps ON p.project_status_id = ps.project_status_id " +
+                                        "WHERE p.projects_id = ?");
+            pstat.setInt(1, projectID);
+            rs = pstat.executeQuery();
+            rs.next();
+        } catch (SQLException ex) {
+                System.out.println(ex);
+        }
+        
+        return rs;
+    }
+    
     public void setTimeTrackGUI(TimeTrackGUI tGUI) {
         this.tGUI = tGUI;
     }
@@ -585,7 +602,7 @@ public class GUIMethods{
         return availableEmail;
     }
     
-    public void getAvailableProjects(int userID, JComboBox comboBox) {
+    public ResultSet getAvailableProjects(int userID, JComboBox comboBox, boolean cBox) {
         
         comboBox.removeAllItems();
         comboBox.addItem("Välj projekt");
@@ -599,12 +616,15 @@ public class GUIMethods{
             pstat.setInt(1, userID);
             //Utför SQL statement till Databas. Returnerar ett resultat till ResultSet rs
             rs = pstat.executeQuery();
-            while(rs.next()) {
-                comboBox.addItem(rs.getString(1));
+            if(cBox) {
+                while(rs.next()) {
+                    comboBox.addItem(rs.getString(1));
+                }
             }
         }catch (SQLException ex) {
             Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return rs;
     }
     
     public void clearAllTextFieldsInCreateUser() {
@@ -900,7 +920,6 @@ public class GUIMethods{
 
     }
             
-            
     protected ResultSet getTimeStampFromDB(int userID, String date) {                                         
         //Select till tabell
         System.out.println(userID + " " + date);
@@ -923,6 +942,24 @@ public class GUIMethods{
         }
         return rs;
     }
+    
+    protected ResultSet getColleaguesFromDB(int projectID) {                                         
+        //Select till tabell
+        try {
+            pstat = cn.prepareStatement("SELECT CONCAT_WS(\" \", u.FName, u.LName) AS Namn, MAX(DATE(t.start_time)) AS \"Senast aktiv\"" +
+                                        "FROM users u" +
+                                        "JOIN time t ON u.user_id = t.user_id" +
+                                        "JOIN users_has_projects up ON u.user_id = up.user_id" +
+                                        "WHERE up.project_id = ?");
+            pstat.setInt(1, projectID);
+            rs = pstat.executeQuery();
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+        return rs;
+    }
+    
 }
 
 
