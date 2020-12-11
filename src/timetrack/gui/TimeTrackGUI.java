@@ -32,7 +32,9 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableModel;
 import net.proteanit.sql.DbUtils;
-
+import javax.swing.plaf.basic.BasicComboBoxRenderer;
+import javax.swing.JList;
+import java.awt.Component;
 
 public class TimeTrackGUI extends javax.swing.JFrame {
 
@@ -1057,6 +1059,8 @@ public class TimeTrackGUI extends javax.swing.JFrame {
             public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
             }
         });
+        SkillBox.setRenderer(new PromptComboBoxRenderer(""));
+        SkillBox.setSelectedIndex(-1);
         adminProjectPanel.add(ProjectsComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 90, 150, -1));
 
         adminProjectPanel.add(StatusComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 210, 180, -1));
@@ -1110,6 +1114,8 @@ public class TimeTrackGUI extends javax.swing.JFrame {
             public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
             }
         });
+        SkillBox.setRenderer(new PromptComboBoxRenderer(""));
+        SkillBox.setSelectedIndex(-1);
         adminProjectPanel.add(SkillBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 100, 160, -1));
 
         jLabel4.setText("Färdigheter");
@@ -1130,6 +1136,8 @@ public class TimeTrackGUI extends javax.swing.JFrame {
             public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
             }
         });
+        SkillBox.setRenderer(new PromptComboBoxRenderer(""));
+        SkillBox.setSelectedIndex(-1);
         adminProjectPanel.add(sSkillChosenBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 140, 160, -1));
 
         sSkillTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -1410,6 +1418,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_menuPanel5MouseExited
 
     private void menuPanel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuPanel6MouseClicked
+        saveNewProject = true;     
         selectedPanel(6);
         menuPanel1.setBackground(new java.awt.Color(92,126,162));
         menuPanel2.setBackground(new java.awt.Color(92,126,162));

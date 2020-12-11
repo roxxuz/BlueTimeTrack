@@ -2046,6 +2046,7 @@
                     <EventHandler event="popupMenuWillBecomeInvisible" listener="javax.swing.event.PopupMenuListener" parameters="javax.swing.event.PopupMenuEvent" handler="ProjectsComboBoxPopupMenuWillBecomeInvisible"/>
                   </Events>
                   <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_ListenersCodePost" type="java.lang.String" value="SkillBox.setRenderer(new PromptComboBoxRenderer(&quot;&quot;));&#xa;SkillBox.setSelectedIndex(-1);"/>
                     <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
                   </AuxValues>
@@ -2221,6 +2222,7 @@
                     <EventHandler event="popupMenuWillBecomeInvisible" listener="javax.swing.event.PopupMenuListener" parameters="javax.swing.event.PopupMenuEvent" handler="SkillBoxPopupMenuWillBecomeInvisible"/>
                   </Events>
                   <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_ListenersCodePost" type="java.lang.String" value="SkillBox.setRenderer(new PromptComboBoxRenderer(&quot;&quot;));&#xa;SkillBox.setSelectedIndex(-1);"/>
                     <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
                   </AuxValues>
@@ -2270,6 +2272,7 @@
                     <EventHandler event="popupMenuWillBecomeInvisible" listener="javax.swing.event.PopupMenuListener" parameters="javax.swing.event.PopupMenuEvent" handler="sSkillChosenBoxPopupMenuWillBecomeInvisible"/>
                   </Events>
                   <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_ListenersCodePost" type="java.lang.String" value="SkillBox.setRenderer(new PromptComboBoxRenderer(&quot;&quot;));&#xa;SkillBox.setSelectedIndex(-1);"/>
                     <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
                   </AuxValues>
