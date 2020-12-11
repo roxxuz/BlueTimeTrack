@@ -1120,6 +1120,15 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         jLabel26.setText("<html>Användare<br>på projekt</html>");
         adminProjectPanel.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 180, -1, -1));
 
+        sSkillChosenBox.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
+                sSkillChosenBoxPopupMenuWillBecomeInvisible(evt);
+            }
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+            }
+        });
         adminProjectPanel.add(sSkillChosenBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 140, 160, -1));
 
         sSkillTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -1138,12 +1147,27 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         adminProjectPanel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 180, 200, 200));
 
         sRemoveSelected.setText("Ta bort markerad");
+        sRemoveSelected.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                sRemoveSelectedMouseClicked(evt);
+            }
+        });
         adminProjectPanel.add(sRemoveSelected, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 400, -1, -1));
 
         NewProject.setText("Nytt Projekt");
+        NewProject.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NewProjectActionPerformed(evt);
+            }
+        });
         adminProjectPanel.add(NewProject, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 10, -1, -1));
 
         EditProject.setText("Redigera Projekt");
+        EditProject.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EditProjectActionPerformed(evt);
+            }
+        });
         adminProjectPanel.add(EditProject, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 10, -1, -1));
 
         mainPanel.add(adminProjectPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 780, 510));
@@ -1713,10 +1737,26 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_dp3PropertyChange
 
+    private void sSkillChosenBoxPopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_sSkillChosenBoxPopupMenuWillBecomeInvisible
+        // TODO add your handling code here:
+    }//GEN-LAST:event_sSkillChosenBoxPopupMenuWillBecomeInvisible
+
+    private void NewProjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewProjectActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_NewProjectActionPerformed
+
+    private void EditProjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditProjectActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EditProjectActionPerformed
+
+    private void sRemoveSelectedMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sRemoveSelectedMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_sRemoveSelectedMouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     protected javax.swing.JComboBox<String> CustomerComboBox;
-    private javax.swing.JButton EditProject;
-    private javax.swing.JButton NewProject;
+    protected javax.swing.JButton EditProject;
+    protected javax.swing.JButton NewProject;
     protected javax.swing.JTextArea ProjectTextArea1;
     protected javax.swing.JTextField ProjectTextField1;
     protected javax.swing.JTextField ProjectTextField2;
@@ -1807,7 +1847,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     private javax.swing.JLabel minimizeLabel;
     private javax.swing.JPanel minimizePanel;
     private javax.swing.JPanel motionPanel;
-    private javax.swing.JButton newProject;
+    protected javax.swing.JButton newProject;
     private javax.swing.JPanel overviewPanel;
     private javax.swing.JLabel pCurrent;
     private javax.swing.JScrollPane projectAvailableScrollPane;
@@ -1830,9 +1870,9 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     private javax.swing.JLabel projectPhoneLabel;
     private javax.swing.JTextField projectPhoneTextField;
     private javax.swing.JLabel projectTableHeaderLabel;
-    private javax.swing.JLabel sRemoveSelected;
-    private javax.swing.JComboBox<String> sSkillChosenBox;
-    private javax.swing.JTable sSkillTable;
+    protected javax.swing.JLabel sRemoveSelected;
+    protected javax.swing.JComboBox<String> sSkillChosenBox;
+    protected javax.swing.JTable sSkillTable;
     private javax.swing.JPanel settingsPanel;
     protected javax.swing.JComboBox<String> timeChooseEndTimeCB;
     protected javax.swing.JComboBox<String> timeChooseEndTimeCB1;
@@ -2391,7 +2431,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         DefaultListModel what = new DefaultListModel();
     //    String test = "";
     //    what.addElement(test);
-        UserList.setModel(what);
+
         
     }
 }
