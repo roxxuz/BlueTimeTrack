@@ -203,9 +203,9 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        sSkillChosenBox = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        sSkillTable = new javax.swing.JTable();
         sRemoveSelected = new javax.swing.JLabel();
         NewProject = new javax.swing.JButton();
         EditProject = new javax.swing.JButton();
@@ -1120,10 +1120,9 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         jLabel26.setText("<html>Användare<br>på projekt</html>");
         adminProjectPanel.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 180, -1, -1));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        adminProjectPanel.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 140, -1, -1));
+        adminProjectPanel.add(sSkillChosenBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 140, 160, -1));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        sSkillTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -1134,7 +1133,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(sSkillTable);
 
         adminProjectPanel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 180, 200, 200));
 
@@ -1733,7 +1732,6 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     private org.jdesktop.swingx.JXDatePicker dp2;
     private org.jdesktop.swingx.JXDatePicker dp3;
     protected javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1777,7 +1775,6 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JSeparator jSeparator7;
     private javax.swing.JSeparator jSeparator8;
-    private javax.swing.JTable jTable1;
     protected javax.swing.JTable jTable2;
     protected javax.swing.JTextField jTextField1;
     protected javax.swing.JTextField jTextField2;
@@ -1834,6 +1831,8 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     private javax.swing.JTextField projectPhoneTextField;
     private javax.swing.JLabel projectTableHeaderLabel;
     private javax.swing.JLabel sRemoveSelected;
+    private javax.swing.JComboBox<String> sSkillChosenBox;
+    private javax.swing.JTable sSkillTable;
     private javax.swing.JPanel settingsPanel;
     protected javax.swing.JComboBox<String> timeChooseEndTimeCB;
     protected javax.swing.JComboBox<String> timeChooseEndTimeCB1;
