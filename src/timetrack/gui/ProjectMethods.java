@@ -35,7 +35,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
-
+import net.proteanit.sql.DbUtils;
 /**
  *
  * @author Retina
@@ -49,37 +49,81 @@ public class ProjectMethods {
     String DBUser;
     String DBPass;
     TimeTrackGUI tGUI;
-    GUIMethods guiM = new GUIMethods();
+    ProjectMethods pM;
+    GUIMethods guiM;
     ArrayList<Integer> userid = new ArrayList<Integer>();
     ArrayList<Integer> useronproject = new ArrayList<Integer>();
     
     public ProjectMethods() {
-   // guiM.readProperties();
-    cn = guiM.prepareDBConnection();
-
+    
 
 }
+    public void setTimeTrackGUI(TimeTrackGUI tGUI) {
+        this.tGUI = tGUI;
+    }
+    
+    public void setGuiM(GUIMethods guiM){
+        this.guiM = guiM;
+    }
 
+    public void setConnection(Connection cn){
+        this.cn = cn;
+        
+    }
+    
+        protected void readProperties(){
+        //Metod som läser in värden från filen db.properties
+        //Skapar objekt av Properties för att läsa från filen db.properties
+        Properties prop = new Properties();
+        try {
+            FileReader reader = new FileReader("src/timetrack/gui/db.properties");
+            prop.load(reader);
+            //Tilldelar värdena från filen db.properties till klassvariablerna
+            //som sedan ska användas för att logga in på databasen
+            DBAddress = prop.getProperty("db");
+            DBUser = prop.getProperty("user");
+            DBPass = prop.getProperty("pass");
+            reader.close();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(LoginGUI.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println("Kanske saknas filen db.properties i src/timetrack/gui?");
+        } catch (IOException ex) {
+            Logger.getLogger(LoginGUI.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println("Kanske saknas filen db.properties i src/timetrack/gui?");
+        }
+    }
+        
+        public Connection prepareDBConnection() {
+        //Skapar Connection variabel med login info till DB
+        //och returnerar den
+        Connection con = null;
+        try {
+            con = DriverManager.getConnection(DBAddress, DBUser, DBPass);
+        } catch (SQLException ex) {
+            System.err.println("Uppkopplingen till databasen misslyckades. \n Förmodligen p.g.a för många användare aktiva");
+        }
+        return con;
+    }
 
     ////SÄTTER IN ALLA PROJEKT I EN COMBOBOX///
     public void projectCombobox(){
-
+        System.out.println("Projectszsz");
         tGUI.ProjectsComboBox.removeAllItems();
 
         try {
-            pstat = cn.prepareStatement("select project_name from projects");
-            rs = pstat.executeQuery();
+            pstat = guiM.cn.prepareStatement("select project_name from projects");
+            guiM.rs = guiM.pstat.executeQuery();
 
-            while (rs.next()) {
+            while (guiM.rs.next()) {
 
-                tGUI.ProjectsComboBox.addItem(rs.getString(1));
+                tGUI.ProjectsComboBox.addItem(guiM.rs.getString(1));
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ProjectMethods.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        tGUI.ProjectsComboBox.setSelectedItem(null);
+    //    tGUI.ProjectsComboBox.setSelectedItem(null);
     }
 
 
@@ -87,16 +131,16 @@ public class ProjectMethods {
         ///SÄTTER IN VAL AV STATUS I EN COMBOBOX///
         tGUI.StatusComboBox.removeAllItems();
         try {
-            pstat = cn.prepareStatement("select status from project_status");
+            guiM.pstat = guiM.cn.prepareStatement("select status from project_status");
             rs = pstat.executeQuery();
 
-            while (rs.next()) {
+            while (guiM.rs.next()) {
 
-                tGUI.StatusComboBox.addItem(rs.getString(1));
+                tGUI.StatusComboBox.addItem(guiM.rs.getString(1));
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ProjectMethods.class.getName()).log(Level.SEVERE, null, ex);
         }
         tGUI.StatusComboBox.setSelectedItem(null);
     }
@@ -114,7 +158,7 @@ public class ProjectMethods {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ProjectMethods.class.getName()).log(Level.SEVERE, null, ex);
         }
         tGUI.CustomerComboBox.setSelectedItem(null);
     }
@@ -145,7 +189,7 @@ public class ProjectMethods {
                 }
 
             } catch (SQLException ex) {
-                Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ProjectMethods.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         catch (Exception e) {
@@ -177,7 +221,7 @@ public class ProjectMethods {
 
         }
         catch (SQLException ex) {
-            Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ProjectMethods.class.getName()).log(Level.SEVERE, null, ex);
         } //return;
     }
 
@@ -198,7 +242,7 @@ public class ProjectMethods {
                 statusID = rs.getInt(1);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ProjectMethods.class.getName()).log(Level.SEVERE, null, ex);
         }
         return statusID;
     }
@@ -220,7 +264,7 @@ public class ProjectMethods {
                 customerID = rs.getInt(1);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ProjectMethods.class.getName()).log(Level.SEVERE, null, ex);
         }
         return customerID;
     }
@@ -240,7 +284,7 @@ public class ProjectMethods {
                 statusID = rs.getInt(1);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ProjectMethods.class.getName()).log(Level.SEVERE, null, ex);
         }
         return statusID;
     }
@@ -264,7 +308,7 @@ public class ProjectMethods {
             pstat.executeUpdate();
 
         }catch (SQLException ex) {
-            Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ProjectMethods.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -305,7 +349,7 @@ public class ProjectMethods {
                     tGUI.SkillBox.addItem(rs.getString(1));
                 }
             }catch (SQLException ex) {
-                Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ProjectMethods.class.getName()).log(Level.SEVERE, null, ex);
             }
             tGUI.SkillBox.setSelectedItem(null);
         }
@@ -341,7 +385,7 @@ public class ProjectMethods {
                 tGUI.sSkillChosenBox.setSelectedItem(null);
                 tGUI.sSkillChosenBox.setEnabled(true);
             } catch (SQLException ex) {
-                Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ProjectMethods.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         }
@@ -372,7 +416,7 @@ public class ProjectMethods {
                 skillID = rs.getInt(1);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ProjectMethods.class.getName()).log(Level.SEVERE, null, ex);
         }
         return skillID;
     }
@@ -413,7 +457,7 @@ public class ProjectMethods {
 
                 }
             } catch (SQLException ex) {
-                Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ProjectMethods.class.getName()).log(Level.SEVERE, null, ex);
             }
         } catch (Exception e) {
             System.err.println("setprojectskillusers");
@@ -460,7 +504,7 @@ public class ProjectMethods {
                 projectID = rs.getInt(1);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ProjectMethods.class.getName()).log(Level.SEVERE, null, ex);
         }
         return projectID;
     }
@@ -507,7 +551,7 @@ public class ProjectMethods {
 
                         useronproject.clear();
                     } catch (SQLException ex) {
-                        Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(ProjectMethods.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
                 else{

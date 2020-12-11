@@ -43,14 +43,25 @@ public class GUIMethods{
     JFrame loginJFrame;
     String currentUser;
     TimeTrackGUI tGUI;
+    ProjectMethods pM;
     //Kan ändras till private när logingenvägarna har tagits bort
     protected static int adminInt;
     ArrayList<Integer> userid = new ArrayList<Integer>();
+    ArrayList<Integer> uidSetOnP = new ArrayList<Integer>();
     ArrayList<Integer> useronproject = new ArrayList<Integer>();
+    Vector isSaved1 = new Vector();
+    Vector isSaved2 = new Vector();
+        // booleans uidSetOnP & uop är redan skapade som kan jämföra sparade användare med nuvarande användare.
+        String pName1, pName2;
+        String pDesc1, pDesc2;
+        String pStatus1, pStatus2;
+        String pCustomer1, pCustomer2;
     
     public GUIMethods() {
         readProperties();
         cn = prepareDBConnection();
+        pM.setConnection(cn);
+        
     }
     
     public int loginUser(String email, String pass1){
@@ -98,6 +109,11 @@ public class GUIMethods{
         
         return input;
     }
+    
+    public void setPm(ProjectMethods pM){
+        this.pM = pM;
+    }
+    
     
     protected void readProperties(){
         //Metod som läser in värden från filen db.properties
@@ -782,6 +798,7 @@ public class GUIMethods{
         catch (Exception e) {
             System.out.println("blabla");
         }
+          //   getProjectInfo1();
     }
 
     public void updateProject() {
@@ -876,7 +893,7 @@ public class GUIMethods{
         return statusID;
     }
 
-    public void newProject(){
+    public void saveNewProject(){
         ///SKAPAR ETT NYTT PROJEKT///
         String pn = tGUI.ProjectTextField2.getText();
         String pd = tGUI.ProjectTextArea1.getText();
@@ -917,7 +934,7 @@ public class GUIMethods{
                     JOptionPane.QUESTION_MESSAGE);
             if (svar == JOptionPane.YES_OPTION){
 
-                newProject();
+                saveNewProject();
                 q = true;                                }
             else{
                 q = false;
@@ -1036,11 +1053,11 @@ public class GUIMethods{
 
 
                 while(rs.next()) {
+                //    uidSetOnP.add(id);
                     int id = (rs.getInt(1));
                     String name = (rs.getString(2) + " " + (rs.getString(3)));
-                    //       Vector row = new Vector();
-                    //       row.add(id, name);
                     model.addRow(new Object[]{id, name});
+                        uidSetOnP.add(id);
 
                 }
             } catch (SQLException ex) {
@@ -1180,7 +1197,30 @@ public class GUIMethods{
         mod.setRowCount(0);
     }
 
+   /*
+    public void getProjectInfo1(){
+        // booleans uidSetOnP & uop är redan skapade som kan jämföra sparade användare med nuvarande användare.
+        pName1 = tGUI.ProjectTextField2.getText();
+        pDesc1 = tGUI.ProjectTextArea1.getText();
+        pStatus1 = (String) tGUI.StatusComboBox.getSelectedItem();
+        pCustomer1 = (String) tGUI.CustomerComboBox.getSelectedItem();
+        
+        isSaved1.add(pName1, pDesc1, pStatus1, pCustomer1);
+        
+    }
+    
+    public void getProjectInfo2(){
+        // booleans uidSetOnP & uop är redan skapade som kan jämföra sparade användare med nuvarande användare.
+        pName2 = tGUI.ProjectTextField2.getText();
+        pDesc2 = tGUI.ProjectTextArea1.getText();
+        pStatus2 = (String) tGUI.StatusComboBox.getSelectedItem();
+        pCustomer2 = (String) tGUI.CustomerComboBox.getSelectedItem();
+        
+        isSaved2.add(pName2, pDesc2, pStatus2, pCustomer2);
+                
+    }
 
+    */
 }
 
 

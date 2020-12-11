@@ -58,6 +58,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     boolean dateChangedAllowed = false;
     private boolean shuttingDown = false;
     boolean saveNewProject;
+    boolean projectSaved;
     
 
     public TimeTrackGUI(JFrame loginJFrame) {
@@ -1166,7 +1167,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         });
         adminProjectPanel.add(sRemoveSelected, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 400, -1, -1));
 
-        NewProject.setText("Nytt Projekt");
+        NewProject.setText("Skapa Projekt");
         NewProject.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 NewProjectActionPerformed(evt);
@@ -1435,6 +1436,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         pM.StatusCombobox();
         pM.CustomerCombobox();
         pM.getAvailableSkillsProject();
+        pCurrent.setText("Skapa");
         
     }//GEN-LAST:event_menuPanel6MouseClicked
 
@@ -1552,45 +1554,44 @@ public class TimeTrackGUI extends javax.swing.JFrame {
 
     private void newProjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newProjectActionPerformed
 
-    String pname = ProjectTextField2.getText();
-        int pid = pM.getProjectIdFromProjectName(pname);
+        String pname = ProjectTextField2.getText();
+
 
         if (saveNewProject){
-            pM.newProject();
-            pM.usersHasProject();
-            //    ProjectTextField2.setText("");
-            //    ProjectTextArea1.setText("");
+            guiM.saveNewProject();
+            guiM.usersHasProject();
             ProjectsComboBox.removeAllItems();
             CustomerComboBox.removeAllItems();
             StatusComboBox.removeAllItems();
-            pM.projectCombobox();
-            pM.StatusCombobox();
-            pM.CustomerCombobox();
+            guiM.projectCombobox();
+            guiM.StatusCombobox();
+            guiM.CustomerCombobox();
 
             ProjectsComboBox.setVisible(true);
             ProjectTextField1.setVisible(true);
             jLabel24.setVisible(true);
             jLabel17.setVisible(true);
             ProjectsComboBox.setSelectedItem(pname);
-            pM.setProjectInfo();
+            guiM.setProjectInfo();
             saveNewProject = false;
+            pCurrent.setText("Redigera");
 
         }else{
-            pM.updateProject();
-            pM.usersHasProject();
+            guiM.updateProject();
+            guiM.usersHasProject();
             ProjectsComboBox.removeAllItems();
-            pM.projectCombobox();
+            guiM.projectCombobox();
             ProjectsComboBox.setSelectedItem(pname);
         }
 
     }//GEN-LAST:event_newProjectActionPerformed
 
     private void ProjectsComboBoxPopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_ProjectsComboBoxPopupMenuWillBecomeInvisible
-        pM.setProjectInfo();
+        guiM.setProjectInfo();
     }//GEN-LAST:event_ProjectsComboBoxPopupMenuWillBecomeInvisible
 
     private void SkillBoxPopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_SkillBoxPopupMenuWillBecomeInvisible
-        pM.setSkillUsers();
+        guiM.setSkillUsers();
     }//GEN-LAST:event_SkillBoxPopupMenuWillBecomeInvisible
 
     private void timeChooseProjectCBPopupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_timeChooseProjectCBPopupMenuWillBecomeVisible
@@ -1770,35 +1771,38 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_dp3PropertyChange
 
     private void sSkillChosenBoxPopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_sSkillChosenBoxPopupMenuWillBecomeInvisible
-        pM.setProjectSkillUsers2();
+        guiM.setProjectSkillUsers2();
     }//GEN-LAST:event_sSkillChosenBoxPopupMenuWillBecomeInvisible
 
     private void NewProjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewProjectActionPerformed
   
         saveNewProject = true;
-        pM.clearAllProjectFields();
+        guiM.clearAllProjectFields();
         ProjectsComboBox.setVisible(false);
         ProjectTextField1.setVisible(false);
         jLabel24.setVisible(false);
         jLabel17.setVisible(false);
-        pM.projectCombobox();
-        pM.StatusCombobox();
-        pM.CustomerCombobox();
-        pM.getAvailableSkillsProject();
+        guiM.projectCombobox();
+        guiM.StatusCombobox();
+        guiM.CustomerCombobox();
+        guiM.getAvailableSkillsProject();
+        pCurrent.setText("Skapa");
 
     }//GEN-LAST:event_NewProjectActionPerformed
 
     private void EditProjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditProjectActionPerformed
+    //    guiM.getProjectInfo2();
         saveNewProject = false;
-        pM.clearAllProjectFields();
+        guiM.clearAllProjectFields();
         ProjectsComboBox.setVisible(true);
         ProjectTextField1.setVisible(true);
         jLabel24.setVisible(true);
         jLabel17.setVisible(true);
-        pM.projectCombobox();
-        pM.StatusCombobox();
-        pM.CustomerCombobox();
-        pM.getAvailableSkillsProject();
+        guiM.projectCombobox();
+        guiM.StatusCombobox();
+        guiM.CustomerCombobox();
+        guiM.getAvailableSkillsProject();
+        pCurrent.setText("Redigera");
     }//GEN-LAST:event_EditProjectActionPerformed
 
     private void sRemoveSelectedMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sRemoveSelectedMouseClicked
@@ -2469,6 +2473,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     
     private void projectSettings() {
         projectTableSettings();
+        pM.setGuiM(guiM);
     }
     
     private void timeTrackSettings() {
@@ -2477,6 +2482,8 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         //och uppdatera tid och datum via en jLabel längst ner i högra hörnet.
         timerThread.start();
         guiM.setTimeTrackGUI(this);
+        pM.setTimeTrackGUI(this);
+        guiM.setPm(pM);
         defaultMenuSettings();
         timeSettings();
         projectSettings();
