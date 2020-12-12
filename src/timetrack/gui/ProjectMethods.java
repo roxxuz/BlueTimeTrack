@@ -52,7 +52,20 @@ public class ProjectMethods {
     ProjectMethods pM;
     GUIMethods guiM;
     ArrayList<Integer> userid = new ArrayList<Integer>();
+    ArrayList<Integer> uidSetOnP = new ArrayList<Integer>();
     ArrayList<Integer> useronproject = new ArrayList<Integer>();
+    ArrayList<String> isSaved1 = new ArrayList<String>();
+    ArrayList<String> isSaved2 = new ArrayList<String>();
+        // booleans uidSetOnP & uop är redan skapade som kan jämföra sparade användare med nuvarande användare.
+        String pName1 = ""; 
+        String pName2 = "";
+        String pDesc1 = "";
+        String pDesc2 = "";
+        String pStatus1 = "";
+        String pStatus2 = "";
+        String pCustomer1 = "";
+        String pCustomer2 = "";
+    boolean compareProjectFields;
     
     public ProjectMethods() {
     
@@ -105,25 +118,24 @@ public class ProjectMethods {
         return con;
     }
 
-    ////SÄTTER IN ALLA PROJEKT I EN COMBOBOX///
+     ////SÄTTER IN ALLA PROJEKT I EN COMBOBOX///
     public void projectCombobox(){
-        System.out.println("Projectszsz");
         tGUI.ProjectsComboBox.removeAllItems();
 
         try {
-            pstat = guiM.cn.prepareStatement("select project_name from projects");
-            guiM.rs = guiM.pstat.executeQuery();
+            pstat = cn.prepareStatement("select project_name from projects");
+            rs = pstat.executeQuery();
 
-            while (guiM.rs.next()) {
+            while (rs.next()) {
 
-                tGUI.ProjectsComboBox.addItem(guiM.rs.getString(1));
+                tGUI.ProjectsComboBox.addItem(rs.getString(1));
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(ProjectMethods.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-    //    tGUI.ProjectsComboBox.setSelectedItem(null);
+        tGUI.ProjectsComboBox.setSelectedItem(null);
     }
 
 
@@ -131,16 +143,16 @@ public class ProjectMethods {
         ///SÄTTER IN VAL AV STATUS I EN COMBOBOX///
         tGUI.StatusComboBox.removeAllItems();
         try {
-            guiM.pstat = guiM.cn.prepareStatement("select status from project_status");
+            pstat = cn.prepareStatement("select status from project_status");
             rs = pstat.executeQuery();
 
-            while (guiM.rs.next()) {
+            while (rs.next()) {
 
-                tGUI.StatusComboBox.addItem(guiM.rs.getString(1));
+                tGUI.StatusComboBox.addItem(rs.getString(1));
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(ProjectMethods.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
         }
         tGUI.StatusComboBox.setSelectedItem(null);
     }
@@ -158,7 +170,7 @@ public class ProjectMethods {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(ProjectMethods.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
         }
         tGUI.CustomerComboBox.setSelectedItem(null);
     }
@@ -166,6 +178,8 @@ public class ProjectMethods {
 
     ///HÄMTAR INFO OM PROJEKT MAN VÄLJER I COMBOBOX OCH SÄTTER I TEXTFIELDS/COMBOBOX///
     public void setProjectInfo() {
+        compareProjectFields = true;
+        isSaved1.clear();
 
         try {
             String projectName = tGUI.ProjectsComboBox.getSelectedItem().toString();
@@ -187,7 +201,8 @@ public class ProjectMethods {
                     tGUI.StatusComboBox.setSelectedItem(rs.getString(4));
                     tGUI.CustomerComboBox.setSelectedItem(rs.getString(5));
                 }
-
+                        getProjectInfo1();
+                        
             } catch (SQLException ex) {
                 Logger.getLogger(ProjectMethods.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -223,6 +238,38 @@ public class ProjectMethods {
         catch (SQLException ex) {
             Logger.getLogger(ProjectMethods.class.getName()).log(Level.SEVERE, null, ex);
         } //return;
+    }
+    
+    public void saveMethod(){
+                String pname = tGUI.ProjectTextField2.getText();
+
+
+        if (tGUI.saveNewProject){
+            pM.saveNewProject();
+            pM.usersHasProject();
+            tGUI.ProjectsComboBox.removeAllItems();
+            tGUI.CustomerComboBox.removeAllItems();
+            tGUI.StatusComboBox.removeAllItems();
+            pM.projectCombobox();
+            pM.StatusCombobox();
+            pM.CustomerCombobox();
+
+            tGUI.ProjectsComboBox.setVisible(true);
+            tGUI.ProjectTextField1.setVisible(true);
+            tGUI.jLabel24.setVisible(true);
+            tGUI.jLabel17.setVisible(true);
+            tGUI.ProjectsComboBox.setSelectedItem(pname);
+            pM.setProjectInfo();
+            tGUI.saveNewProject = false;
+            tGUI.pCurrent.setText("Redigera");
+
+        }else{
+            pM.updateProject();
+            pM.usersHasProject();
+            tGUI.ProjectsComboBox.removeAllItems();
+            pM.projectCombobox();
+            tGUI.ProjectsComboBox.setSelectedItem(pname);
+        }
     }
 
 
@@ -289,7 +336,7 @@ public class ProjectMethods {
         return statusID;
     }
 
-    public void newProject(){
+    public void saveNewProject(){
         ///SKAPAR ETT NYTT PROJEKT///
         String pn = tGUI.ProjectTextField2.getText();
         String pd = tGUI.ProjectTextArea1.getText();
@@ -330,7 +377,7 @@ public class ProjectMethods {
                     JOptionPane.QUESTION_MESSAGE);
             if (svar == JOptionPane.YES_OPTION){
 
-                newProject();
+                saveNewProject();
                 q = true;                                }
             else{
                 q = false;
@@ -451,8 +498,6 @@ public class ProjectMethods {
                 while(rs.next()) {
                     int id = (rs.getInt(1));
                     String name = (rs.getString(2) + " " + (rs.getString(3)));
-                    //       Vector row = new Vector();
-                    //       row.add(id, name);
                     model.addRow(new Object[]{id, name});
 
                 }
@@ -593,6 +638,77 @@ public class ProjectMethods {
         mod.setRowCount(0);
     }
 
+        public void getProjectInfo1(){
+        // booleans uidSetOnP & uop är redan skapade som kan jämföra sparade användare med nuvarande användare.
+        pName1 = tGUI.ProjectTextField2.getText();
+        pDesc1 = tGUI.ProjectTextArea1.getText();
+        pStatus1 = (String) tGUI.StatusComboBox.getSelectedItem();
+        pCustomer1 = (String) tGUI.CustomerComboBox.getSelectedItem();
+
+            System.out.println(pName1);
+            System.out.println(pDesc1);
+            System.out.println(pStatus1);
+            System.out.println(pCustomer1);
+        }
+    
+    public void getProjectInfo2(){
+        // booleans uidSetOnP & uop är redan skapade som kan jämföra sparade användare med nuvarande användare.
+        pName2 = tGUI.ProjectTextField2.getText();
+        pDesc2 = tGUI.ProjectTextArea1.getText();
+        pStatus2 = (String) tGUI.StatusComboBox.getSelectedItem();
+        pCustomer2 = (String) tGUI.CustomerComboBox.getSelectedItem();
+        
+        System.out.println(pName2);
+        System.out.println(pDesc2);
+        System.out.println(pStatus2);
+        System.out.println(pCustomer2);
+    }
+
+        
+        public void compareFields(){
+            
+            System.out.println(pName1);
+            System.out.println(pName2);
+            
+            if (pName1.equals(pName2)
+                    &&
+                pDesc1.equals(pDesc2)
+                    &&
+                pStatus1.equals(pStatus2)
+                    &&
+                pCustomer1.equals(pCustomer2)) {
+                System.out.println("the same");
+            }
+            else {
+                System.out.println("Do you want to save changes?");
+                 {
+            int svar = JOptionPane.showConfirmDialog(null,
+                   "Vill du spara ändringar?", "Spara?",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.QUESTION_MESSAGE);
+            if (svar == JOptionPane.YES_OPTION){
+                tGUI.newProject();
+                else{
+                    tGUI.EditProject;
+                }
+                }
+            else{
+                q = false;
+            }
+        }  
+                
+            }
+        }
+        
+        public void resetIsSaved(){
+        pName1 = ""; 
+        pName2 = "";
+        pDesc1 = "";
+        pDesc2 = "";
+        pStatus1 = "";
+        pStatus2 = "";
+        pCustomer1 = "";
+        pCustomer2 = "";
+        
+        }
 }
-
-
