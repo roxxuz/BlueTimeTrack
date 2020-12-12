@@ -60,7 +60,7 @@ public class GUIMethods{
     public GUIMethods() {
         readProperties();
         cn = prepareDBConnection();
-        pM.setConnection(cn);
+
         
     }
     
@@ -112,6 +112,7 @@ public class GUIMethods{
     
     public void setPm(ProjectMethods pM){
         this.pM = pM;
+        this.pM.setConnection(cn);
     }
     
     
@@ -708,6 +709,11 @@ public class GUIMethods{
         return rs;
     }
     
+    
+    
+    
+    
+    /*
      ////SÄTTER IN ALLA PROJEKT I EN COMBOBOX///
     public void projectCombobox(){
         System.out.println("Projectszsz");
@@ -1196,7 +1202,7 @@ public class GUIMethods{
         DefaultTableModel mod = (DefaultTableModel) tGUI.sSkillTable.getModel();
         mod.setRowCount(0);
     }
-
+*/
    /*
     public void getProjectInfo1(){
         // booleans uidSetOnP & uop är redan skapade som kan jämföra sparade användare med nuvarande användare.

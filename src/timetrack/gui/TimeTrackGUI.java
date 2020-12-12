@@ -57,8 +57,10 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     String[] defaultComboBox = {""};
     boolean dateChangedAllowed = false;
     private boolean shuttingDown = false;
-    boolean saveNewProject;
-    boolean projectSaved;
+    boolean saveNewProject;   ///true = spara nytt projekt - false = spara redigerat projekt
+    boolean projectSaved;   
+    
+
     
 
     public TimeTrackGUI(JFrame loginJFrame) {
@@ -1432,11 +1434,16 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         menuPanel8.setBackground(new java.awt.Color(92,126,162));
         Arrays.fill(menuArray, Boolean.FALSE);
         menuArray[5] = true;
+        ProjectsComboBox.setVisible(false);
+        ProjectTextField1.setVisible(false);
+        jLabel24.setVisible(false);
+        jLabel17.setVisible(false);
         pM.projectCombobox();
         pM.StatusCombobox();
         pM.CustomerCombobox();
         pM.getAvailableSkillsProject();
         pCurrent.setText("Skapa");
+        pM.getProjectInfo1();
         
     }//GEN-LAST:event_menuPanel6MouseClicked
 
@@ -1553,45 +1560,16 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox1PopupMenuWillBecomeInvisible
 
     private void newProjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newProjectActionPerformed
-
-        String pname = ProjectTextField2.getText();
-
-
-        if (saveNewProject){
-            guiM.saveNewProject();
-            guiM.usersHasProject();
-            ProjectsComboBox.removeAllItems();
-            CustomerComboBox.removeAllItems();
-            StatusComboBox.removeAllItems();
-            guiM.projectCombobox();
-            guiM.StatusCombobox();
-            guiM.CustomerCombobox();
-
-            ProjectsComboBox.setVisible(true);
-            ProjectTextField1.setVisible(true);
-            jLabel24.setVisible(true);
-            jLabel17.setVisible(true);
-            ProjectsComboBox.setSelectedItem(pname);
-            guiM.setProjectInfo();
-            saveNewProject = false;
-            pCurrent.setText("Redigera");
-
-        }else{
-            guiM.updateProject();
-            guiM.usersHasProject();
-            ProjectsComboBox.removeAllItems();
-            guiM.projectCombobox();
-            ProjectsComboBox.setSelectedItem(pname);
-        }
-
+        pM.saveMethod();
     }//GEN-LAST:event_newProjectActionPerformed
 
     private void ProjectsComboBoxPopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_ProjectsComboBoxPopupMenuWillBecomeInvisible
-        guiM.setProjectInfo();
+        pM.setProjectInfo();
+        pM.setProjectSkillUsers();
     }//GEN-LAST:event_ProjectsComboBoxPopupMenuWillBecomeInvisible
 
     private void SkillBoxPopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_SkillBoxPopupMenuWillBecomeInvisible
-        guiM.setSkillUsers();
+        pM.setSkillUsers();
     }//GEN-LAST:event_SkillBoxPopupMenuWillBecomeInvisible
 
     private void timeChooseProjectCBPopupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_timeChooseProjectCBPopupMenuWillBecomeVisible
@@ -1771,37 +1749,47 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_dp3PropertyChange
 
     private void sSkillChosenBoxPopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_sSkillChosenBoxPopupMenuWillBecomeInvisible
-        guiM.setProjectSkillUsers2();
+        pM.setProjectSkillUsers2();
     }//GEN-LAST:event_sSkillChosenBoxPopupMenuWillBecomeInvisible
 
     private void NewProjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewProjectActionPerformed
-  
+
+        pM.getProjectInfo2();
+        pM.compareFields();
+
+        pM.getProjectInfo1();
         saveNewProject = true;
-        guiM.clearAllProjectFields();
+        pM.clearAllProjectFields();
         ProjectsComboBox.setVisible(false);
         ProjectTextField1.setVisible(false);
         jLabel24.setVisible(false);
         jLabel17.setVisible(false);
-        guiM.projectCombobox();
-        guiM.StatusCombobox();
-        guiM.CustomerCombobox();
-        guiM.getAvailableSkillsProject();
+        pM.projectCombobox();
+        pM.StatusCombobox();
+        pM.CustomerCombobox();
+        pM.getAvailableSkillsProject();
         pCurrent.setText("Skapa");
+        pM.resetIsSaved();
+        
+        pM.printAL();
 
     }//GEN-LAST:event_NewProjectActionPerformed
 
     private void EditProjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditProjectActionPerformed
-    //    guiM.getProjectInfo2();
+
+        pM.getProjectInfo2();
+        pM.compareFields();
+        pM.resetIsSaved();
         saveNewProject = false;
-        guiM.clearAllProjectFields();
+        pM.clearAllProjectFields();
         ProjectsComboBox.setVisible(true);
         ProjectTextField1.setVisible(true);
         jLabel24.setVisible(true);
         jLabel17.setVisible(true);
-        guiM.projectCombobox();
-        guiM.StatusCombobox();
-        guiM.CustomerCombobox();
-        guiM.getAvailableSkillsProject();
+        pM.projectCombobox();
+        pM.StatusCombobox();
+        pM.CustomerCombobox();
+        pM.getAvailableSkillsProject();
         pCurrent.setText("Redigera");
     }//GEN-LAST:event_EditProjectActionPerformed
 
@@ -1838,7 +1826,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     protected javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
+    protected javax.swing.JLabel jLabel17;
     protected javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
@@ -1846,7 +1834,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
+    protected javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel3;
@@ -1907,7 +1895,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     private javax.swing.JPanel motionPanel;
     protected javax.swing.JButton newProject;
     private javax.swing.JPanel overviewPanel;
-    private javax.swing.JLabel pCurrent;
+    protected javax.swing.JLabel pCurrent;
     private javax.swing.JScrollPane projectAvailableScrollPane;
     private javax.swing.JTable projectAvailableTable;
     private javax.swing.JLabel projectColleagueLabel;
