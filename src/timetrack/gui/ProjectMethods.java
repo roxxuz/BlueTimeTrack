@@ -51,11 +51,11 @@ public class ProjectMethods {
     TimeTrackGUI tGUI;
     ProjectMethods pM;
     GUIMethods guiM;
-    ArrayList<Integer> userid = new ArrayList<Integer>();
-    ArrayList<Integer> uidSetOnP = new ArrayList<Integer>();
+    ArrayList<Integer> userid = new ArrayList<Integer>();///Skriver in användare till projekt vid öppna projekt.
+    ArrayList<Integer> uidSetOnP = new ArrayList<Integer>();  
     ArrayList<Integer> useronproject = new ArrayList<Integer>();
-    ArrayList<String> isSaved1 = new ArrayList<String>();
-    ArrayList<String> isSaved2 = new ArrayList<String>();
+    ArrayList <Integer> uop = new ArrayList <Integer>();
+
         // booleans uidSetOnP & uop är redan skapade som kan jämföra sparade användare med nuvarande användare.
         String pName1 = ""; 
         String pName2 = "";
@@ -178,8 +178,6 @@ public class ProjectMethods {
 
     ///HÄMTAR INFO OM PROJEKT MAN VÄLJER I COMBOBOX OCH SÄTTER I TEXTFIELDS/COMBOBOX///
     public void setProjectInfo() {
-        compareProjectFields = true;
-        isSaved1.clear();
 
         try {
             String projectName = tGUI.ProjectsComboBox.getSelectedItem().toString();
@@ -245,31 +243,32 @@ public class ProjectMethods {
 
 
         if (tGUI.saveNewProject){
-            pM.saveNewProject();
-            pM.usersHasProject();
+            saveNewProject();
+            usersHasProject();
             tGUI.ProjectsComboBox.removeAllItems();
             tGUI.CustomerComboBox.removeAllItems();
             tGUI.StatusComboBox.removeAllItems();
-            pM.projectCombobox();
-            pM.StatusCombobox();
-            pM.CustomerCombobox();
+            projectCombobox();
+            StatusCombobox();
+            CustomerCombobox();
 
             tGUI.ProjectsComboBox.setVisible(true);
             tGUI.ProjectTextField1.setVisible(true);
             tGUI.jLabel24.setVisible(true);
             tGUI.jLabel17.setVisible(true);
             tGUI.ProjectsComboBox.setSelectedItem(pname);
-            pM.setProjectInfo();
+            setProjectInfo();
             tGUI.saveNewProject = false;
             tGUI.pCurrent.setText("Redigera");
 
         }else{
-            pM.updateProject();
-            pM.usersHasProject();
+            updateProject();
+            usersHasProject();
             tGUI.ProjectsComboBox.removeAllItems();
-            pM.projectCombobox();
+            projectCombobox();
             tGUI.ProjectsComboBox.setSelectedItem(pname);
         }
+        getProjectInfo1();
     }
 
 
@@ -474,6 +473,7 @@ public class ProjectMethods {
     ///LÄGG TILL ANVÄNDARE SOM ÄR KOPPLADE TILL PROJEKTET I EN JTABLE///
     public void setProjectSkillUsers() {
         try {
+            uidSetOnP.clear();
             DefaultTableModel model = (DefaultTableModel)tGUI.sSkillTable.getModel();
             int a = tGUI.sSkillTable.getRowCount();
             for(int i = a; i > 0 ; i--) {
@@ -499,7 +499,7 @@ public class ProjectMethods {
                     int id = (rs.getInt(1));
                     String name = (rs.getString(2) + " " + (rs.getString(3)));
                     model.addRow(new Object[]{id, name});
-
+                    uidSetOnP.add(id);
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(ProjectMethods.class.getName()).log(Level.SEVERE, null, ex);
@@ -644,11 +644,19 @@ public class ProjectMethods {
         pDesc1 = tGUI.ProjectTextArea1.getText();
         pStatus1 = (String) tGUI.StatusComboBox.getSelectedItem();
         pCustomer1 = (String) tGUI.CustomerComboBox.getSelectedItem();
-
+        
+        if (pStatus1 == null){
+            pStatus1 = "";
+        }
+        if (pCustomer1 == null){
+            pCustomer1 = "";
+        }
+            System.out.println("111111");
             System.out.println(pName1);
             System.out.println(pDesc1);
             System.out.println(pStatus1);
             System.out.println(pCustomer1);
+            System.out.println("1111111");
         }
     
     public void getProjectInfo2(){
@@ -658,17 +666,23 @@ public class ProjectMethods {
         pStatus2 = (String) tGUI.StatusComboBox.getSelectedItem();
         pCustomer2 = (String) tGUI.CustomerComboBox.getSelectedItem();
         
+        if (pStatus2 == null){
+            pStatus2 = "";
+        }
+        if (pCustomer2 == null){
+            pCustomer2 = "";
+        }
+        System.out.println("22222");
         System.out.println(pName2);
         System.out.println(pDesc2);
         System.out.println(pStatus2);
         System.out.println(pCustomer2);
+        System.out.println("222222");
     }
 
         
         public void compareFields(){
-            
-            System.out.println(pName1);
-            System.out.println(pName2);
+              
             
             if (pName1.equals(pName2)
                     &&
@@ -676,8 +690,11 @@ public class ProjectMethods {
                     &&
                 pStatus1.equals(pStatus2)
                     &&
-                pCustomer1.equals(pCustomer2)) {
-                System.out.println("the same");
+                pCustomer1.equals(pCustomer2) )
+        //            &&
+        //        uidSetOnP.equals(useronproject))  
+            {
+                System.out.println("\nthe same");
             }
             else {
                 System.out.println("Do you want to save changes?");
@@ -687,17 +704,13 @@ public class ProjectMethods {
                     JOptionPane.YES_NO_OPTION,
                     JOptionPane.QUESTION_MESSAGE);
             if (svar == JOptionPane.YES_OPTION){
-                tGUI.newProject();
-                else{
-                    tGUI.EditProject;
-                }
-                }
-            else{
-                q = false;
-            }
-        }  
+                saveMethod();
                 
+            }  else {
+                }                            
+        }                  
             }
+            
         }
         
         public void resetIsSaved(){
@@ -710,5 +723,14 @@ public class ProjectMethods {
         pCustomer1 = "";
         pCustomer2 = "";
         
+        }
+        
+        public void printAL(){
+                for (int i : userid){
+                System.out.println("uidSetOnP " + i);
+            }
+                for (int i :useronproject){
+                System.out.println("useronproject " + i);
+            }
         }
 }
