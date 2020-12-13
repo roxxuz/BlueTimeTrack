@@ -867,6 +867,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
             }
         ));
         projectAvailableTable.setRowHeight(30);
+        projectAvailableTable.setShowGrid(false);
         projectAvailableTable.setTableHeader(null);
         projectAvailableScrollPane.setViewportView(projectAvailableTable);
 
