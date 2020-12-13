@@ -526,6 +526,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         timeChooseProjectCB.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         timeChooseProjectCB.setForeground(new java.awt.Color(165, 165, 165));
         timeChooseProjectCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välj projekt", "Item 2", "Item 3", "Item 4" }));
+        timeChooseProjectCB.setBorder(null);
         timeChooseProjectCB.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
             public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
             }
@@ -543,6 +544,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         timeChooseStartTimeCB.setForeground(new java.awt.Color(165, 165, 165));
         timeChooseStartTimeCB.setMaximumRowCount(19);
         timeChooseStartTimeCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        timeChooseStartTimeCB.setBorder(null);
         timeChooseStartTimeCB.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
             public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
             }
@@ -560,6 +562,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         timeChooseEndTimeCB.setForeground(new java.awt.Color(165, 165, 165));
         timeChooseEndTimeCB.setMaximumRowCount(19);
         timeChooseEndTimeCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        timeChooseEndTimeCB.setBorder(null);
         timeChooseEndTimeCB.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
             public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
             }
@@ -744,6 +747,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         timeChooseProjectCB1.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         timeChooseProjectCB1.setForeground(new java.awt.Color(165, 165, 165));
         timeChooseProjectCB1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välj projekt", "Item 2", "Item 3", "Item 4" }));
+        timeChooseProjectCB1.setBorder(null);
         timeChooseProjectCB1.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
             public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
             }
@@ -761,6 +765,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         timeChooseStartTimeCB1.setForeground(new java.awt.Color(165, 165, 165));
         timeChooseStartTimeCB1.setMaximumRowCount(19);
         timeChooseStartTimeCB1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        timeChooseStartTimeCB1.setBorder(null);
         timeChooseStartTimeCB1.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
             public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
             }
@@ -778,6 +783,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         timeChooseEndTimeCB1.setForeground(new java.awt.Color(165, 165, 165));
         timeChooseEndTimeCB1.setMaximumRowCount(19);
         timeChooseEndTimeCB1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        timeChooseEndTimeCB1.setBorder(null);
         timeChooseEndTimeCB1.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
             public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
             }
@@ -861,6 +867,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
             }
         ));
         projectAvailableTable.setRowHeight(30);
+        projectAvailableTable.setShowGrid(false);
         projectAvailableTable.setTableHeader(null);
         projectAvailableScrollPane.setViewportView(projectAvailableTable);
 
