@@ -699,7 +699,8 @@ public class GUIMethods{
                                         "FROM users u " +
                                         "JOIN time t ON u.user_id = t.user_id " +
                                         "JOIN users_has_projects up ON u.user_id = up.user_id " +
-                                        "WHERE up.project_id = ?");
+                                        "WHERE t.project_id = ? " +
+                                        "GROUP BY Namn");
             pstat.setInt(1, projectID);
             rs = pstat.executeQuery();
             
