@@ -1123,8 +1123,10 @@ public class GUIMethods{
     public void getUserIdFromProject (int pid) {
 
         try {
+
             pstat = cn.prepareStatement("select user_id from users_has_projects where project_id = ?");
             pstat.setInt(1, pid);
+
             rs = pstat.executeQuery();
 
             while (rs.next()) {

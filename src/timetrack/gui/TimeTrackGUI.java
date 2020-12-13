@@ -2417,6 +2417,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
             } catch (Exception e) {
                 System.err.println("Något gick fel i Override av valueChanged() i metoden projectTableSettings()");
             }
+            setTableCellsAlignment(projectColleagueTable, SwingConstants.CENTER);
             
         }
         });
@@ -2459,9 +2460,15 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         timeHidePanels();
     }
     
+    private void projectColleaguesTableSettings() {
+        //inget här
+    }
+    
     private void projectSettings() {
         projectTableSettings();
         pM.setGuiM(guiM);
+        projectColleaguesTableSettings();
+
     }
     
     private void timeTrackSettings() {
