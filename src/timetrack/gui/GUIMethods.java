@@ -202,7 +202,7 @@ public class GUIMethods{
                 int skillID = 0;
                 skillID = rs.getInt(1);
                 //Gör insert med vald skill + userID
-                pstat = cn.prepareStatement("INSERT INTO users_has_skills (skill_id, users_id) VALUES (?,?)");
+                pstat = cn.prepareStatement("INSERT INTO users_has_skills (skill_id, user_id) VALUES (?,?)");
                 pstat.setInt(1, skillID);
                 pstat.setInt(2, userID);
                 pstat.executeUpdate();
