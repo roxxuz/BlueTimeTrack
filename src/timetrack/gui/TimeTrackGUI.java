@@ -213,6 +213,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         jTable3 = new javax.swing.JTable();
         jLabel34 = new javax.swing.JLabel();
         jLabel35 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         adminProjectPanel = new javax.swing.JPanel();
         pCurrent = new javax.swing.JLabel();
         ProjectsComboBox = new javax.swing.JComboBox<>();
@@ -1011,9 +1012,19 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         adminUserChoosePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         adminCreateUserBtn.setText("SKAPA NY ANVÄNDARE");
+        adminCreateUserBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                adminCreateUserBtnActionPerformed(evt);
+            }
+        });
         adminUserChoosePanel.add(adminCreateUserBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 150, 380, 100));
 
         adminEditUserBtn.setText("REDIGERA BEFINTLIG ANVÄNDARE");
+        adminEditUserBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                adminEditUserBtnActionPerformed(evt);
+            }
+        });
         adminUserChoosePanel.add(adminEditUserBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 270, 380, 100));
 
         adminUserChooseHeaderLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -1171,6 +1182,9 @@ public class TimeTrackGUI extends javax.swing.JFrame {
             }
         });
         adminEditUserPanel1.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 380, 110, 30));
+
+        jLabel5.setText("REDIGERA ANVÄNDARE");
+        adminEditUserPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 10, -1, -1));
 
         adminUserSelectPanel.add(adminEditUserPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 780, 510));
 
@@ -1939,6 +1953,19 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel35MouseClicked
 
+    private void adminCreateUserBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminCreateUserBtnActionPerformed
+        adminUserChoosePanel.setVisible(false);
+        adminEditUserPanel1.setVisible(false);
+        adminUserPanel1.setVisible(true);
+        
+    }//GEN-LAST:event_adminCreateUserBtnActionPerformed
+
+    private void adminEditUserBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminEditUserBtnActionPerformed
+        adminUserChoosePanel.setVisible(false);
+        adminUserPanel1.setVisible(false);
+        adminEditUserPanel1.setVisible(true);
+    }//GEN-LAST:event_adminEditUserBtnActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     protected javax.swing.JComboBox<String> CustomerComboBox;
     protected javax.swing.JButton EditProject;
@@ -1964,7 +1991,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     private org.jdesktop.swingx.JXDatePicker dp2;
     private org.jdesktop.swingx.JXDatePicker dp3;
     protected javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
+    protected javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1991,10 +2018,11 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
-    private javax.swing.JLabel jLabel33;
-    private javax.swing.JLabel jLabel34;
+    protected javax.swing.JLabel jLabel33;
+    protected javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -2002,7 +2030,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     protected javax.swing.JPasswordField jPasswordField2;
-    private javax.swing.JPasswordField jPasswordField3;
+    protected javax.swing.JPasswordField jPasswordField3;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
@@ -2021,13 +2049,13 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator7;
     private javax.swing.JSeparator jSeparator8;
     protected javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
+    protected javax.swing.JTable jTable3;
     protected javax.swing.JTextField jTextField1;
     protected javax.swing.JTextField jTextField2;
     protected javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
+    protected javax.swing.JTextField jTextField4;
+    protected javax.swing.JTextField jTextField5;
+    protected javax.swing.JTextField jTextField6;
     private javax.swing.JLabel logoLabel;
     private javax.swing.JPanel mainLeftPanel;
     private javax.swing.JPanel mainPanel;
@@ -2234,7 +2262,10 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         timePanel.setVisible(false);
         projectPanel.setVisible(false);
         overviewPanel.setVisible(false);
+        adminUserSelectPanel.setVisible(false);
         adminUserChoosePanel.setVisible(false);
+        adminEditUserPanel1.setVisible(false);
+        adminUserPanel1.setVisible(false);
         adminProjectPanel.setVisible(false);
         settingsPanel.setVisible(false);
         
@@ -2264,6 +2295,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
                 
                 break;
             case 5:
+                adminUserSelectPanel.setVisible(true);
                 adminUserChoosePanel.setVisible(true);
                 break;
             case 6:
@@ -2683,6 +2715,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         projectSettings();
         adminSettings();
         adminUserSettings();
+        adminUserChoosePanel.setVisible(false);
         
         DefaultListModel what = new DefaultListModel();
     //    String test = "";
