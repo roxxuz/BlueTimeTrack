@@ -35,6 +35,7 @@ import net.proteanit.sql.DbUtils;
 import javax.swing.plaf.basic.BasicComboBoxRenderer;
 import javax.swing.JList;
 import java.awt.Component;
+import java.util.Calendar;
 
 public class TimeTrackGUI extends javax.swing.JFrame {
 
@@ -1611,6 +1612,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
 
     private void timeChooseEndTimeCBPopupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_timeChooseEndTimeCBPopupMenuWillBecomeVisible
         timeChooseEndTimeCB.setForeground(new Color(51,51,51));
+        timeChooseEndTimeCB.removeItemAt(3);
     }//GEN-LAST:event_timeChooseEndTimeCBPopupMenuWillBecomeVisible
 
     private void dp1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dp1PropertyChange
@@ -2040,10 +2042,36 @@ public class TimeTrackGUI extends javax.swing.JFrame {
             JOptionPane.showConfirmDialog(this, "Du måste ange " + missingFieldsMsg + "för att rapportera tiden"
                                                , "Missade fält", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE);
         }
+        
         else{
-            //Om inga fält saknas så utförs tidrapporteringen
-            guiM.sendTimeToDB(userID, projectID, date, startTime, endTime);
+            if(!startTimeBeforeEndTime(startTime, endTime)){
+                JOptionPane.showConfirmDialog(this, "Du måste ange en sluttid som är senare än starttiden för att rapportera tiden"
+                                               , "Felaktig sluttid", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE);
+            }
+            else {
+                //Om inga fält saknas och starttiden är innan sluttiden så utförs tidrapporteringen
+                guiM.sendTimeToDB(userID, projectID, date, startTime, endTime);
+            }
         }
+    }
+    
+    private boolean startTimeBeforeEndTime(String startTime, String endTime) {
+        
+        boolean startTimeBeforeEndTime;
+        //Gör om string till StringBuilder för att kunna använda metoden deleteCharAt()
+        StringBuilder st = new StringBuilder(startTime);
+        StringBuilder et = new StringBuilder(endTime);
+        //Tar bort position 2 (kolontecknet) i tiderna
+        st.deleteCharAt(2);
+        et.deleteCharAt(2);
+        //Gör om StringBuilder till int
+        int intStartTime = Integer.parseInt(st.toString());
+        int intEndTime = Integer.parseInt(et.toString());
+        
+        //Kollar om starttiden är innan sluttiden och sparar svaret i en boolean
+        startTimeBeforeEndTime = intStartTime < intEndTime;
+        //Returnerar boolean med true eller false
+        return startTimeBeforeEndTime;
     }
     
     public void selectedPanel(int menuNr) {
@@ -2267,6 +2295,11 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         //Ändrar boolean till true för att det nu går att hämta värdet från JXDatePicker utan crash
         //Crashen beror på att Event Property Change används och har först inget värde vid uppstart av programmet
         dateChangedAllowed = true;
+        
+        //Sätter högsta tillåtna datum till dagens datum i datumväljarna
+        dp1.getMonthView().setUpperBound(Calendar.getInstance().getTime());
+        dp2.getMonthView().setUpperBound(Calendar.getInstance().getTime());
+        dp3.getMonthView().setUpperBound(Calendar.getInstance().getTime());
     }
     
     private void availableProjectsToTable(JTable jTable) {
@@ -2422,7 +2455,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
                 projectInfoPanel.setVisible(true);
                 
             } catch (Exception e) {
-                System.err.println("Något gick fel i Override av valueChanged() i metoden projectTableSettings()");
+                //System.err.println("Något gick fel i Override av valueChanged() i metoden projectTableSettings()");
             }
             setTableCellsAlignment(projectColleagueTable, SwingConstants.CENTER);
             
