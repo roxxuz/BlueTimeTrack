@@ -5,7 +5,6 @@
  */
 package timetrack.gui;
 
-import java.util.ArrayList;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -14,18 +13,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
 import java.util.Properties;
 import java.util.Vector;
 import java.util.logging.Level;
@@ -49,12 +37,11 @@ public class ProjectMethods {
     String DBUser;
     String DBPass;
     TimeTrackGUI tGUI;
-    ProjectMethods pM;
     GUIMethods guiM;
-    ArrayList<Integer> userid = new ArrayList<Integer>();///Skriver in användare till projekt vid öppna projekt.
-    ArrayList<Integer> uidSetOnP = new ArrayList<Integer>();  
-    ArrayList<Integer> useronproject = new ArrayList<Integer>();
-    ArrayList <Integer> uop = new ArrayList <Integer>();
+    ArrayList<Integer> userid = new ArrayList<Integer>();           ///Lagrar alla userID för användare som lägs i chosenskillComboBox
+    ArrayList<Integer> uidSetOnP = new ArrayList<Integer>();        ///Skriver in användare till projekt vid öppna projekt. listan fylls på när jtable fylls i
+    ArrayList<Integer> useronproject = new ArrayList<Integer>();    ///kollar vem som är på projektet i databasen när man sparar.
+    ArrayList <Integer> uop = new ArrayList <Integer>();            ///Kollar vem som är i jtable just nu
 
         // booleans uidSetOnP & uop är redan skapade som kan jämföra sparade användare med nuvarande användare.
         String pName1 = ""; 
@@ -239,9 +226,9 @@ public class ProjectMethods {
     }
     
     public void saveMethod(){
-                String pname = tGUI.ProjectTextField2.getText();
+            String pname = tGUI.ProjectTextField2.getText();
 
-
+        if (!saveMissingFields()) {
         if (tGUI.saveNewProject){
             saveNewProject();
             usersHasProject();
@@ -259,7 +246,7 @@ public class ProjectMethods {
             tGUI.ProjectsComboBox.setSelectedItem(pname);
             setProjectInfo();
             tGUI.saveNewProject = false;
-            tGUI.pCurrent.setText("Redigera");
+            tGUI.pCurrent.setText("Redigera");         
 
         }else{
             updateProject();
@@ -269,6 +256,12 @@ public class ProjectMethods {
             tGUI.ProjectsComboBox.setSelectedItem(pname);
         }
         getProjectInfo1();
+        uop.clear();
+        }  else {
+            
+        }   
+
+        
     }
 
 
@@ -507,6 +500,7 @@ public class ProjectMethods {
         } catch (Exception e) {
             System.err.println("setprojectskillusers");
         }
+        System.out.println(uidSetOnP.size());
     }
 
 
@@ -575,7 +569,7 @@ public class ProjectMethods {
     ///LÄGG IN DATA I USERS_HAS_PROJECT TABELLEN
     public void usersHasProject() {
         int pid;
-        ArrayList <Integer> uop = new ArrayList <Integer>();
+
         try {
             String name = tGUI.ProjectTextField2.getText();
             pid = getProjectIdFromProjectName(name);
@@ -585,7 +579,6 @@ public class ProjectMethods {
                 int uid = (Integer) tGUI.sSkillTable.getValueAt(i, 0);
                 uop.add(uid);
 
-
                 if (!useronproject.contains(uid)){
 
                     try {
@@ -594,7 +587,7 @@ public class ProjectMethods {
                         pstat.setInt(2, pid);
                         pstat.executeUpdate();
 
-                        useronproject.clear();
+                    //    useronproject.clear();
                     } catch (SQLException ex) {
                         Logger.getLogger(ProjectMethods.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -611,6 +604,7 @@ public class ProjectMethods {
         } catch (Exception e) {
             System.out.println("nixenpixen");
         }
+        uop.clear();
     }
     ///TAR BORT FRÅN USERS_HAS_PROJECTS///
     public void removeUserFromProject(int uid, int pid){
@@ -639,7 +633,7 @@ public class ProjectMethods {
     }
 
         public void getProjectInfo1(){
-        // booleans uidSetOnP & uop är redan skapade som kan jämföra sparade användare med nuvarande användare.
+        uidFromPtable();
         pName1 = tGUI.ProjectTextField2.getText();
         pDesc1 = tGUI.ProjectTextArea1.getText();
         pStatus1 = (String) tGUI.StatusComboBox.getSelectedItem();
@@ -650,17 +644,18 @@ public class ProjectMethods {
         }
         if (pCustomer1 == null){
             pCustomer1 = "";
-        }
+        }/*
             System.out.println("111111");
             System.out.println(pName1);
             System.out.println(pDesc1);
             System.out.println(pStatus1);
             System.out.println(pCustomer1);
             System.out.println("1111111");
+        */
         }
     
     public void getProjectInfo2(){
-        // booleans uidSetOnP & uop är redan skapade som kan jämföra sparade användare med nuvarande användare.
+        uidFromPtable();
         pName2 = tGUI.ProjectTextField2.getText();
         pDesc2 = tGUI.ProjectTextArea1.getText();
         pStatus2 = (String) tGUI.StatusComboBox.getSelectedItem();
@@ -672,12 +667,13 @@ public class ProjectMethods {
         if (pCustomer2 == null){
             pCustomer2 = "";
         }
-        System.out.println("22222");
+    /*    System.out.println("22222");
         System.out.println(pName2);
         System.out.println(pDesc2);
         System.out.println(pStatus2);
         System.out.println(pCustomer2);
         System.out.println("222222");
+*/
     }
 
         
@@ -690,9 +686,9 @@ public class ProjectMethods {
                     &&
                 pStatus1.equals(pStatus2)
                     &&
-                pCustomer1.equals(pCustomer2) )
-        //            &&
-        //        uidSetOnP.equals(useronproject))  
+                pCustomer1.equals(pCustomer2) 
+                    &&
+                uidSetOnP.equals(uop))  
             {
                 System.out.println("\nthe same");
             }
@@ -725,12 +721,75 @@ public class ProjectMethods {
         
         }
         
+        public void uidFromPtable(){
+
+
+        try {
+
+            DefaultTableModel model = (DefaultTableModel)tGUI.sSkillTable.getModel();
+            
+            for (int i = 0; i < model.getRowCount(); i++) {
+                int uid = (Integer) tGUI.sSkillTable.getValueAt(i, 0);
+                uop.add(uid);
+            }
+            
+            } catch (Exception e) {
+                System.err.println("uidFromPtable");
+            }
+            
+        }
+        
         public void printAL(){
-                for (int i : userid){
+            
+        
+
+            
+                for (int i : uidSetOnP){
                 System.out.println("uidSetOnP " + i);
             }
-                for (int i :useronproject){
-                System.out.println("useronproject " + i);
+                for (int i :uop){
+                System.out.println("uop " + i);
             }
         }
+        
+         private boolean saveMissingFields() {
+        String pn = tGUI.ProjectTextField2.getText();
+        String pd = tGUI.ProjectTextArea1.getText();
+        String statusID = "";
+        String customerID = "";
+        try {
+        statusID = tGUI.StatusComboBox.getSelectedItem().toString();
+        customerID = tGUI.CustomerComboBox.getSelectedItem().toString();
+        }catch(Exception e) {
+        }
+
+        
+        String missingFieldsMsg = "";
+        boolean missingField = false;
+        
+        if(pn.equals("")) {
+            missingField = true;
+            missingFieldsMsg = missingFieldsMsg + "Projektnamn, ";
+        }
+        if(pd.equals("")) {
+            missingField = true;
+            missingFieldsMsg = missingFieldsMsg + "Projekt beskrivning, ";
+        }
+        if(statusID.equals("")) {
+            missingField = true;
+            missingFieldsMsg = missingFieldsMsg + "Status, ";
+        }
+        if(customerID.equals("")) {
+            missingField = true;
+            missingFieldsMsg = missingFieldsMsg + "Kund, ";
+        }
+        if(missingField) {
+            JOptionPane.showConfirmDialog(null, "Du måste ange " + missingFieldsMsg + "för att spara nytt projekt"
+                                               , "Missade fält", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE);
+        }
+        else{
+            missingField = false;
+        }
+        return missingField;
+         }
 }
