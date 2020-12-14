@@ -174,9 +174,11 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         adminUserSelectPanel = new javax.swing.JPanel();
         adminUserChoosePanel = new javax.swing.JPanel();
-        adminCreateUserBtn = new javax.swing.JButton();
-        adminEditUserBtn = new javax.swing.JButton();
         adminUserChooseHeaderLabel = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel36 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel37 = new javax.swing.JLabel();
         adminUserPanel1 = new javax.swing.JPanel();
         jTextField2 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
@@ -1011,27 +1013,57 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         adminUserChoosePanel.setBackground(new java.awt.Color(255, 255, 255));
         adminUserChoosePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        adminCreateUserBtn.setText("SKAPA NY ANVÄNDARE");
-        adminCreateUserBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                adminCreateUserBtnActionPerformed(evt);
-            }
-        });
-        adminUserChoosePanel.add(adminCreateUserBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 150, 380, 100));
-
-        adminEditUserBtn.setText("REDIGERA BEFINTLIG ANVÄNDARE");
-        adminEditUserBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                adminEditUserBtnActionPerformed(evt);
-            }
-        });
-        adminUserChoosePanel.add(adminEditUserBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 270, 380, 100));
-
         adminUserChooseHeaderLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         adminUserChooseHeaderLabel.setForeground(new java.awt.Color(165, 165, 165));
         adminUserChooseHeaderLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         adminUserChooseHeaderLabel.setText("HANTERA ANVÄNDARE");
         adminUserChoosePanel.add(adminUserChooseHeaderLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 780, 30));
+
+        jPanel3.setBackground(new java.awt.Color(92, 126, 162));
+        jPanel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel3MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jPanel3MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jPanel3MouseExited(evt);
+            }
+        });
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel36.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel36.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        jLabel36.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel36.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel36.setText("SKAPA NY ANVÄNDARE");
+        jPanel3.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 360, 110));
+
+        adminUserChoosePanel.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 130, 360, 110));
+
+        jPanel4.setBackground(new java.awt.Color(92, 126, 162));
+        jPanel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel4MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jPanel4MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jPanel4MouseExited(evt);
+            }
+        });
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel37.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel37.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel37.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel37.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel37.setText("REDIGERA ANVÄNDARE");
+        jPanel4.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 360, 120));
+
+        adminUserChoosePanel.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 280, 360, 120));
 
         adminUserSelectPanel.add(adminUserChoosePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 780, 510));
 
@@ -1953,18 +1985,35 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel35MouseClicked
 
-    private void adminCreateUserBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminCreateUserBtnActionPerformed
+    private void jPanel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseClicked
         adminUserChoosePanel.setVisible(false);
         adminEditUserPanel1.setVisible(false);
         adminUserPanel1.setVisible(true);
-        
-    }//GEN-LAST:event_adminCreateUserBtnActionPerformed
+    }//GEN-LAST:event_jPanel3MouseClicked
 
-    private void adminEditUserBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminEditUserBtnActionPerformed
+    private void jPanel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseClicked
         adminUserChoosePanel.setVisible(false);
         adminUserPanel1.setVisible(false);
         adminEditUserPanel1.setVisible(true);
-    }//GEN-LAST:event_adminEditUserBtnActionPerformed
+    }//GEN-LAST:event_jPanel4MouseClicked
+
+    private void jPanel3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseEntered
+        jPanel3.setBackground(new java.awt.Color(47,66,84));
+
+    }//GEN-LAST:event_jPanel3MouseEntered
+
+    private void jPanel4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseEntered
+       jPanel4.setBackground(new java.awt.Color(47,66,84));
+
+    }//GEN-LAST:event_jPanel4MouseEntered
+
+    private void jPanel3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseExited
+         jPanel3.setBackground(new java.awt.Color(92,126,162));
+    }//GEN-LAST:event_jPanel3MouseExited
+
+    private void jPanel4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseExited
+         jPanel4.setBackground(new java.awt.Color(92,126,162));
+    }//GEN-LAST:event_jPanel4MouseExited
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     protected javax.swing.JComboBox<String> CustomerComboBox;
@@ -1976,8 +2025,6 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     protected javax.swing.JComboBox<String> ProjectsComboBox;
     protected javax.swing.JComboBox<String> SkillBox;
     protected javax.swing.JComboBox<String> StatusComboBox;
-    private javax.swing.JButton adminCreateUserBtn;
-    private javax.swing.JButton adminEditUserBtn;
     private javax.swing.JPanel adminEditUserPanel1;
     private javax.swing.JPanel adminProjectPanel;
     private javax.swing.JLabel adminUserChooseHeaderLabel;
@@ -2021,6 +2068,8 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     protected javax.swing.JLabel jLabel33;
     protected javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -2029,6 +2078,8 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     protected javax.swing.JPasswordField jPasswordField2;
     protected javax.swing.JPasswordField jPasswordField3;
     private javax.swing.JRadioButton jRadioButton1;
