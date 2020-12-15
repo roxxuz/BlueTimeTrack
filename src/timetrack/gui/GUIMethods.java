@@ -25,6 +25,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 import net.proteanit.sql.DbUtils;
@@ -179,7 +180,7 @@ public class GUIMethods{
         }
     }
     
-    public void insertUsersHasSkills(String email) {
+    public void insertUsersHasSkills(String email, JTable jTable) {
         int userID = 0;
             try {
                 pstat = cn.prepareStatement("SELECT user_id FROM users WHERE email = ?");
@@ -190,12 +191,12 @@ public class GUIMethods{
             } catch (Exception e) {
                 System.out.println(e);
             }
-        int rowCount = tGUI.jTable2.getRowCount();
+        int rowCount = jTable.getRowCount();
         for (int i = 0; i < rowCount; i++) {
             try {
                 //Hämtar skillID för vald skill (loopar alla valda skills i tabellen)
                 pstat = cn.prepareStatement("SELECT skill_id FROM skills WHERE skill = ?");
-                String skillName = (String) tGUI.jTable2.getValueAt(i, 0);
+                String skillName = (String) jTable.getValueAt(i, 0);
                 pstat.setString(1, skillName);
                 rs = pstat.executeQuery();
                 rs.next();
@@ -599,6 +600,25 @@ public class GUIMethods{
        row.add(skill);
        model.addRow(row);
     }
+    
+    public void insertSkillValue2() {
+             String skill = (String) tGUI.jComboBox2.getSelectedItem();
+        DefaultTableModel model = (DefaultTableModel)tGUI.jTable3.getModel();
+        
+       
+        
+        for(int i = 0; i < tGUI.jTable3.getRowCount(); i++) {
+            if(tGUI.jTable3.getModel().getValueAt(i,0).equals(tGUI.jComboBox2.getSelectedItem())) {
+               return;
+                
+         
+            }
+        }  
+        
+       Vector row = new Vector();
+       row.add(skill);
+       model.addRow(row);
+    }
 
     public boolean emailIsAvailable(String email) {
         //Kontrollerar att emailen inte redan finns i databasen.
@@ -775,12 +795,77 @@ public class GUIMethods{
             Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-            
-            
-}
+           }
     
-}                 
+    public void updateUser() {
+        String name = tGUI.jTextField6.getText();
+        String lastName =  tGUI.jTextField4.getText();
+        String email = tGUI.jTextField5.getText();
+        Boolean isAdmin =  tGUI.jRadioButton2.isSelected();
+        int getUserIdInfo =  userArray.get(tGUI.jGetUserComboBox1.getSelectedIndex());
+        
+        if(validTextFieldsUpdate(name, lastName)) {
+            
+        
+        
+      try {
+            pstat = cn.prepareStatement("update users set FName = ?, LName = ?, email = ?, is_admin = ? where user_id = ?");
+            
+            pstat.setString(1, name);
+            pstat.setString(2, lastName);
+            pstat.setString(3, email);
+            pstat.setBoolean(4, isAdmin);
+            pstat.setInt(5, getUserIdInfo);
 
+            pstat.executeUpdate();
+            
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
+        }}
+    }
+    
+     public boolean validTextFieldsUpdate(String name, String lname) {
+       
+         boolean sucess = false;
+        if(name.trim().isEmpty() 
+                && lname.trim().isEmpty()){
+              tGUI.jLabel29.setText("Alla fält är inte ifyllda, fyll i alla fält!");
+        }
+        else if(name.trim().isEmpty()){
+             tGUI.jLabel29.setText("Fyll i ett Förnamn");
+        } 
+         else if(lname.trim().isEmpty()) {
+             tGUI.jLabel29.setText("Fyll i ett Efternamn");
+        }
+         else {
+             sucess = true;
+         }
+        return sucess;
+    }
+
+//     public void updateUserSkills() {
+//
+//         tGUI.jTable3.removeAll();
+//}              
+     
+     public void deleteAllUserSkills() {
+        try {
+            int getUserIdInfo =  userArray.get(tGUI.jGetUserComboBox1.getSelectedIndex());
+            
+            pstat = cn.prepareStatement("delete from users_has_skills where user_id = ?");
+            pstat.setInt(1,getUserIdInfo);
+            pstat.executeUpdate();
+        } 
+        catch (SQLException ex) {
+            Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
+     }
+
+}
 
 
 
