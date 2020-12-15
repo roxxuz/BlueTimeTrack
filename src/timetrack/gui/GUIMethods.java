@@ -710,7 +710,141 @@ public class GUIMethods{
         return rs;
     }
     
+    ArrayList<Integer> userArray = new ArrayList<>();
+            
+    public void getUsersFromDataBase() {
+        tGUI.jGetUserComboBox1.removeAllItems();
+        
+        try {
+            pstat = cn.prepareStatement("select user_id, FName,LName from users");
+                    rs = pstat.executeQuery();
+                    
+                     while (rs.next()) {
+                         userArray.add(rs.getInt(1));
+                tGUI.jGetUserComboBox1.addItem(rs.getString(2) + " " + rs.getString(3));
+
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            tGUI.jGetUserComboBox1.setSelectedItem(null);
+     }
+
+
+    public void getUsersInfoFromDataBase() {
+            
+          int getUserIdInfo =  userArray.get(tGUI.jGetUserComboBox1.getSelectedIndex());
+          
+        try {
+            pstat = cn.prepareStatement("select FName, LName, email, is_admin from users where user_id = ?");
+            pstat.setInt(1, getUserIdInfo);
+            rs = pstat.executeQuery();
+            rs.next();
+            tGUI.jTextField6.setText(rs.getString(1));
+            tGUI.jTextField4.setText(rs.getString(2));
+            tGUI.jTextField5.setText(rs.getString(3));
+            tGUI.jRadioButton2.setSelected(rs.getBoolean(4));
+
+            
+              pstat = cn.prepareStatement("SELECT skill FROM skills s \n" +
+                "join users_has_skills us ON s.skill_id  = us.skill_id\n" +
+                "join users u ON us.user_id = u.user_id\n" +
+                "Where u.user_id = ?");
+                pstat.setInt(1, getUserIdInfo);
+                rs = pstat.executeQuery(); 
+                tGUI.jTable3.setModel(DbUtils.resultSetToTableModel(rs));
+                
+                
+            tGUI.jComboBox2.removeAllItems();
+        try {
+            pstat = cn.prepareStatement("select skill from skills");
+            rs = pstat.executeQuery();
+            while(rs.next()) {
+            tGUI.jComboBox2.addItem(rs.getString(1));
+        }
+        }catch (SQLException ex) {
+            Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
+        }
     
+        
+        
+        
+        
+        } catch (SQLException ex) {
+            Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+            
+            
+}
+    
+}                 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    //public void setUserInfo() {
+//
+//        try {
+//            String projectName = tGUI.ProjectsComboBox.getSelectedItem().toString();
+//            try {
+//                pstat = cn.prepareStatement("select projects_id, project_name, project_description, ps.status, c.customer from projects p\n" +
+//                        "join project_status ps\n" +
+//                        "on p.project_status_id = ps.project_status_id \n" +
+//                        "join customers c\n" +
+//                        "on p.customer_id=c.customer_id\n" +
+//                        "where project_name = ?");
+//                pstat.setString(1, projectName);
+//                rs = pstat.executeQuery();
+//
+//                while (rs.next()) {
+//
+//                    tGUI.ProjectTextField1.setText(rs.getString(1));
+//                    tGUI.ProjectTextField2.setText(rs.getString(2));
+//                    tGUI.ProjectTextArea1.setText(rs.getString(3));
+//                    tGUI.StatusComboBox.setSelectedItem(rs.getString(4));
+//                    tGUI.CustomerComboBox.setSelectedItem(rs.getString(5));
+//                }
+//                        getProjectInfo1();
+//                        
+//            } catch (SQLException ex) {
+//                Logger.getLogger(ProjectMethods.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        }
+//        catch (Exception e) {
+//            System.out.println("blabla");
+//        }
+//    }
     
     
     
@@ -1230,6 +1364,6 @@ public class GUIMethods{
     }
 
     */
-}
+
 
 
