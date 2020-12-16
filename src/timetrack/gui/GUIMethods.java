@@ -5,6 +5,7 @@ package timetrack.gui;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -25,9 +26,11 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 import net.proteanit.sql.DbUtils;
+import security.HashPassword;
 
 /**
  *
@@ -56,7 +59,7 @@ public class GUIMethods{
         String pDesc1, pDesc2;
         String pStatus1, pStatus2;
         String pCustomer1, pCustomer2;
-    
+        
     public GUIMethods() {
         readProperties();
         cn = prepareDBConnection();
@@ -66,7 +69,13 @@ public class GUIMethods{
     
     public int loginUser(String email, String pass1){
         String qEmail = email;
-        String qPass = pass1;
+        String hashPassword = null;
+        
+        try {
+            hashPassword = HashPassword.hashPassword(pass1);
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
+        }
         //returnUserID som kommer att returnera UserID från databasen om användarnamn + lösenord matchar
         //Annars är den default 0 och returnerar då 0.
         int returnUserID = 0;
@@ -77,7 +86,7 @@ public class GUIMethods{
             pstat = cn.prepareStatement("SELECT * FROM users WHERE email=? AND BINARY user_password=?");
             //Ändrar value-parametrar till texten i text-fälten.
             pstat.setString(1, qEmail);
-            pstat.setString(2, qPass);
+            pstat.setString(2, hashPassword);
             //Utför SQL kommand
             rs = pstat.executeQuery();
             //Kollar om det finns MINST en rad från select statement (while hade kollat alla)
@@ -179,7 +188,7 @@ public class GUIMethods{
         }
     }
     
-    public void insertUsersHasSkills(String email) {
+    public void insertUsersHasSkills(String email, JTable jTable) {
         int userID = 0;
             try {
                 pstat = cn.prepareStatement("SELECT user_id FROM users WHERE email = ?");
@@ -190,12 +199,12 @@ public class GUIMethods{
             } catch (Exception e) {
                 System.out.println(e);
             }
-        int rowCount = tGUI.jTable2.getRowCount();
+        int rowCount = jTable.getRowCount();
         for (int i = 0; i < rowCount; i++) {
             try {
                 //Hämtar skillID för vald skill (loopar alla valda skills i tabellen)
                 pstat = cn.prepareStatement("SELECT skill_id FROM skills WHERE skill = ?");
-                String skillName = (String) tGUI.jTable2.getValueAt(i, 0);
+                String skillName = (String) jTable.getValueAt(i, 0);
                 pstat.setString(1, skillName);
                 rs = pstat.executeQuery();
                 rs.next();
@@ -299,18 +308,16 @@ public class GUIMethods{
         return success;
     }
         
-    public boolean deleteUser(int userid){
-        boolean success = false;
+    public void deleteUser(){
+            int getUserIdInfo =  userArray.get(tGUI.jGetUserComboBox1.getSelectedIndex());
         try {
             pstat = cn.prepareStatement("delete from users where user_id = ?");
-            pstat.setInt(1, userid);
+            pstat.setInt(1, getUserIdInfo);
             pstat.executeUpdate();
-            
-            success = true;
+        
         }catch(SQLException ex) {
             System.out.println(ex);
         } 
-        return success;
     }
 
         
@@ -389,13 +396,19 @@ public class GUIMethods{
             
             
     public boolean createUser(String name, String lastName, String email, String password, String skill, boolean isAdmin) {
+        String hashPassword = null;
+        try {
+            hashPassword = HashPassword.hashPassword(password);
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
+        }
         boolean success = false;
         try {
              pstat = cn.prepareStatement("insert into users (FName, LName, email, user_password, is_admin) VALUES (?,?,?,?,?) ");
              pstat.setString(1,name);            
              pstat.setString(2,lastName);
              pstat.setString(3,email);
-             pstat.setString(4,password);
+             pstat.setString(4,hashPassword);
              pstat.setBoolean(5, isAdmin);
              pstat.executeUpdate();
 
@@ -426,7 +439,7 @@ public class GUIMethods{
         public Thread2(JLabel jLabel) {
             this.jLabel = jLabel;
         }
-      
+         @Override
         public void run(){
             //Gör en fade in och fade out på en Label
             //Ska från vit 255,255,255 till grön 60,117,57
@@ -435,8 +448,8 @@ public class GUIMethods{
             } catch (InterruptedException ex) {
                 Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
             }
-            for (int i = 0; i < 180; i=i+2) {
-                jLabel.setForeground(new java.awt.Color(60, 117, 57, i));
+            for (int i = 0; i < 255; i=i+2) {
+                jLabel.setForeground(new java.awt.Color(153,153,153, i));
                 try {
                     Thread.sleep(10);
                 } catch (InterruptedException ex) {
@@ -449,9 +462,9 @@ public class GUIMethods{
                 Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-            for (int i = 180; i > 0; i--) {
+            for (int i = 255; i > 0; i--) {
 
-                jLabel.setForeground(new java.awt.Color(60, 117, 57, i));
+                jLabel.setForeground(new java.awt.Color(153,153,153, i));
                 try {
                     Thread.sleep(10);
                 } catch (InterruptedException ex) {
@@ -461,6 +474,15 @@ public class GUIMethods{
             tGUI.menuTimeDefaultValues();
         }
     }
+    
+    public void saveUserUpdateConfirmed(JLabel jLabel) {
+        Thread2 updateConfirmed = new Thread2(jLabel);
+        
+        updateConfirmed.start();
+      
+    }
+    
+  
     
     public ResultSet getUserProjects(int userID) {
     try {
@@ -599,6 +621,31 @@ public class GUIMethods{
        row.add(skill);
        model.addRow(row);
     }
+    
+    public void insertSkillValue2() {
+          try { 
+        
+        String skill = (String) tGUI.jComboBox2.getSelectedItem();
+        DefaultTableModel model = (DefaultTableModel)tGUI.jTable3.getModel();
+        
+       
+        
+        for(int i = 0; i < tGUI.jTable3.getRowCount(); i++) {
+            if(tGUI.jTable3.getModel().getValueAt(i,0).equals(tGUI.jComboBox2.getSelectedItem())) {
+               return;
+                
+         
+            }
+        }  
+        
+       Vector row = new Vector();
+       row.add(skill);
+       model.addRow(row);
+          } catch(Exception e) {
+              System.out.println("Combo Box Empty, not skilfull to fix the problem. srry boss");
+          }
+       
+    }
 
     public boolean emailIsAvailable(String email) {
         //Kontrollerar att emailen inte redan finns i databasen.
@@ -661,7 +708,23 @@ public class GUIMethods{
              }
         }  
  
-        protected boolean getIsAdmin() {
+     public void clearAllTextFieldsInUpdateUser() {
+        tGUI.jTextField4.setText("");
+        tGUI.jTextField5.setText("");
+        tGUI.jTextField6.setText("");
+        tGUI.jGetUserComboBox1.removeAllItems();
+        
+        
+        DefaultTableModel model = (DefaultTableModel)tGUI.jTable3.getModel();
+        
+        int a = tGUI.jTable3.getRowCount();
+         
+        for(int i = a; i > 0 ; i--) {
+               model.removeRow(i -1);
+             }
+        }  
+        
+     protected boolean getIsAdmin() {
             boolean isAdmin;
             isAdmin = adminInt==1;
             return isAdmin;
@@ -710,7 +773,207 @@ public class GUIMethods{
         return rs;
     }
     
+    ArrayList<Integer> userArray = new ArrayList<>();
+            
+    public void getUsersFromDataBase() {
+        tGUI.jGetUserComboBox1.removeAllItems();
+        
+        try {
+            pstat = cn.prepareStatement("select user_id, FName,LName from users");
+                    rs = pstat.executeQuery();
+                    
+                     while (rs.next()) {
+                         userArray.add(rs.getInt(1));
+                tGUI.jGetUserComboBox1.addItem(rs.getString(2) + " " + rs.getString(3));
+
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            tGUI.jGetUserComboBox1.setSelectedItem(null);
+     }
+
+
+    public void getUsersInfoFromDataBase() {
+            
+          
+        try {
+            int getUserIdInfo =  userArray.get(tGUI.jGetUserComboBox1.getSelectedIndex());
+
+            pstat = cn.prepareStatement("select FName, LName, email, is_admin from users where user_id = ?");
+            pstat.setInt(1, getUserIdInfo);
+            rs = pstat.executeQuery();
+            rs.next();
+            tGUI.jTextField6.setText(rs.getString(1));
+            tGUI.jTextField4.setText(rs.getString(2));
+            tGUI.jTextField5.setText(rs.getString(3));
+            tGUI.jRadioButton2.setSelected(rs.getBoolean(4));
+
+            
+              pstat = cn.prepareStatement("SELECT skill FROM skills s \n" +
+                "join users_has_skills us ON s.skill_id  = us.skill_id\n" +
+                "join users u ON us.user_id = u.user_id\n" +
+                "Where u.user_id = ?");
+                pstat.setInt(1, getUserIdInfo);
+                rs = pstat.executeQuery(); 
+                tGUI.jTable3.setModel(DbUtils.resultSetToTableModel(rs));
+                
+                
+            tGUI.jComboBox2.removeAllItems();
+        try {
+            pstat = cn.prepareStatement("select skill from skills");
+            rs = pstat.executeQuery();
+            while(rs.next()) {
+            tGUI.jComboBox2.addItem(rs.getString(1));
+        }
+        }catch (SQLException ex) {
+            Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
+        }
     
+        
+        
+        
+        
+        } catch (SQLException ex) {
+            Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+           }
+    
+    public void updateUser() {
+        String name = tGUI.jTextField6.getText();
+        String lastName =  tGUI.jTextField4.getText();
+        String email = tGUI.jTextField5.getText();
+        Boolean isAdmin =  tGUI.jRadioButton2.isSelected();
+        int getUserIdInfo =  userArray.get(tGUI.jGetUserComboBox1.getSelectedIndex());
+        
+        if(validTextFieldsUpdate(name, lastName)) {
+            
+        
+        
+      try {
+            pstat = cn.prepareStatement("update users set FName = ?, LName = ?, email = ?, is_admin = ? where user_id = ?");
+            
+            pstat.setString(1, name);
+            pstat.setString(2, lastName);
+            pstat.setString(3, email);
+            pstat.setBoolean(4, isAdmin);
+            pstat.setInt(5, getUserIdInfo);
+
+            pstat.executeUpdate();
+            
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
+        }}
+    }
+    
+     public boolean validTextFieldsUpdate(String name, String lname) {
+       
+         boolean sucess = false;
+        if(name.trim().isEmpty() 
+                && lname.trim().isEmpty()){
+              tGUI.jLabel29.setText("Alla fält är inte ifyllda, fyll i alla fält!");
+        }
+        else if(name.trim().isEmpty()){
+             tGUI.jLabel29.setText("Fyll i ett Förnamn");
+        } 
+         else if(lname.trim().isEmpty()) {
+             tGUI.jLabel29.setText("Fyll i ett Efternamn");
+        }
+         else {
+             sucess = true;
+         }
+        return sucess;
+    }
+
+//     public void updateUserSkills() {
+//
+//         tGUI.jTable3.removeAll();
+//}              
+     
+     public void deleteAllUserSkills() {
+        try {
+            int getUserIdInfo =  userArray.get(tGUI.jGetUserComboBox1.getSelectedIndex());
+            
+            pstat = cn.prepareStatement("delete from users_has_skills where user_id = ?");
+            pstat.setInt(1,getUserIdInfo);
+            pstat.executeUpdate();
+        } 
+        catch (SQLException ex) {
+            Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
+     }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    //public void setUserInfo() {
+//
+//        try {
+//            String projectName = tGUI.ProjectsComboBox.getSelectedItem().toString();
+//            try {
+//                pstat = cn.prepareStatement("select projects_id, project_name, project_description, ps.status, c.customer from projects p\n" +
+//                        "join project_status ps\n" +
+//                        "on p.project_status_id = ps.project_status_id \n" +
+//                        "join customers c\n" +
+//                        "on p.customer_id=c.customer_id\n" +
+//                        "where project_name = ?");
+//                pstat.setString(1, projectName);
+//                rs = pstat.executeQuery();
+//
+//                while (rs.next()) {
+//
+//                    tGUI.ProjectTextField1.setText(rs.getString(1));
+//                    tGUI.ProjectTextField2.setText(rs.getString(2));
+//                    tGUI.ProjectTextArea1.setText(rs.getString(3));
+//                    tGUI.StatusComboBox.setSelectedItem(rs.getString(4));
+//                    tGUI.CustomerComboBox.setSelectedItem(rs.getString(5));
+//                }
+//                        getProjectInfo1();
+//                        
+//            } catch (SQLException ex) {
+//                Logger.getLogger(ProjectMethods.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        }
+//        catch (Exception e) {
+//            System.out.println("blabla");
+//        }
+//    }
     
     
     
@@ -1230,6 +1493,6 @@ public class GUIMethods{
     }
 
     */
-}
+
 
 

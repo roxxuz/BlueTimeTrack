@@ -223,6 +223,7 @@ public class LoginGUI extends javax.swing.JFrame {
         //Hämtar inmatningarna i textfälten
         String email = emailInput.getText();
         String pass = passField.getText();
+        
 
         //If-satsen anropar metoden loginUser och skickar med email och pass från textfälten
         //Metoden kommer returnera en int med användarens ID, som lagras i userID.
@@ -233,6 +234,8 @@ public class LoginGUI extends javax.swing.JFrame {
             //Kallar på metoden som ska starta huvudprogrammet och skickar med
             //inloogad användares userID (från databasen)
             guiM.startTimeTrack(this, guiM, userID);
+            
+            
         }
     }//GEN-LAST:event_loginButtonActionPerformed
 
