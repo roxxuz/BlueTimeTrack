@@ -22,7 +22,7 @@ public class HashPassword {
             for(byte b1 : b) {
                 sb.append(Integer.toHexString(b1 & 0xff).toString());
             }
-            System.out.println(sb.toString());
+           // System.out.println(sb.toString());
             return sb.toString();
     }}
     

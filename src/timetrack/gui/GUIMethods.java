@@ -5,6 +5,7 @@ package timetrack.gui;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -29,6 +30,7 @@ import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 import net.proteanit.sql.DbUtils;
+import security.HashPassword;
 
 /**
  *
@@ -57,7 +59,7 @@ public class GUIMethods{
         String pDesc1, pDesc2;
         String pStatus1, pStatus2;
         String pCustomer1, pCustomer2;
-    
+        
     public GUIMethods() {
         readProperties();
         cn = prepareDBConnection();
@@ -67,7 +69,13 @@ public class GUIMethods{
     
     public int loginUser(String email, String pass1){
         String qEmail = email;
-        String qPass = pass1;
+        String hashPassword = null;
+        
+        try {
+            hashPassword = HashPassword.hashPassword(pass1);
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
+        }
         //returnUserID som kommer att returnera UserID från databasen om användarnamn + lösenord matchar
         //Annars är den default 0 och returnerar då 0.
         int returnUserID = 0;
@@ -78,7 +86,7 @@ public class GUIMethods{
             pstat = cn.prepareStatement("SELECT * FROM users WHERE email=? AND BINARY user_password=?");
             //Ändrar value-parametrar till texten i text-fälten.
             pstat.setString(1, qEmail);
-            pstat.setString(2, qPass);
+            pstat.setString(2, hashPassword);
             //Utför SQL kommand
             rs = pstat.executeQuery();
             //Kollar om det finns MINST en rad från select statement (while hade kollat alla)
@@ -300,18 +308,16 @@ public class GUIMethods{
         return success;
     }
         
-    public boolean deleteUser(int userid){
-        boolean success = false;
+    public void deleteUser(){
+            int getUserIdInfo =  userArray.get(tGUI.jGetUserComboBox1.getSelectedIndex());
         try {
             pstat = cn.prepareStatement("delete from users where user_id = ?");
-            pstat.setInt(1, userid);
+            pstat.setInt(1, getUserIdInfo);
             pstat.executeUpdate();
-            
-            success = true;
+        
         }catch(SQLException ex) {
             System.out.println(ex);
         } 
-        return success;
     }
 
         
@@ -390,13 +396,19 @@ public class GUIMethods{
             
             
     public boolean createUser(String name, String lastName, String email, String password, String skill, boolean isAdmin) {
+        String hashPassword = null;
+        try {
+            hashPassword = HashPassword.hashPassword(password);
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
+        }
         boolean success = false;
         try {
              pstat = cn.prepareStatement("insert into users (FName, LName, email, user_password, is_admin) VALUES (?,?,?,?,?) ");
              pstat.setString(1,name);            
              pstat.setString(2,lastName);
              pstat.setString(3,email);
-             pstat.setString(4,password);
+             pstat.setString(4,hashPassword);
              pstat.setBoolean(5, isAdmin);
              pstat.executeUpdate();
 
@@ -427,7 +439,7 @@ public class GUIMethods{
         public Thread2(JLabel jLabel) {
             this.jLabel = jLabel;
         }
-      
+         @Override
         public void run(){
             //Gör en fade in och fade out på en Label
             //Ska från vit 255,255,255 till grön 60,117,57
@@ -436,8 +448,8 @@ public class GUIMethods{
             } catch (InterruptedException ex) {
                 Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
             }
-            for (int i = 0; i < 180; i=i+2) {
-                jLabel.setForeground(new java.awt.Color(60, 117, 57, i));
+            for (int i = 0; i < 255; i=i+2) {
+                jLabel.setForeground(new java.awt.Color(153,153,153, i));
                 try {
                     Thread.sleep(10);
                 } catch (InterruptedException ex) {
@@ -450,9 +462,9 @@ public class GUIMethods{
                 Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-            for (int i = 180; i > 0; i--) {
+            for (int i = 255; i > 0; i--) {
 
-                jLabel.setForeground(new java.awt.Color(60, 117, 57, i));
+                jLabel.setForeground(new java.awt.Color(153,153,153, i));
                 try {
                     Thread.sleep(10);
                 } catch (InterruptedException ex) {
@@ -462,6 +474,15 @@ public class GUIMethods{
             tGUI.menuTimeDefaultValues();
         }
     }
+    
+    public void saveUserUpdateConfirmed(JLabel jLabel) {
+        Thread2 updateConfirmed = new Thread2(jLabel);
+        
+        updateConfirmed.start();
+      
+    }
+    
+  
     
     public ResultSet getUserProjects(int userID) {
     try {
@@ -602,7 +623,9 @@ public class GUIMethods{
     }
     
     public void insertSkillValue2() {
-             String skill = (String) tGUI.jComboBox2.getSelectedItem();
+          try { 
+        
+        String skill = (String) tGUI.jComboBox2.getSelectedItem();
         DefaultTableModel model = (DefaultTableModel)tGUI.jTable3.getModel();
         
        
@@ -618,6 +641,10 @@ public class GUIMethods{
        Vector row = new Vector();
        row.add(skill);
        model.addRow(row);
+          } catch(Exception e) {
+              System.out.println("Combo Box Empty, not skilfull to fix the problem. srry boss");
+          }
+       
     }
 
     public boolean emailIsAvailable(String email) {
@@ -681,7 +708,23 @@ public class GUIMethods{
              }
         }  
  
-        protected boolean getIsAdmin() {
+     public void clearAllTextFieldsInUpdateUser() {
+        tGUI.jTextField4.setText("");
+        tGUI.jTextField5.setText("");
+        tGUI.jTextField6.setText("");
+        tGUI.jGetUserComboBox1.removeAllItems();
+        
+        
+        DefaultTableModel model = (DefaultTableModel)tGUI.jTable3.getModel();
+        
+        int a = tGUI.jTable3.getRowCount();
+         
+        for(int i = a; i > 0 ; i--) {
+               model.removeRow(i -1);
+             }
+        }  
+        
+     protected boolean getIsAdmin() {
             boolean isAdmin;
             isAdmin = adminInt==1;
             return isAdmin;
@@ -754,9 +797,10 @@ public class GUIMethods{
 
     public void getUsersInfoFromDataBase() {
             
-          int getUserIdInfo =  userArray.get(tGUI.jGetUserComboBox1.getSelectedIndex());
           
         try {
+            int getUserIdInfo =  userArray.get(tGUI.jGetUserComboBox1.getSelectedIndex());
+
             pstat = cn.prepareStatement("select FName, LName, email, is_admin from users where user_id = ?");
             pstat.setInt(1, getUserIdInfo);
             rs = pstat.executeQuery();

@@ -215,6 +215,9 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jGetUserComboBox1 = new javax.swing.JComboBox<>();
         jLabel29 = new javax.swing.JLabel();
+        jLabel34 = new javax.swing.JLabel();
+        jLabel38 = new javax.swing.JLabel();
+        jLabel39 = new javax.swing.JLabel();
         adminProjectPanel = new javax.swing.JPanel();
         pCurrent = new javax.swing.JLabel();
         ProjectsComboBox = new javax.swing.JComboBox<>();
@@ -1032,7 +1035,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         });
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel36.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel36.setBackground(new java.awt.Color(153, 153, 153));
         jLabel36.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         jLabel36.setForeground(new java.awt.Color(255, 255, 255));
         jLabel36.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -1060,7 +1063,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         jLabel37.setForeground(new java.awt.Color(255, 255, 255));
         jLabel37.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel37.setText("REDIGERA ANVÄNDARE");
-        jPanel4.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 310, 120));
+        jPanel4.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 360, 120));
 
         adminUserChoosePanel.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 280, 360, 120));
 
@@ -1188,7 +1191,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
                 jLabel33MouseClicked(evt);
             }
         });
-        adminEditUserPanel1.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 470, 140, 30));
+        adminEditUserPanel1.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 470, 110, 30));
 
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1226,8 +1229,30 @@ public class TimeTrackGUI extends javax.swing.JFrame {
             public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
             }
         });
+        jGetUserComboBox1.setRenderer(new PromptComboBoxRenderer(""));
+        jGetUserComboBox1.setSelectedIndex(-1);
         adminEditUserPanel1.add(jGetUserComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 190, 30));
         adminEditUserPanel1.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 336, 280, 30));
+
+        jLabel34.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel34.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel34.setText("Ändringar Sparade");
+        adminEditUserPanel1.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 470, 280, 30));
+        jLabel34.getAccessibleContext().setAccessibleName("Ändringar Sparade");
+
+        jLabel38.setForeground(new java.awt.Color(0, 51, 153));
+        jLabel38.setText("Radera Användare");
+        jLabel38.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel38.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel38MouseClicked(evt);
+            }
+        });
+        adminEditUserPanel1.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 470, 110, 30));
+
+        jLabel39.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel39.setText("Användare Raderad");
+        adminEditUserPanel1.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 470, 280, 30));
 
         adminUserSelectPanel.add(adminEditUserPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 780, 510));
 
@@ -1595,6 +1620,8 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         Arrays.fill(menuArray, Boolean.FALSE);
         menuArray[4] = true;
         guiM.getAvailableSkills();
+        guiM.clearAllTextFieldsInUpdateUser();
+        guiM.clearAllTextFieldsInCreateUser();
     }//GEN-LAST:event_menuPanel5MouseClicked
 
     private void menuPanel5MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuPanel5MouseEntered
@@ -1985,14 +2012,16 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_sRemoveSelectedMouseClicked
 
     private void jComboBox2PopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_jComboBox2PopupMenuWillBecomeInvisible
+        if(jComboBox2.getSelectedIndex() != -1) {
         guiM.insertSkillValue2();
-      
+        }
     }//GEN-LAST:event_jComboBox2PopupMenuWillBecomeInvisible
 
     private void jLabel33MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel33MouseClicked
         guiM.deleteAllUserSkills();
         guiM.insertUsersHasSkills(jTextField5.getText(), jTable3);
         guiM.updateUser();
+        guiM.saveUserUpdateConfirmed(jLabel34);
     }//GEN-LAST:event_jLabel33MouseClicked
 
     private void jLabel35MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel35MouseClicked
@@ -2035,8 +2064,17 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel4MouseExited
 
     private void jGetUserComboBox1PopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_jGetUserComboBox1PopupMenuWillBecomeInvisible
-       guiM.getUsersInfoFromDataBase();
+       if(jGetUserComboBox1.getSelectedIndex() != -1 ) {
+        guiM.getUsersInfoFromDataBase();
+       }
+      
     }//GEN-LAST:event_jGetUserComboBox1PopupMenuWillBecomeInvisible
+
+    private void jLabel38MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel38MouseClicked
+        guiM.deleteUser();
+        guiM.saveUserUpdateConfirmed(jLabel39);
+        guiM.clearAllTextFieldsInUpdateUser();
+    }//GEN-LAST:event_jLabel38MouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     protected javax.swing.JComboBox<String> CustomerComboBox;
@@ -2090,9 +2128,12 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     protected javax.swing.JLabel jLabel33;
+    protected javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
+    private javax.swing.JLabel jLabel38;
+    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -2773,6 +2814,8 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     private void adminUserSettings() {
         adminEditUserPanel1.setVisible(false);
         adminUserPanel1.setVisible(false);
+        jLabel34.setForeground(new Color(0,0,0,0));
+        jLabel39.setForeground(new Color(0,0,0,0));
     }
     
     private void timeTrackSettings() {
