@@ -60,6 +60,7 @@ public class GUIMethods{
         String pStatus1, pStatus2;
         String pCustomer1, pCustomer2;
         
+        
     public GUIMethods() {
         readProperties();
         cn = prepareDBConnection();
@@ -864,6 +865,22 @@ public class GUIMethods{
             Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
         }
             tGUI.jGetUserComboBox1.setSelectedItem(null);
+     }
+    
+    public String getUserEmail(int userID) {
+        String email = "";
+        try {
+            pstat = cn.prepareStatement("SELECT email FROM users WHERE user_id = ? ");
+            pstat.setInt(1, userID);
+            
+            rs = pstat.executeQuery();
+            rs.next();
+            email = rs.getString(1);
+
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        return email;
      }
 
 

@@ -247,7 +247,7 @@ public class ProjectMethods {
         getAvailableSkillsProject();
         tGUI.ProjectTextField2.setEditable(true);
         tGUI.ProjectTextArea1.setEditable(true);
-        tGUI.pCurrent.setText("Skapa");
+        tGUI.adminUserChooseHeaderLabel2.setText("SKAPA NYTT PROJEKT");
                 getProjectInfo1();
         printAL();
     }
@@ -270,7 +270,7 @@ public class ProjectMethods {
         getAvailableSkillsProject();
         tGUI.ProjectTextField2.setEditable(false);
         tGUI.ProjectTextArea1.setEditable(false);
-        tGUI.pCurrent.setText("Redigera");
+        tGUI.adminUserChooseHeaderLabel2.setText("REDIGERA PROJEKT");
         getProjectInfo1();
     }
     
@@ -296,7 +296,7 @@ public class ProjectMethods {
             tGUI.ProjectsComboBox.setSelectedItem(pname);
             setProjectInfo();
             tGUI.saveNewProject = false;
-            tGUI.pCurrent.setText("Redigera");         
+            tGUI.adminUserChooseHeaderLabel2.setText("REDIGERA PROJEKT");         
 
         }else{
             updateProject();
