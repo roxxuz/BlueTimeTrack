@@ -773,6 +773,36 @@ public class GUIMethods{
         return rs;
     }
     
+    protected String getHoursThisMonth(int userID) {                                         
+        String hoursThisMonth = "999";
+        try {
+            pstat = cn.prepareStatement("SELECT SUM((HOUR(end_time) - HOUR(start_time))) FROM time " +
+                                        "WHERE MONTH(start_time) = MONTH(CURDATE()) AND user_id = ?");
+            pstat.setInt(1, userID);
+            rs = pstat.executeQuery();
+            rs.next();
+            hoursThisMonth = rs.getString(1);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+        return hoursThisMonth;
+    }
+    
+    protected String getHoursThisYear(int userID) {                                         
+        String hoursThisYear = "999";
+        try {
+            pstat = cn.prepareStatement("SELECT SUM((HOUR(end_time) - HOUR(start_time))) FROM time " +
+                                        "WHERE YEAR(start_time) = YEAR(CURDATE()) AND user_id = ?");
+            pstat.setInt(1, userID);
+            rs = pstat.executeQuery();
+            rs.next();
+            hoursThisYear = rs.getString(1);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+        return hoursThisYear;
+    }
+    
     ArrayList<Integer> userArray = new ArrayList<>();
             
     public void getUsersFromDataBase() {
