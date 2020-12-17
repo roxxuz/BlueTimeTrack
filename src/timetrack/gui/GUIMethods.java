@@ -449,7 +449,7 @@ public class GUIMethods{
                 Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
             }
             for (int i = 0; i < 255; i=i+2) {
-                jLabel.setForeground(new java.awt.Color(153,153,153, i));
+                jLabel.setForeground(new java.awt.Color(63,126,104, i));
                 try {
                     Thread.sleep(10);
                 } catch (InterruptedException ex) {
@@ -464,7 +464,7 @@ public class GUIMethods{
 
             for (int i = 255; i > 0; i--) {
 
-                jLabel.setForeground(new java.awt.Color(153,153,153, i));
+                jLabel.setForeground(new java.awt.Color(63,126,104, i));
                 try {
                     Thread.sleep(10);
                 } catch (InterruptedException ex) {
@@ -936,7 +936,7 @@ public class GUIMethods{
             pstat.executeUpdate();
             
             
-            
+            saveUserUpdateConfirmed(tGUI.editUserSavedLabel);
         } catch (SQLException ex) {
             Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
         }}
@@ -947,13 +947,13 @@ public class GUIMethods{
          boolean sucess = false;
         if(name.trim().isEmpty() 
                 && lname.trim().isEmpty()){
-              tGUI.jLabel29.setText("Alla fält är inte ifyllda, fyll i alla fält!");
+              tGUI.editUserFieldsMissing.setText("Alla fält är inte ifyllda, fyll i alla fält!");
         }
         else if(name.trim().isEmpty()){
-             tGUI.jLabel29.setText("Fyll i ett Förnamn");
+             tGUI.editUserFieldsMissing.setText("Fyll i ett Förnamn");
         } 
          else if(lname.trim().isEmpty()) {
-             tGUI.jLabel29.setText("Fyll i ett Efternamn");
+             tGUI.editUserFieldsMissing.setText("Fyll i ett Efternamn");
         }
          else {
              sucess = true;
