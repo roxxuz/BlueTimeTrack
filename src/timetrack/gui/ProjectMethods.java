@@ -20,6 +20,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
@@ -191,10 +192,13 @@ public class ProjectMethods {
             } catch (SQLException ex) {
                 Logger.getLogger(ProjectMethods.class.getName()).log(Level.SEVERE, null, ex);
             }
+        tGUI.ProjectTextField2.setEditable(true);
+        tGUI.ProjectTextArea1.setEditable(true);
         }
         catch (Exception e) {
             System.out.println("blabla");
         }
+        
     }
 
     public void updateProject() {
@@ -224,6 +228,52 @@ public class ProjectMethods {
             Logger.getLogger(ProjectMethods.class.getName()).log(Level.SEVERE, null, ex);
         } //return;
     }
+    
+    public void newProjectButton() {
+        compareFields();
+        getProjectInfo2();
+        uop.clear();
+        uidSetOnP.clear();
+        clearProjectFields();
+        tGUI.saveNewProject = true;
+        clearAllProjectFields();
+        tGUI.ProjectsComboBox.setVisible(false);
+        tGUI.ProjectTextField1.setVisible(false);
+        tGUI.jLabel24.setVisible(false);
+        tGUI.jLabel17.setVisible(false);
+        projectCombobox();
+        StatusCombobox();
+        CustomerCombobox();
+        getAvailableSkillsProject();
+        tGUI.ProjectTextField2.setEditable(true);
+        tGUI.ProjectTextArea1.setEditable(true);
+        tGUI.pCurrent.setText("Skapa");
+                getProjectInfo1();
+        printAL();
+    }
+    
+    public void editProjectButton() {
+        getProjectInfo2();
+        compareFields();
+        clearProjectFields();
+        uop.clear();
+        uidSetOnP.clear();
+        tGUI.saveNewProject = false;
+        clearAllProjectFields();
+        tGUI.ProjectsComboBox.setVisible(true);
+        tGUI.ProjectTextField1.setVisible(true);
+        tGUI.jLabel24.setVisible(true);
+        tGUI.jLabel17.setVisible(true);
+        projectCombobox();
+        StatusCombobox();
+        CustomerCombobox();
+        getAvailableSkillsProject();
+        tGUI.ProjectTextField2.setEditable(false);
+        tGUI.ProjectTextArea1.setEditable(false);
+        tGUI.pCurrent.setText("Redigera");
+        getProjectInfo1();
+    }
+    
     
     public void saveMethod(){
             String pname = tGUI.ProjectTextField2.getText();
@@ -260,7 +310,8 @@ public class ProjectMethods {
         }  else {
             
         }   
-
+            tGUI.saveDeleteDone.setText("Projekt sparat");
+            saveDeleteDoneMessage();
         
     }
 
@@ -644,15 +695,8 @@ public class ProjectMethods {
         }
         if (pCustomer1 == null){
             pCustomer1 = "";
-        }/*
-            System.out.println("111111");
-            System.out.println(pName1);
-            System.out.println(pDesc1);
-            System.out.println(pStatus1);
-            System.out.println(pCustomer1);
-            System.out.println("1111111");
-        */
         }
+    }
     
     public void getProjectInfo2(){
         uidFromPtable();
@@ -667,13 +711,6 @@ public class ProjectMethods {
         if (pCustomer2 == null){
             pCustomer2 = "";
         }
-    /*    System.out.println("22222");
-        System.out.println(pName2);
-        System.out.println(pDesc2);
-        System.out.println(pStatus2);
-        System.out.println(pCustomer2);
-        System.out.println("222222");
-*/
     }
 
         
@@ -709,7 +746,7 @@ public class ProjectMethods {
             
         }
         
-        public void resetIsSaved(){
+        public void clearProjectFields(){
         pName1 = ""; 
         pName2 = "";
         pDesc1 = "";
@@ -747,9 +784,9 @@ public class ProjectMethods {
                 for (int i : uidSetOnP){
                 System.out.println("uidSetOnP " + i);
             }
-                for (int i :uop){
-                System.out.println("uop " + i);
-            }
+                for (int i :uop){            
+                System.out.println("uop " + i);                
+            }          
         }
         
          private boolean saveMissingFields() {
@@ -792,4 +829,41 @@ public class ProjectMethods {
         }
         return missingField;
          }
+         
+          public void deleteProject(){
+    
+              try{              
+            int pid = Integer.parseInt(tGUI.ProjectTextField1.getText());
+              
+            pstat = cn.prepareStatement("delete from projects where projects_id = ?");
+            pstat.setInt(1, pid);
+            pstat.executeUpdate();
+            tGUI.saveDeleteDone.setText("Projekt raderat");
+            saveDeleteDoneMessage();
+            
+            clearProjectFields();
+            DefaultTableModel model = (DefaultTableModel)tGUI.sSkillTable.getModel();
+            int a = tGUI.sSkillTable.getRowCount();
+            for(int i = a; i > 0 ; i--) {
+                model.removeRow(i -1);            
+            }
+            clearAllProjectFields();
+            editProjectButton();                
+
+        }
+        catch(Exception e){
+            System.err.println("Project NOT deleted");
+        }
+              clearAllProjectFields();
+          }      
+              
+         public void saveDeleteDoneMessage(){
+                //Ny thread startar som kommer att visa en text med att rapporteringen har lyckats
+                GUIMethods.Thread2 msg = guiM.new Thread2(tGUI.saveDeleteDone);
+                msg.start();
+                tGUI.setTimeDefaultValues();
+                System.out.println("print");
+
+    }
+
 }
