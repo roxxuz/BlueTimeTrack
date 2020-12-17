@@ -296,9 +296,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         passwordPreview = new javax.swing.JLabel();
         name2 = new javax.swing.JLabel();
         newPassField = new javax.swing.JPasswordField();
-        jSeparator9 = new javax.swing.JSeparator();
         currentPassField = new javax.swing.JPasswordField();
-        jSeparator11 = new javax.swing.JSeparator();
         passMassage = new javax.swing.JLabel();
         emailPanel = new javax.swing.JPanel();
         emailPreview = new javax.swing.JLabel();
@@ -312,8 +310,6 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         saveNameBtn = new javax.swing.JButton();
         jLabel51 = new javax.swing.JLabel();
         lnField = new javax.swing.JTextField();
-        jSeparator10 = new javax.swing.JSeparator();
-        jSeparator12 = new javax.swing.JSeparator();
         userMassage = new javax.swing.JLabel();
         dateTimeLabel = new javax.swing.JLabel();
         mainTopPanel = new javax.swing.JPanel();
@@ -1718,7 +1714,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        settingsPanel.add(changePassPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 120, 130, 60));
+        settingsPanel.add(changePassPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 250, 130, 60));
         changePassPanel.getAccessibleContext().setAccessibleParent(passwordPanel);
 
         passwordPanel.setBackground(new java.awt.Color(255, 255, 255));
@@ -1756,30 +1752,32 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         passwordPanel.add(name2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, -1, 40));
 
         newPassField.setText("Enter your password");
-        newPassField.setBorder(null);
+        newPassField.setBorder(BorderFactory.createEmptyBorder(1,1,1,1)
+
+        );
         newPassField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 newPassFieldActionPerformed(evt);
             }
         });
         passwordPanel.add(newPassField, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 80, 360, 30));
-        passwordPanel.add(jSeparator9, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 110, 360, 10));
 
         currentPassField.setText("Enter your password");
-        currentPassField.setBorder(null);
+        currentPassField.setBorder(BorderFactory.createEmptyBorder(1,1,1,1)
+
+        );
         currentPassField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 currentPassFieldActionPerformed(evt);
             }
         });
         passwordPanel.add(currentPassField, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 360, 30));
-        passwordPanel.add(jSeparator11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 360, 10));
 
         passMassage.setForeground(new java.awt.Color(255, 255, 255));
         passMassage.setText("Namn Updaterad");
         passwordPanel.add(passMassage, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, 220, 30));
 
-        settingsPanel.add(passwordPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 720, 60));
+        settingsPanel.add(passwordPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 720, 180));
 
         emailPanel.setBackground(new java.awt.Color(247, 247, 247));
         emailPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1792,7 +1790,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         currentEmailUserPreview.setText("john@doe.com");
         emailPanel.add(currentEmailUserPreview, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, 420, 40));
 
-        settingsPanel.add(emailPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 780, 60));
+        settingsPanel.add(emailPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 780, 60));
 
         namePreviewLabel.setText("John Doe");
         settingsPanel.add(namePreviewLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, 430, 40));
@@ -1836,7 +1834,9 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         usernamePanel.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 60, -1, -1));
 
         fnField.setText("John");
-        fnField.setBorder(null);
+        fnField.setBorder(BorderFactory.createEmptyBorder(1,1,1,1);
+
+        );
         fnField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 fnFieldActionPerformed(evt);
@@ -1862,16 +1862,16 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         usernamePanel.add(jLabel51, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, -1, -1));
 
         lnField.setText("Doe");
-        lnField.setBorder(null);
+        lnField.setBorder(BorderFactory.createEmptyBorder(1,1,1,1)
+
+        );
         usernamePanel.add(lnField, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 80, 360, 30));
-        usernamePanel.add(jSeparator10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 350, 10));
-        usernamePanel.add(jSeparator12, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 110, 350, 10));
 
         userMassage.setForeground(new java.awt.Color(255, 255, 255));
         userMassage.setText("Namn Updaterad");
         usernamePanel.add(userMassage, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 130, 220, 30));
 
-        settingsPanel.add(usernamePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 740, 60));
+        settingsPanel.add(usernamePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 740, 180));
 
         mainPanel.add(settingsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 780, 510));
 
@@ -2804,9 +2804,6 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator10;
-    private javax.swing.JSeparator jSeparator11;
-    private javax.swing.JSeparator jSeparator12;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
@@ -2814,7 +2811,6 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JSeparator jSeparator7;
     private javax.swing.JSeparator jSeparator8;
-    private javax.swing.JSeparator jSeparator9;
     protected javax.swing.JTable jTable2;
     protected javax.swing.JTable jTable3;
     protected javax.swing.JTextField jTextField1;
