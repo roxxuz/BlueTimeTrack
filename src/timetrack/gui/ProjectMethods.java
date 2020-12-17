@@ -230,8 +230,8 @@ public class ProjectMethods {
     }
     
     public void newProjectButton() {
-        compareFields();
-        getProjectInfo2();
+//        compareFields();
+//        getProjectInfo2();
         uop.clear();
         uidSetOnP.clear();
         clearProjectFields();
@@ -253,8 +253,8 @@ public class ProjectMethods {
     }
     
     public void editProjectButton() {
-        getProjectInfo2();
-        compareFields();
+//        getProjectInfo2();
+//        compareFields();
         clearProjectFields();
         uop.clear();
         uidSetOnP.clear();
@@ -449,6 +449,7 @@ public class ProjectMethods {
     }
     ///LÄGGER TILL ANVÄNDARE MED VALD SKILL I JCOMBOBOX///
     public void setSkillUsers() {
+        userid.clear();
         tGUI.sSkillChosenBox.removeAllItems();
         try {
             String skill = tGUI.SkillBox.getSelectedItem().toString();
