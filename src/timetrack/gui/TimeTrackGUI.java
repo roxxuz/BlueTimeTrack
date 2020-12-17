@@ -286,7 +286,31 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         saveDeleteDone = new javax.swing.JLabel();
         adminProjectCustomerTable = new javax.swing.JPanel();
         settingsPanel = new javax.swing.JPanel();
+        namePreview = new javax.swing.JLabel();
+        changePassPanel = new javax.swing.JPanel();
+        changePassBtn = new javax.swing.JLabel();
+        passwordPanel = new javax.swing.JPanel();
+        jLabel49 = new javax.swing.JLabel();
+        savePassBtn = new javax.swing.JButton();
+        jLabel50 = new javax.swing.JLabel();
+        passwordPreview = new javax.swing.JLabel();
+        name2 = new javax.swing.JLabel();
+        newPassField = new javax.swing.JPasswordField();
+        currentPassField = new javax.swing.JPasswordField();
+        passMassage = new javax.swing.JLabel();
+        emailPanel = new javax.swing.JPanel();
+        emailPreview = new javax.swing.JLabel();
+        currentEmailUserPreview = new javax.swing.JLabel();
+        namePreviewLabel = new javax.swing.JLabel();
+        changeNameBtnPanel = new javax.swing.JPanel();
+        changeNameBtn = new javax.swing.JLabel();
+        usernamePanel = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
+        fnField = new javax.swing.JTextField();
+        saveNameBtn = new javax.swing.JButton();
+        jLabel51 = new javax.swing.JLabel();
+        lnField = new javax.swing.JTextField();
+        userMassage = new javax.swing.JLabel();
         dateTimeLabel = new javax.swing.JLabel();
         mainTopPanel = new javax.swing.JPanel();
         logoLabel = new javax.swing.JLabel();
@@ -1658,8 +1682,196 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         settingsPanel.setBackground(new java.awt.Color(255, 255, 255));
         settingsPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel7.setText("Inställningar");
-        settingsPanel.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 240, -1, -1));
+        namePreview.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        namePreview.setText("Namn:");
+        settingsPanel.add(namePreview, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, 40));
+
+        changePassPanel.setBackground(new java.awt.Color(255, 255, 255));
+
+        changePassBtn.setBackground(new java.awt.Color(255, 255, 255));
+        changePassBtn.setForeground(new java.awt.Color(22, 42, 84));
+        changePassBtn.setText("<html><u>Ändra Lössenord</u></html>");
+        changePassBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        changePassBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                changePassBtnMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout changePassPanelLayout = new javax.swing.GroupLayout(changePassPanel);
+        changePassPanel.setLayout(changePassPanelLayout);
+        changePassPanelLayout.setHorizontalGroup(
+            changePassPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, changePassPanelLayout.createSequentialGroup()
+                .addGap(0, 5, Short.MAX_VALUE)
+                .addComponent(changePassBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        changePassPanelLayout.setVerticalGroup(
+            changePassPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, changePassPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(changePassBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        settingsPanel.add(changePassPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 250, 130, 60));
+        changePassPanel.getAccessibleContext().setAccessibleParent(passwordPanel);
+
+        passwordPanel.setBackground(new java.awt.Color(255, 255, 255));
+        passwordPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel49.setText("Ny lössenord");
+        passwordPanel.add(jLabel49, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 60, -1, -1));
+
+        savePassBtn.setBackground(new java.awt.Color(22, 42, 84));
+        savePassBtn.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        savePassBtn.setForeground(new java.awt.Color(255, 255, 255));
+        savePassBtn.setText("Spara");
+        savePassBtn.setBorder(null);
+        savePassBtn.setFocusPainted(false);
+        savePassBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                savePassBtnMouseClicked(evt);
+            }
+        });
+        savePassBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                savePassBtnActionPerformed(evt);
+            }
+        });
+        passwordPanel.add(savePassBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 80, 30));
+
+        jLabel50.setText("Nuvarande Lösenord");
+        passwordPanel.add(jLabel50, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, -1, -1));
+
+        passwordPreview.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        passwordPreview.setText("Lösenord:");
+        passwordPanel.add(passwordPreview, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, -1, 40));
+
+        name2.setText("***************");
+        passwordPanel.add(name2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, -1, 40));
+
+        newPassField.setText("Enter your password");
+        newPassField.setBorder(BorderFactory.createEmptyBorder(1,1,1,1)
+
+        );
+        newPassField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newPassFieldActionPerformed(evt);
+            }
+        });
+        passwordPanel.add(newPassField, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 80, 360, 30));
+
+        currentPassField.setText("Enter your password");
+        currentPassField.setBorder(BorderFactory.createEmptyBorder(1,1,1,1)
+
+        );
+        currentPassField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                currentPassFieldActionPerformed(evt);
+            }
+        });
+        passwordPanel.add(currentPassField, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 360, 30));
+
+        passMassage.setForeground(new java.awt.Color(255, 255, 255));
+        passMassage.setText("Namn Updaterad");
+        passwordPanel.add(passMassage, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, 220, 30));
+
+        settingsPanel.add(passwordPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 720, 180));
+
+        emailPanel.setBackground(new java.awt.Color(247, 247, 247));
+        emailPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        emailPreview.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        emailPreview.setText("E-post:");
+        emailPreview.setDisplayedMnemonicIndex(2);
+        emailPanel.add(emailPreview, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, 40));
+
+        currentEmailUserPreview.setText("john@doe.com");
+        emailPanel.add(currentEmailUserPreview, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, 420, 40));
+
+        settingsPanel.add(emailPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 780, 60));
+
+        namePreviewLabel.setText("John Doe");
+        settingsPanel.add(namePreviewLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, 430, 40));
+
+        changeNameBtnPanel.setBackground(new java.awt.Color(255, 255, 255));
+
+        changeNameBtn.setBackground(new java.awt.Color(255, 255, 255));
+        changeNameBtn.setForeground(new java.awt.Color(22, 42, 84));
+        changeNameBtn.setText("<html><u>Ändra Namn</u></html>");
+        changeNameBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        changeNameBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                changeNameBtnMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout changeNameBtnPanelLayout = new javax.swing.GroupLayout(changeNameBtnPanel);
+        changeNameBtnPanel.setLayout(changeNameBtnPanelLayout);
+        changeNameBtnPanelLayout.setHorizontalGroup(
+            changeNameBtnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, changeNameBtnPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(changeNameBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        changeNameBtnPanelLayout.setVerticalGroup(
+            changeNameBtnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(changeNameBtnPanelLayout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(changeNameBtn)
+                .addContainerGap(29, Short.MAX_VALUE))
+        );
+
+        settingsPanel.add(changeNameBtnPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, -6, 110, 70));
+        changeNameBtnPanel.getAccessibleContext().setAccessibleParent(usernamePanel);
+
+        usernamePanel.setBackground(new java.awt.Color(255, 255, 255));
+        usernamePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel7.setText("Efternamn");
+        usernamePanel.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 60, -1, -1));
+
+        fnField.setText("John");
+        fnField.setBorder(BorderFactory.createEmptyBorder(1,1,1,1);
+
+        );
+        fnField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fnFieldActionPerformed(evt);
+            }
+        });
+        usernamePanel.add(fnField, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 350, 30));
+
+        saveNameBtn.setBackground(new java.awt.Color(22, 42, 84));
+        saveNameBtn.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        saveNameBtn.setForeground(new java.awt.Color(255, 255, 255));
+        saveNameBtn.setText("Spara");
+        saveNameBtn.setBorder(null);
+        saveNameBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        saveNameBtn.setFocusPainted(false);
+        saveNameBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                saveNameBtnMouseClicked(evt);
+            }
+        });
+        usernamePanel.add(saveNameBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 80, 30));
+
+        jLabel51.setText("Förnamn");
+        usernamePanel.add(jLabel51, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, -1, -1));
+
+        lnField.setText("Doe");
+        lnField.setBorder(BorderFactory.createEmptyBorder(1,1,1,1)
+
+        );
+        usernamePanel.add(lnField, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 80, 360, 30));
+
+        userMassage.setForeground(new java.awt.Color(255, 255, 255));
+        userMassage.setText("Namn Updaterad");
+        usernamePanel.add(userMassage, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 130, 220, 30));
+
+        settingsPanel.add(usernamePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 740, 180));
 
         mainPanel.add(settingsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 780, 510));
 
@@ -1756,6 +1968,17 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         menuPanel8.setBackground(new java.awt.Color(92,126,162));
         Arrays.fill(menuArray, Boolean.FALSE);
         menuArray[6] = true;
+        
+        String user = currentUserLabel.getText();
+        namePreviewLabel.setText(user);
+        String[] fNameLnameSplit = user.split("\\s");
+        fnField.setText(fNameLnameSplit[0]);
+
+        if(fNameLnameSplit.length <= 2) {
+            lnField.setText(fNameLnameSplit[1]);
+        }else {
+            lnField.setText(fNameLnameSplit[1] + " " + fNameLnameSplit[2]);
+        }
     }//GEN-LAST:event_menuPanel7MouseClicked
 
     private void menuPanel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuPanel3MouseClicked
@@ -2384,6 +2607,73 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         pM.deleteProject();
     }//GEN-LAST:event_deleteProjectActionPerformed
 
+    boolean btnClicked = false;
+    private void changePassBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_changePassBtnMouseClicked
+
+        if(btnClicked == false) {
+            for (int i = 0; i <= 180; i++) {
+                passwordPanel.setSize(740, i);
+                btnClicked = true;
+            }
+
+        }else {
+            btnClicked = false;
+            for (int i = 180; i >= 0; i--) {
+                passwordPanel.setSize(740, i);
+            }
+        }
+    }//GEN-LAST:event_changePassBtnMouseClicked
+
+    private void savePassBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_savePassBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_savePassBtnActionPerformed
+
+    private void newPassFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newPassFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_newPassFieldActionPerformed
+
+    private void currentPassFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_currentPassFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_currentPassFieldActionPerformed
+
+    private void changeNameBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_changeNameBtnMouseClicked
+ 
+        if(btnClicked == false) {
+            for (int i = 0; i <= 180; i++) {
+                usernamePanel.setSize(740, i);
+                emailPanel.setBounds(0, i, 780, 60);
+                passwordPanel.setBounds(20, emailPanel.getY() + 60, 740, 60);
+                btnClicked = true;
+            }
+
+        }else {
+            btnClicked = false;
+            for (int i = 180; i >= 0; i--) {
+                usernamePanel.setSize(740, i);
+                emailPanel.setBounds(0, 60, 780, 60);
+                passwordPanel.setBounds(20, 120, 740, 60);
+            }
+        }
+    }//GEN-LAST:event_changeNameBtnMouseClicked
+
+    private void fnFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fnFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fnFieldActionPerformed
+
+    private void saveNameBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_saveNameBtnMouseClicked
+        String fn = fnField.getText();
+        String ln = lnField.getText();
+
+        guiM.updateUserName(fn, ln, userID);
+    }//GEN-LAST:event_saveNameBtnMouseClicked
+
+    private void savePassBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_savePassBtnMouseClicked
+        String currentPass = currentPassField.getText();
+        String newPass = newPassField.getText();
+        
+        guiM.changePassword(currentPass, newPass, userID);
+    }//GEN-LAST:event_savePassBtnMouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     protected javax.swing.JComboBox<String> CustomerComboBox;
     protected javax.swing.JButton EditProject;
@@ -2404,13 +2694,22 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     private javax.swing.JPanel adminUserChoosePanel;
     private javax.swing.JPanel adminUserPanel1;
     private javax.swing.JPanel adminUserSelectPanel;
+    private javax.swing.JLabel changeNameBtn;
+    private javax.swing.JPanel changeNameBtnPanel;
+    private javax.swing.JLabel changePassBtn;
+    private javax.swing.JPanel changePassPanel;
     private javax.swing.JPanel closePanel;
+    private javax.swing.JLabel currentEmailUserPreview;
+    private javax.swing.JPasswordField currentPassField;
     protected javax.swing.JLabel currentUserLabel;
     private static javax.swing.JLabel dateTimeLabel;
     protected javax.swing.JButton deleteProject;
     private org.jdesktop.swingx.JXDatePicker dp1;
     private org.jdesktop.swingx.JXDatePicker dp2;
     private org.jdesktop.swingx.JXDatePicker dp3;
+    private javax.swing.JPanel emailPanel;
+    private javax.swing.JLabel emailPreview;
+    private javax.swing.JTextField fnField;
     private javax.swing.JLabel hoursOverThisMonthLabel;
     private javax.swing.JLabel hoursOverThisYearLabel;
     private javax.swing.JLabel hoursRegularThisMonthLabel;
@@ -2463,7 +2762,10 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel46;
     private javax.swing.JLabel jLabel47;
     private javax.swing.JLabel jLabel48;
+    private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel50;
+    private javax.swing.JLabel jLabel51;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -2517,6 +2819,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     protected javax.swing.JTextField jTextField4;
     protected javax.swing.JTextField jTextField5;
     protected javax.swing.JTextField jTextField6;
+    private javax.swing.JTextField lnField;
     private javax.swing.JLabel logoLabel;
     private javax.swing.JPanel mainLeftPanel;
     private javax.swing.JPanel mainPanel;
@@ -2545,10 +2848,17 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     private javax.swing.JLabel minimizeLabel;
     private javax.swing.JPanel minimizePanel;
     private javax.swing.JPanel motionPanel;
+    private javax.swing.JLabel name2;
+    private javax.swing.JLabel namePreview;
+    private javax.swing.JLabel namePreviewLabel;
+    private javax.swing.JPasswordField newPassField;
     protected javax.swing.JButton newProject;
     private javax.swing.JLabel overviewHeaderLabel;
     private javax.swing.JPanel overviewPanel;
     protected javax.swing.JLabel pCurrent;
+    public javax.swing.JLabel passMassage;
+    private javax.swing.JPanel passwordPanel;
+    private javax.swing.JLabel passwordPreview;
     private javax.swing.JScrollPane projectAvailableScrollPane;
     private javax.swing.JTable projectAvailableTable;
     private javax.swing.JLabel projectColleagueLabel;
@@ -2573,6 +2883,8 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     protected javax.swing.JComboBox<String> sSkillChosenBox;
     protected javax.swing.JTable sSkillTable;
     protected javax.swing.JLabel saveDeleteDone;
+    private javax.swing.JButton saveNameBtn;
+    private javax.swing.JButton savePassBtn;
     private javax.swing.JPanel settingsPanel;
     protected javax.swing.JComboBox<String> timeChooseEndTimeCB;
     protected javax.swing.JComboBox<String> timeChooseEndTimeCB1;
@@ -2606,6 +2918,8 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     private javax.swing.JLabel timeStartLabel1;
     protected javax.swing.JLabel timeSucceededLabel;
     protected javax.swing.JLabel timeSucceededLabel1;
+    public javax.swing.JLabel userMassage;
+    private javax.swing.JPanel usernamePanel;
     // End of variables declaration//GEN-END:variables
 
     
