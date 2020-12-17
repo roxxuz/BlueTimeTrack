@@ -2344,7 +2344,8 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_menuPanel5MouseExited
 
     private void menuPanel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuPanel6MouseClicked
-        pM.clearAllProjectFields();
+        pM.compareFields();
+        
         saveNewProject = true;     
         selectedPanel(6);
         menuPanel1.setBackground(new java.awt.Color(92,126,162));
