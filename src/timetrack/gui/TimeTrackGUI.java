@@ -115,7 +115,6 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         timeSendButtonPanel = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        menuLeftPanel4 = new javax.swing.JPanel();
         timeSucceededLabel = new javax.swing.JLabel();
         timeStampHeaderLabel = new javax.swing.JLabel();
         timeEditHeaderLabel = new javax.swing.JLabel();
@@ -144,9 +143,10 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         timeSendButtonPanel1 = new javax.swing.JPanel();
         timeEditStampSaveLabel = new javax.swing.JLabel();
-        menuLeftPanel9 = new javax.swing.JPanel();
         timeSucceededLabel1 = new javax.swing.JLabel();
         dp3 = new org.jdesktop.swingx.JXDatePicker();
+        menuLeftPanel9 = new javax.swing.JPanel();
+        menuLeftPanel4 = new javax.swing.JPanel();
         projectPanel = new javax.swing.JPanel();
         projectHeaderLabel1 = new javax.swing.JLabel();
         projectAvailableScrollPane = new javax.swing.JScrollPane();
@@ -170,6 +170,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         jScrollPane8 = new javax.swing.JScrollPane();
         projectColleagueTable = new javax.swing.JTable();
         jSeparator8 = new javax.swing.JSeparator();
+        jPanel13 = new javax.swing.JPanel();
         overviewPanel = new javax.swing.JPanel();
         overviewHeaderLabel = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
@@ -184,6 +185,20 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         jPanel10 = new javax.swing.JPanel();
         jLabel45 = new javax.swing.JLabel();
         hoursOverThisMonthLabel = new javax.swing.JLabel();
+        jPanel11 = new javax.swing.JPanel();
+        jLabel46 = new javax.swing.JLabel();
+        hoursRegularThisYearLabel = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel47 = new javax.swing.JLabel();
+        jPanel12 = new javax.swing.JPanel();
+        jLabel48 = new javax.swing.JLabel();
+        hoursRegularThisMonthLabel = new javax.swing.JLabel();
+        jPanel15 = new javax.swing.JPanel();
+        jPanel16 = new javax.swing.JPanel();
+        jPanel17 = new javax.swing.JPanel();
+        jPanel18 = new javax.swing.JPanel();
+        jPanel19 = new javax.swing.JPanel();
+        jPanel20 = new javax.swing.JPanel();
         adminUserSelectPanel = new javax.swing.JPanel();
         adminUserChoosePanel = new javax.swing.JPanel();
         adminUserChooseHeaderLabel = new javax.swing.JLabel();
@@ -191,6 +206,8 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         jLabel36 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel37 = new javax.swing.JLabel();
+        jPanel14 = new javax.swing.JPanel();
+        jPanel21 = new javax.swing.JPanel();
         adminUserPanel1 = new javax.swing.JPanel();
         jTextField2 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
@@ -237,6 +254,8 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         jLabel40 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jLabel41 = new javax.swing.JLabel();
+        jPanel22 = new javax.swing.JPanel();
+        jPanel23 = new javax.swing.JPanel();
         adminProjectInsidePanel = new javax.swing.JPanel();
         pCurrent = new javax.swing.JLabel();
         ProjectsComboBox = new javax.swing.JComboBox<>();
@@ -347,7 +366,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         menuLabel2.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         menuLabel2.setForeground(new java.awt.Color(255, 255, 255));
         menuLabel2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        menuLabel2.setText("Projekt");
+        menuLabel2.setText("Mina projekt");
         menuPanel2.add(menuLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 140, 30));
 
         menuLeftPanel2.setBackground(new java.awt.Color(47, 66, 84));
@@ -378,7 +397,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         menuLabel3.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         menuLabel3.setForeground(new java.awt.Color(255, 255, 255));
         menuLabel3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        menuLabel3.setText("Översikt");
+        menuLabel3.setText("Arbetade timmar");
         menuPanel3.add(menuLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 140, 30));
 
         menuLeftPanel3.setBackground(new java.awt.Color(47, 66, 84));
@@ -650,13 +669,10 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText(" Skicka");
+        jLabel3.setText("Skicka");
         timeSendButtonPanel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 70, 30));
 
-        menuLeftPanel4.setBackground(new java.awt.Color(47, 66, 84));
-        timeSendButtonPanel.add(menuLeftPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 30));
-
-        timePanel.add(timeSendButtonPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 80, 90, 30));
+        timePanel.add(timeSendButtonPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 80, 90, 30));
 
         timeSucceededLabel.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         timeSucceededLabel.setForeground(new java.awt.Color(255, 255, 255));
@@ -707,10 +723,10 @@ public class TimeTrackGUI extends javax.swing.JFrame {
                 timeEditDateLabelNewPropertyChange(evt);
             }
         });
-        timePanel.add(timeEditDateLabelNew, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 250, 120, 30));
+        timePanel.add(timeEditDateLabelNew, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 250, 100, 30));
 
         timeEditDatePanel.setBackground(new java.awt.Color(237, 237, 237));
-        timePanel.add(timeEditDatePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 250, 120, 30));
+        timePanel.add(timeEditDatePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 250, 100, 30));
 
         timeDateLabel1.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         timeDateLabel1.setForeground(new java.awt.Color(47, 66, 84));
@@ -868,13 +884,10 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         timeEditStampSaveLabel.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         timeEditStampSaveLabel.setForeground(new java.awt.Color(255, 255, 255));
         timeEditStampSaveLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        timeEditStampSaveLabel.setText("  Uppdatera");
+        timeEditStampSaveLabel.setText("Uppdatera");
         timeSendButtonPanel1.add(timeEditStampSaveLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 70, 30));
 
-        menuLeftPanel9.setBackground(new java.awt.Color(47, 66, 84));
-        timeSendButtonPanel1.add(menuLeftPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 30));
-
-        timeLastEditStampPanel.add(timeSendButtonPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 30, 90, 30));
+        timeLastEditStampPanel.add(timeSendButtonPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 30, 90, 30));
 
         timeSucceededLabel1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         timeSucceededLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -889,9 +902,15 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         });
         timeLastEditStampPanel.add(dp3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, -130, 0, 20));
 
+        menuLeftPanel9.setBackground(new java.awt.Color(47, 66, 84));
+        timeLastEditStampPanel.add(menuLeftPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 30, 110, 30));
+
         timeEditStampPanel.add(timeLastEditStampPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 780, -1));
 
         timePanel.add(timeEditStampPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 780, 220));
+
+        menuLeftPanel4.setBackground(new java.awt.Color(47, 66, 84));
+        timePanel.add(menuLeftPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 80, 110, 30));
 
         mainPanel.add(timePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 780, 510));
 
@@ -1017,6 +1036,9 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         jSeparator8.setForeground(new java.awt.Color(165, 165, 165));
         projectPanel.add(jSeparator8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 700, 10));
 
+        jPanel13.setBackground(new java.awt.Color(92, 126, 162));
+        projectPanel.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, 300, 120));
+
         mainPanel.add(projectPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 780, 510));
 
         overviewPanel.setBackground(new java.awt.Color(255, 255, 255));
@@ -1025,7 +1047,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         overviewHeaderLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         overviewHeaderLabel.setForeground(new java.awt.Color(165, 165, 165));
         overviewHeaderLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        overviewHeaderLabel.setText("ÖVERSIKT");
+        overviewHeaderLabel.setText("ARBETADE TIMMAR");
         overviewPanel.add(overviewHeaderLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 780, 30));
 
         jPanel7.setBackground(new java.awt.Color(237, 237, 237));
@@ -1033,64 +1055,126 @@ public class TimeTrackGUI extends javax.swing.JFrame {
 
         jLabel42.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jLabel42.setForeground(new java.awt.Color(47, 66, 84));
-        jLabel42.setText("Arbetade timmar i år:");
+        jLabel42.setText("Totalt:");
         jPanel7.add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, 30));
 
         hoursThisYearLabel.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         hoursThisYearLabel.setForeground(new java.awt.Color(47, 66, 84));
         hoursThisYearLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         hoursThisYearLabel.setText("0");
-        jPanel7.add(hoursThisYearLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 0, 90, 30));
+        jPanel7.add(hoursThisYearLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 0, 90, 30));
 
-        overviewPanel.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, 400, 30));
+        overviewPanel.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 110, 220, 30));
 
         jPanel8.setBackground(new java.awt.Color(237, 237, 237));
         jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel43.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jLabel43.setForeground(new java.awt.Color(47, 66, 84));
-        jLabel43.setText("Arbetade timmar denna månad:");
+        jLabel43.setText("Totalt:");
         jPanel8.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, 30));
 
         hoursThisMonthLabel.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         hoursThisMonthLabel.setForeground(new java.awt.Color(47, 66, 84));
         hoursThisMonthLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         hoursThisMonthLabel.setText("0");
-        jPanel8.add(hoursThisMonthLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 0, 90, 30));
+        jPanel8.add(hoursThisMonthLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 0, 90, 30));
 
-        overviewPanel.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 120, 400, 30));
+        overviewPanel.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 300, 220, 30));
 
         jPanel9.setBackground(new java.awt.Color(237, 237, 237));
         jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel44.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jLabel44.setForeground(new java.awt.Color(47, 66, 84));
-        jLabel44.setText("Övertidstimmar i år:");
+        jLabel44.setText("Övertid:");
         jPanel9.add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, 30));
 
         hoursOverThisYearLabel.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         hoursOverThisYearLabel.setForeground(new java.awt.Color(47, 66, 84));
         hoursOverThisYearLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         hoursOverThisYearLabel.setText("0");
-        jPanel9.add(hoursOverThisYearLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 0, 90, 30));
+        jPanel9.add(hoursOverThisYearLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 0, 90, 30));
 
-        overviewPanel.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 180, 400, 30));
+        overviewPanel.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 190, 220, 30));
 
         jPanel10.setBackground(new java.awt.Color(237, 237, 237));
         jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel45.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jLabel45.setForeground(new java.awt.Color(47, 66, 84));
-        jLabel45.setText("Övertidstimmar denna månad:");
+        jLabel45.setText("Övertid:");
         jPanel10.add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, 30));
 
         hoursOverThisMonthLabel.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         hoursOverThisMonthLabel.setForeground(new java.awt.Color(47, 66, 84));
         hoursOverThisMonthLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         hoursOverThisMonthLabel.setText("0");
-        jPanel10.add(hoursOverThisMonthLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 0, 90, 30));
+        jPanel10.add(hoursOverThisMonthLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 0, 90, 30));
 
-        overviewPanel.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 220, 400, 30));
+        overviewPanel.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 380, 220, 30));
+
+        jPanel11.setBackground(new java.awt.Color(237, 237, 237));
+        jPanel11.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel46.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        jLabel46.setForeground(new java.awt.Color(47, 66, 84));
+        jLabel46.setText("Ordinarie:");
+        jPanel11.add(jLabel46, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, 30));
+
+        hoursRegularThisYearLabel.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        hoursRegularThisYearLabel.setForeground(new java.awt.Color(47, 66, 84));
+        hoursRegularThisYearLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        hoursRegularThisYearLabel.setText("0");
+        jPanel11.add(hoursRegularThisYearLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 0, 90, 30));
+
+        overviewPanel.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 150, 220, 30));
+
+        jLabel8.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(47, 66, 84));
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel8.setText("ARBETADE TIMMAR I ÅR");
+        overviewPanel.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 70, 240, 40));
+
+        jLabel47.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jLabel47.setForeground(new java.awt.Color(47, 66, 84));
+        jLabel47.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel47.setText("ARBETADE TIMMAR DENNA MÅNAD");
+        overviewPanel.add(jLabel47, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 260, 240, 40));
+
+        jPanel12.setBackground(new java.awt.Color(237, 237, 237));
+        jPanel12.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel48.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        jLabel48.setForeground(new java.awt.Color(47, 66, 84));
+        jLabel48.setText("Ordinarie:");
+        jPanel12.add(jLabel48, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, 30));
+
+        hoursRegularThisMonthLabel.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        hoursRegularThisMonthLabel.setForeground(new java.awt.Color(47, 66, 84));
+        hoursRegularThisMonthLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        hoursRegularThisMonthLabel.setText("0");
+        jPanel12.add(hoursRegularThisMonthLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 0, 90, 30));
+
+        overviewPanel.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 340, 220, 30));
+
+        jPanel15.setBackground(new java.awt.Color(92, 126, 162));
+        overviewPanel.add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 110, 240, 30));
+
+        jPanel16.setBackground(new java.awt.Color(92, 126, 162));
+        overviewPanel.add(jPanel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 150, 240, 30));
+
+        jPanel17.setBackground(new java.awt.Color(92, 126, 162));
+        overviewPanel.add(jPanel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 190, 240, 30));
+
+        jPanel18.setBackground(new java.awt.Color(92, 126, 162));
+        overviewPanel.add(jPanel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 300, 240, 30));
+
+        jPanel19.setBackground(new java.awt.Color(92, 126, 162));
+        overviewPanel.add(jPanel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 340, 240, 30));
+
+        jPanel20.setBackground(new java.awt.Color(92, 126, 162));
+        overviewPanel.add(jPanel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 380, 240, 30));
 
         mainPanel.add(overviewPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 780, 510));
 
@@ -1150,6 +1234,12 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         jPanel4.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 360, 120));
 
         adminUserChoosePanel.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 280, 360, 120));
+
+        jPanel14.setBackground(new java.awt.Color(47, 66, 84));
+        adminUserChoosePanel.add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 130, 380, 110));
+
+        jPanel21.setBackground(new java.awt.Color(47, 66, 84));
+        adminUserChoosePanel.add(jPanel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 280, 380, 120));
 
         adminUserSelectPanel.add(adminUserChoosePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 780, 510));
 
@@ -1398,6 +1488,12 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         jPanel6.add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 360, 120));
 
         adminProjectChoosePanel.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 280, 360, 120));
+
+        jPanel22.setBackground(new java.awt.Color(47, 66, 84));
+        adminProjectChoosePanel.add(jPanel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 130, 380, 110));
+
+        jPanel23.setBackground(new java.awt.Color(47, 66, 84));
+        adminProjectChoosePanel.add(jPanel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 280, 380, 120));
 
         adminProjectPanel.add(adminProjectChoosePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 780, 510));
 
@@ -1672,8 +1768,18 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         menuPanel8.setBackground(new java.awt.Color(92,126,162));
         Arrays.fill(menuArray, Boolean.FALSE);
         menuArray[2] = true;
-        hoursThisYearLabel.setText(guiM.getHoursThisYear(userID));
-        hoursThisMonthLabel.setText(guiM.getHoursThisMonth(userID));
+        
+        int hoursThisYear = guiM.getHoursThisYear(userID);
+        hoursThisYearLabel.setText(Integer.toString(hoursThisYear));
+        int hoursThisMonth = guiM.getHoursThisMonth(userID);
+        hoursThisMonthLabel.setText(Integer.toString(hoursThisMonth));
+        int hoursOverThisYear = guiM.getHoursOverThisYear(userID);
+        hoursOverThisYearLabel.setText(Integer.toString(hoursOverThisYear));
+        int hoursOverThisMonth = guiM.getHoursOverThisMonth(userID);
+        hoursOverThisMonthLabel.setText(Integer.toString(hoursOverThisMonth));
+        hoursRegularThisYearLabel.setText(Integer.toString(hoursThisYear - hoursOverThisYear));
+        hoursRegularThisMonthLabel.setText(Integer.toString(hoursThisMonth - hoursOverThisMonth));
+        
     }//GEN-LAST:event_menuPanel3MouseClicked
 
     private void menuPanel3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuPanel3MouseEntered
@@ -2307,6 +2413,8 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     private org.jdesktop.swingx.JXDatePicker dp3;
     private javax.swing.JLabel hoursOverThisMonthLabel;
     private javax.swing.JLabel hoursOverThisYearLabel;
+    private javax.swing.JLabel hoursRegularThisMonthLabel;
+    private javax.swing.JLabel hoursRegularThisYearLabel;
     private javax.swing.JLabel hoursThisMonthLabel;
     private javax.swing.JLabel hoursThisYearLabel;
     protected javax.swing.JComboBox<String> jComboBox1;
@@ -2352,13 +2460,30 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
+    private javax.swing.JLabel jLabel46;
+    private javax.swing.JLabel jLabel47;
+    private javax.swing.JLabel jLabel48;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
+    private javax.swing.JPanel jPanel14;
+    private javax.swing.JPanel jPanel15;
+    private javax.swing.JPanel jPanel16;
+    private javax.swing.JPanel jPanel17;
+    private javax.swing.JPanel jPanel18;
+    private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel20;
+    private javax.swing.JPanel jPanel21;
+    private javax.swing.JPanel jPanel22;
+    private javax.swing.JPanel jPanel23;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;

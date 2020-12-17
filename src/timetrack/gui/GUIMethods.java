@@ -773,34 +773,76 @@ public class GUIMethods{
         return rs;
     }
     
-    protected String getHoursThisMonth(int userID) {                                         
-        String hoursThisMonth = "999";
+    protected int getHoursThisMonth(int userID) {                                         
+        int hoursThisMonth = 999;
         try {
             pstat = cn.prepareStatement("SELECT SUM((HOUR(end_time) - HOUR(start_time))) FROM time " +
                                         "WHERE MONTH(start_time) = MONTH(CURDATE()) AND user_id = ?");
             pstat.setInt(1, userID);
             rs = pstat.executeQuery();
             rs.next();
-            hoursThisMonth = rs.getString(1);
+            hoursThisMonth = rs.getInt(1);
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
         return hoursThisMonth;
     }
     
-    protected String getHoursThisYear(int userID) {                                         
-        String hoursThisYear = "999";
+    protected int getHoursThisYear(int userID) {                                         
+        int hoursThisYear = 999;
         try {
             pstat = cn.prepareStatement("SELECT SUM((HOUR(end_time) - HOUR(start_time))) FROM time " +
                                         "WHERE YEAR(start_time) = YEAR(CURDATE()) AND user_id = ?");
             pstat.setInt(1, userID);
             rs = pstat.executeQuery();
             rs.next();
-            hoursThisYear = rs.getString(1);
+            hoursThisYear = rs.getInt(1);
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
         return hoursThisYear;
+    }
+    
+    protected int getHoursOverThisYear(int userID) {                                         
+        int hoursOverThisYear = 999;
+        try {
+            pstat = cn.prepareStatement("SELECT SUM(overtime) overtime_hours FROM " +
+                                        "( " +
+                                        "	SELECT SUM(ABS((HOUR(start_time)-8))) overtime FROM time " +
+                                        "	WHERE YEAR(start_time) = YEAR(CURDATE()) AND HOUR(start_time) < 8 AND user_id = 1 " +
+                                        "	UNION ALL " +
+                                        "	SELECT SUM((HOUR(end_time)-16)) overtime FROM time " +
+                                        "	WHERE YEAR(start_time) = YEAR(CURDATE()) AND HOUR(end_time) > 16 AND user_id = ? " +
+                                        ")overtime");
+            pstat.setInt(1, userID);
+            rs = pstat.executeQuery();
+            rs.next();
+            hoursOverThisYear = rs.getInt(1);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+        return hoursOverThisYear;
+    }
+    
+    protected int getHoursOverThisMonth(int userID) {                                         
+        int hoursOverThisMonth = 999;
+        try {
+            pstat = cn.prepareStatement("SELECT SUM(overtime) overtime_hours FROM " +
+                                        "( " +
+                                        "	SELECT SUM(ABS((HOUR(start_time)-8))) overtime FROM time " +
+                                        "	WHERE MONTH(start_time) = MONTH(CURDATE()) AND HOUR(start_time) < 8 AND user_id = 1 " +
+                                        "	UNION ALL " +
+                                        "	SELECT SUM((HOUR(end_time)-16)) overtime FROM time " +
+                                        "	WHERE MONTH(start_time) = MONTH(CURDATE()) AND HOUR(end_time) > 16 AND user_id = ? " +
+                                        ")overtime");
+            pstat.setInt(1, userID);
+            rs = pstat.executeQuery();
+            rs.next();
+            hoursOverThisMonth = rs.getInt(1);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+        return hoursOverThisMonth;
     }
     
     ArrayList<Integer> userArray = new ArrayList<>();
