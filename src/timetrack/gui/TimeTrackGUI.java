@@ -1576,7 +1576,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         jLabel40.setForeground(new java.awt.Color(255, 255, 255));
         jLabel40.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel40.setText("SKAPA NYTT PROJEKT");
-        jPanel5.add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 330, 110));
+        jPanel5.add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 360, 110));
 
         adminProjectChoosePanel.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 130, 360, 110));
 
@@ -2749,25 +2749,9 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         adminProjectChoosePanel.setVisible(false);
         adminProjectInsidePanel.setVisible(true);
         
-        //Från knappen sedan tidigare
-        pM.getProjectInfo2();
-        pM.compareFields();
-
-        pM.getProjectInfo1();
-        saveNewProject = true;
-        pM.clearAllProjectFields();
-        ProjectsComboBox.setVisible(false);
-        ProjectTextField1.setVisible(false);
-        jLabel24.setVisible(false);
-        jLabel17.setVisible(false);
-        pM.projectCombobox();
-        pM.StatusCombobox();
-        pM.CustomerCombobox();
-        pM.getAvailableSkillsProject();
-        adminUserChooseHeaderLabel2.setText("SKAPA NYTT PROJEKT");
-        pM.clearProjectFields();
+        pM.newProjectButton();
         
-        pM.printAL();
+        adminUserChooseHeaderLabel2.setText("SKAPA NYTT PROJEKT");
         projektMovePanel.setBounds(40, 70, 310, 310);
     }//GEN-LAST:event_jPanel5MouseClicked
 
@@ -2783,20 +2767,8 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         adminProjectChoosePanel.setVisible(false);
         adminProjectInsidePanel.setVisible(true);
         
-        //Från knappen sedan tidigare
-        pM.getProjectInfo2();
-        pM.compareFields();
-        pM.clearProjectFields();
-        saveNewProject = false;
-        pM.clearAllProjectFields();
-        ProjectsComboBox.setVisible(true);
-        ProjectTextField1.setVisible(true);
-        jLabel24.setVisible(true);
-        jLabel17.setVisible(true);
-        pM.projectCombobox();
-        pM.StatusCombobox();
-        pM.CustomerCombobox();
-        pM.getAvailableSkillsProject();
+        pM.editProjectButton();
+        
         adminUserChooseHeaderLabel2.setText("REDIGERA PROJEKT");
         projektMovePanel.setBounds(40, 190, 310, 310);
         
