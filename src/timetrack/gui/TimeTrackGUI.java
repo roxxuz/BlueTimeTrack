@@ -1880,7 +1880,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         changePassPanelLayout.setVerticalGroup(
             changePassPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, changePassPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(14, Short.MAX_VALUE)
                 .addComponent(changePassBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -2008,7 +2008,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
             .addGroup(changeNameBtnPanelLayout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addComponent(changeNameBtn)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         settingsPanel.add(changeNameBtnPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, -6, 110, 70));
@@ -2344,6 +2344,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_menuPanel5MouseExited
 
     private void menuPanel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuPanel6MouseClicked
+        pM.clearAllProjectFields();
         saveNewProject = true;     
         selectedPanel(6);
         menuPanel1.setBackground(new java.awt.Color(92,126,162));
@@ -2363,6 +2364,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         pM.CustomerCombobox();
         pM.getAvailableSkillsProject();
         adminUserChooseHeaderLabel2.setText("SKAPA NYTT PROJEKT");
+        
         pM.getProjectInfo1();
         
     }//GEN-LAST:event_menuPanel6MouseClicked
