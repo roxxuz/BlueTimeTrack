@@ -253,6 +253,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         EditProject = new javax.swing.JButton();
         deleteProject = new javax.swing.JButton();
         saveDeleteDone = new javax.swing.JLabel();
+        adminProjectCustomerTable = new javax.swing.JPanel();
         settingsPanel = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         dateTimeLabel = new javax.swing.JLabel();
@@ -564,6 +565,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         timeChooseProjectCB.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         timeChooseProjectCB.setForeground(new java.awt.Color(165, 165, 165));
         timeChooseProjectCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välj projekt", "Item 2", "Item 3", "Item 4" }));
+        timeChooseProjectCB.setBorder(null);
         timeChooseProjectCB.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
             public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
             }
@@ -1472,6 +1474,10 @@ public class TimeTrackGUI extends javax.swing.JFrame {
 
         adminProjectPanel.add(adminProjectInsidePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 780, 510));
 
+        adminProjectCustomerTable.setBackground(new java.awt.Color(255, 255, 255));
+        adminProjectCustomerTable.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        adminProjectPanel.add(adminProjectCustomerTable, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 780, 510));
+
         mainPanel.add(adminProjectPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 780, 510));
 
         settingsPanel.setBackground(new java.awt.Color(255, 255, 255));
@@ -2203,6 +2209,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     protected javax.swing.JComboBox<String> StatusComboBox;
     protected javax.swing.JPanel adminEditUserPanel1;
     private javax.swing.JPanel adminProjectChoosePanel;
+    private javax.swing.JPanel adminProjectCustomerTable;
     private javax.swing.JPanel adminProjectInsidePanel;
     private javax.swing.JPanel adminProjectPanel;
     private javax.swing.JLabel adminUserChooseHeaderLabel;
