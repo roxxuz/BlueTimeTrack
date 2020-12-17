@@ -1576,7 +1576,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         jLabel40.setForeground(new java.awt.Color(255, 255, 255));
         jLabel40.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel40.setText("SKAPA NYTT PROJEKT");
-        jPanel5.add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 330, 110));
+        jPanel5.add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 360, 110));
 
         adminProjectChoosePanel.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 130, 360, 110));
 
@@ -1880,7 +1880,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         changePassPanelLayout.setVerticalGroup(
             changePassPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, changePassPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(14, Short.MAX_VALUE)
                 .addComponent(changePassBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -2008,7 +2008,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
             .addGroup(changeNameBtnPanelLayout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addComponent(changeNameBtn)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         settingsPanel.add(changeNameBtnPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, -6, 110, 70));
@@ -2344,6 +2344,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_menuPanel5MouseExited
 
     private void menuPanel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuPanel6MouseClicked
+        pM.clearAllProjectFields();
         saveNewProject = true;     
         selectedPanel(6);
         menuPanel1.setBackground(new java.awt.Color(92,126,162));
@@ -2363,6 +2364,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         pM.CustomerCombobox();
         pM.getAvailableSkillsProject();
         adminUserChooseHeaderLabel2.setText("SKAPA NYTT PROJEKT");
+        
         pM.getProjectInfo1();
         
     }//GEN-LAST:event_menuPanel6MouseClicked
@@ -2749,25 +2751,9 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         adminProjectChoosePanel.setVisible(false);
         adminProjectInsidePanel.setVisible(true);
         
-        //Från knappen sedan tidigare
-        pM.getProjectInfo2();
-        pM.compareFields();
-
-        pM.getProjectInfo1();
-        saveNewProject = true;
-        pM.clearAllProjectFields();
-        ProjectsComboBox.setVisible(false);
-        ProjectTextField1.setVisible(false);
-        jLabel24.setVisible(false);
-        jLabel17.setVisible(false);
-        pM.projectCombobox();
-        pM.StatusCombobox();
-        pM.CustomerCombobox();
-        pM.getAvailableSkillsProject();
-        adminUserChooseHeaderLabel2.setText("SKAPA NYTT PROJEKT");
-        pM.clearProjectFields();
+        pM.newProjectButton();
         
-        pM.printAL();
+        adminUserChooseHeaderLabel2.setText("SKAPA NYTT PROJEKT");
         projektMovePanel.setBounds(40, 70, 310, 310);
     }//GEN-LAST:event_jPanel5MouseClicked
 
@@ -2783,20 +2769,8 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         adminProjectChoosePanel.setVisible(false);
         adminProjectInsidePanel.setVisible(true);
         
-        //Från knappen sedan tidigare
-        pM.getProjectInfo2();
-        pM.compareFields();
-        pM.clearProjectFields();
-        saveNewProject = false;
-        pM.clearAllProjectFields();
-        ProjectsComboBox.setVisible(true);
-        ProjectTextField1.setVisible(true);
-        jLabel24.setVisible(true);
-        jLabel17.setVisible(true);
-        pM.projectCombobox();
-        pM.StatusCombobox();
-        pM.CustomerCombobox();
-        pM.getAvailableSkillsProject();
+        pM.editProjectButton();
+        
         adminUserChooseHeaderLabel2.setText("REDIGERA PROJEKT");
         projektMovePanel.setBounds(40, 190, 310, 310);
         
