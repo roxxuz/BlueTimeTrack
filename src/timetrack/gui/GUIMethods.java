@@ -977,9 +977,64 @@ public class GUIMethods{
         catch (SQLException ex) {
             Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-
      }
-
+     
+     public void updateUserName(String fn, String ln, int userID) {
+        try {
+            pstat = cn.prepareStatement("UPDATE users SET FName=?, LName=? WHERE user_id=?");
+            pstat.setString(1, fn);
+            pstat.setString(2, ln);
+            pstat.setInt(3, userID);
+            pstat.executeUpdate();
+            
+            var tr = new Thread2(tGUI.userMassage);
+            tr.start();
+            
+        }catch (SQLException e) {System.out.println(e);}
+    }
+     
+     public void changePassword(String currentPass, String newPass, int userID){
+        String hashPassword = null;
+        String newHashPassword = null;
+        
+        try {
+            hashPassword = HashPassword.hashPassword(currentPass);
+            newHashPassword = HashPassword.hashPassword(newPass);
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        try {
+            //Ökar timeout till 5 sekunder
+            DriverManager.setLoginTimeout(5);
+            //Skapar ett SELECT statement till PreparedStatement objekt
+            pstat = cn.prepareStatement("SELECT * FROM users WHERE user_id = ? AND user_password=?");
+            
+            pstat.setInt(1, userID);
+            pstat.setString(2, hashPassword);
+            
+            rs = pstat.executeQuery();
+            
+            if(rs.next()) {
+                pstat = cn.prepareStatement("UPDATE users SET user_password=? WHERE user_id=?");
+            
+                pstat.setString(1, newHashPassword);
+                pstat.setInt(2, userID);
+                pstat.executeUpdate();
+                
+                tGUI.passMassage.setText("Lösenord updaterad :)");
+                var tr = new Thread2(tGUI.passMassage);
+                tr.start();
+   
+            }else {
+                tGUI.passMassage.setText("Felaktigt nuvarande lösenord :(");
+                var tr = new Thread2(tGUI.passMassage);
+                tr.start();
+            }
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Kunde inte ansluta till databasen.\nKontrollera att du är ansluten till internet.", "Är du online?", 0);
+            System.out.println(ex);
+        }
+     }
 }
-
