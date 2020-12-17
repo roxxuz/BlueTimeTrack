@@ -251,6 +251,8 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         sRemoveSelected = new javax.swing.JLabel();
         NewProject = new javax.swing.JButton();
         EditProject = new javax.swing.JButton();
+        deleteProject = new javax.swing.JButton();
+        saveDeleteDone = new javax.swing.JLabel();
         settingsPanel = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         dateTimeLabel = new javax.swing.JLabel();
@@ -562,7 +564,6 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         timeChooseProjectCB.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         timeChooseProjectCB.setForeground(new java.awt.Color(165, 165, 165));
         timeChooseProjectCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välj projekt", "Item 2", "Item 3", "Item 4" }));
-        timeChooseProjectCB.setBorder(null);
         timeChooseProjectCB.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
             public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
             }
@@ -580,7 +581,6 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         timeChooseStartTimeCB.setForeground(new java.awt.Color(165, 165, 165));
         timeChooseStartTimeCB.setMaximumRowCount(19);
         timeChooseStartTimeCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        timeChooseStartTimeCB.setBorder(null);
         timeChooseStartTimeCB.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
             public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
             }
@@ -598,7 +598,6 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         timeChooseEndTimeCB.setForeground(new java.awt.Color(165, 165, 165));
         timeChooseEndTimeCB.setMaximumRowCount(19);
         timeChooseEndTimeCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        timeChooseEndTimeCB.setBorder(null);
         timeChooseEndTimeCB.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
             public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
             }
@@ -783,7 +782,6 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         timeChooseProjectCB1.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         timeChooseProjectCB1.setForeground(new java.awt.Color(165, 165, 165));
         timeChooseProjectCB1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välj projekt", "Item 2", "Item 3", "Item 4" }));
-        timeChooseProjectCB1.setBorder(null);
         timeChooseProjectCB1.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
             public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
             }
@@ -801,7 +799,6 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         timeChooseStartTimeCB1.setForeground(new java.awt.Color(165, 165, 165));
         timeChooseStartTimeCB1.setMaximumRowCount(19);
         timeChooseStartTimeCB1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        timeChooseStartTimeCB1.setBorder(null);
         timeChooseStartTimeCB1.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
             public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
             }
@@ -819,7 +816,6 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         timeChooseEndTimeCB1.setForeground(new java.awt.Color(165, 165, 165));
         timeChooseEndTimeCB1.setMaximumRowCount(19);
         timeChooseEndTimeCB1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        timeChooseEndTimeCB1.setBorder(null);
         timeChooseEndTimeCB1.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
             public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
             }
@@ -1398,16 +1394,16 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         });
         SkillBox.setRenderer(new PromptComboBoxRenderer(""));
         SkillBox.setSelectedIndex(-1);
-        adminProjectInsidePanel.add(SkillBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 100, 160, -1));
+        adminProjectInsidePanel.add(SkillBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 90, 160, -1));
 
         jLabel4.setText("Färdigheter");
-        adminProjectInsidePanel.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 100, -1, -1));
+        adminProjectInsidePanel.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 90, -1, -1));
 
         jLabel25.setText("Användare");
-        adminProjectInsidePanel.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 140, -1, -1));
+        adminProjectInsidePanel.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 130, -1, -1));
 
         jLabel26.setText("<html>Användare<br>på projekt</html>");
-        adminProjectInsidePanel.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 180, -1, -1));
+        adminProjectInsidePanel.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 170, -1, -1));
 
         sSkillChosenBox.setEnabled(false);
         sSkillChosenBox.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
@@ -1421,7 +1417,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         });
         sSkillChosenBox.setRenderer(new PromptComboBoxRenderer(""));
         sSkillChosenBox.setSelectedIndex(-1);
-        adminProjectInsidePanel.add(sSkillChosenBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 140, 160, -1));
+        adminProjectInsidePanel.add(sSkillChosenBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 130, 160, -1));
 
         sSkillTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1434,15 +1430,17 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         sSkillTable.getColumnModel().getColumn(0).setMaxWidth(60);
         jScrollPane1.setViewportView(sSkillTable);
 
-        adminProjectInsidePanel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 180, 200, 200));
+        adminProjectInsidePanel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 170, 200, 200));
 
+        sRemoveSelected.setForeground(new java.awt.Color(51, 51, 255));
         sRemoveSelected.setText("Ta bort markerad");
+        sRemoveSelected.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         sRemoveSelected.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 sRemoveSelectedMouseClicked(evt);
             }
         });
-        adminProjectInsidePanel.add(sRemoveSelected, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 400, -1, -1));
+        adminProjectInsidePanel.add(sRemoveSelected, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 390, -1, -1));
 
         NewProject.setText("Skapa Projekt");
         NewProject.addActionListener(new java.awt.event.ActionListener() {
@@ -1459,6 +1457,18 @@ public class TimeTrackGUI extends javax.swing.JFrame {
             }
         });
         adminProjectInsidePanel.add(EditProject, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 10, -1, -1));
+
+        deleteProject.setText("Radera");
+        deleteProject.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteProjectActionPerformed(evt);
+            }
+        });
+        adminProjectInsidePanel.add(deleteProject, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 380, -1, -1));
+
+        saveDeleteDone.setFont(new java.awt.Font("Lucida Grande", 0, 36)); // NOI18N
+        saveDeleteDone.setForeground(new java.awt.Color(255, 255, 255));
+        adminProjectInsidePanel.add(saveDeleteDone, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 420, 360, 70));
 
         adminProjectPanel.add(adminProjectInsidePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 780, 510));
 
@@ -2034,43 +2044,13 @@ public class TimeTrackGUI extends javax.swing.JFrame {
 
     private void NewProjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewProjectActionPerformed
 
-        pM.getProjectInfo2();
-        pM.compareFields();
-
-        pM.getProjectInfo1();
-        saveNewProject = true;
-        pM.clearAllProjectFields();
-        ProjectsComboBox.setVisible(false);
-        ProjectTextField1.setVisible(false);
-        jLabel24.setVisible(false);
-        jLabel17.setVisible(false);
-        pM.projectCombobox();
-        pM.StatusCombobox();
-        pM.CustomerCombobox();
-        pM.getAvailableSkillsProject();
-        pCurrent.setText("Skapa");
-        pM.resetIsSaved();
-        
-        pM.printAL();
+        pM.newProjectButton();
 
     }//GEN-LAST:event_NewProjectActionPerformed
 
     private void EditProjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditProjectActionPerformed
 
-        pM.getProjectInfo2();
-        pM.compareFields();
-        pM.resetIsSaved();
-        saveNewProject = false;
-        pM.clearAllProjectFields();
-        ProjectsComboBox.setVisible(true);
-        ProjectTextField1.setVisible(true);
-        jLabel24.setVisible(true);
-        jLabel17.setVisible(true);
-        pM.projectCombobox();
-        pM.StatusCombobox();
-        pM.CustomerCombobox();
-        pM.getAvailableSkillsProject();
-        pCurrent.setText("Redigera");
+        pM.editProjectButton();
     }//GEN-LAST:event_EditProjectActionPerformed
 
     private void sRemoveSelectedMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sRemoveSelectedMouseClicked
@@ -2164,7 +2144,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         pM.CustomerCombobox();
         pM.getAvailableSkillsProject();
         pCurrent.setText("Skapa");
-        pM.resetIsSaved();
+        pM.clearProjectFields();
         
         pM.printAL();
     }//GEN-LAST:event_jPanel5MouseClicked
@@ -2184,7 +2164,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         //Från knappen sedan tidigare
         pM.getProjectInfo2();
         pM.compareFields();
-        pM.resetIsSaved();
+        pM.clearProjectFields();
         saveNewProject = false;
         pM.clearAllProjectFields();
         ProjectsComboBox.setVisible(true);
@@ -2196,6 +2176,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         pM.CustomerCombobox();
         pM.getAvailableSkillsProject();
         pCurrent.setText("Redigera");
+        
     }//GEN-LAST:event_jPanel6MouseClicked
 
     private void jPanel6MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MouseEntered
@@ -2205,6 +2186,10 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     private void jPanel6MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MouseExited
         jPanel6.setBackground(new java.awt.Color(92,126,162));
     }//GEN-LAST:event_jPanel6MouseExited
+
+    private void deleteProjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteProjectActionPerformed
+        pM.deleteProject();
+    }//GEN-LAST:event_deleteProjectActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     protected javax.swing.JComboBox<String> CustomerComboBox;
@@ -2228,6 +2213,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     private javax.swing.JPanel closePanel;
     protected javax.swing.JLabel currentUserLabel;
     private static javax.swing.JLabel dateTimeLabel;
+    protected javax.swing.JButton deleteProject;
     private org.jdesktop.swingx.JXDatePicker dp1;
     private org.jdesktop.swingx.JXDatePicker dp2;
     private org.jdesktop.swingx.JXDatePicker dp3;
@@ -2361,6 +2347,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     protected javax.swing.JLabel sRemoveSelected;
     protected javax.swing.JComboBox<String> sSkillChosenBox;
     protected javax.swing.JTable sSkillTable;
+    protected javax.swing.JLabel saveDeleteDone;
     private javax.swing.JPanel settingsPanel;
     protected javax.swing.JComboBox<String> timeChooseEndTimeCB;
     protected javax.swing.JComboBox<String> timeChooseEndTimeCB1;
