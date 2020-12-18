@@ -994,7 +994,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         projectInfoPanel.add(projectNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 90, -1));
 
         projectNameTextField.setEditable(false);
-        projectNameTextField.setBackground(new java.awt.Color(255, 255, 255));
+        projectNameTextField.setBackground(new java.awt.Color(210, 219, 228));
         projectNameTextField.setText("Javautbildning");
         projectInfoPanel.add(projectNameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 200, 30));
 
@@ -1005,7 +1005,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         projectInfoPanel.add(projectCustomerLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 90, 20));
 
         projectCustomerTextField.setEditable(false);
-        projectCustomerTextField.setBackground(new java.awt.Color(255, 255, 255));
+        projectCustomerTextField.setBackground(new java.awt.Color(210, 219, 228));
         projectCustomerTextField.setText("Malmö Stad");
         projectInfoPanel.add(projectCustomerTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 200, 30));
 
@@ -1038,15 +1038,15 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         projectInfoPanel.add(projectEmailLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 0, 90, 20));
 
         projectEmailTextField.setEditable(false);
-        projectEmailTextField.setBackground(new java.awt.Color(255, 255, 255));
+        projectEmailTextField.setBackground(new java.awt.Color(210, 219, 228));
         projectEmailTextField.setText("jan.malmstrom@malmostad.se");
         projectInfoPanel.add(projectEmailTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 20, 200, 30));
 
         projectColleagueLabel.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         projectColleagueLabel.setForeground(new java.awt.Color(47, 66, 84));
         projectColleagueLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        projectColleagueLabel.setText("Kollegor i projektet");
-        projectInfoPanel.add(projectColleagueLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 0, 130, 20));
+        projectColleagueLabel.setText("Aktiva kollegor i projektet");
+        projectInfoPanel.add(projectColleagueLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 0, 160, 20));
 
         projectDescriptionTextArea.setEditable(false);
         projectDescriptionTextArea.setBackground(new java.awt.Color(210, 219, 228));
@@ -1904,6 +1904,11 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         newPassField.setBorder(BorderFactory.createEmptyBorder(1,1,1,1)
 
         );
+        newPassField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                newPassFieldFocusGained(evt);
+            }
+        });
         passwordPanel.add(newPassField, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 80, 360, 30));
 
         currentPassField.setText("Enter your password");
@@ -2346,7 +2351,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     private void menuPanel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuPanel6MouseClicked
         pM.getProjectInfo2();
         pM.compareFields();
-        
+        pM.uidSetOnP.clear();
         saveNewProject = true;     
         selectedPanel(6);
         menuPanel1.setBackground(new java.awt.Color(92,126,162));
@@ -2897,6 +2902,10 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     private void jPanel26MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel26MouseReleased
         jPanel26.setBackground(new java.awt.Color(47,66,84));
     }//GEN-LAST:event_jPanel26MouseReleased
+
+    private void newPassFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_newPassFieldFocusGained
+        newPassField.selectAll();
+    }//GEN-LAST:event_newPassFieldFocusGained
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     protected javax.swing.JComboBox<String> CustomerComboBox;

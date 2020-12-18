@@ -276,7 +276,9 @@ public class ProjectMethods {
     
     
     public void saveMethod(){
-            String pname = tGUI.ProjectTextField2.getText();
+            
+        uidSetOnP.clear();
+        String pname = tGUI.ProjectTextField2.getText();
 
         if (!saveMissingFields()) {
         if (tGUI.saveNewProject){
@@ -311,12 +313,13 @@ public class ProjectMethods {
             tGUI.saveDeleteDone.setText("Projekt sparat");
             saveDeleteDoneMessage();
         }
-        getProjectInfo1();
-        uop.clear();
+        
         }  else {
             
         }   
-            
+        getProjectInfo1();
+        uop.clear();
+        uidFromPtable2();
         
     }
 
@@ -774,6 +777,24 @@ public class ProjectMethods {
             for (int i = 0; i < model.getRowCount(); i++) {
                 int uid = (Integer) tGUI.sSkillTable.getValueAt(i, 0);
                 uop.add(uid);
+            }
+            
+            } catch (Exception e) {
+                System.err.println("uidFromPtable");
+            }
+            
+        }
+        
+        public void uidFromPtable2(){
+
+
+        try {
+
+            DefaultTableModel model = (DefaultTableModel)tGUI.sSkillTable.getModel();
+            
+            for (int i = 0; i < model.getRowCount(); i++) {
+                int uid = (Integer) tGUI.sSkillTable.getValueAt(i, 0);
+                uidSetOnP.add(uid);
             }
             
             } catch (Exception e) {
