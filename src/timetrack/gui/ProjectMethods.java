@@ -288,6 +288,9 @@ public class ProjectMethods {
             projectCombobox();
             StatusCombobox();
             CustomerCombobox();
+            
+            tGUI.saveDeleteDone.setText("Projekt sparat");
+            saveDeleteDoneMessage();
 
             tGUI.ProjectsComboBox.setVisible(true);
             tGUI.ProjectTextField1.setVisible(true);
@@ -304,14 +307,16 @@ public class ProjectMethods {
             tGUI.ProjectsComboBox.removeAllItems();
             projectCombobox();
             tGUI.ProjectsComboBox.setSelectedItem(pname);
+            
+            tGUI.saveDeleteDone.setText("Projekt sparat");
+            saveDeleteDoneMessage();
         }
         getProjectInfo1();
         uop.clear();
         }  else {
             
         }   
-            tGUI.saveDeleteDone.setText("Projekt sparat");
-            saveDeleteDoneMessage();
+            
         
     }
 

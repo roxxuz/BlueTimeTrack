@@ -2344,6 +2344,7 @@ public class TimeTrackGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_menuPanel5MouseExited
 
     private void menuPanel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuPanel6MouseClicked
+        pM.getProjectInfo2();
         pM.compareFields();
         
         saveNewProject = true;     
@@ -2365,9 +2366,6 @@ public class TimeTrackGUI extends javax.swing.JFrame {
         pM.CustomerCombobox();
         pM.getAvailableSkillsProject();
         adminUserChooseHeaderLabel2.setText("SKAPA NYTT PROJEKT");
-        
-        pM.getProjectInfo1();
-        
     }//GEN-LAST:event_menuPanel6MouseClicked
 
     private void menuPanel6MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuPanel6MouseEntered
