@@ -530,6 +530,36 @@ public class GUIMethods{
         return success;
     }
     
+    public boolean timeOverlap(int userID, String date, String startTime, String endTime) {
+        boolean overlap = false;
+        try {
+            pstat = cn.prepareStatement("SELECT * FROM time " +
+                                        "WHERE DATE(start_time) = ? " +
+                                        "AND user_id = ? " +
+                                        "AND ( " +
+                                        "(? BETWEEN DATE_FORMAT(start_time, \"%H:%i\") AND DATE_FORMAT(end_time, \"%H:%i\")-1) " +
+                                        "OR " +
+                                        "(? BETWEEN DATE_FORMAT(start_time, \"%H:%i\")+1 AND DATE_FORMAT(end_time, \"%H:%i\")) " +
+                                        "OR " +
+                                        "(? < DATE_FORMAT(start_time, \"%H:%i\") AND ? > DATE_FORMAT(end_time, \"%H:%i\")) " +
+                                        ")");
+            pstat.setString(1, date);
+            pstat.setInt(2, userID);
+            pstat.setString(3, startTime);
+            pstat.setString(4, endTime);
+            pstat.setString(5, startTime);
+            pstat.setString(6, endTime);
+            rs = pstat.executeQuery();
+            if(rs.next()) {
+                overlap = true;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(GUIMethods.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return overlap;
+    }
+            
+    
     public boolean sendTimeUpdateToDB(int userID, int timeID, int project, String date, String startTime, String endTime){
         //Slår samman datum och tid till en sträng. Det är så den lagras i databasen
         String dateTimeStart = date + " " + startTime;

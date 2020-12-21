@@ -3250,6 +3250,10 @@ public class TimeTrackGUI extends javax.swing.JFrame {
                 JOptionPane.showConfirmDialog(this, "Du måste ange en sluttid som är senare än starttiden för att rapportera tiden"
                                                , "Felaktig sluttid", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE);
             }
+            else if(guiM.timeOverlap(userID, date, startTime, endTime)) {
+                JOptionPane.showConfirmDialog(this, "Tiden överlappar en existerande tidrapportering på valt datum \nKontrollera tiderna och försök igen"
+                                               , "Tiderna överlappar", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE);
+            }
             else {
                 //Om inga fält saknas och starttiden är innan sluttiden så utförs tidrapporteringen
                 guiM.sendTimeToDB(userID, projectID, date, startTime, endTime);
